@@ -38,3 +38,7 @@ metadata:
 <DeepLinkAccordion title="SVG awesome">
   Lorem ipsum dolor sit amet, placeholder content for the first accordion.
 </DeepLinkAccordion>
+
+<DeepLinkAccordion title="Correct SVG awesome">
+  Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+</DeepLinkAccordion>
