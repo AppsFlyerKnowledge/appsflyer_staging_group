@@ -9,7 +9,7 @@ metadata:
   - Lorem ipsum dolor sit amet, placeholder content for the first accordion.
 </DeepLinkAccordion>
 
-<DeepLinkAccordion title="Test Section">
+<DeepLinkAccordion title="Test Section 2">
   Same title on purpose, this checks the id auto-dedupes to test-section-1.
 </DeepLinkAccordion>
 
