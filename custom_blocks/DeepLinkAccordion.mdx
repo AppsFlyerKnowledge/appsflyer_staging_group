@@ -1,42 +1,58 @@
 ---
 name: DeepLinkAccordion
 ---
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 export const DeepLinkAccordion = ({ title, children }) => {
-  const idRef = useRef(null);
-  if (idRef.current === null) {
-    const base = (title || "section")
+  const slugify = (text) =>
+    (text || "section")
       .toLowerCase()
       .trim()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "") || "section";
-    let candidate = base;
-    let n = 1;
-    while (typeof document !== "undefined" && document.getElementById(candidate)) {
-      candidate = `${base}-${n}`;
-      n++;
-    }
-    idRef.current = candidate;
-  }
-  const id = idRef.current;
 
+  const AnchorIcon = () => (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="5" r="3" />
+      <line x1="12" y1="22" x2="12" y2="8" />
+      <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+    </svg>
+  );
+
+  const id = slugify(title);
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const checkHash = () => setOpen(window.location.hash === `#${id}`);
+    const checkHash = () => {
+      if (window.location.hash === `#${id}`) {
+        setOpen(true);
+      }
+    };
     checkHash();
     window.addEventListener("hashchange", checkHash);
     return () => window.removeEventListener("hashchange", checkHash);
   }, [id]);
 
   useEffect(() => {
-    if (open) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [open]);
+    if (!open) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }, [open, id]);
 
   return (
     <div id={id} className="border rounded-md mb-2">
@@ -58,7 +74,7 @@ export const DeepLinkAccordion = ({ title, children }) => {
             padding: 4,
           }}
         >
-          <i className="fa-solid fa-anchor" aria-hidden="true" style={{ fontSize: 14 }} />
+          <AnchorIcon />
         </a>
         <button
           type="button"
@@ -74,10 +90,10 @@ export const DeepLinkAccordion = ({ title, children }) => {
   );
 };
 
-<DeepLinkAccordion title="Test Section">
+<DeepLinkAccordion title="Test Section One">
   Lorem ipsum dolor sit amet, placeholder content for the first accordion.
 </DeepLinkAccordion>
 
-<DeepLinkAccordion title="Test Section">
-  Same title on purpose, this checks the id auto-dedupes to test-section-1.
+<DeepLinkAccordion title="Test Section Two">
+  Different title from the one above, so ids stay unique without any runtime dedup logic.
 </DeepLinkAccordion>
