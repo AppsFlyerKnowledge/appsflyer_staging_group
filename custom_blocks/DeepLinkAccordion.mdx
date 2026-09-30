@@ -7,7 +7,8 @@ export const DeepLinkAccordion = ({ title, children }) => {
   const idRef = useRef(null);
   if (idRef.current === null) {
     const base = (title || "section")
-      .toLowerCase().trim()
+      .toLowerCase()
+      .trim()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "") || "section";
     let candidate = base;
@@ -57,7 +58,7 @@ export const DeepLinkAccordion = ({ title, children }) => {
             padding: 4,
           }}
         >
-          🔗
+          <i className="fa-solid fa-anchor" aria-hidden="true" style={{ fontSize: 14 }} />
         </a>
         <button
           type="button"
@@ -75,4 +76,8 @@ export const DeepLinkAccordion = ({ title, children }) => {
 
 <DeepLinkAccordion title="Test Section">
   Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+</DeepLinkAccordion>
+
+<DeepLinkAccordion title="Test Section">
+  Same title on purpose, this checks the id auto-dedupes to test-section-1.
 </DeepLinkAccordion>
