@@ -16,3 +16,11 @@ metadata:
 <Accordion title="This is a title" icon="fa-info-circle">
   this is contents of lorem ipsum or whatever is need
 </Accordion>
+
+# A test heading
+
+## Another heading
+
+<br />
+
+<br />
