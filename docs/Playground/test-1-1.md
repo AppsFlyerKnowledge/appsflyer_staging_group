@@ -26,3 +26,11 @@ metadata:
 <DeepLinkAccordion title="Anchor floater">
   Lorem ipsum dolor sit amet, placeholder content for the first accordion.
 </DeepLinkAccordion>
+
+<DeepLinkAccordion title="Awesome anchor">
+  Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+</DeepLinkAccordion>
+
+<DeepLinkAccordion title="Test Section">
+  Same title on purpose, this checks the id auto-dedupes to test-section-1.
+</DeepLinkAccordion>
