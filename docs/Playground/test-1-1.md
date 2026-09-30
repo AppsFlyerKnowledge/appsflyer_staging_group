@@ -42,3 +42,11 @@ metadata:
 <DeepLinkAccordion title="Correct SVG awesome">
   Lorem ipsum dolor sit amet, placeholder content for the first accordion.
 </DeepLinkAccordion>
+
+<DeepLinkAccordion title="Test Section One">
+  Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+</DeepLinkAccordion>
+
+<DeepLinkAccordion title="Now with copied to clipboard">
+  Different title from the one above, so ids stay unique without any runtime dedup logic.
+</DeepLinkAccordion>
