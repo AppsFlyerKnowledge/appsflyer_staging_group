@@ -1,0 +1,69 @@
+---
+name: DeepLinkAccordion
+---
+import React, { useState, useEffect, useRef } from "react";
+
+export const DeepLinkAccordion = ({ title, children }) => {
+  const idRef = useRef(null);
+
+  if (idRef.current === null) {
+    const base = (title || "section")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "section";
+
+    let candidate = base;
+    let n = 1;
+    while (typeof document !== "undefined" && document.getElementById(candidate)) {
+      candidate = `${base}-${n}`;
+      n++;
+    }
+    idRef.current = candidate;
+  }
+
+  const id = idRef.current;
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const checkHash = () => setOpen(window.location.hash === `#${id}`);
+    checkHash();
+    window.addEventListener("hashchange", checkHash);
+    return () => window.removeEventListener("hashchange", checkHash);
+  }, [id]);
+
+  useEffect(() => {
+    if (open && window.location.hash !== `#${id}`) {
+      window.history.replaceState(null, "", `#${id}`);
+    }
+  }, [open, id]);
+
+  useEffect(() => {
+    if (open) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [open]);
+
+  return (
+    <div id={id} className="border rounded-md mb-2">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full text-left p-3 font-semibold flex justify-between items-center"
+      >
+        {title}
+        <span>{open ? "−" : "+"}</span>
+      </button>
+      {open && <div className="p-3 pt-0">{children}</div>}
+    </div>
+  );
+};
+
+<DeepLinkAccordion title="Test Section">
+  Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+</DeepLinkAccordion>
+
+<DeepLinkAccordion title="Test Section">
+  Same title on purpose, this checks the id auto-dedupes to test-section-1.
+</DeepLinkAccordion>
