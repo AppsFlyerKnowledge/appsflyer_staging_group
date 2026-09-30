@@ -5,14 +5,11 @@ import React, { useState, useEffect, useRef } from "react";
 
 export const DeepLinkAccordion = ({ title, children }) => {
   const idRef = useRef(null);
-
   if (idRef.current === null) {
     const base = (title || "section")
-      .toLowerCase()
-      .trim()
+      .toLowerCase().trim()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "") || "section";
-
     let candidate = base;
     let n = 1;
     while (typeof document !== "undefined" && document.getElementById(candidate)) {
@@ -21,9 +18,10 @@ export const DeepLinkAccordion = ({ title, children }) => {
     }
     idRef.current = candidate;
   }
-
   const id = idRef.current;
+
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const checkHash = () => setOpen(window.location.hash === `#${id}`);
@@ -31,12 +29,6 @@ export const DeepLinkAccordion = ({ title, children }) => {
     window.addEventListener("hashchange", checkHash);
     return () => window.removeEventListener("hashchange", checkHash);
   }, [id]);
-
-  useEffect(() => {
-    if (open && window.location.hash !== `#${id}`) {
-      window.history.replaceState(null, "", `#${id}`);
-    }
-  }, [open, id]);
 
   useEffect(() => {
     if (open) {
@@ -47,14 +39,35 @@ export const DeepLinkAccordion = ({ title, children }) => {
 
   return (
     <div id={id} className="border rounded-md mb-2">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="w-full text-left p-3 font-semibold flex justify-between items-center"
+      <div
+        className="relative flex items-center"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
-        {title}
-        <span>{open ? "−" : "+"}</span>
-      </button>
+        <a
+          href={`#${id}`}
+          aria-label="Link to this section"
+          style={{
+            position: "absolute",
+            left: -22,
+            opacity: hovered ? 1 : 0,
+            transition: "opacity 0.15s",
+            color: "#9ca3af",
+            textDecoration: "none",
+            padding: 4,
+          }}
+        >
+          🔗
+        </a>
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="w-full text-left p-3 font-semibold flex justify-between items-center"
+        >
+          {title}
+          <span>{open ? "−" : "+"}</span>
+        </button>
+      </div>
       {open && <div className="p-3 pt-0">{children}</div>}
     </div>
   );
@@ -62,8 +75,4 @@ export const DeepLinkAccordion = ({ title, children }) => {
 
 <DeepLinkAccordion title="Test Section">
   Lorem ipsum dolor sit amet, placeholder content for the first accordion.
-</DeepLinkAccordion>
-
-<DeepLinkAccordion title="Test Section">
-  Same title on purpose, this checks the id auto-dedupes to test-section-1.
 </DeepLinkAccordion>
