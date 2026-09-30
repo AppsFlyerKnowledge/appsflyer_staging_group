@@ -15,6 +15,14 @@ metadata:
 
 <Accordion title="This is a title" icon="fa-info-circle">
   this is contents of lorem ipsum or whatever is need
+
+  <DeepLinkAccordion title="Test Section One">
+    Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+  </DeepLinkAccordion>
+
+  <DeepLinkAccordion title="Test Section Two">
+    Different title from the one above, so ids stay unique without any runtime dedup logic.
+  </DeepLinkAccordion>
 </Accordion>
 
 # A test heading
