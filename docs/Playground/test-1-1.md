@@ -23,4 +23,6 @@ metadata:
 
 <br />
 
-<br />
+<DeepLinkAccordion title="Anchor floater">
+  Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+</DeepLinkAccordion>
