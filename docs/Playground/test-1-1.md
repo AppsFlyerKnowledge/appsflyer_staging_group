@@ -16,6 +16,8 @@ metadata:
 <Accordion title="This is a title" icon="fa-info-circle">
   this is contents of lorem ipsum or whatever is need
 
+  <br />
+
   <DeepLinkAccordion title="Test Section One">
     Lorem ipsum dolor sit amet, placeholder content for the first accordion.
   </DeepLinkAccordion>
@@ -58,3 +60,8 @@ metadata:
 <DeepLinkAccordion title="Now with copied to clipboard">
   Different title from the one above, so ids stay unique without any runtime dedup logic.
 </DeepLinkAccordion>
+
+|   |   |   |
+| - | - | - |
+|   |   |   |
+|   |   |   |
