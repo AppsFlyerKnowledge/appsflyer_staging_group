@@ -6,7 +6,7 @@ metadata:
   robots: index
 ---
 <DeepLinkAccordion title="Test Section">
-  Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+  - Lorem ipsum dolor sit amet, placeholder content for the first accordion.
 </DeepLinkAccordion>
 
 <DeepLinkAccordion title="Test Section">
