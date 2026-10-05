@@ -4,7 +4,6 @@ hidden: false
 ---
 In this guide, you will learn how to get conversion data using [`IAppsFlyerConversionData`](https://dev.appsflyer.com/hc/docs/api#iappsflyerconversiondata), as well as examples for using the conversion data.
 
-Learn more about [what is conversion data](https://dev.appsflyer.com/hc/docs/conversion-data).
 
 ## Obtain AppsFlyer conversion data
 

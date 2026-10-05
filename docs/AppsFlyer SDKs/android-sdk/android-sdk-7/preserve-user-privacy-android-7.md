@@ -6,8 +6,6 @@ hidden: false
 
 # Preserve user privacy
 
-For a general introduction to privacy-preserving methods in the AppsFlyer SDK, see [Preserving user privacy](https://dev.appsflyer.com/hc/docs/preserve-user-privacy-1) (under Getting started).
-
 ## Use start to share only the install event
 
 If you prefer to send only the install event and no additional information, you can invoke `start` with a request callback. Upon receiving a success message confirming that the install event has been logged, you should then call `stop` or `anonymizeUser` from within the callback function.

@@ -5,7 +5,6 @@ hidden: false
 
 In this guide you will learn how to get conversion data using [`AppsFlyerConversionListener`](doc:android-sdk-reference-appsflyerconversionlistener), as well as [examples](doc:conversion-data-android#accessing-attribution-data) for using the conversion data.
 
-Learn more about [what is conversion data](doc:conversion-data).
 
 Before you begin
 ----------------

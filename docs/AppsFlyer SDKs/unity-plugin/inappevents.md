@@ -13,7 +13,7 @@ In-App Events provide insight on what is happening in your app. It is recommende
 
 Recording in-app events is performed by calling `sendEvent` with event name and value parameters. See In-App Events [documentation](https://support.appsflyer.com/hc/en-us/articles/115005544169-Rich-in-app-events-for-Android-and-iOS#introduction-predefined-and-custom-events) for more details.
 
-Find more info about recording events [here](https://dev.appsflyer.com/hc/docs/in-app-events-sdk).
+Find more info about recording events: [Android](https://dev.appsflyer.com/hc/docs/sending-events-android-7) | [iOS](https://dev.appsflyer.com/hc/docs/sending-events-ios-7).
 
 ## Send Event
 

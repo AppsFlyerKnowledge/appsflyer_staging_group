@@ -321,6 +321,14 @@ AppsFlyerLib.shared().isDebug = true
 
 ## Test the integration
 
+Testing verifies that the SDK starts and successfully establishes a connection to AppsFlyer, with no networking or authentication issues, and relays attribution data correctly.
+
+It's performed by:
+
+1. Creating an AppsFlyer attribution link and using it to simulate a user clicking an ad.
+2. Installing the app on a [registered test device](https://support.appsflyer.com/hc/en-us/articles/207031996-Registering-test-devices-).
+3. Inspecting the conversion data.
+
 ### Recommended
 
 [block:html]
@@ -337,8 +345,10 @@ For a full troubleshooting checklist, see [Troubleshooting](doc:troubleshooting-
 
 ### Creating an iOS debug app
 
+To avoid mixing production data with test conversions and in-app events, you can test the SDK integration using a debug app. Debug apps differ from production apps in that they have a different app ID, their own instance in the AppsFlyer dashboard, and aren't published to app stores.
+
 <span class="annotation-optional">Optional</span>
-You can utilize Xcode's compilation configuration capabilities to configure an easy-to-use [debug app](doc:integration-testing#debug-apps). It will enable you to switch between your debug and production apps by tapping into Xcode's active compilation conditions.
+You can utilize Xcode's compilation configuration capabilities to configure an easy-to-use debug app. It will enable you to switch between your debug and production apps by tapping into Xcode's active compilation conditions.
 [block:callout]
 {
   "type": "info",

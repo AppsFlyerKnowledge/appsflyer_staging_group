@@ -4,10 +4,6 @@ excerpt: Learn how to preserve user privacy in the iOS SDK.
 hidden: false
 ---
 
-## Getting Started on Privacy Preservation
-
-For a general introduction to privacy-preserving methods in the AppsFlyer SDK, see [Preserving user privacy](https://dev.appsflyer.com/hc/docs/preserve-user-privacy-1) (under Getting started).
-
 ## Use start to share only the install event
 
 If you prefer to send only the install event and no additional information, you can invoke [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start), with a completion handler. Once you receive a success response indicating that the install event has been received, either set [`isStopped`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#isstopped)  or [`anonymizeUser`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#anonymizeuser) to `true` in the completion handler. 

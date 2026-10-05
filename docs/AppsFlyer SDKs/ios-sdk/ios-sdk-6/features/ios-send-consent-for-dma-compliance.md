@@ -4,8 +4,6 @@ excerpt: Learn how to preserve user privacy in the iOS SDK.
 hidden: false
 ---
 
-For a general introduction to DMA consent data, see [here](https://dev.appsflyer.com/hc/docs/send-consent-for-dma-compliance).
-
 The SDK offers two alternative methods for gathering consent data:
 
 - **Through a Consent Management Platform (CMP)**: If the app uses a CMP that complies with the [Transparency and Consent Framework (TCF) v2.2/2.3 protocol](https://iabeurope.eu/tcf-supporting-resources/), the SDK can automatically retrieve the consent details.  

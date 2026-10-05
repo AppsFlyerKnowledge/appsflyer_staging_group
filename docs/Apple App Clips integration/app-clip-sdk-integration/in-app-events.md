@@ -7,4 +7,4 @@ In-app events provide advertisers with the ability to record post-install events
 
 In-app events for App Clips are usually derived from the in-app events set up for the full app. Therefore, if in-app events are already set up for the full app, no additional work is needed for the App Clip. 
 
-[Learn more](https://dev.appsflyer.com/hc/docs/in-app-events-sdk) about adding in-app events for the App Clip and full app.
+Learn more about adding in-app events for the App Clip and full app: [Android](https://dev.appsflyer.com/hc/docs/sending-events-android-7) | [iOS](https://dev.appsflyer.com/hc/docs/sending-events-ios-7).

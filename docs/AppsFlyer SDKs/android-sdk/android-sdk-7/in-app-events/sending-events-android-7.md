@@ -5,7 +5,7 @@ hidden: false
 
 ## Overview
 
-For an introduction to in-app events for developers, see [In-app events](doc:in-app-events-sdk).
+This document is a guide on implementing in-app events in the Android SDK.
 
 ## Before you begin
 
@@ -89,7 +89,7 @@ In the above `logEvent` invocation:
 
 ### Implementing event structure definitions
 
-Based on the example definition provided in [Understanding event structure definitions](https://dev.appsflyer.com/hc/docs/in-app-events-sdk#understanding-event-structure-definitions), the event should be implemented as follows:
+Based on the example event definition, the event should be implemented as follows:
 
 ```java
 Map<String, Object> eventValues = new HashMap<String, Object>();
@@ -162,7 +162,7 @@ In the event that an error occurs when recording the in-app event, an error code
 
 ### Recording offline events
 
-The SDK can record events that occur when no internet connection is available. See [Offline in-app events](https://dev.appsflyer.com/hc/docs/in-app-events-sdk#offline-in-app-events) for details.
+The SDK can record events that occur when no internet connection is available.
 
 ### Logging events before calling `start`
 

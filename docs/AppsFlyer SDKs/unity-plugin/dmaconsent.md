@@ -4,7 +4,7 @@ hidden: false
 ---
 # Send consent for DMA compliance (Unity)
 
-For a general introduction to DMA consent data, see the [DMA consent overview](https://dev.appsflyer.com/hc/docs/send-consent-for-dma-compliance) in the AppsFlyer docs. The SDK offers two alternative methods for gathering consent data:
+The SDK offers two alternative methods for gathering consent data:
 
 - **Through a Consent Management Platform (CMP):** If your app uses a CMP that complies with the IAB **Transparency and Consent Framework (TCF) v2.2/2.3**, the SDK can automatically retrieve consent details.
 

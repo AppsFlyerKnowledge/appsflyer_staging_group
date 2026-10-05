@@ -134,7 +134,7 @@ The dev key is required for all apps and the appID is required only for iOS.<br/
 | devKey   | Your application [devKey](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieving-the-dev-key) provided by AppsFlyer (required)  |
 | appId      | [App ID](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-new-app#available-in-the-app-store-google-play-store-windows-phone-store)  (iOS only) you configured in your AppsFlyer dashboard  |
 | isDebug    | Debug mode - set to `true` for testing only  |
-|onInstallConversionDataListener| Set listener for [GCD](https://dev.appsflyer.com/hc/docs/conversion-data) response (Optional. default=true) |
+|onInstallConversionDataListener| Set listener for GCD response: [Android](https://dev.appsflyer.com/hc/docs/conversion-data-android-7) | [iOS](https://dev.appsflyer.com/hc/docs/conversion-data-ios-7) (Optional. default=true) |
 |onDeepLinkListener| Set listener for [UDL](https://dev.appsflyer.com/hc/docs/unified-deep-linking-udl) response (Optional. default=false) |
 |timeToWaitForATTUserAuthorization| Waits for request user authorization to access app-related data. please read more [Here](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#waitforattuserauthorization) |
 |manualStart| Prevents from the SDK from sending the launch request after using appsFlyer.initSdk(...). When using this property, the apps needs to manually trigger the appsFlyer.startSdk() API to report the app launch. read more [here](#startSdk). (Optional, default=false) |
