@@ -1,7 +1,9 @@
 ---
-title: Test 1
+title: Anchored Accordion
 deprecated: false
 hidden: false
+link:
+  new_tab: false
 metadata:
   robots: index
 ---
