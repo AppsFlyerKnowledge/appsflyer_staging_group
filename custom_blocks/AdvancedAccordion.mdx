@@ -1,0 +1,703 @@
+---
+name: AdvancedAccordion
+---
+import React, { useState, useEffect, useRef } from "react";
+
+export const AnchorIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 640 640"
+    width="14"
+    height="14"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M320 128C302.3 128 288 142.3 288 160C288 177.7 302.3 192 320 192C337.7 192 352 177.7 352 160C352 142.3 337.7 128 320 128zM224 160C224 107 267 64 320 64C373 64 416 107 416 160C416 201.8 389.3 237.4 352 250.5L352 508.4C414.9 494.1 462.2 438.7 463.9 371.9L447.8 386C437.8 394.7 422.7 393.7 413.9 383.7C405.1 373.7 406.2 358.6 416.2 349.8L480.2 293.8C489.2 285.9 502.8 285.9 511.8 293.8L575.8 349.8C585.8 358.5 586.8 373.7 578.1 383.7C569.4 393.7 554.2 394.7 544.2 386L528 371.9C525.9 485 433.6 576 320 576C206.4 576 114.1 485 112 371.9L95.8 386.1C85.8 394.8 70.7 393.8 61.9 383.8C53.1 373.8 54.2 358.7 64.2 349.9L128.2 293.9C137.2 286 150.8 286 159.8 293.9L223.8 349.9C233.8 358.6 234.8 373.8 226.1 383.8C217.4 393.8 202.2 394.8 192.2 386.1L176.1 372C177.9 438.8 225.2 494.2 288 508.5L288 250.6C250.7 237.4 224 201.9 224 160.1z" />
+  </svg>
+);
+
+export const PlusIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+
+export const TrashIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16Z" />
+  </svg>
+);
+
+export const CopyIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="9" y="9" width="12" height="12" rx="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+  </svg>
+);
+
+export const BLOCK_LIBRARY = [
+  { type: "paragraph", label: "Paragraph", description: "A block of body text" },
+  { type: "callout", label: "Callout", description: "Info, warning, success, or danger note" },
+  { type: "code", label: "Code block", description: "A snippet with a language label" },
+  { type: "image", label: "Image", description: "An image with alt text" },
+  { type: "table", label: "Table", description: "A simple editable table" },
+  { type: "list", label: "Bulleted list", description: "A list of items" },
+];
+
+export let blockCounter = 0;
+export const nextBlockId = (type) => {
+  blockCounter += 1;
+  return `${type}-${Date.now()}-${blockCounter}`;
+};
+
+export const createBlock = (type) => {
+  const id = nextBlockId(type);
+  switch (type) {
+    case "paragraph":
+      return { id, type, text: "New paragraph text. Click to edit." };
+    case "callout":
+      return { id, type, calloutType: "info", text: "New callout text. Click to edit." };
+    case "code":
+      return { id, type, language: "javascript", code: "New code block" };
+    case "image":
+      return { id, type, src: "", alt: "Image description" };
+    case "table":
+      return { id, type, headers: ["Column 1", "Column 2"], rows: [["", ""]] };
+    case "list":
+      return { id, type, items: ["New item"] };
+    default:
+      return { id, type: "paragraph", text: "" };
+  }
+};
+
+export const CALLOUT_STYLES = {
+  info: { border: "#3b82f6", background: "#eff6ff", label: "Note" },
+  warning: { border: "#f59e0b", background: "#fffbeb", label: "Warning" },
+  success: { border: "#22c55e", background: "#f0fdf4", label: "Tip" },
+  danger: { border: "#ef4444", background: "#fef2f2", label: "Important" },
+};
+
+export const Callout = ({ type = "info", children }) => {
+  const style = CALLOUT_STYLES[type] || CALLOUT_STYLES.info;
+  return (
+    <div
+      style={{
+        borderLeft: `4px solid ${style.border}`,
+        background: style.background,
+        padding: "10px 14px",
+        borderRadius: 4,
+        margin: "10px 0",
+      }}
+    >
+      <div style={{ fontWeight: 600, fontSize: 12, textTransform: "uppercase", letterSpacing: 0.4, marginBottom: 4 }}>
+        {style.label}
+      </div>
+      <div>{children}</div>
+    </div>
+  );
+};
+
+export const CodeBlock = ({ language = "text", children }) => (
+  <div style={{ margin: "10px 0", borderRadius: 6, overflow: "hidden", border: "1px solid #e5e7eb" }}>
+    <div style={{ background: "#f3f4f6", padding: "4px 10px", fontSize: 11, color: "#6b7280", fontFamily: "monospace" }}>
+      {language}
+    </div>
+    <pre style={{ margin: 0, padding: "10px 12px", background: "#111827", color: "#f9fafb", overflowX: "auto", fontSize: 13 }}>
+      <code>{children}</code>
+    </pre>
+  </div>
+);
+
+export const ImageBlock = ({ src, alt = "" }) => {
+  if (!src) {
+    return (
+      <div style={{ padding: 16, textAlign: "center", color: "#9ca3af", border: "1px dashed #d1d5db", borderRadius: 6, margin: "10px 0", fontSize: 13 }}>
+        (no image URL set)
+      </div>
+    );
+  }
+  return <img src={src} alt={alt} style={{ maxWidth: "100%", borderRadius: 6, margin: "10px 0" }} />;
+};
+
+export const TableBlock = ({ headers = [], rows = [] }) => (
+  <table style={{ width: "100%", borderCollapse: "collapse", margin: "10px 0", fontSize: 13 }}>
+    <thead>
+      <tr>
+        {headers.map((h, i) => (
+          <th key={i} style={{ textAlign: "left", borderBottom: "2px solid #e5e7eb", padding: "6px 8px" }}>
+            {h}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row, r) => (
+        <tr key={r}>
+          {row.map((cell, c) => (
+            <td key={c} style={{ borderBottom: "1px solid #f0f0f0", padding: "6px 8px" }}>
+              {cell}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
+
+export const ListBlock = ({ items = [] }) => (
+  <ul style={{ margin: "10px 0", paddingLeft: 20 }}>
+    {items.map((item, i) => (
+      <li key={i}>{item}</li>
+    ))}
+  </ul>
+);
+
+export const fieldStyle = {
+  width: "100%",
+  border: "1px solid #d1d5db",
+  borderRadius: 4,
+  padding: "6px 8px",
+  fontSize: 13,
+  fontFamily: "inherit",
+  boxSizing: "border-box",
+};
+
+export const BlockToolbar = ({ onMoveUp, onMoveDown, onDelete, disableUp, disableDown }) => (
+  <div style={{ display: "flex", gap: 4, marginLeft: "auto" }}>
+    <button
+      type="button"
+      onClick={onMoveUp}
+      disabled={disableUp}
+      title="Move up"
+      style={{ border: "none", background: "none", cursor: disableUp ? "default" : "pointer", opacity: disableUp ? 0.3 : 1, fontSize: 12, padding: "2px 4px" }}
+    >
+      ▲
+    </button>
+    <button
+      type="button"
+      onClick={onMoveDown}
+      disabled={disableDown}
+      title="Move down"
+      style={{ border: "none", background: "none", cursor: disableDown ? "default" : "pointer", opacity: disableDown ? 0.3 : 1, fontSize: 12, padding: "2px 4px" }}
+    >
+      ▼
+    </button>
+    <button
+      type="button"
+      onClick={onDelete}
+      title="Delete block"
+      style={{ border: "none", background: "none", cursor: "pointer", color: "#ef4444", padding: "2px 4px" }}
+    >
+      <TrashIcon />
+    </button>
+  </div>
+);
+
+export const EditableBlock = ({ block, update, remove, moveUp, moveDown, disableUp, disableDown }) => {
+  const wrapperStyle = {
+    border: "1px solid #e5e7eb",
+    borderRadius: 6,
+    padding: 10,
+    marginBottom: 8,
+    background: "#fafafa",
+  };
+  const headerStyle = { display: "flex", alignItems: "center", marginBottom: 6 };
+  const labelStyle = { fontSize: 11, fontWeight: 600, color: "#6b7280", textTransform: "uppercase", letterSpacing: 0.4 };
+
+  const toolbar = (
+    <BlockToolbar onMoveUp={moveUp} onMoveDown={moveDown} onDelete={remove} disableUp={disableUp} disableDown={disableDown} />
+  );
+
+  if (block.type === "paragraph") {
+    return (
+      <div style={wrapperStyle}>
+        <div style={headerStyle}>
+          <span style={labelStyle}>Paragraph</span>
+          {toolbar}
+        </div>
+        <textarea
+          value={block.text}
+          onChange={(e) => update({ text: e.target.value })}
+          rows={3}
+          style={fieldStyle}
+        />
+      </div>
+    );
+  }
+
+  if (block.type === "callout") {
+    return (
+      <div style={wrapperStyle}>
+        <div style={headerStyle}>
+          <span style={labelStyle}>Callout</span>
+          {toolbar}
+        </div>
+        <select
+          value={block.calloutType}
+          onChange={(e) => update({ calloutType: e.target.value })}
+          style={{ ...fieldStyle, marginBottom: 6, width: "auto" }}
+        >
+          <option value="info">Info</option>
+          <option value="warning">Warning</option>
+          <option value="success">Success</option>
+          <option value="danger">Danger</option>
+        </select>
+        <textarea
+          value={block.text}
+          onChange={(e) => update({ text: e.target.value })}
+          rows={2}
+          style={fieldStyle}
+        />
+      </div>
+    );
+  }
+
+  if (block.type === "code") {
+    return (
+      <div style={wrapperStyle}>
+        <div style={headerStyle}>
+          <span style={labelStyle}>Code block</span>
+          {toolbar}
+        </div>
+        <input
+          value={block.language}
+          onChange={(e) => update({ language: e.target.value })}
+          placeholder="language (e.g. javascript)"
+          style={{ ...fieldStyle, marginBottom: 6 }}
+        />
+        <textarea
+          value={block.code}
+          onChange={(e) => update({ code: e.target.value })}
+          rows={4}
+          style={{ ...fieldStyle, fontFamily: "monospace" }}
+        />
+      </div>
+    );
+  }
+
+  if (block.type === "image") {
+    return (
+      <div style={wrapperStyle}>
+        <div style={headerStyle}>
+          <span style={labelStyle}>Image</span>
+          {toolbar}
+        </div>
+        <input
+          value={block.src}
+          onChange={(e) => update({ src: e.target.value })}
+          placeholder="Image URL"
+          style={{ ...fieldStyle, marginBottom: 6 }}
+        />
+        <input
+          value={block.alt}
+          onChange={(e) => update({ alt: e.target.value })}
+          placeholder="Alt text"
+          style={{ ...fieldStyle, marginBottom: 6 }}
+        />
+        <ImageBlock src={block.src} alt={block.alt} />
+      </div>
+    );
+  }
+
+  if (block.type === "table") {
+    const setCell = (r, c, value) => {
+      const rows = block.rows.map((row) => row.slice());
+      rows[r][c] = value;
+      update({ rows });
+    };
+    const setHeader = (c, value) => {
+      const headers = block.headers.slice();
+      headers[c] = value;
+      update({ headers });
+    };
+    const addRow = () => update({ rows: [...block.rows, block.headers.map(() => "")] });
+    const removeRow = (r) => update({ rows: block.rows.filter((_, i) => i !== r) });
+    const addColumn = () => update({
+      headers: [...block.headers, `Column ${block.headers.length + 1}`],
+      rows: block.rows.map((row) => [...row, ""]),
+    });
+    const removeColumn = (c) => update({
+      headers: block.headers.filter((_, i) => i !== c),
+      rows: block.rows.map((row) => row.filter((_, i) => i !== c)),
+    });
+
+    return (
+      <div style={wrapperStyle}>
+        <div style={headerStyle}>
+          <span style={labelStyle}>Table</span>
+          {toolbar}
+        </div>
+        <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: 6 }}>
+          <thead>
+            <tr>
+              {block.headers.map((h, c) => (
+                <th key={c} style={{ padding: 2 }}>
+                  <input value={h} onChange={(e) => setHeader(c, e.target.value)} style={fieldStyle} />
+                </th>
+              ))}
+              <th style={{ padding: 2 }}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {block.rows.map((row, r) => (
+              <tr key={r}>
+                {row.map((cell, c) => (
+                  <td key={c} style={{ padding: 2 }}>
+                    <input value={cell} onChange={(e) => setCell(r, c, e.target.value)} style={fieldStyle} />
+                  </td>
+                ))}
+                <td style={{ padding: 2 }}>
+                  <button type="button" onClick={() => removeRow(r)} title="Remove row" style={{ border: "none", background: "none", color: "#ef4444", cursor: "pointer" }}>
+                    <TrashIcon />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="button" onClick={addRow} style={{ fontSize: 12, border: "1px solid #d1d5db", borderRadius: 4, background: "white", padding: "3px 8px", cursor: "pointer" }}>
+            + Row
+          </button>
+          <button type="button" onClick={addColumn} style={{ fontSize: 12, border: "1px solid #d1d5db", borderRadius: 4, background: "white", padding: "3px 8px", cursor: "pointer" }}>
+            + Column
+          </button>
+          {block.headers.length > 1 && (
+            <button type="button" onClick={() => removeColumn(block.headers.length - 1)} style={{ fontSize: 12, border: "1px solid #d1d5db", borderRadius: 4, background: "white", padding: "3px 8px", cursor: "pointer" }}>
+              − Last column
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (block.type === "list") {
+    const setItem = (i, value) => {
+      const items = block.items.slice();
+      items[i] = value;
+      update({ items });
+    };
+    const addItem = () => update({ items: [...block.items, "New item"] });
+    const removeItem = (i) => update({ items: block.items.filter((_, idx) => idx !== i) });
+
+    return (
+      <div style={wrapperStyle}>
+        <div style={headerStyle}>
+          <span style={labelStyle}>Bulleted list</span>
+          {toolbar}
+        </div>
+        {block.items.map((item, i) => (
+          <div key={i} style={{ display: "flex", gap: 6, marginBottom: 4 }}>
+            <input value={item} onChange={(e) => setItem(i, e.target.value)} style={fieldStyle} />
+            <button type="button" onClick={() => removeItem(i)} title="Remove item" style={{ border: "none", background: "none", color: "#ef4444", cursor: "pointer" }}>
+              <TrashIcon />
+            </button>
+          </div>
+        ))}
+        <button type="button" onClick={addItem} style={{ fontSize: 12, border: "1px solid #d1d5db", borderRadius: 4, background: "white", padding: "3px 8px", cursor: "pointer" }}>
+          + Item
+        </button>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+export const AddContentMenu = ({ onSelect }) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    const handleKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={ref} style={{ position: "relative", marginTop: 4 }}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 6,
+          fontSize: 13,
+          border: "1px dashed #9ca3af",
+          borderRadius: 6,
+          background: "white",
+          color: "#374151",
+          padding: "6px 10px",
+          cursor: "pointer",
+          width: "100%",
+          justifyContent: "center",
+        }}
+      >
+        <PlusIcon /> Add content
+      </button>
+      {open && (
+        <div
+          style={{
+            position: "absolute",
+            zIndex: 20,
+            top: "calc(100% + 4px)",
+            left: 0,
+            right: 0,
+            background: "white",
+            border: "1px solid #e5e7eb",
+            borderRadius: 6,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+            overflow: "hidden",
+          }}
+        >
+          {BLOCK_LIBRARY.map((item) => (
+            <button
+              key={item.type}
+              type="button"
+              onClick={() => {
+                onSelect(item.type);
+                setOpen(false);
+              }}
+              style={{
+                display: "block",
+                width: "100%",
+                textAlign: "left",
+                padding: "8px 12px",
+                border: "none",
+                background: "white",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#f3f4f6")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "white")}
+            >
+              <div style={{ fontSize: 13, fontWeight: 600 }}>{item.label}</div>
+              <div style={{ fontSize: 11, color: "#6b7280" }}>{item.description}</div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const escapeAttr = (str = "") => String(str).replace(/"/g, "&quot;");
+export const escapeText = (str = "") =>
+  String(str).replace(/[{}]/g, (ch) => (ch === "{" ? "&#123;" : "&#125;"));
+
+export const blockToJSX = (block, indent = "  ") => {
+  switch (block.type) {
+    case "paragraph":
+      return `${indent}<p>${escapeText(block.text)}</p>`;
+    case "callout":
+      return `${indent}<Callout type="${block.calloutType}">${escapeText(block.text)}</Callout>`;
+    case "code":
+      return `${indent}<CodeBlock language="${escapeAttr(block.language)}">\n${indent}  {\`${block.code.replace(/`/g, "\\`")}\`}\n${indent}</CodeBlock>`;
+    case "image":
+      return `${indent}<ImageBlock src="${escapeAttr(block.src)}" alt="${escapeAttr(block.alt)}" />`;
+    case "table":
+      return `${indent}<TableBlock\n${indent}  headers={${JSON.stringify(block.headers)}}\n${indent}  rows={${JSON.stringify(block.rows)}}\n${indent}/>`;
+    case "list":
+      return `${indent}<ListBlock items={${JSON.stringify(block.items)}} />`;
+    default:
+      return "";
+  }
+};
+
+export const accordionToJSX = (title, blocks) => {
+  const body = blocks.map((b) => blockToJSX(b)).join("\n\n");
+  return `<AdvancedAccordion title="${escapeAttr(title)}">\n${body || "  no content added yet"}\n</AdvancedAccordion>`;
+};
+
+export const AdvancedAccordion = ({ title, children, editable = false, initialBlocks = [] }) => {
+  const slugify = (text) =>
+    (text || "section")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "section";
+
+  const id = slugify(title);
+  const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [jsxCopied, setJsxCopied] = useState(false);
+  const [blocks, setBlocks] = useState(initialBlocks);
+
+  useEffect(() => {
+    const checkHash = () => {
+      if (window.location.hash === `#${id}`) {
+        setOpen(true);
+      }
+    };
+    checkHash();
+    window.addEventListener("hashchange", checkHash);
+    return () => window.removeEventListener("hashchange", checkHash);
+  }, [id]);
+
+  useEffect(() => {
+    if (!open) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }, [open, id]);
+
+  const handleAnchorClick = () => {
+    const url = `${window.location.origin}${window.location.pathname}${window.location.search}#${id}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1500);
+        })
+        .catch(() => {});
+    }
+  };
+
+  const handleCopyJSX = () => {
+    const code = accordionToJSX(title, blocks);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(code)
+        .then(() => {
+          setJsxCopied(true);
+          setTimeout(() => setJsxCopied(false), 1500);
+        })
+        .catch(() => {});
+    }
+  };
+
+  const addBlock = (type) => setBlocks((prev) => [...prev, createBlock(type)]);
+  const updateBlock = (blockId, patch) =>
+    setBlocks((prev) => prev.map((b) => (b.id === blockId ? { ...b, ...patch } : b)));
+  const removeBlock = (blockId) => setBlocks((prev) => prev.filter((b) => b.id !== blockId));
+  const moveBlock = (index, direction) =>
+    setBlocks((prev) => {
+      const next = prev.slice();
+      const target = index + direction;
+      if (target < 0 || target >= next.length) return prev;
+      [next[index], next[target]] = [next[target], next[index]];
+      return next;
+    });
+
+  return (
+    <div id={id} className="border rounded-md mb-2">
+      <div
+        className="relative flex items-center"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <a
+          href={`#${id}`}
+          onClick={handleAnchorClick}
+          aria-label="Copy link to this section"
+          style={{
+            position: "absolute",
+            left: -22,
+            opacity: hovered ? 1 : 0,
+            transition: "opacity 0.15s",
+            color: "#9ca3af",
+            textDecoration: "none",
+            padding: 4,
+          }}
+        >
+          <AnchorIcon />
+        </a>
+
+        {copied && (
+          <span
+            style={{
+              position: "absolute",
+              left: -22,
+              top: -22,
+              fontSize: 11,
+              background: "#111827",
+              color: "white",
+              padding: "2px 6px",
+              borderRadius: 4,
+              whiteSpace: "nowrap",
+            }}
+          >
+            Copied!
+          </span>
+        )}
+
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="w-full text-left p-3 font-semibold flex justify-between items-center"
+        >
+          {title}
+          <span>{open ? "−" : "+"}</span>
+        </button>
+
+        {editable && (
+          <button
+            type="button"
+            onClick={handleCopyJSX}
+            title="Copy this accordion's content as JSX"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+              fontSize: 11,
+              border: "1px solid #d1d5db",
+              borderRadius: 4,
+              background: "white",
+              padding: "4px 8px",
+              marginRight: 10,
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+              color: "#374151",
+            }}
+          >
+            <CopyIcon /> {jsxCopied ? "Copied!" : "Copy JSX"}
+          </button>
+        )}
+      </div>
+
+      {open && (
+        <div className="p-3 pt-0">
+          {children}
+
+          {editable && (
+            <div style={{ marginTop: children ? 10 : 0 }}>
+              {blocks.map((block, index) => (
+                <EditableBlock
+                  key={block.id}
+                  block={block}
+                  update={(patch) => updateBlock(block.id, patch)}
+                  remove={() => removeBlock(block.id)}
+                  moveUp={() => moveBlock(index, -1)}
+                  moveDown={() => moveBlock(index, 1)}
+                  disableUp={index === 0}
+                  disableDown={index === blocks.length - 1}
+                />
+              ))}
+              <AddContentMenu onSelect={addBlock} />
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+<AdvancedAccordion title="Test Section One" editable>
+  Lorem ipsum dolor sit amet, placeholder content for the first accordion.
+</AdvancedAccordion>
