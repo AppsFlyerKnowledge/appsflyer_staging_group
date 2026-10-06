@@ -22,19 +22,19 @@ Answer a few questions about your app and platform, and [Developer Journey](http
 
 ### AI-assisted: integrate with your coding assistant
 
-Use the AppsFlyer SDK MCP server with Cursor, GitHub Copilot, or Codex to offload most of the integration work. [See the AI integration guide](https://dev.appsflyer.com/hc/docs/integrate-sdk-with-ai). Currently supports Android and iOS.
+Use the AppsFlyer SDK MCP server with Cursor, GitHub Copilot, or Codex to offload most of the integration work. [See the AI integration guide](doc:integrate-sdk-with-ai). Currently supports Android and iOS.
 
 ## Browse by platform
 
 ### Native SDKs
 
-- Android: [SDK 7](https://dev.appsflyer.com/hc/docs/android-sdk-7) | [SDK 6](https://dev.appsflyer.com/hc/docs/android-sdk-6)
-- iOS: [SDK 7](https://dev.appsflyer.com/hc/docs/ios-sdk-7) | [SDK 6](https://dev.appsflyer.com/hc/docs/ios-sdk-6)
+- Android: [SDK 7](doc:android-sdk-7) | [SDK 6](doc:android-sdk-6)
+- iOS: [SDK 7](doc:ios-sdk-7) | [SDK 6](doc:ios-sdk-6)
 
 ### Multi-platform plugins
 
-- [React Native](https://dev.appsflyer.com/hc/docs/react-native-plugin)
-- [Unity](https://dev.appsflyer.com/hc/docs/unity-plugin)
+- [React Native](doc:react-native-plugin)
+- [Unity](doc:unity-plugin)
 - [Flutter](https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin) (GitHub)
 - [NativeScript](https://github.com/AppsFlyerSDK/appsflyer-nativescript-plugin) (GitHub)
 - [Cordova](https://github.com/AppsFlyerSDK/appsflyer-cordova-plugin) (GitHub)
@@ -44,5 +44,5 @@ Use the AppsFlyer SDK MCP server with Cursor, GitHub Copilot, or Codex to offloa
 
 ### Game development
 
-- [Unreal Engine](https://dev.appsflyer.com/hc/docs/unreal-engine-plugin)
+- [Unreal Engine](doc:unreal-engine-plugin)
 - [Cocos2d](https://github.com/AppsFlyerSDK/appsflyer-cocos2dx-plugin) (GitHub)

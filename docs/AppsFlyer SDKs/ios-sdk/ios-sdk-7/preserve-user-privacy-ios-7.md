@@ -4,6 +4,30 @@ excerpt: Learn how to preserve user privacy in the iOS SDK.
 hidden: false
 ---
 
+## Privacy-preserving methods: When, Who, and What to send
+
+The SDK lets you control three things about the data you send to AppsFlyer:
+
+- **When** you send user-level data
+- **Who** receives user-level data
+- **What** user-level data you send
+
+### When to send user-level data
+
+The SDK sends information about app installs and in-app events to AppsFlyer as soon as `start` is called. Privacy-preserving methods affect the availability of certain user-level event data depending on whether they're invoked before or after the `start` call.
+
+When `start` is called for the first time, the SDK sends the install event to AppsFlyer, along with the parameters required to attribute the installation to the correct media source. Invoking privacy-preserving methods before calling `start` can prevent AppsFlyer from attributing the install event properly.
+
+So, if you want attribution to occur, avoid calling privacy-preserving methods before `start`. Instead, call them only after the install event has been sent to AppsFlyer. This approach ensures that the user's in-app events remain private while install attribution can still take place.
+
+### Who receives user-level data
+
+Your ad network and Self-Reporting Network (SRN) partners receive user-level data for attribution and optimization. Use a partner-sharing filter method, below, to limit which partners receive this data based on end-user preference.
+
+### What data to send
+
+Some methods below anonymize data by deleting or hashing all user-level identifiers. Others remove only specific identifiers.
+
 ## Use start to share only the install event
 
 If you prefer to send only the install event and no additional information, you can invoke [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start), with a completion handler. Once you receive a success response indicating that the install event has been received, either set [`isStopped`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#isstopped)  or [`anonymizeUser`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#anonymizeuser) to `true` in the completion handler. 
