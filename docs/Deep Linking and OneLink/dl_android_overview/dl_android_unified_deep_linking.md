@@ -16,22 +16,22 @@ hidden: false
 The flow works as follows:
 
 1. User clicks a OneLink link.
-   * If the user has the app installed, the Android App Links or URI scheme opens the app.
-   * If the user doesn't have the app installed, they are redirected to the app store, and after downloading, the user opens the app. 
+   - If the user has the app installed, the Android App Links or URI scheme opens the app.
+   - If the user doesn't have the app installed, they are redirected to the app store, and after downloading, the user opens the app.
 2. The app open triggers the AppsFlyer SDK.
-3. The AppsFlyer SDK runs the UDL API. 
-4. The UDL API retrieves OneLink data from AppsFlyer servers. 
+3. The AppsFlyer SDK runs the UDL API.
+4. The UDL API retrieves OneLink data from AppsFlyer servers.
 5. The UDL API calls back the [`onDeepLinking()`](https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking) method in the [`DeepLinkListener`](https://dev.appsflyer.com/hc/docs/deeplinklistener) class.
 6. The [`onDeepLinking()`](https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking) method gets a [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult) object.
 7. The [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult) object includes:
-   * Status (Found/Not found/Error)
-   * A DeepLink object that carries: 
-      - **For users with app not yet installed**: The `deep_link_value` and `deep_link_sub1-10` parameters.
-      - **For users with the app already installed**: The `deep_link_value` and `deep_link_sub1-10` parameters and all parameters contained in the `link` parameter of the OneLink attribution link.
+   - Status (Found/Not found/Error)
+   - A DeepLink object that carries:
+     - **For users with app not yet installed**: The `deep_link_value` and `deep_link_sub1-10` parameters.
+     - **For users with the app already installed**: The `deep_link_value` and `deep_link_sub1-10` parameters and all parameters contained in the `link` parameter of the OneLink attribution link.
 
 ## Planning
 
-* UDL requires AppsFlyer Android SDK V6.1+.
+- UDL requires AppsFlyer Android SDK V6.1+.
 
 When setting up OneLinks, the marketer uses parameters to create the links, and the developer customizes the behavior of the app based on the values received. It's the developer's responsibility to make sure the parameters are handled correctly in the app, for both in-app routing, and personalizing data in the link.
 
@@ -39,35 +39,35 @@ When setting up OneLinks, the marketer uses parameters to create the links, and 
 
 1. Get from the marketer the desired behavior and personal experience a user gets when they click the URL.
 2. Based on the desired behavior, plan the `deep_link_value` and other parameters that are needed to give the user the desired personal experience.
-   * The `deep_link_value` is set by the marketer in the URL and used by the developer to redirect the user to a specific place inside the app. For example, if you have a fruit store and want to direct users to apples, the value of `deep_link_value` can be `apples`.
-   * The `deep_link_sub1-10` parameters can also be added to the URL to help personalize the user experience. For example, to give a 10% discount, the value of `deep_link_sub1` can be `10`. 
+   - The `deep_link_value` is set by the marketer in the URL and used by the developer to redirect the user to a specific place inside the app. For example, if you have a fruit store and want to direct users to apples, the value of `deep_link_value` can be `apples`.
+   - The `deep_link_sub1-10` parameters can also be added to the URL to help personalize the user experience. For example, to give a 10% discount, the value of `deep_link_sub1` can be `10`.
 
 ## Implementation
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    border: 1px solid #d8d8d8;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 180px; margin: 0 0; margin-right: 20px\">\n  <div>\n    <h1 style=\"margin-top: 20px\">\n      Let's save you some time  >>\n    </h1>   \n      <h3>\n        Set Deep Linking with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=dl_android_unified_deep_linking');\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    border: 1px solid #d8d8d8;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 180px; margin: 0 0; margin-right: 20px\">\n  <div>\n    <h1 style=\"margin-top: 20px\">\n      Let's save you some time  >>\n    </h1>   \n      <h3>\n        Set Deep Linking with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=dl_android_unified_deep_linking');\\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
-
 
 Implement the UDL API logic based on the chosen parameters and values.
 
 1. Use the [`subscribeForDeepLink()`](https://dev.appsflyer.com/hc/docs/appsflyerlib#subscribefordeeplink) method (from `AppsFlyerLib`), before calling [start](doc:android-sdk-reference-appsflyerlib#start), to register the  [`DeepLinkListener`](https://dev.appsflyer.com/hc/docs/deeplinklistener) interface listener.
-2. Make sure you override the callback function [`onDeepLinking()`](https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking). 
-`onDeepLinking() ` accepts as an argument a [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult) object. 
-4. Use [`getStatus()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#getstatus) to query whether the deep linking match is found.
-5. For when the status is an error, call [`getError()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#geterror) and run your error flow.
-6. For when the status is found, use [`getDeepLink()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#getdeeplink) to retrieve the [`DeepLink`](https://dev.appsflyer.com/hc/docs/deeplink) object. 
-The `DeepLink `object contains the deep linking information and helper functions to easily retrieve values from well-known OneLink keys, for example, [`getDeepLinkValue()`](https://dev.appsflyer.com/hc/docs/deeplink#getdeeplinkvalue).
-7. Use [`getDeepLinkValue()`](https://dev.appsflyer.com/hc/docs/deeplink#getdeeplinkvalue) to retrieve the `deep_link_value`. 
-8. Use [`getStringValue("deep_link_sub1")`](https://dev.appsflyer.com/hc/docs/deeplink#getstringvalue) to retrieve `deep_link_sub1`. Do the same for `deep_link_sub2-10` parameters, changing the string value as required.
-9. Once `deep_link_value` and `deep_link_sub1-10` are retrieved, pass them to an in-app router and use them to personalize the user experience.
+2. Make sure you override the callback function [`onDeepLinking()`](https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking).
+   `onDeepLinking() ` accepts as an argument a [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult) object.
+3. Use [`getStatus()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#getstatus) to query whether the deep linking match is found.
+4. For when the status is an error, call [`getError()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#geterror) and run your error flow.
+5. For when the status is found, use [`getDeepLink()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#getdeeplink) to retrieve the [`DeepLink`](https://dev.appsflyer.com/hc/docs/deeplink) object.
+   The `DeepLink `object contains the deep linking information and helper functions to easily retrieve values from well-known OneLink keys, for example, [`getDeepLinkValue()`](https://dev.appsflyer.com/hc/docs/deeplink#getdeeplinkvalue).
+6. Use [`getDeepLinkValue()`](https://dev.appsflyer.com/hc/docs/deeplink#getdeeplinkvalue) to retrieve the `deep_link_value`.
+7. Use [`getStringValue("deep_link_sub1")`](https://dev.appsflyer.com/hc/docs/deeplink#getstringvalue) to retrieve `deep_link_sub1`. Do the same for `deep_link_sub2-10` parameters, changing the string value as required.
+8. Once `deep_link_value` and `deep_link_sub1-10` are retrieved, pass them to an in-app router and use them to personalize the user experience.
 
 > 📘 **Note**
 >
 > `onDeepLinking` is not called when the app is running in the background and Application LaunchMode is not standard.
 > To correct this, call `setIntent(intent)` method to set the intent value inside the overridden method `onNewIntent` if the application is using a non-standard LaunchMode.
+>
 > ```java
 >        import android.content.Intent;
 >        ...
@@ -79,9 +79,9 @@ The `DeepLink `object contains the deep linking information and helper functions
 >           super.onNewIntent(intent);     
 >           setIntent(intent);
 >        }
->```
+> ```
 
-### Supporting legacy OneLink links 
+### Supporting legacy OneLink links
 
 Legacy OneLink are links that don't contain the parameters recommended for UDL: `deep_link_value` and `deep_link_sub1-10`.
 Usually these are links that already exist and are in use when migrating from legacy methods to UDL.
@@ -143,6 +143,7 @@ appsflyer.subscribeForDeepLink(new DeepLinkListener
     }
 });
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().subscribeForDeepLink(object : DeepLinkListener{
     override fun onDeepLinking(deepLinkResult: DeepLinkResult) {
@@ -202,34 +203,40 @@ AppsFlyerLib.getInstance().subscribeForDeepLink(object : DeepLinkListener{
 ## Testing deferred deep linking
 
 ### Prerequisites
+
 - Complete UDL [integration](#implementation)
 - [Register your testing device](https://support.appsflyer.com/hc/en-us/articles/207031996)
-- [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode) in the app 
+- [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode) in the app
 - Make sure the app isn't installed on your device
-- Ask your marketer for a OneLink template. 
-  - It will look something like this: `https://onelink-basic-app.onelink.me/H5hv`. 
+- Ask your marketer for a OneLink template.
+  - It will look something like this: `https://onelink-basic-app.onelink.me/H5hv`.
   - This example uses the OneLink subdomain `onelink-basic-app.onelink.me` and the OneLink template ID `H5hv`
 
 ### The test link
+
 You can use an existing OneLink link or ask your marketer to create a new one for testing. Both short and long OneLink URLs can be used.
 
 #### Adding ad-hoc parameters to an existing link
- 
+
 - Use only the domain and OneLink template of your link, for example: `https://onelink-basic-app.onelink.me/H5hv`.
 - Add OneLink parameters `deep_link_value` and `deep_link_sub1-10`, as expected by your application. The parameters should be added as query parameters.
   - Example: `https://onelink-basic-app.onelink.me/H5hv?pid=my_media_source&deep_link_value=apples&deep_link_sub1=23`
 
 ### Perform the test
+
 1. Click the link on your device.
-2. OneLink redirects you according to the link setup, either to Google Play or a website. 
+2. OneLink redirects you according to the link setup, either to Google Play or a website.
 3. Install the application.
-> ** Important **
-> - If the application is still in development, and not uploaded to the store yet, you see this image:
-> <img src="https://files.readme.io/8d43627-Screenshot_20221205-191054_Chrome.jpg" alt="drawing" width="250" style={{textAlign: "center"}} />
-> - Install the application from *Android Studio* or any other IDE you use.
-4. UDL detects the deferred deep linking, matches the install to the click and retrieves the OneLink parameters to `onDeepLinking` callback. 
+
+> \*\* Important \*\*
+>
+> - If the application is still in development, and not uploaded to the store yet, you see this image:> <img src="https://files.readme.io/8d43627-Screenshot_20221205-191054_Chrome.jpg" alt="drawing" width="250" style={{textAlign: "center"}} />
+> - Install the application from _Android Studio_ or any other IDE you use.
+
+4. UDL detects the deferred deep linking, matches the install to the click and retrieves the OneLink parameters to `onDeepLinking` callback.
 
 ### Expected logs results
+
 > 📘 The following logs are available **only** when [debug mode is enabled](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode).
 
 - SDK initialized:
@@ -240,11 +247,11 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
   ```
   D/AppsFlyer_6.9.0: No deep link detected
   ```
-- UDL API starts:  
+- UDL API starts:
   ```
   D/AppsFlyer_6.9.0: [DDL] start
   ```
-- UDL sends query to AppsFlyer to query a match with this install: 
+- UDL sends query to AppsFlyer to query a match with this install:
   ```
   D/AppsFlyer_6.9.0: [DDL] Preparing request 1
   ...
@@ -264,25 +271,29 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
 ## Testing deep linking (Android App Links)
 
 ### Prerequisites
+
 - Complete UDL [integration](#implementation)
 - [Register your testing device](https://support.appsflyer.com/hc/en-us/articles/207031996)
-- [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode) in the app 
+- [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode) in the app
 - Make sure the app is already installed on your device
-- Ask your marketer for a OneLink template. 
-  - It will look something like this `https://onelink-basic-app.onelink.me/H5hv`. 
+- Ask your marketer for a OneLink template.
+  - It will look something like this `https://onelink-basic-app.onelink.me/H5hv`.
   - This example uses the OneLink subdomain `onelink-basic-app.onelink.me` and the OneLink template ID `H5hv`.
 - [Configure Android App-Links](dl_android_init_setup#procedures-for-android-app-links).
 
 ### Create the test link
+
 Use the same method as in [deferred deep linking](#testing-deferred-deep-linking).
 
 ### Perform the test
-1. Click the link on your device.
-2. UDL detects the Android App Link and retrieves the OneLink parameters to `onDeepLinking` callback. 
 
+1. Click the link on your device.
+2. UDL detects the Android App Link and retrieves the OneLink parameters to `onDeepLinking` callback.
 
 ### Expected logs results
+
 > 📘 The following logs are available **only** when [debug mode is enabled](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode).
+
 - If the link is a OneLink shortlink (e.g. https://onelink-basic-app.onelink.me/H5hv/apples)
   ```
   D/AppsFlyer_6.9.0: HTTP: [258990367] GET:https://onelink.appsflyer.com/shortlink-sdk/v2/H5hv?id=apples 
@@ -295,12 +306,15 @@ Use the same method as in [deferred deep linking](#testing-deferred-deep-linking
 
 > 📘 **Tip**
 > If when clicking an Android App Link the OS shows a Disambiguation Dialog or redirects to Google Play or a website, check whether the SHA256 signature is correct.
+>
 > 1. Use `adb` to get the app signature on the device:
+>
 > ```
 > adb shell pm get-app-links <PACKAGE_NAME>
->```
+> ```
+>
 > -2. Make sure the subdomain is `verified`.
 > ![adb verified!](https://files.readme.io/f0086fb-Screen_Shot_2022-12-06_at_17.05.10.png "adb verified")
 >
 > 3. If the subdomain isn't verified, it shows `1024`.
-> ![adb verified!](https://files.readme.io/f98642e-Screen_Shot_2022-12-06_at_17.05.22.png "adb verified")
+>    ![adb verified!](https://files.readme.io/f98642e-Screen_Shot_2022-12-06_at_17.05.22.png "adb verified")

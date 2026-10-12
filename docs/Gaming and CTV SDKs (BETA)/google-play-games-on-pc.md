@@ -15,15 +15,14 @@ Game attribution and user measurement require the game to integrate an AppsFlyer
 
 [block:tutorial-tile]
 {
-  "backgroundColor": "#0197f4",
-  "emoji": "🥇",
-  "id": "609928242e7f38004f7f2c90",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/starting-the-sdk-in-android",
-  "slug": "starting-the-sdk-in-android",
-  "title": "Starting the SDK in Android"
+"backgroundColor": "#0197f4",
+"emoji": "🥇",
+"id": "609928242e7f38004f7f2c90",
+"link": "https://dev.appsflyer.com/v0.1/recipes/starting-the-sdk-in-android",
+"slug": "starting-the-sdk-in-android",
+"title": "Starting the SDK in Android"
 }
 [/block]
-
 
 ## Adding the App to Google Play Games on PC
 
@@ -34,10 +33,10 @@ Game attribution and user measurement require the game to integrate an AppsFlyer
 ## Trying the AppsFlyer sample app
 
 > 📘 Note
-> 
+>
 > You can only access our sample app if the Google Play Games for PC beta is available in your country.
 
-**To see how an app looks on Google Play Games on PC**: 
+**To see how an app looks on Google Play Games on PC**:
 
 1. On your desktop, go to the AppsFlyer sample app on Google Play Games on PC: [My Device ID](https://play.google.com/store/apps/details?id=com.appsflyer.android.deviceid).
 2. Click **Install on Windows**.

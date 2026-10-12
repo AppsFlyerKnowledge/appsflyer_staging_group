@@ -18,6 +18,7 @@ In your `AppDelegate`, import `AppsFlyerLib`:
 
 @end
 ```
+
 ```swift Swift
 import UIKit
 import AppsFlyerLib
@@ -34,6 +35,7 @@ In `didFinishLaunchingWithOptions`, initialize the SDK with your dev key and App
 ```objc Objective-C
 [[AppsFlyerLib shared] initWithDevKey:@"<YOUR_DEV_KEY>" appleAppId:@"<APPLE_APP_ID>"];
 ```
+
 ```swift Swift
 AppsFlyerLib.shared().initialize(devKey: "<YOUR_DEV_KEY>", appId: "<APPLE_APP_ID>")
 ```
@@ -48,16 +50,16 @@ SDK V7 introduces an optional property list file for configuring SDK behavior wi
 
 ### Supported keys
 
-| Plist key | Type | Default | Programmatic equivalent |
-|---|---|---|---|
-| `debug_mode` | Boolean | `false` | `AppsFlyerLib.shared().isDebug = true` |
-| `currency_code` | String | `"USD"` | `AppsFlyerLib.shared().currencyCode = "ILS"` |
-| `disable_idfa_collection` | Boolean | `false` | `AppsFlyerLib.shared().disableAdvertisingIdentifier = true` |
-| `disable_idfv_collection` | Boolean | `false` | `AppsFlyerLib.shared().disableIDFVCollection = true` |
-| `disable_skadnetwork` | Boolean | `false` | `AppsFlyerLib.shared().disableSKAdNetwork = true` |
-| `min_time_between_sessions` | Integer (seconds) | `30` | `AppsFlyerLib.shared().minTimeBetweenSessions = 1` |
-| `host` | String | `""` | `AppsFlyerLib.shared().setHost("prefix", hostName: "host.com")` |
-| `prefix` | String | `""` | *(set together with `host`)* |
+| Plist key                   | Type                                 | Default | Programmatic equivalent                                         |
+| --------------------------- | ------------------------------------ | ------- | --------------------------------------------------------------- |
+| `debug_mode`                | Boolean                              | `false` | `AppsFlyerLib.shared().isDebug = true`                          |
+| `currency_code`             | String                               | `"USD"` | `AppsFlyerLib.shared().currencyCode = "ILS"`                    |
+| `disable_idfa_collection`   | Boolean                              | `false` | `AppsFlyerLib.shared().disableAdvertisingIdentifier = true`     |
+| `disable_idfv_collection`   | Boolean                              | `false` | `AppsFlyerLib.shared().disableIDFVCollection = true`            |
+| `disable_skadnetwork`       | Boolean                              | `false` | `AppsFlyerLib.shared().disableSKAdNetwork = true`               |
+| `min_time_between_sessions` | Integer (seconds) | `30`    | `AppsFlyerLib.shared().minTimeBetweenSessions = 1`              |
+| `host`                      | String                               | `""`    | `AppsFlyerLib.shared().setHost("prefix", hostName: "host.com")` |
+| `prefix`                    | String                               | `""`    | _(set together with `host`)_                 |
 
 **Example: `AppsFlyerLibConfig.plist`**
 
@@ -124,6 +126,7 @@ Use this if your app has no pre-start conditions. If your app supports Universal
     return YES;
 }
 ```
+
 ```swift Swift
 func application(_ application: UIApplication,
                  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -183,6 +186,7 @@ If `start` must wait for both SDK readiness and your consent flow (CMP, ATT, or 
 
 @end
 ```
+
 ```swift Swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -235,6 +239,7 @@ struct MyApp: App {
 // Objective-C
 [[AppsFlyerLib shared] unregisterSessionReadyListener];
 ```
+
 ```swift Swift
 // Swift
 AppsFlyerLib.shared().unregisterSessionReadyListener()
@@ -247,6 +252,7 @@ AppsFlyerLib.shared().unregisterSessionReadyListener()
 ```objc Objective-C
 BOOL ready = [[AppsFlyerLib shared] isSessionReady];
 ```
+
 ```swift Swift
 let ready = AppsFlyerLib.shared().isSessionReady()
 ```
@@ -273,6 +279,7 @@ The following example demonstrates how to initialize and start the SDK without p
     return YES;
 }
 ```
+
 ```swift Swift
 func application(_ application: UIApplication,
                  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -301,6 +308,7 @@ You can enable debug logs by setting `isDebug` to `true`:
 ```objc Objective-C
 [AppsFlyerLib shared].isDebug = true;
 ```
+
 ```swift Swift
 AppsFlyerLib.shared().isDebug = true
 ```
@@ -333,7 +341,7 @@ It's performed by:
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-ios-sdk-7');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-ios-sdk-7');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
 
@@ -351,84 +359,85 @@ To avoid mixing production data with test conversions and in-app events, you can
 You can utilize Xcode's compilation configuration capabilities to configure an easy-to-use debug app. It will enable you to switch between your debug and production apps by tapping into Xcode's active compilation conditions.
 [block:callout]
 {
-  "type": "info",
-  "title": "Note",
-  "body": "If you don't mind mixing production data with test traffic, you can skip to [testing the integration](#test-ios-sdk-integration). All tests can be performed for both production and debug apps."
+"type": "info",
+"title": "Note",
+"body": "If you don't mind mixing production data with test traffic, you can skip to [testing the integration](#test-ios-sdk-integration). All tests can be performed for both production and debug apps."
 }
 [/block]
 This is achieved by configuring a User-Defined Setting in your project's Build Settings and exposing it via an `info.plist` property.
 
 **Step 1: Add a debug app to AppsFlyer**
-[Add a new pending iOS app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-New-Application-to-the-AppsFlyer-Dashboard) or ask a team member with dashboard access to add it. Choose any available app ID–You will need it in step 3. Make sure the ID is 9 digits and starts with four 1s, for example, 111167538. 
+[Add a new pending iOS app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-New-Application-to-the-AppsFlyer-Dashboard) or ask a team member with dashboard access to add it. Choose any available app ID–You will need it in step 3. Make sure the ID is 9 digits and starts with four 1s, for example, 111167538.
 
 **Step 2: Add a User-Defined Setting**
- 1. In Xcode, in the file navigator view, select your project root and go to **Build Settings**.
- 2. Click **+** in the toolbar and select **Add User-Defined Setting**. In this case, we name it `AF_APP_ID`.
- 3. Expand the newly created User-Defined Setting:
-    * Set the **Debug** Conditional Setting to your test app's app ID (mentioned in step 1)
-    * Set the **Release** Conditional Setting to your production app's app ID. 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/6c8e25c-2021-08-02_19-12-34.png",
-        "2021-08-02_19-12-34.png",
-        987,
-        597,
-        "#302b2e"
-      ],
-      "border": false
-    }
-  ]
-}
-[/block]
-**Step 3: Expose app IDs via info.plist**
-Go to the project's `info.plist` and add a new property (called `AFAppID` in this case). Set its value to `$(AF_APP_ID)` (based on the User-Defined Setting name in step 2).
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/2073949-2021-08-02_19-41-31.png",
-        "2021-08-02_19-41-31.png",
-        971,
-        434,
-        "#322d31"
-      ]
-    }
-  ]
-}
-[/block]
-**Step 4: Retrieve and set the app ID**
-To access and use app ID [during SDK initialization](doc:integrate-ios-sdk#initializing-the-ios-sdk), add the following code to `didFinishLaunchingWithOptions` in your `AppDelegate`:
-[block:code]
-{
-  "codes": [
-    {
-      "code": "func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {\n    // ...\n    guard let appID : String = Bundle.main.object(forInfoDictionaryKey: \"AFAppID\") as? String else {\n        fatalError(\"Cannot find app ID\")\n    }\n    AppsFlyerLib.shared().appleAppID = appID\n    // ...\n    return true\n}\n",
-      "language": "swift"
-    }
-  ]
-}
-[/block]
-**Step 5: Run app using Debug build configuration**
-To change the active build configuration:
- 1. go to **Product** > **Scheme** > **Edit Scheme...**.
- 2. Select **Run** and change the **Build configuration** to **Debug** or **Release**, as needed.
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/bc4100b-2021-08-02_19-58-57.png",
-        "2021-08-02_19-58-57.png",
-        945,
-        312,
-        "#313034"
-      ]
-    }
-  ]
-}
-[/block]
-Now, when you use the Debug configuration to build your app, Xcode will use the debug app ID that you configured in step 2.
+
+1. In Xcode, in the file navigator view, select your project root and go to **Build Settings**.
+2. Click **+** in the toolbar and select **Add User-Defined Setting**. In this case, we name it `AF_APP_ID`.
+3. Expand the newly created User-Defined Setting:
+   - Set the **Debug** Conditional Setting to your test app's app ID (mentioned in step 1)
+   - Set the **Release** Conditional Setting to your production app's app ID.
+     [block:image]
+     {
+     "images": [
+     {
+     "image": [
+     "https://files.readme.io/6c8e25c-2021-08-02_19-12-34.png",
+     "2021-08-02_19-12-34.png",
+     987,
+     597,
+     "#302b2e"
+     ],
+     "border": false
+     }
+     ]
+     }
+     [/block]
+     **Step 3: Expose app IDs via info.plist**
+     Go to the project's `info.plist` and add a new property (called `AFAppID` in this case). Set its value to `$(AF_APP_ID)` (based on the User-Defined Setting name in step 2).
+     [block:image]
+     {
+     "images": [
+     {
+     "image": [
+     "https://files.readme.io/2073949-2021-08-02_19-41-31.png",
+     "2021-08-02_19-41-31.png",
+     971,
+     434,
+     "#322d31"
+     ]
+     }
+     ]
+     }
+     [/block]
+     **Step 4: Retrieve and set the app ID**
+     To access and use app ID [during SDK initialization](doc:integrate-ios-sdk#initializing-the-ios-sdk), add the following code to `didFinishLaunchingWithOptions` in your `AppDelegate`:
+     [block:code]
+     {
+     "codes": [
+     {
+     "code": "func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {\n    // ...\n    guard let appID : String = Bundle.main.object(forInfoDictionaryKey: \"AFAppID\") as? String else {\n        fatalError(\"Cannot find app ID\")\n    }\n    AppsFlyerLib.shared().appleAppID = appID\n    // ...\n    return true\n}\n",
+     "language": "swift"
+     }
+     ]
+     }
+     [/block]
+     **Step 5: Run app using Debug build configuration**
+     To change the active build configuration:
+4. go to **Product** > **Scheme** > **Edit Scheme...**.
+5. Select **Run** and change the **Build configuration** to **Debug** or **Release**, as needed.
+   [block:image]
+   {
+   "images": [
+   {
+   "image": [
+   "https://files.readme.io/bc4100b-2021-08-02_19-58-57.png",
+   "2021-08-02_19-58-57.png",
+   945,
+   312,
+   "#313034"
+   ]
+   }
+   ]
+   }
+   [/block]
+   Now, when you use the Debug configuration to build your app, Xcode will use the debug app ID that you configured in step 2.

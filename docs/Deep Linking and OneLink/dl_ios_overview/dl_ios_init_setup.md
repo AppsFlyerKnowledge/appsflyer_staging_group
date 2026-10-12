@@ -11,10 +11,10 @@ There are two app opening methods that need to be implemented to cover your enti
 
 The two methods and instructions for implementation are described in detail in the following sections.
 
-| Method | Description | iOS Versions | Procedure |
-| --- | --- | --- | --- |
-|**Universal Links**|Directly opens the mobile app at the default activity. Universal Links take the format of regular web links (e.g. https://yourbrand.onelink.me or https://www.yourbrand.com)|iOS 9 and above|<ol><li>[Get the app bundle ID and prefix ID.](#getting-the-app-bundle-id-and-prefix-id)</li><li> [Enable associated domains.](#enabling-associated-domains)</li></ol>|
-|**URI Scheme**|Directly opens the app based on the activity path specified in the URI scheme.|[iOS all versions](https://support.appsflyer.com/hc/en-us/articles/115002366466)|<ol><li>[Decide on a URI scheme with the marketer.](#deciding-on-a-uri-scheme)</li><li> [Adding URI scheme.](#adding-uri-scheme)</li><li>[Testing](#testing-the-uri-scheme)</li></ol>
+| Method              | Description                                                                                                                                                                                                                                                                                                                                     | iOS Versions                                                                     | Procedure                                                                                                                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Universal Links** | Directly opens the mobile app at the default activity. Universal Links take the format of regular web links (e.g. https://yourbrand.onelink.me or https://www.yourbrand.com) | iOS 9 and above                                                                  | <ol><li>[Get the app bundle ID and prefix ID.](#getting-the-app-bundle-id-and-prefix-id)</li><li> [Enable associated domains.](#enabling-associated-domains)</li></ol>                |
+| **URI Scheme**      | Directly opens the app based on the activity path specified in the URI scheme.                                                                                                                                                                                                                                                  | [iOS all versions](https://support.appsflyer.com/hc/en-us/articles/115002366466) | <ol><li>[Decide on a URI scheme with the marketer.](#deciding-on-a-uri-scheme)</li><li> [Adding URI scheme.](#adding-uri-scheme)</li><li>[Testing](#testing-the-uri-scheme)</li></ol> |
 
 ## Procedures for iOS Universal Links
 
@@ -26,8 +26,8 @@ The two methods and instructions for implementation are described in detail in t
 4. Click the relevant app.
 5. Copy the prefix ID and app bundle ID.
 6. Give the prefix ID and app bundle ID to your marketer.
-The marketer will use it in the AppsFlyer dashboard to register the app.
-![certs_apple_info!](https://files.readme.io/6b67004-certs_apple_info.png "certs_apple_info")
+   The marketer will use it in the AppsFlyer dashboard to register the app.
+   ![certs_apple_info!](https://files.readme.io/6b67004-certs_apple_info.png "certs_apple_info")
 
 ### Enabling associated domains
 
@@ -36,6 +36,7 @@ The marketer will use it in the AppsFlyer dashboard to register the app.
 Follow the iOS instructions [to add the associated domains entitlement to your app](https://developer.apple.com/documentation/xcode/supporting-associated-domains#Add-the-associated-domains-entitlement-to-your-app).
 
 ### Configuring mobile apps to register approved domains
+
 Configuring mobile apps to register approved domains takes place inside Xcode. It requires the OneLink subdomain that your marketer generates.
 
 **To configure mobile apps to register approved domains**:
@@ -46,7 +47,7 @@ Configuring mobile apps to register approved domains takes place inside Xcode. I
 4. Switch to the **Capabilities** tab.
 5. Turn on **Associated Domain**.
 6. Add the subdomain that you got from your marketer.
-    The format is `applinks:subdomain.onelink.me`.
+   The format is `applinks:subdomain.onelink.me`.
 
 ![xcode-associated-domains!](https://files.readme.io/ed37397-xcode-associated-domains.png "xcode-associated-domains")
 
@@ -57,19 +58,24 @@ Configuring mobile apps to register approved domains takes place inside Xcode. I
 ### Universal Link limitations
 
 #### Opening apps from browsers
+
 Universal Links only work when clicked on. For example, when clicking a link in a web page or email. Pasting the link in the browser address bar doesn't deep link into the app.
 
 #### OneLink subdomain
+
 While the OneLink subdomain can be changed at anytime, it causes all existing OneLink URLs using the original subdomain to stop working.
 
 #### OneLink in social network apps
+
 Not all apps, including social networks apps, fully support Universal links. For further details, please see [this guide](https://support.appsflyer.com/hc/en-us/articles/207032246-OneLink-Basic-Setup-Guide#partners-onelink-social-apps).
 
 #### Other limitations and issues
+
 There may also be other limitations with Universal links. Visit [OneLink troubleshooting](https://support.appsflyer.com/hc/en-us/articles/360014821438) for more details.
 
 ## Procedures for URI scheme
-A URI scheme is a URL that leads users directly to the mobile app. 
+
+A URI scheme is a URL that leads users directly to the mobile app.
 
 When an app user enters a URI scheme in a browser address bar box, or clicks on a link based on a URI scheme, the app launches and the user is deep-linked.
 
@@ -78,12 +84,14 @@ Whenever a Universal Link fails to open the app, the URI scheme can be used as a
 ### Deciding on a URI scheme
 
 **To decide on a URI scheme:**
-1. Contact the marketer. 
+
+1. Contact the marketer.
 2. Choose a URI scheme. For example: `yourappname://`
 
 > 📘
+>
 > - Use a URI scheme that is as unique as possible to your app and brand to avoid coincidental overlap with other apps in the ecosystem. Overlap with other apps is an inherent issue in the nature of URI scheme protocol.
-> - The URI scheme should not start with *http* or *https*.
+> - The URI scheme should not start with _http_ or _https_.
 > - The URI scheme should be similarly defined on Android and iOS.
 
 3. Send the URI scheme to the marketer, e.g. `afshopapp://mainactivity`.
@@ -95,11 +103,10 @@ Whenever a Universal Link fails to open the app, the URI scheme can be used as a
 1. In Xcode, open app information plist file.
 2. Add a **URL types** entry.
 3. Expand the **URL type** and **Item 0** rows.
-4. Add a unique identifier for the app for URL identifier as a value. 
-It is best to select a unique identifier that is unlikely to be used by other apps.
+4. Add a unique identifier for the app for URL identifier as a value.
+   It is best to select a unique identifier that is unlikely to be used by other apps.
 5. Right-click **URL identifier** and select **Add Row** > **URI Schemes**.
 6. Set the **Item 0** value to your unique scheme.
-
 
 ![info_list_uri_schemes!](https://files.readme.io/569ae8d-info_list_uri_schemes.png "info_list_uri_schemes")
 
@@ -122,14 +129,16 @@ https://demo.onelink.me/1aBC/123ab45c?af_force_deeplink=true
 ```
 
 ### URI scheme limitations
+
 Neither Apple nor Google enforces unique naming for app schemes. Choose a scheme name unique to your brand to avoid conflicting schemes across different applications. A good scheme name could be your app bundle ID, for example: **com.company.app**.
 
 To enable OneLink to serve both iOS and Android, it's important that the same scheme be defined for both platforms.
 
 When a OneLink that has `af_force_deeplink=true` is opened in iOS 12.3.1, the following logic applies:
-* A dialog is shown asking the user if the app installed:
-    * If the user chooses OK (app is installed), AppsFlyer attempts to open the app using URI scheme.
-    * If the user chooses Cancel (app is not installed), AppsFlyer redirects the user to the app store.
-    * If the user chooses OK but the app is not installed, an error message is shown:
-  
+
+- A dialog is shown asking the user if the app installed:
+  - If the user chooses OK (app is installed), AppsFlyer attempts to open the app using URI scheme.
+  - If the user chooses Cancel (app is not installed), AppsFlyer redirects the user to the app store.
+  - If the user chooses OK but the app is not installed, an error message is shown:
+
 ![uri_cannot_open_page!](https://files.readme.io/4bdb9ef-885402320830842.XbZXy5YrCSL3FKIBZPjn_height640.png "uri_cannot_open_page")

@@ -3,23 +3,25 @@ title: Ad revenue
 excerpt: Impression-level ad revenue reporting by SDK
 hidden: false
 ---
+
 The app sends impression revenue data to the SDK which then sends it to AppsFlyer. The revenue data is collected and processed in AppsFlyer, and the revenue is attributed to the original UA source. To learn more about ad revenue see [here](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners).
 
 There are two ways for the SDK to generate an ad revenue event, depending on your SDK version. Use the correct method for your SDK version:
+
 - [For SDK 6.15.0 and above](#log-ad-revenue-for-sdk-6150-and-above). Uses the ad revenue SDK API.
 - [For SDK 6.14.2 and below](#legacy-log-ad-revenue-for-sdk-6142-and-below). Uses the ad revenue SDK connector.
 
 ## Log ad revenue (for SDK 6.15.0 and above)
 
-When an impression with revenue occurs, invoke the [`logAdRevenue`](doc:api#logadrevenue) method with the revenue details of the impression.  
+When an impression with revenue occurs, invoke the [`logAdRevenue`](doc:api#logadrevenue) method with the revenue details of the impression.
 
 **To implement the method:**
 
 1. Create an instance of `AFAdRevenueData` with the revenue details of the impression to be logged. Version 6.15.0 of the SDK removes the need for using a connector for sending Ad Revenue data to AppsFlyer.
 2. If you want to add additional details to the ad revenue event, populate a map with key-value pairs.
 3. Invoke the  `logAdRevenue` method with the following arguments:
-    - The `AFAdRevenueData` object you created in step 1.
-    - The `Map` instance with the additional details you created in step 2.
+   - The `AFAdRevenueData` object you created in step 1.
+   - The `Map` instance with the additional details you created in step 2.
 
 ### Code Example
 
@@ -33,10 +35,11 @@ var logRevenue = new AFAdRevenueData("monetizationNetworkEx", MediationNetwork.G
 AppsFlyer.logAdRevenue(logRevenue, additionalParams);
 ```
 
-> 📘 Note 
->  The AdMob iLTV SDK reports impression revenue in micro-units. To display the correct ad revenue amount in USD in AppsFlyer, divide the amount extracted from the iLTV event handler by 1 million before sending it to AppsFlyer.
+> 📘 Note
+> The AdMob iLTV SDK reports impression revenue in micro-units. To display the correct ad revenue amount in USD in AppsFlyer, divide the amount extracted from the iLTV event handler by 1 million before sending it to AppsFlyer.
 
 ## [LEGACY] Log ad revenue (for SDK 6.14.2 and below)
+
 For SDK v6.14.2 and below - the AdRevenue Connector should be used along side the AppsFlyer SDK to send Ad Revenue data to AppsFlyer.
 
 ### Using Unity Package
@@ -60,7 +63,7 @@ For SDK v6.14.2 and below - the AdRevenue Connector should be used along side th
 
 ### Initialize the connector
 
-Make sure to initialize the AppsFlyer SDK before initializing the connector. 
+Make sure to initialize the AppsFlyer SDK before initializing the connector.
 
 ```java
 using AppsFlyerSDK;
@@ -96,7 +99,7 @@ using AppsFlyerSDK;
 
 #### `setIsDebug`
 
- `public static void setIsDebug(bool isDebug)`
+`public static void setIsDebug(bool isDebug)`
 
 Set to true to view debug logs. (development only!)
 
@@ -119,14 +122,14 @@ To turn on the debug logs on Android call `AppsFlyer.setIsDebug(true);`
 
 Send ad revenue data from the impression payload to AppsFlyer regardless of the mediation network you use.
 
-| parameter            | type                                   | description                      |
-| -------------------- | -------------------------------------- | -------------------------------- |
-| monetizationNetwork  | string                                 | monetization network             |
-| mediationNetwork     | AppsFlyerAdRevenueMediationNetworkType | Enum for mediaton network type   |
-| eventRevenue         | string                                 | event revenue                    |
-| revenueCurrency      | string                                 | revenue currency                 |
-| additionalParameters | Dictionary<string, string>            | Any custom additional parameters |
-|                      |                                        |                                  |
+| parameter            | type                                                | description                      |
+| -------------------- | --------------------------------------------------- | -------------------------------- |
+| monetizationNetwork  | string                                              | monetization network             |
+| mediationNetwork     | AppsFlyerAdRevenueMediationNetworkType              | Enum for mediaton network type   |
+| eventRevenue         | string                                              | event revenue                    |
+| revenueCurrency      | string                                              | revenue currency                 |
+| additionalParameters | Dictionary<string, string> | Any custom additional parameters |
+|                      |                                                     |                                  |
 
 _Example:_
 

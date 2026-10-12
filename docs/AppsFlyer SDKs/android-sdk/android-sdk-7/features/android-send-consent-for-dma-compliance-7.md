@@ -11,25 +11,25 @@ As part of the EU Digital Markets Act (DMA), big tech companies must get consent
 
 The SDK offers two alternative methods for gathering consent data:
 
-- **Through a Consent Management Platform (CMP)**: If the app uses a CMP that complies with the [Transparency and Consent Framework (TCF) v2.2/2.3 protocol](https://iabeurope.eu/tcf-supporting-resources/), the SDK can automatically retrieve the consent details. 
+- **Through a Consent Management Platform (CMP)**: If the app uses a CMP that complies with the [Transparency and Consent Framework (TCF) v2.2/2.3 protocol](https://iabeurope.eu/tcf-supporting-resources/), the SDK can automatically retrieve the consent details.
 
-    **OR**
+  **OR**
 
 - **Through a dedicated SDK API**: Developers can pass Google's required consent data directly to the SDK using a specific API designed for this purpose.
-  
+
 > 📘 Note
-> 
+>
 > AppsFlyer recommends using only one of the above methods per specific event sent. If both methods are sent for the same event, AppsFlyer will prioritize the manual consent data sent via the dedicated SDK API.
 
 ## Use CMP to collect consent data
 
 A CMP compatible with TCF v2.2/2.3 collects DMA consent data and stores it in `SharedPreferences`. To enable the SDK to access this data and include it with every event, follow these steps:
 
-1. [Initialize the SDK](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#init) from the `Application` class. 
-2. Immediately after initializing the SDK, call `enableTCFDataCollection(true)`  to instruct the SDK to collect the TCF data from the device. 
-3. In the `Activity` class, use the CMP to decide if you need the consent dialog in the current session. 
-4. If needed, show the consent dialog, using the CMP,  to capture the user consent decision. Otherwise, go to step 6. 
-5. Get confirmation from the CMP that the user has made their consent decision, and the data is available in `SharedPreferences`. 
+1. [Initialize the SDK](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#init) from the `Application` class.
+2. Immediately after initializing the SDK, call `enableTCFDataCollection(true)`  to instruct the SDK to collect the TCF data from the device.
+3. In the `Activity` class, use the CMP to decide if you need the consent dialog in the current session.
+4. If needed, show the consent dialog, using the CMP,  to capture the user consent decision. Otherwise, go to step 6.
+5. Get confirmation from the CMP that the user has made their consent decision, and the data is available in `SharedPreferences`.
 6. Call `start()`.
 
 **Application class**
@@ -83,20 +83,20 @@ To manually collect consent data, perform the following:
 1. [Initialize the SDK](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#init) from the Application class.
 2. In the `Activity` class, determine whether the GDPR applies or not to the user.
 3. Determine whether the consent data is already stored for this session.
-    - If there is no consent data stored, show the consent dialog to capture the user consent decision.
-    - If there is consent data stored continue to the next step.
+   - If there is no consent data stored, show the consent dialog to capture the user consent decision.
+   - If there is consent data stored continue to the next step.
 4. To transfer the consent data to the SDK, create an object called [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent)  with the following optional parameters:
-    - `isUserSubjectToGDPR` - Indicates whether GDPR applies to the user.
-    - `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
-    - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising purposes.
-    - `hasConsentForAdStorage` - indicates whether the user has consented to store or access information on a device.   
+   - `isUserSubjectToGDPR` - Indicates whether GDPR applies to the user.
+   - `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
+   - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising purposes.
+   - `hasConsentForAdStorage` - indicates whether the user has consented to store or access information on a device.
 5. If the GDPR does not apply to the user `isUserSubjectToGDPR` is `false` and the rest of the parameters must be `null`. See example below.
-6. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object. 
+6. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object.
 
 > 📘 Note
->   
+>
 > SDK registers only parameters which are explicitly passed to the  [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) method via the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object.
-  
+
 6. Call `start()`.
 
 ```java

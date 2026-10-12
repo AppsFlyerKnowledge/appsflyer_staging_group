@@ -17,6 +17,7 @@ To import `AppsFlyerLib`:
 
 @end
 ```
+
 ```swift
 import AppsFlyerLib
 ```
@@ -97,8 +98,8 @@ Use this property to set your app’s Apple ID(taken from the app’s page on iT
 **Description**  
 Use this property to set your [AppsFlyer dev key](https://support.appsflyer.com/hc/en-us/articles/207032066#integration-2-integrating-the-sdk).
 
-| Type       | Name              | Description             |
-| :--------- | :---------------- | :---------------------- |
+| Type       | Name              | Description                             |
+| :--------- | :---------------- | :-------------------------------------- |
 | `NSString` | `appsFlyerDevKey` | Your AppsFlyer dev key. |
 
 ### currencyCode
@@ -118,6 +119,7 @@ The currency code is a [3 letter code according to ISO standards](https://en.wik
 ```objc
 [[AppsFlyerLib shared] setCurrencyCode:@"USD"];
 ```
+
 ```swift
 AppsFlyerLib.shared().currencyCode = "USD"
 ```
@@ -248,7 +250,7 @@ Disables AdServices framework-based attribution for Apple Search Ads.
 ```
 
 **Description**  
- Disables the collection of data from the iAd Framework. This API has no effect in v6.12.3 and above, where the iAd Framework is no longer in use.
+Disables the collection of data from the iAd Framework. This API has no effect in v6.12.3 and above, where the iAd Framework is no longer in use.
 
 | Type   | Name                |
 | :----- | :------------------ |
@@ -354,9 +356,9 @@ Prints SDK messages to the console log. Should be disabled for production builds
 ```
 
 > 📘 SDK Restart
-> 
-> Set `isStopped = true` and then set `isStopped = false`  
-> 
+>
+> Set `isStopped = true` and then set `isStopped = false`
+>
 > No need to call `start()`
 
 **Description**  
@@ -379,8 +381,8 @@ Set a custom value for the minimum required time between sessions.
 
 **Input arguments**
 
-| Type         | Name                     | Description                                                                                                                                                         |
-| :----------- | :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Type         | Name                     | Description                                                                                                                                                                         |
+| :----------- | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `NSUInteger` | `minTimeBetweenSessions` | Sets the minimum time that must pass between two app launches to count as two separate sessions. If not set, the default minimum time between sessions is 5 seconds |
 
 ### oneLinkCustomDomains
@@ -438,6 +440,7 @@ For example, you have three click domains that redirect to your OneLink which is
 ```objectivec
 [AppsFlyerLib shared].resolveDeepLinkURLs = @[@"example.com",@"click.example.com"];
 ```
+
 ```swift
 AppsFlyerLib.shared().resolveDeepLinkURLs = ["example.com", "click.example.com"]
 ```
@@ -467,7 +470,7 @@ This allows you to use your click domain while preserving OneLink functionality.
 ```
 
 **Description**  
-Set this flag to YES, to collect the current device name(e.g. “My iPhone”). 
+Set this flag to YES, to collect the current device name(e.g. “My iPhone”).
 
 | Type   | Name                      |
 | :----- | :------------------------ |
@@ -512,6 +515,7 @@ Set this flag to test uninstall on Apple environment(production or sandbox).
 ```objc
 - (void)addPushNotificationDeepLinkPath:(NSArray<NSString *> *)deepLinkPath;
 ```
+
 ```swift
 addPushNotificationDeepLinkPath(deepLinkPath: [String])
 ```
@@ -534,6 +538,7 @@ Basic configuration:
 ```objc
 [AppsFlyerLib shared] addPushNotificationDeepLinkPath:@[@"af_push_link"]]
 ```
+
 ```swift
 AppsFlyerLib.shared().addPushNotificationDeepLinkPath(["af_push_link"])
 ```
@@ -543,6 +548,7 @@ Advanced configuration:
 ```objc
 [AppsFlyerLib shared] addPushNotificationDeepLinkPath:@[@"deeply", @"nested", @"deep_link"]]
 ```
+
 ```swift
 AppsFlyerLib.shared().addPushNotificationDeepLinkPath(["deeply", "nested", "deep_link"])
 ```
@@ -566,6 +572,7 @@ This call matches the following payload structure:
 ```objc
 (void)appendParametersToDeepLinkingURLWithString:(NSString *)containsString parameters:(NSDictionary<NSString *, NSString*> *)parameters;
 ```
+
 ```swift
 appendParametersToDeeplinkURL(contains: String, parameters: [String : String])
 ```
@@ -573,14 +580,14 @@ appendParametersToDeeplinkURL(contains: String, parameters: [String : String])
 **Description**  
 Matches URLs that contain `contains` as a substring and appends query parameters to them. In case the URL does not match, parameters are not appended to it.
 
-> 🚧 
-> 
+> 🚧
+>
 > Call this method before calling [`start`](#start)
 
 **Input arguments**
 
-| Type           | Name         | Description                                                          |
-| :------------- | :----------- | :------------------------------------------------------------------- |
+| Type           | Name         | Description                                                                          |
+| :------------- | :----------- | :----------------------------------------------------------------------------------- |
 | `NSString`     | `contains`   | The string to check in URL.                                          |
 | `NSDictionary` | `parameters` | Parameters to append to the deeplink url after it passed validation. |
 
@@ -596,12 +603,13 @@ Matches URLs that contain `contains` as a substring and appends query parameters
 restorationHandler:
 (void (^_Nullable)(int *_Nullable))restorationHandler;
 ```
+
 ```swift
 AppsFlyerLib.shared().continue(userActivity: NSUserActivity?, restorationHandler: (([Any]?) -> Void)?)
 ```
 
 **Description**  
-Allow AppsFlyer to handle restoration from an \``NSUserActivity`. Use this method to handle Universal links.
+Allow AppsFlyer to handle restoration from an \\`\`NSUserActivity\`. Use this method to handle Universal links.
 
 **Input arguments**
 
@@ -620,6 +628,7 @@ Allow AppsFlyer to handle restoration from an \``NSUserActivity`. Use this metho
 ```objc
 - (void)enableFacebookDeferredApplinksWithClass:(Class _Nullable)facebookAppLinkUtilityClass;
 ```
+
 ```swift
 enableFacebookDeferredApplinks(with:AnyClass?)
 ```
@@ -642,21 +651,23 @@ Enable the collection of Facebook Deferred AppLinks.
 ### enableTCFDataCollection
 
 **Method signature**
+
 ```objc
 - (void)enableTCFDataCollection:(BOOL)flag;
 ```
+
 ```swift
 func enableTCFDataCollection(_ flag: Bool)
 ```
 
-**Description** 
+**Description**
 Enables the collection of Transparency and Consent Framework (TCF) data from `NSUserDefaults`. The data was placed in `UserDefaults` by the device's TCF v2.2/2.3 compatible Consent Management Platform (CMP).
 
 **Input arguments**
 
-| Type                                 | Name  | Description                                                                   |
-|--------------------------------------|-------|-------------------------------------------------------------------------------|
-| `Bool` | flag  | A Boolean value to enable or disable the collection of TCF data. |
+| Type   | Name | Description                                                                      |
+| ------ | ---- | -------------------------------------------------------------------------------- |
+| `Bool` | flag | A Boolean value to enable or disable the collection of TCF data. |
 
 **Returns**  
 `void`.
@@ -668,6 +679,7 @@ Enables the collection of Transparency and Consent Framework (TCF) data from `NS
 ```objc
 - (NSString *)getAppsFlyerUID;
 ```
+
 ```swift
 getAppsFlyerUID()
 ```
@@ -680,8 +692,8 @@ This method takes no input arguments.
 
 **Returns**
 
-| Type       | Description            |
-| :--------- | :--------------------- |
+| Type       | Description                            |
+| :--------- | :------------------------------------- |
 | `NSString` | AppsFlyer internal ID. |
 
 ### getSDKVersion
@@ -691,6 +703,7 @@ This method takes no input arguments.
 ```objc
 - (NSString *)getSDKVersion;
 ```
+
 ```swift
 getSDKVersion()
 ```
@@ -703,8 +716,8 @@ This method takes no input arguments.
 
 **Returns**
 
-| Type       | Description                |
-| :--------- | :------------------------- |
+| Type       | Description                                |
+| :--------- | :----------------------------------------- |
 | `NSString` | The AppsFlyer SDK version. |
 
 ### handleOpen
@@ -714,6 +727,7 @@ This method takes no input arguments.
 ```objc
 - (void)handleOpenUrl:(id)url options:(id)options;
 ```
+
 ```swift
 AppsFlyerLib.shared().handleOpen(url: URL?, options: [AnyHashable : Any]?)
 ```
@@ -724,8 +738,8 @@ This method handles URI-scheme for iOS 9 and above.
 
 **Input arguments**
 
-| Type          | Name      | Description                                                 |
-| :------------ | :-------- | :---------------------------------------------------------- |
+| Type          | Name      | Description                                                                 |
+| :------------ | :-------- | :-------------------------------------------------------------------------- |
 | `NSURL`       | `url`     | The URL that was passed to your app delegate.               |
 | `AnyHashable` | `options` | The options dictionary that was passed to your AppDelegate. |
 
@@ -739,6 +753,7 @@ This method handles URI-scheme for iOS 9 and above.
 ```objc
 - (void)handlePushNotification:(NSDictionary * _Nullable)pushPayload;
 ```
+
 ```swift
 AppsFlyerLib.shared().handlePushNotification(pushPayload: [AnyHashable : Any]?)
 ```
@@ -748,14 +763,15 @@ Enable AppsFlyer to handle a push notification.
 
 **Input arguments**
 
-| Type          | Name          | Description                                                                                                                                                                     |
-| :------------ | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Type          | Name          | Description                                                                                                                                                                                                     |
+| :------------ | :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `AnyHashable` | `pushPayload` | The `userInfo` from received remote notification. Unless [`addPushNotificationDeepLinkPath`](#addPushNotificationDeepLinkPath) is used, the data must be under the `@“af”` key. |
 
 **Returns**  
 `void`.
 
 ### logAdRevenue
+
 <span class="annotation-added">Added in v6.15.0</span>
 
 **Method signature**
@@ -763,17 +779,17 @@ Enable AppsFlyer to handle a push notification.
 ```objectivec
 -(void)logAdRevenue:(AFAdRevenueData *)adRevenueData additionalParameters:(NSDictionary * **_Nullable**)additionalParameters;
 ```
+
 **Description**
 
 The method sends an ad revenue event to AppsFlyer. See more information in [Ad revenue](doc:ad-revenue-2).
 
-
 **Input parameters**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `adRevenueData` | [`AFAdRevenueData*`](#afadrevenuedata) | An object that encapsulates all the mandatory parameters of the adRevenue event. The object is passed to the logAdRevenue method. |
-| `additionalParameters` | NSDictionary * _Nullable | An optional dictionary containing additional parameters to log with the adRevenue event. |
+| Name                   | Type                                           | Description                                                                                                                                                       |
+| ---------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `adRevenueData`        | [`AFAdRevenueData*`](#afadrevenuedata)         | An object that encapsulates all the mandatory parameters of the adRevenue event. The object is passed to the logAdRevenue method. |
+| `additionalParameters` | NSDictionary \* _Nullable | An optional dictionary containing additional parameters to log with the adRevenue event.                                                          |
 
 **Returns**
 
@@ -796,30 +812,30 @@ AFAdRevenueData {
 
 **AFAdRevenueData parameters**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `monetizationNetwork` | String | The monetization network name. |
-| `mediationNetwork` | [AppsFlyerAdRevenueMediationNetworkType](#appsflyeradrevenuemediationnetworktype) | The mediation network enum. |
-| `currencyIso4217Code` | String | The ad revenue event currency is a String validated against currencyIso4217Code |
-| `eventRevenue` | Double | The ad revenue event amount. |
+| Name                  | Type                                                                              | Description                                                                     |
+| --------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `monetizationNetwork` | String                                                                            | The monetization network name.                                  |
+| `mediationNetwork`    | [AppsFlyerAdRevenueMediationNetworkType](#appsflyeradrevenuemediationnetworktype) | The mediation network enum.                                     |
+| `currencyIso4217Code` | String                                                                            | The ad revenue event currency is a String validated against currencyIso4217Code |
+| `eventRevenue`        | Double                                                                            | The ad revenue event amount.                                    |
 
 #### AppsFlyerAdRevenueMediationNetworkType
 
-| Name | Type | Comments |
-| --- | --- | --- |
-| ironsource | String |  |
-| applovinmax | String |  |
-| googleadmob | String |  |
-| fyber | String |  |
-| appodeal | String |  |
-| admost | String |  |
-| topon | String |  |
-| tradplus | String |  |
-| yandex | String |  |
-| chartboost | String |  |
-| unity | String |  |
-| customMediation | String | The mediation solution is not on the list of supported mediation partners. |
-| directMonetizationNetwork | String | The app integrates directly with monetization networks without mediation. |
+| Name                      | Type   | Comments                                                                                   |
+| ------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| ironsource                | String |                                                                                            |
+| applovinmax               | String |                                                                                            |
+| googleadmob               | String |                                                                                            |
+| fyber                     | String |                                                                                            |
+| appodeal                  | String |                                                                                            |
+| admost                    | String |                                                                                            |
+| topon                     | String |                                                                                            |
+| tradplus                  | String |                                                                                            |
+| yandex                    | String |                                                                                            |
+| chartboost                | String |                                                                                            |
+| unity                     | String |                                                                                            |
+| customMediation           | String | The mediation solution is not on the list of supported mediation partners. |
+| directMonetizationNetwork | String | The app integrates directly with monetization networks without mediation.  |
 
 ### logEvent
 
@@ -828,6 +844,7 @@ AFAdRevenueData {
 ```objc
 - (void)logEvent:(NSString *)eventName withValues:(NSDictionary * _Nullable)values;
 ```
+
 ```swift
 logEvent(eventName: String, withValues: [AnyHashable : Any]?)
 ```
@@ -854,12 +871,13 @@ Use this method to log an event with event parameters.
   eventValues:(NSDictionary<NSString * , id> * _Nullable)eventValues
   completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, id> * _Nullable dictionary, NSError * _Nullable error))completionHandler;
 ```
+
 ```swift
 logEvent(eventName: String, withValues: [AnyHashable : Any]?, completionHandler:(([String : Any]?, Error?) -> Void)?)
 ```
 
 **Description**  
-Use this method to log an event with event parameters, and pass a completion handler to [handle event submissions success and failure](doc:in-app-events-ios#handling-event-submission-success-and-failure). 
+Use this method to log an event with event parameters, and pass a completion handler to [handle event submissions success and failure](doc:in-app-events-ios#handling-event-submission-success-and-failure).
 
 **Input arguments**
 
@@ -879,6 +897,7 @@ Use this method to log an event with event parameters, and pass a completion han
 ```objc
 - (void)logLocation:(double)longitude latitude:(double)latitude;
 ```
+
 ```swift
 logLocation(longitude: Double, latitude: Double)
 ```
@@ -903,6 +922,7 @@ To log location for geo-fencing. Does the same as code below.
 ```objc
 - (void)performOnAppAttributionWithURL:(NSURL * _Nullable)URL;
 ```
+
 ```swift
 performOnAppAttribution(with:URL?)
 ```
@@ -912,8 +932,8 @@ Used to manually trigger `onAppOpenAttribution` delegate.
 
 **Input arguments**
 
-| Type    | Name  | Description                                                                 |
-| :------ | :---- | :-------------------------------------------------------------------------- |
+| Type    | Name  | Description                                                                                                                                     |
+| :------ | :---- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `NSURL` | `URL` | The parameter to resolve into -[AppsFlyerLibDelegate onAppOpenAttribution:] |
 
 **Returns**  
@@ -926,6 +946,7 @@ Used to manually trigger `onAppOpenAttribution` delegate.
 ```objc
 - (void)registerUninstall:(NSData * _Nullable)deviceToken;
 ```
+
 ```swift
 registerUninstall(deviceToken: Data?)
 ```
@@ -935,8 +956,8 @@ Register uninstall - you should register for remote notification and provide App
 
 **Input arguments**
 
-| Type     | Name          | Description                                                                                                                                                                                                    |
-| :------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Type     | Name          | Description                                                                                                                                                                                                                    |
+| :------- | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `NSData` | `deviceToken` | The `deviceToken` is from [`didRegisterForRemoteNotificationsWithDeviceToken`](https://developer.apple.com/documentation/watchkit/wkextensiondelegate/3141924-didregisterforremotenotification?language=objc). |
 
 **Returns**  
@@ -949,18 +970,19 @@ Register uninstall - you should register for remote notification and provide App
 ```swift
 .setConsentData(afConsent: AppsFlyerConsent)
 ```
+
 ```objectivec
 - (void)setConsentData:(AppsFlyerConsent) afConsent
 ```
 
 **Description**
 
-Transfers consent data to the SDK. 
+Transfers consent data to the SDK.
 
 **Input arguments**
 
-| Type                   | Name      | Description                            |
-| ---------------------- | --------- | -------------------------------------- |
+| Type                                                                                     | Name      | Description                            |
+| ---------------------------------------------------------------------------------------- | --------- | -------------------------------------- |
 | [AppsFlyerConsent](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerconsent) | afConsent | An object containing user consent data |
 
 ### setCurrentDeviceLanguage
@@ -976,8 +998,8 @@ Use this method to set the device language in the SDK and pass it to AppsFlyer.
 
 **Input arguments**
 
-| Type       | Name                    | Description              |
-| :--------- | :---------------------- | :----------------------- |
+| Type       | Name                    | Description                              |
+| :--------- | :---------------------- | :--------------------------------------- |
 | `NSString` | `currentDeviceLanguage` | Current device language. |
 
 **Usage example**
@@ -986,6 +1008,7 @@ Use this method to set the device language in the SDK and pass it to AppsFlyer.
 NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0]
     [[AppsFlyerLib shared] setCurrentDeviceLanguage: @language];
 ```
+
 ```swift
 let language = NSLocale.current.languageCode
 AppsFlyerLib.shared().currentDeviceLanguage = language
@@ -998,6 +1021,7 @@ AppsFlyerLib.shared().currentDeviceLanguage = language
 ```objc
 (void)setHost:(NSString *)host withHostPrefix:(NSString *)hostPrefix;
 ```
+
 ```swift
 setHost(host: String, withHostPrefix: String)
 ```
@@ -1009,19 +1033,20 @@ This function sets the hostname and prefix hostname for all the endpoints.
 
 **Input arguments**
 
-| Type       | Name             | Description            |
-| :--------- | :--------------- | :--------------------- |
-| `NSString` | `host`           | hostname.              |
+| Type       | Name             | Description                                            |
+| :--------- | :--------------- | :----------------------------------------------------- |
+| `NSString` | `host`           | hostname.                              |
 | `NSString` | `withHostPrefix` | Required. host prefix. |
 
 **Returns**  
 `void`.
 
-** Usage example**
+\*\* Usage example\*\*
 
 ```objc
 [[AppsFlyerLib shared] setHost:@"example.com" withHostPrefix:@"my_host_prefix"];
 ```
+
 ```swift
 AppsFlyerLib.shared().setHost("example.com", withHostPrefix: "my_host_prefix")
 ```
@@ -1033,6 +1058,7 @@ AppsFlyerLib.shared().setHost("example.com", withHostPrefix: "my_host_prefix")
 ```objc
 - (void)setPartnerDataWithPartnerId:(NSString * _Nullable)partnerId partnerInfo:(NSDictionary<NSString *, id> * _Nullable)partnerInfo;
 ```
+
 ```swift
 setPartnerData(partnerId: String?, partnerInfo: [String : Any]?)
 ```
@@ -1044,7 +1070,7 @@ Allows sending custom data for partner integration purposes.
 
 | Type                                       | Name          | Description                                                            |
 | :----------------------------------------- | :------------ | :--------------------------------------------------------------------- |
-| `NSString`                                 | `partnerId`   | ID of the partner (usually has `_int` suffix)                          |
+| `NSString`                                 | `partnerId`   | ID of the partner (usually has `_int` suffix)       |
 | `NSDictionary<NSString _, id> _ _Nullable` | `partnerInfo` | customer data, depends on the integration nature with specific partner |
 
 **Returns**  
@@ -1059,6 +1085,7 @@ NSDictionary *partnerInfo = @{
 
 [[AppsFlyerLib shared] setPartnerDataWithPartnerId: @"test_int" partnerInfo:partnerInfo];
 ```
+
 ```swift
 let partnerInfo = [
   "puid":"123456789",
@@ -1085,33 +1112,33 @@ Lets you configure which partners should the SDK exclude from data-sharing.
 
 [block:parameters]
 {
-  "data": {
-    "h-0": "Type",
-    "h-1": "Name",
-    "h-2": "Description",
-    "0-0": "`NSArray<NSString _> _ _Nullable`",
-    "0-1": "`sharingFilter`",
-    "0-2": "One or more partner identifiers you wish to exclude. Must include letters/digits and underscores only.  \n  \nMaximum partner ID length: 45"
-  },
-  "cols": 3,
-  "rows": 1,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
+"data": {
+"h-0": "Type",
+"h-1": "Name",
+"h-2": "Description",
+"0-0": "`NSArray<NSString _> _ _Nullable`",
+"0-1": "`sharingFilter`",
+"0-2": "One or more partner identifiers you wish to exclude. Must include letters/digits and underscores only.  \n  \nMaximum partner ID length: 45"
+},
+"cols": 3,
+"rows": 1,
+"align": [
+"left",
+"left",
+"left"
+]
 }
 [/block]
 
 > 📘 **Note**
-> 
+>
 > Make sure to use the exact partner ID (PID). Failing to do so may result in privacy-preservation breaches.
-> 
+>
 > To find out the required partner IDs:
-> 
+>
 > - Run the **Get active integrations API** for a list of all active integrations.  
 >   Use the `media_source_name` values from the API response as input values to the method’s `partners` array.
-> 
+>
 > - **If the partner is not yet active**, you can retrieve the PID from the **Partner Marketplace** in AppsFlyer HQ:  
 >   Search for the partner, and the URL for that partner will include the PID (typically in the format `*_int`).  
 >   For example, the Meta Ad Network has the URL:  
@@ -1119,6 +1146,7 @@ Lets you configure which partners should the SDK exclude from data-sharing.
 >   In this case, the PID is `facebook_int`.
 >
 > **Exceptions**:
+>
 > - For Apple Search Ads use `Apple Search Ads` (and not `iossearchads_int`).
 > - For Twitter, use `twitter` or `twitter_int`
 
@@ -1130,6 +1158,7 @@ Lets you configure which partners should the SDK exclude from data-sharing.
 [[AppsFlyerLib shared] setSharingFilterForPartners:@[@"all"]]; // All partners
 [[AppsFlyerLib shared] setSharingFilterForPartners:nil]; // Reset list (default)
 ```
+
 ```swift
 AppsFlyerLib.shared().setSharingFilterForPartners(["examplePartner1_int"]) // 1 partner
 AppsFlyerLib.shared().setSharingFilterForPartners(["examplePartner2_int", "examplePartner1_int"]) // multiple partners
@@ -1145,6 +1174,7 @@ AppsFlyerLib.shared().setSharingFilterForPartners(nil) // Reset list (default)
 ```objc
 - (void)setSharingFilterForAllPartners;
 ```
+
 ```swift
 setSharingFilterForAllPartners()
 ```
@@ -1169,6 +1199,7 @@ This method takes no input arguments.
 ```objc
 - (void)setUserEmails:(NSArray<NSString *> * _Nullable)userEmails withCryptType:(EmailCryptType)type;
 ```
+
 ```swift
 setUserEmails(userEmails: [String]?, with: EmailCryptType)
 ```
@@ -1179,8 +1210,8 @@ Use this to set the user email(s).
 
 **Input arguments**
 
-| Type                  | Name         | Description      |
-| :-------------------- | :----------- | :--------------- |
+| Type                  | Name         | Description                      |
+| :-------------------- | :----------- | :------------------------------- |
 | `NSArray<NSString *>` | `userEmails` | Email array.     |
 | `EmailCryptType`      | `type`       | Encryption type. |
 
@@ -1211,6 +1242,7 @@ AppsFlyerLib.shared()
 ```objc
 - (void)start;
 ```
+
 ```swift
 (void) start()
 ```
@@ -1231,12 +1263,13 @@ This method takes no input arguments.
 ```objc
 - (void)startWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, id> * _Nullable dictionary, NSError * _Nullable error))completionHandler;
 ```
+
 ```swift
 start(completionHandler: (([String : Any]?, Error?) -> Void)?)
 ```
 
 **Description**  
-Start the SDK with a [completion handler](<>).
+Start the SDK with a [completion handler]().
 
 **Input arguments**
 
@@ -1248,6 +1281,7 @@ Start the SDK with a [completion handler](<>).
 `void`.
 
 ### validateAndLogInAppPurchase
+
 (Supported from SDK v.6.14.1)
 
 **Method signature**
@@ -1261,17 +1295,17 @@ typedef void (^AFSDKValidateAndLogCompletion)(AFSDKValidateAndLogResult * _Nulla
 
 **Description**
 
-The method validates a purchase event with the store and if the validation is successful, the SDK sends an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-ios#af_purchase) event to AppsFlyer.  
+The method validates a purchase event with the store and if the validation is successful, the SDK sends an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-ios#af_purchase) event to AppsFlyer.
 
 See detailed instructions in [Validate and log in-app purchase](#validateandloginapppurchase).
 
 **Input parameters**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `details`* | ['AFSDKPurchaseDetails'](#afsdkpurchasedetails)* | An object that encapsulates all data related to the purchase provided to the validateAndLogInAppPurchase method. |
-| `extraEventValues` | NSDictionary * _Nullable | An optional dictionary containing additional parameters to log with the purchase event. |
-| `completionHandler`* | `AFSDKValidateAndLogCompletion` | A completion handler block that is called with the result of the purchase validation and logging.  |
+| Name                  | Type                                              | Description                                                                                                                      |
+| --------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `details`\*           | ['AFSDKPurchaseDetails'](#afsdkpurchasedetails)\* | An object that encapsulates all data related to the purchase provided to the validateAndLogInAppPurchase method. |
+| `extraEventValues`    | NSDictionary \* _Nullable    | An optional dictionary containing additional parameters to log with the purchase event.                          |
+| `completionHandler`\* | `AFSDKValidateAndLogCompletion`                   | A completion handler block that is called with the result of the purchase validation and logging.                |
 
 **Returns**  
 `void`.
@@ -1282,21 +1316,22 @@ An object that encapsulates all data related to the purchase provided to the `va
 
 **AFSDKPurchaseDetails parameters**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| `purchaseType`* | [AFPurchaseType](#afpurchasetype) |The purchase type enum to distinguish between one-time purchases and subscriptions. The field can accept either subscription or one-time-purchase. |
-| `productId` | String | The product identifier for the purchase.  |
-| `transactionId` | String | A specific identifier for the transaction.  |
+| Name             | Type                              | Description                                                                                                                                                                        |
+| ---------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `purchaseType`\* | [AFPurchaseType](#afpurchasetype) | The purchase type enum to distinguish between one-time purchases and subscriptions. The field can accept either subscription or one-time-purchase. |
+| `productId`      | String                            | The product identifier for the purchase.                                                                                                                           |
+| `transactionId`  | String                            | A specific identifier for the transaction.                                                                                                                         |
 
 #### AFPurchaseType
 
-| Name | Type | Comments |
-| --- | --- | --- |
-| AFSDKPurchaseTypeOneTimePurchase | String |  |
-| AFSDKPurchaseTypeSubscriptionurce | String |  |
+| Name                              | Type   | Comments |
+| --------------------------------- | ------ | -------- |
+| AFSDKPurchaseTypeOneTimePurchase  | String |          |
+| AFSDKPurchaseTypeSubscriptionurce | String |          |
 
 ### validateAndLogInAppPurchase (LEGACY)
-<span class="annotation-deprecated">Deprecated since V6.14.0</span>  
+
+<span class="annotation-deprecated">Deprecated since V6.14.0</span>
 
 **Method signature**
 
@@ -1311,6 +1346,7 @@ failure:
 (void (^_Nullable)(int *_Nullable,
  id _Nullable))failedBlock;
 ```
+
 ```swift
 validateAndLog(inAppPurchase: String?, price: String?, currency: String?, transactionId: String?, additionalParameters: [AnyHashable : Any]?, success: ([AnyHashable : Any]) -> Void)?, failure: ((Error?, Any?) -> Void)?)
 ```
@@ -1320,13 +1356,13 @@ To log and validate in-app purchases you can call this method from the [`complet
 
 **Input arguments**
 
-| Type                                                | Name                   | Description                                                |
-| :-------------------------------------------------- | :--------------------- | :--------------------------------------------------------- |
+| Type                                                | Name                   | Description                                                                |
+| :-------------------------------------------------- | :--------------------- | :------------------------------------------------------------------------- |
 | `NSString`                                          | `productIdentifier`    | `inAppPurchase` in Swift.                                  |
-| `NSString`                                          | `price`                |                                                            |
-| `NSString`                                          | `currency`             |                                                            |
-| `NSString`                                          | `transactionId`        |                                                            |
-| `NSDictionary`                                      | `additionalParameters` |                                                            |
+| `NSString`                                          | `price`                |                                                                            |
+| `NSString`                                          | `currency`             |                                                                            |
+| `NSString`                                          | `transactionId`        |                                                                            |
+| `NSDictionary`                                      | `additionalParameters` |                                                                            |
 | `void (^_Nullable)(int *))successBlock`             | `successBlock`         | Completion handler for successful logging and  validation. |
 | `void (^_Nullable)(int *_Nullable,  id _Nullable))` | `failedBlock`          | Completion handler for failure in logging and  validation. |
 
@@ -1340,6 +1376,7 @@ To log and validate in-app purchases you can call this method from the [`complet
 ```objc
 - (void)waitForATTUserAuthorizationWithTimeoutInterval:(id)timeoutInterval;
 ```
+
 ```swift
 waitForATTUserAuthorization(timeoutInterval:)
 ```
@@ -1362,6 +1399,7 @@ if (@available(iOS 14, *)) {
         }];
     }
 ```
+
 ```swift Swift
 if #available(iOS 14, *) {
             AppsFlyerLib.shared().waitForATTUserAuthorization(withTimeoutInterval: 60)

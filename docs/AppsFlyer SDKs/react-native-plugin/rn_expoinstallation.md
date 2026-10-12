@@ -4,17 +4,21 @@ hidden: false
 ---
 
 ## Install AppsFlyer in an Expo managed project
+
 1. Install `expo-dev-client`. You can read more about expo development builds [here](https://docs.expo.dev/development/introduction/):
+
 ```
 expo install expo-dev-client
 ```
 
 2. Install react-native-appsflyer:
+
 ```
 expo install react-native-appsflyer
 ```
 
 3. Add `react-native-appsflyer` into the `plugins` array inside the `app.json` file of your app:
+
 ```
 ...
 "plugins": [
@@ -30,7 +34,8 @@ expo install react-native-appsflyer
 ...
 ```
 
-4. ___optional___ If you are developing a kids app and you wish to use our strict mode, you should add `"shouldUseStrictMode": true` as followed:
+4. _**optional**_ If you are developing a kids app and you wish to use our strict mode, you should add `"shouldUseStrictMode": true` as followed:
+
 ```
 ...
 "plugins": [
@@ -40,26 +45,31 @@ expo install react-native-appsflyer
     ],
 ...
 ```
+
 ### Backup Rules Configuration (Android)
 
 The AppsFlyer SDK includes built-in backup rules in its Android manifest to ensure accurate install/reinstall detection. By default, the plugin respects your app's backup rules and does not modify them.
 
 **Default Behavior** (`preferAppsFlyerBackupRules: false` or omitted):
+
 - Your app's `android:dataExtractionRules` and `android:fullBackupContent` attributes are left untouched
 - You maintain full control over your app's backup policy
 - No manifest merge conflicts occur
 
 **Opt-in Behavior** (`preferAppsFlyerBackupRules: true`):
+
 - If your app defines backup rules, they will be removed to let AppsFlyer SDK's built-in rules take precedence
 - This ensures AppsFlyer SDK's backup rules are used, which may improve install/reinstall detection accuracy
 - Use this flag if you want AppsFlyer SDK to manage backup rules for you
 
 **When to use `preferAppsFlyerBackupRules: true`:**
+
 - You want AppsFlyer SDK to handle backup rules automatically
 - You're experiencing issues with install/reinstall detection that may be related to backup rules
 - You don't have specific backup requirements for your app
 
 **Example configuration:**
+
 ```json
 {
   "expo": {
@@ -84,10 +94,11 @@ When building your Expo app with the AppsFlyer plugin, you might encounter a bui
 To resolve this, you can create a custom Expo config plugin that modifies the AndroidManifest.xml during the build process. This approach allows you to adjust the manifest without directly editing it, maintaining compatibility with the managed workflow.
 
 Steps to Implement the Custom Plugin:
+
 1. Create the Plugin File:
-    -	In your project’s root directory, create a file named withCustomAndroidManifest.js.
-2.	Define the Plugin Function:
-	  -	In withCustomAndroidManifest.js, define a function that uses Expo’s withAndroidManifest to modify the manifest. This function will remove the conflicting dataExtractionRules attribute.
+   - In your project’s root directory, create a file named withCustomAndroidManifest.js.
+2. Define the Plugin Function:
+   - In withCustomAndroidManifest.js, define a function that uses Expo’s withAndroidManifest to modify the manifest. This function will remove the conflicting dataExtractionRules attribute.
 
 ```js
 // withCustomAndroidManifest.js
@@ -118,8 +129,8 @@ module.exports = function withCustomAndroidManifest(config) {
 
 ```
 
-3.	Update app.json or app.config.js:
-	  -	In your app configuration file, include the custom plugin to ensure it’s executed during the build process.
+3. Update app.json or app.config.js:
+   - In your app configuration file, include the custom plugin to ensure it’s executed during the build process.
 
 ```json
 // app.json
@@ -142,7 +153,8 @@ module.exports = function withCustomAndroidManifest(config) {
 By implementing this custom plugin, you can resolve the dataExtractionRules conflict without directly modifying the AndroidManifest.xml.
 
 ## The AD_ID permission for android apps
-In v6.8.0 of the AppsFlyer SDK, we added the normal permission com.google.android.gms.permission.AD_ID to the SDK's AndroidManifest, 
+
+In v6.8.0 of the AppsFlyer SDK, we added the normal permission com.google.android.gms.permission.AD_ID to the SDK's AndroidManifest,
 to allow the SDK to collect the Android Advertising ID on apps targeting API 33.
 If your app is targeting children, you need to revoke this permission to comply with Google's Data policy.
 You can read more about it [here](https://docs.expo.dev/guides/permissions/#android).
@@ -151,13 +163,13 @@ You can read more about it [here](https://docs.expo.dev/guides/permissions/#andr
 
 Setting `"shouldUsePurchaseConnector": true` will:
 
-* **iOS** – add the `PurchaseConnector` CocoaPod automatically  
-* **Android** – add `appsflyer.enable_purchase_connector=true` to `gradle.properties`
+- **iOS** – add the `PurchaseConnector` CocoaPod automatically
+- **Android** – add `appsflyer.enable_purchase_connector=true` to `gradle.properties`
 
 ### Plugin Options Summary
 
-| Option | Type | Default | Description |
-|-------|------|---------|-------------|
-| `shouldUseStrictMode` | boolean | `false` | Enable strict mode for kids apps |
-| `shouldUsePurchaseConnector` | boolean | `false` | Enable Purchase Connector support |
+| Option                       | Type    | Default | Description                                                                                       |
+| ---------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------- |
+| `shouldUseStrictMode`        | boolean | `false` | Enable strict mode for kids apps                                                                  |
+| `shouldUsePurchaseConnector` | boolean | `false` | Enable Purchase Connector support                                                                 |
 | `preferAppsFlyerBackupRules` | boolean | `false` | Remove app's backup rules to use AppsFlyer SDK's built-in rules (Android only) |

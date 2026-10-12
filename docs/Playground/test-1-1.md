@@ -7,6 +7,7 @@ link:
 metadata:
   robots: index
 ---
+
 <DeepLinkAccordion title="Test Section">
   - Lorem ipsum dolor sit amet, placeholder content for the first accordion.
 </DeepLinkAccordion>
@@ -18,7 +19,7 @@ metadata:
 <Accordion title="This is a title" icon="fa-info-circle">
   this is contents of lorem ipsum or whatever is need
 
-  <br />
+<br />
 
   <DeepLinkAccordion title="Test Section One">
     Lorem ipsum dolor sit amet, placeholder content for the first accordion.

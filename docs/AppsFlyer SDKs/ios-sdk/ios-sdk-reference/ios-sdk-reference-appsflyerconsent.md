@@ -18,12 +18,12 @@ public struct AppsFlyerConsent {
 
 ### Parameters
 
-| Name | Type | Description |
-| --- | --- | --- |
-| isUserSubjectToGDPR | Boolean | Indicates whether GDPR applies to the user. |
-| hasConsentForDataUsage | Boolean | Indicates whether the user has consented to use their data for advertising purposes. |
+| Name                            | Type    | Description                                                                                              |
+| ------------------------------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| isUserSubjectToGDPR             | Boolean | Indicates whether GDPR applies to the user.                                              |
+| hasConsentForDataUsage          | Boolean | Indicates whether the user has consented to use their data for advertising purposes.     |
 | hasConsentForAdsPersonalization | Boolean | Indicates whether the user has consented to use their data for personalized advertising. |
-| hasConsentForAdStorage | Boolean | Indicates whether the user has consented to store or access data on a device. |
+| hasConsentForAdStorage          | Boolean | Indicates whether the user has consented to store or access data on a device.            |
 
 ### Usage examples
 
@@ -53,17 +53,18 @@ var nonGdprUser = AppsFlyerConsent(
 AppsFlyerLib.shared().setConsentData(nonGdprUser)
 
 ```
+
 ## Initializers
 
 ### initForGDPRUser
 
-<span class="annotation-deprecated">Deprecated since V6.16.1</span>  
+<span class="annotation-deprecated">Deprecated since V6.16.1</span>
 
 **Input arguments**
 
-| Type    | Name                                  | Description                                                                   |
-| ------- | ------------------------------------- | ----------------------------------------------------------------------------- |
-| Boolean | forGDPRUserWithHasConsentForDataUsage | Indicates whether the user give consent to send their user data to Google. |
+| Type    | Name                                  | Description                                                                                          |
+| ------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Boolean | forGDPRUserWithHasConsentForDataUsage | Indicates whether the user give consent to send their user data to Google.           |
 | Boolean | hasConsentForAdsPersonalization       | Indicates whether the user consented to use their data for personalized advertising. |
 
 **Usage examples**
@@ -79,7 +80,7 @@ AppsFlyerLib.shared().setConsentData(gdprConsent)
 
 ### initForNonGDPRUser
 
-<span class="annotation-deprecated">Deprecated since V6.16.1</span>  
+<span class="annotation-deprecated">Deprecated since V6.16.1</span>
 
 **Input arguments**
 

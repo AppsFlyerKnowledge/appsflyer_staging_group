@@ -11,7 +11,7 @@ hidden: false
 AppsFlyer empowers gaming marketers to make better decisions by providing powerful tools to perform cross-platform attribution.
 
 Game attribution requires the game to integrate the AppsFlyer SDK that records first opens, consecutive sessions, and in-app events. For example, purchase events.
-We recommend you use this sample app as a reference for integrating the AppsFlyer SDK into your Unreal game. 
+We recommend you use this sample app as a reference for integrating the AppsFlyer SDK into your Unreal game.
 
 **Note**: The sample code that follows is currently only supported in a Windows environment.
 
@@ -39,7 +39,6 @@ void Init(const char* devkey, const char* appID)
 
 - `DEV_KEY`: Get from the marketer or [AppsFlyer HQ](https://support.appsflyer.com/hc/en-us/articles/211719806-App-settings-#general-app-settings).
 - `APP_ID`: Your Appsflyer app id (excluding the `nativepc-` prefix).
-
 
 **Usage**:
 
@@ -164,7 +163,6 @@ AppsflyerPCModule()->SetCustomerUserId("Test-18-9-23");
 AppsflyerPCModule()->Start();
 ```
 
-
 ### To_utf8
 
 This method receives a reference of a `std::wstring` and returns UTF-8 encoded `std::string`
@@ -174,7 +172,9 @@ This method receives a reference of a `std::wstring` and returns UTF-8 encoded `
 ```c++
 std::string to_utf8(std::wstring& wide_string);
 ```
+
 **Usage**:
+
 ```c++
 // Set non-English values for testing UTF-8 support
 std::wstring ws = L"車B1234 こんにちは";
@@ -197,6 +197,7 @@ bool IsInstallOlderThanDate(std::string datestring)
 - `std::string datestring`: Date string in `yyyy-MMMM-dd hh:mm:ss` format.
 
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c++
@@ -235,6 +236,7 @@ PrivateDependencyModuleNames.Add("HTTP");
 ```
 
 2. In your Unreal Project files, under the `Source/[YOUR-APP-NAME]` directory, create a new directory named `AppsflyerPCModule`.
+
 3. Copy the following files from `appsflyer-native-pc-unreal-sample-app/AppsflyerPCModule` to the new folder:
 
    - AppsflyerPCModule.cpp
@@ -244,6 +246,7 @@ PrivateDependencyModuleNames.Add("HTTP");
    - RequestData.h
 
 4. Generate project files in order to add OpenSSL. [Learn more](https://forums.unrealengine.com/t/how-to-use-included-openssl/670971/2)
+
 5. In the `GameMode.h` file, add the `StartPlay()` function:
 
 ```c++

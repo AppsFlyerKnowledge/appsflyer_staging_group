@@ -5,9 +5,7 @@ hidden: false
 
 In this guide you will learn how to get conversion data using [`AppsFlyerConversionListener`](doc:android-sdk-reference-appsflyerconversionlistener), as well as [examples](doc:conversion-data-android#accessing-attribution-data) for using the conversion data.
 
-
-Before you begin
-----------------
+## Before you begin
 
 The following code examples require you import [`AppsFlyerLib`](doc:android-sdk-reference-appsflyerlib) and [`AppsFlyerConversionListener`](doc:android-sdk-reference-appsflyerconversionlistener):
 
@@ -16,8 +14,7 @@ import com.appsflyer.AppsFlyerLib;
 import com.appsflyer.AppsFlyerConversionListener;
 ```
 
-Setting-up AppsFlyerConversionListener in Android SDK
------------------------------------------------------
+## Setting-up AppsFlyerConversionListener in Android SDK
 
 ### AppsFlyerConversionListener overview
 
@@ -30,8 +27,7 @@ If you implement and register [`AppsFlyerConversionListener`](doc:android-sdk-re
 
 If for whatever reason the SDK fails to fetch the conversion data, [`onConversionDataFail`](doc:android-sdk-reference-appsflyerconversionlistener#onconversiondatafail) is invoked.
 
-Accessing attribution data
---------------------------
+## Accessing attribution data
 
 When invoked, [`onConversionDataSuccess`](doc:android-sdk-reference-appsflyerconversionlistener#onconversiondatasuccess) returns a `Map` (called `conversionDataMap` in the example) that contains the conversion data for that install. The conversion data is cached the first time [`onConversionDataSuccess`](doc:android-sdk-reference-appsflyerconversionlistener#onconversiondatasuccess) is called and will be identical on consecutive calls.
 
@@ -88,6 +84,7 @@ AppsFlyerConversionListener conversionListener =  new AppsFlyerConversionListene
 
 };
 ```
+
 ```kotlin
 import com.appsflyer.AppsFlyerConversionListener
 import com.appsflyer.AppsFlyerLib
@@ -126,8 +123,7 @@ class AFApplication : Application() {
 
 [Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/80763ef8c93c49b1f0226455ae35d089f7968ede/java/basic_app/app/src/main/java/com/appsflyer/onelink/appsflyeronelinkbasicapp/AppsflyerBasicApp.java#L99-L143)
 
-Deferred deep linking (Legacy method)
--------------------------------------
+## Deferred deep linking (Legacy method)
 
 When the app is opened via deferred deep linking, [`onConversionDataSuccess`](doc:android-sdk-reference-appsflyerconversionlistener#onconversiondatasuccess)'s payload returns deep linking data, as well as attribution data.
 

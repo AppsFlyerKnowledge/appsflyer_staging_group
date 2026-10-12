@@ -17,31 +17,36 @@ hidden: false
 ## Installation with [autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md)
 
 Run the following:
-  
+
 ```
 $ npm install react-native-appsflyer --save
 $ cd ios && pod install
 ```
 
 ## Installation without [autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md)
+
 Run the following:
-  
+
 ```
 $ npm install react-native-appsflyer --save
 $ react-native link react-native-appsflyer
 ```
 
 ### Manual installation iOS
+
 1. Add the `appsFlyerFramework` to `podfile` and run `pod install`.
 
 Example:
+
 ```
 pod 'react-native-appsflyer',
 :path => '../node_modules/react-native-appsflyer'
 ```
+
 This assumes your `Podfile` is located in `ios` directory.
 
 #### Sample pod file:
+
 ```
 target 'AFTest' do
 
@@ -80,12 +85,13 @@ end
 ![Project directory](https://files.readme.io/cf6f7a3-small-ios_files.png)
 
 ### Manual installation Android
-  
+
 Run `react-native link react-native-appsflyer` OR add manually:
 
 ##### **android/app/build.gradle**
 
 Add the project to your dependencies
+
 ```gradle
 dependencies {
 ...
@@ -114,12 +120,13 @@ ext {
 ```
 
 ##### **MainApplication.java**
+
 Add:
 
 1. `import com.appsflyer.reactnative.RNAppsFlyerPackage;`
 
-2.  In the `getPackages()` method register the module:
-`new RNAppsFlyerPackage()`
+2. In the `getPackages()` method register the module:
+   `new RNAppsFlyerPackage()`
 
 So `getPackages()` should look like:
 
@@ -136,10 +143,12 @@ So `getPackages()` should look like:
 ```
 
 ## Add strict-mode for App-kids
+
 Starting from version **6.1.10** iOS SDK comes in two variants: **Strict** mode and **Regular** mode. Please read more [here](https://dev.appsflyer.com/hc/docs/install-ios-sdk#strict-mode-sdk)
 
-***Change to Strict mode***
+_**Change to Strict mode**_
 After you installed the AppsFlyer plugin, add `$RNAppsFlyerStrictMode=true` in the project's Podfile:
+
 ```
 //MyRNApp/ios/Podfile
 ...
@@ -150,10 +159,12 @@ use_frameworks!
 ...
 
 ```
+
 In the `ios` folder of your `root` project Run `pod install`
 
-***Change to Regular mode***
+_**Change to Regular mode**_
 Remove `$RNAppsFlyerStrictMode=true` from the project's Podfile or set it to `false`:
+
 ```
 //MyRNApp/ios/Podfile
 ...
@@ -163,10 +174,12 @@ use_frameworks!
   # Pods for MyRNApp
 ...
 ```
+
 In the `ios` folder of your `root` project Run `pod install`
 
 ## The AD_ID permission for android apps
-In v6.8.0 of the AppsFlyer SDK, we added the normal permission com.google.android.gms.permission.AD_ID to the SDK's AndroidManifest, 
+
+In v6.8.0 of the AppsFlyer SDK, we added the normal permission com.google.android.gms.permission.AD_ID to the SDK's AndroidManifest,
 to allow the SDK to collect the Android Advertising ID on apps targeting API 33.
 If your app is targeting children, you need to revoke this permission to comply with Google's Data policy.
 You can read more about it [here](https://dev.appsflyer.com/hc/docs/install-android-sdk#the-ad_id-permission).

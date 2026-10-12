@@ -20,15 +20,15 @@ Find more info about recording events: [Android](https://dev.appsflyer.com/hc/do
 
 **`logEvent(eventName, eventValues, success, error)`**
 
-| parameter    | type     | description                                   |
-| -----------  |----------|------------------------------------------     |
-| eventName    | string   |  In-App Event name  |                      
-| eventValues  | json     | The event values that are sent with the event 
-| success      | function | success callback |                             
-| error        | function | error callback |                          
+| parameter   | type     | description                                   |
+| ----------- | -------- | --------------------------------------------- |
+| eventName   | string   | In-App Event name                             |
+| eventValues | json     | The event values that are sent with the event |
+| success     | function | success callback                              |
+| error       | function | error callback                                |
 
+_Example:_
 
-*Example:*
 ```javascript
 const eventName = 'af_add_to_cart';
 const eventValues = {
@@ -50,6 +50,7 @@ appsFlyer.logEvent(
 ```
 
 ---
+
 ## In-app purchase validation
 
 > ⚠️ **Deprecated**: The `validateAndLogInAppPurchase` API is deprecated. Use `validateAndLogInAppPurchaseV2` instead. See the [API reference](/Docs/RN_API.md#validateandloginapppurchasev2) for details.
@@ -57,16 +58,17 @@ appsFlyer.logEvent(
 Receipt validation is a secure mechanism whereby the payment platform (e.g. Apple or Google) validates that an in-app purchase indeed occurred as reported.
 Learn more [here](https://support.appsflyer.com/hc/en-us/articles/207032106-Receipt-validation-for-in-app-purchases).
 
-❗Important❗ for iOS - set SandBox to ```true```
-```appsFlyer.setUseReceiptValidationSandbox(true);```
+❗Important❗ for iOS - set SandBox to `true`
+`appsFlyer.setUseReceiptValidationSandbox(true);`
 
-| parameter       | type     | description                      |
-| ----------      |----------|------------------                |
-| purchaseInfo    | json     | In-App Purchase parameters      |
-| successC        | function | success callback (generated link) |
-| errorC          | function | error callback                   |
+| parameter    | type     | description                                          |
+| ------------ | -------- | ---------------------------------------------------- |
+| purchaseInfo | json     | In-App Purchase parameters                           |
+| successC     | function | success callback (generated link) |
+| errorC       | function | error callback                                       |
 
-*Example:*
+_Example:_
+
 ```javascript
 let info = {
         publicKey: 'key',

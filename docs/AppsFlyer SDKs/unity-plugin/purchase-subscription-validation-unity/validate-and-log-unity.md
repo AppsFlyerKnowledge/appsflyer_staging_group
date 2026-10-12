@@ -3,6 +3,7 @@ title: Validate and log purchase
 excerpt: Used to validate and report in-app purchase and subscription revenue events
 hidden: false
 ---
+
 ## Validate and log purchase
 
 Follow the instructions according to your operating system.
@@ -103,7 +104,8 @@ public class AppsFlyerObject : MonoBehaviour, IAppsFlyerValidateAndLog
 ```
 
 ## Receipt validation [Legacy]
-<span class="annotation-deprecated">Deprecated since V6.17.8</span>  
+
+<span class="annotation-deprecated">Deprecated since V6.17.8</span>
 
 For current integration, use the [Validate and log purchase](#validate-and-log-purchase) section above.
 

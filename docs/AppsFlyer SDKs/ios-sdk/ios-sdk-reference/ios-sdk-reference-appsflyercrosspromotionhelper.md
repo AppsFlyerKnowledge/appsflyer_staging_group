@@ -4,11 +4,13 @@ hidden: false
 ---
 
 ## Overview
+
 AppsFlyer allows you to log and attribute installs originating from cross-promotion campaigns of your own apps. This enables marketers to optimize cross-promotion campaigns for better results.
 
 Go back to the [SDK reference index](doc:ios-sdk-reference).
 
 **Interface declaration**
+
 ```objc
 @interface AppsFlyerCrossPromotionHelper
 ```
@@ -18,7 +20,9 @@ To access `AppsFlyerCrossPromotionHelper`, import [`AppsFlyerLib`](doc:ios-sdk-r
 ## Methods
 
 ### logCrossPromoteImpression
+
 **Method signature**
+
 ```objc
 (void)logCrossPromoteImpression:(id)appID
                          campaign:(id)campaign
@@ -30,17 +34,19 @@ logs an impression as part of a cross-promotion campaign. Make sure to use the p
 
 **Input arguments**
 
-| Type | Name | Description |
-|:------|:-----|:-----|
-| `NSString` | `appID` | Promoted App ID |
-| `NSString` | `campaign` | Name of cross-promotion campaign |
-| `NSDictionary` | `parameters` | Additional parameters to log |
+| Type           | Name         | Description                      |
+| :------------- | :----------- | :------------------------------- |
+| `NSString`     | `appID`      | Promoted App ID                  |
+| `NSString`     | `campaign`   | Name of cross-promotion campaign |
+| `NSDictionary` | `parameters` | Additional parameters to log     |
 
 **Returns**
 `void`.
 
 ### logAndOpenStore
+
 **Method signature**
+
 ```objc
 (void)logAndOpenStore:(id)appID
                campaign:(id)campaign
@@ -53,12 +59,12 @@ You can utilize the StoreKit component to open the App Store while remaining in 
 
 **Input arguments**
 
-| Type | Name | Description |
-|:------|:-----|:-----|
-| `NSString` | `appID` | Promoted App ID. |
-| `NSString` | `campaign` | Name of cross-promotion campaign. |
-| `NSDictionary` | `parameters` | Additional parameters to log. |
-| `void (^)(int *, int *)` | `openStoreBlock` | Contains promoted clickURL. |
-	
+| Type                     | Name             | Description                                       |
+| :----------------------- | :--------------- | :------------------------------------------------ |
+| `NSString`               | `appID`          | Promoted App ID.                  |
+| `NSString`               | `campaign`       | Name of cross-promotion campaign. |
+| `NSDictionary`           | `parameters`     | Additional parameters to log.     |
+| `void (^)(int *, int *)` | `openStoreBlock` | Contains promoted clickURL.       |
+
 **Returns**
 `void`.

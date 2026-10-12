@@ -20,14 +20,14 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 Some Purchase Connector versions require a specific version of the AppsFlyer SDK to operate properly.
 The following table details the compatibility between the Purchase Connector versions and the SDK versions.
 
-| Purchase Connector Version | Supported AppsFlyer SDK Versions | Supported Billing Library Versions 
-|----------------------------|------------------------------------|----------------------------------|
-| v2.0.0                     | v6.12.2 - v6.14.3                | v5.x.x                             |
-| v2.0.1                     | v6.12.2 - v6.14.3                | v5.x.x - v7.x.x                    |
-| v2.1.0                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
-| v2.1.1                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
-| v2.1.2                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
-| v2.2.0                     | v6.15.0 (and above)              | v8.x.x                             |
+| Purchase Connector Version             | Supported AppsFlyer SDK Versions                                                  | Supported Billing Library Versions                                              |
+| -------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| v2.0.0 | v6.12.2 - v6.14.3 | v5.x.x                                          |
+| v2.0.1 | v6.12.2 - v6.14.3 | v5.x.x - v7.x.x |
+| v2.1.0 | v6.15.0 (and above)            | v5.x.x - v7.x.x |
+| v2.1.1 | v6.15.0 (and above)            | v5.x.x - v7.x.x |
+| v2.1.2 | v6.15.0 (and above)            | v5.x.x - v7.x.x |
+| v2.2.0 | v6.15.0 (and above)            | v8.x.x                                          |
 
 ## Adding the connector to your project
 
@@ -60,6 +60,7 @@ PurchaseClient.Builder builder = new PurchaseClient.Builder(context, Store.GOOGL
 // Make sure to keep this instance
 PurchaseClient purchaseClient = builder.build();
 ```
+
 ```kotlin
 // init
 val builder = PurchaseClient.Builder(this, Store.GOOGLE)
@@ -80,17 +81,18 @@ Start the SDK instance to observe transactions. </br>
 // start
 afPurchaseClient.startObservingTransactions();
 ```
+
 ```kotlin
 // start
 afPurchaseClient.startObservingTransactions()
 ```
 
-
 ### Stop observing transactions
 
 Stop the SDK instance from observing transactions. </br>
 **⚠️ Note**
-> This should be called if you want to stop the connector from listening to billing transactions. This removes the listener and stops the observation of new transactions. 
+
+> This should be called if you want to stop the connector from listening to billing transactions. This removes the listener and stops the observation of new transactions.
 > Use this API when, for example, you want the app to stop sending data to AppsFlyer due to changes in user consent (opt-out from data sharing). Otherwise, there is no reason to call this method.
 > If you decide to use this API, it should be called right before calling the Android SDK [`stop`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#stop) API.
 
@@ -98,6 +100,7 @@ Stop the SDK instance from observing transactions. </br>
 // start
 afPurchaseClient.stopObservingTransactions();
 ```
+
 ```kotlin
 // start
 afPurchaseClient.stopObservingTransactions()
@@ -112,6 +115,7 @@ If this API isn't used, then by default, the connector doesn't record subscripti
 ```java
 builder.logSubscriptions(true);
 ```
+
 ```kotlin
 builder.logSubscriptions(true)
 ```
@@ -125,6 +129,7 @@ If this API isn't used, then by default, the connector doesn't record in-app pur
 ```java
 builder.autoLogInApps(true);
 ```
+
 ```kotlin
 builder.autoLogInApps(true)
 ```
@@ -153,6 +158,7 @@ builder.setSubscriptionPurchaseEventDataSource(purchaseEvents -> {
     return map;
 });
 ```
+
 ```kotlin
 builder.setSubscriptionPurchaseEventDataSource(object : PurchaseClient.SubscriptionPurchaseEventDataSource{
     override fun onNewPurchases(purchaseEvents: List<SubscriptionPurchaseEvent>): Map<String, Any> {
@@ -189,6 +195,7 @@ builder.setInAppPurchaseEventDataSource(purchaseEvents -> {
     return map;
 });
 ```
+
 ```kotlin
 builder.setInAppPurchaseEventDataSource(object :
     PurchaseClient.InAppPurchaseEventDataSource {
@@ -213,10 +220,10 @@ builder.setInAppPurchaseEventDataSource {
 
 You can register listeners to get the validation results after getting a response from AppsFlyer servers to know if the purchase was validated successfully.
 
-| Listener Method               | Description  |
-|-------------------------------|--------------|
-| `onResponse(result: Result?)` | Invoked when we got 200 OK response from the server (INVALID purchase is considered to be successful response and will be returned to this callback) |
-|`onFailure(result: String, error: Throwable?)`|Invoked when we got some network exception or non 200/OK response from the server.|
+| Listener Method                                | Description                                                                                                                                                             |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onResponse(result: Result?)`                  | Invoked when we got 200 OK response from the server (INVALID purchase is considered to be successful response and will be returned to this callback) |
+| `onFailure(result: String, error: Throwable?)` | Invoked when we got some network exception or non 200/OK response from the server.                                                                      |
 
 ### Subscription validation result listener
 
@@ -249,6 +256,7 @@ builder.setSubscriptionValidationResultListener(new PurchaseClient.SubscriptionP
     }
 });
 ```
+
 ```kotlin
 builder.setSubscriptionValidationResultListener(object :
     PurchaseClient.SubscriptionPurchaseValidationResultListener {
@@ -304,6 +312,7 @@ builder.setInAppValidationResultListener(new PurchaseClient.InAppPurchaseValidat
     }
 });
 ```
+
 ```kotlin
 builder.setInAppValidationResultListener(object :
     PurchaseClient.InAppPurchaseValidationResultListener {
@@ -340,6 +349,7 @@ builder.setSandbox(true);
 builder.setSandbox(false);
 
 ```
+
 ```kotlin
 // sandbox environment
 builder.setSandbox(true)
@@ -447,6 +457,7 @@ public void onCreate() {
 }
  
 ```
+
 ```kotlin
 override fun onCreate() {
     super.onCreate()

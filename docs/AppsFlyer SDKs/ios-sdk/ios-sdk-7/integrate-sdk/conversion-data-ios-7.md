@@ -5,13 +5,11 @@ hidden: false
 
 In this guide you will learn how to get conversion data using the iOS SDK, as well as usage examples.
 
-Before you begin
-----------------
+## Before you begin
 
 Getting conversion data requires you first [integrate the SDK](doc:integrate-ios-sdk).
 
-Getting conversion data in iOS SDK
-----------------------------------
+## Getting conversion data in iOS SDK
 
 ```objectivec
 #import "AppDelegate.h"
@@ -31,6 +29,7 @@ Getting conversion data in iOS SDK
 // ...
 @end
 ```
+
 ```swift
 import UIKit
 import AppsFlyerLib
@@ -66,8 +65,7 @@ When invoked, [`onConversionDataSuccess`](doc:ios-sdk-reference-appsflyerlibdele
 [`onConversionDataFail`](doc:ios-sdk-reference-appsflyerlibdelegate#onconversiondatafail) is implemented in  [`AppsFlyerLibDelegate`](doc:ios-sdk-reference-appsflyerlibdelegate).  
 If for whatever reason the SDK fails to fetch the conversion data, [`onConversionDataFail`](doc:ios-sdk-reference-appsflyerlibdelegate#onconversiondatafail) is invoked.
 
-Accessing attribution data
---------------------------
+## Accessing attribution data
 
 You can get the conversion type by checking the value of `af_status` in `onConversionDataSuccess`'s payload. It can be one of the following values:
 
@@ -107,6 +105,7 @@ Following is an example implementation:
 // ...
 @end
 ```
+
 ```swift
 import UIKit
 import AppsFlyerLib
@@ -143,8 +142,7 @@ extension AppDelegate: AppsFlyerLibDelegate {
 
 [Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/7c58363b01a184863d3b3fc07ba707a72d76bcda/swift/basic_app/basic_app/AppDelegate.swift#L168-L212)
 
-Deferred deep linking (Legacy method)
--------------------------------------
+## Deferred deep linking (Legacy method)
 
 When the app is opened via deferred deep linking, [`onConversionDataSuccess`](doc:ios-sdk-reference-appsflyerlibdelegate#onconversiondatasuccess)'s payload returns deep linking data, as well as attribution data.
 

@@ -2,6 +2,7 @@
 title: In-App Events
 hidden: false
 ---
+
 - [Overview](#overview)
 - [Send Event](#send-event)
 - [In-app purchase validation (V2)](#in-app-purchase-validation-v2)
@@ -9,7 +10,7 @@ hidden: false
 
 ## Overview
 
-In-App Events provide insight on what is happening in your app. It is recommended to take the time and define the events you want to measure to allow you to measure *ROI* (Return on Investment) and *LTV* (Lifetime Value).
+In-App Events provide insight on what is happening in your app. It is recommended to take the time and define the events you want to measure to allow you to measure _ROI_ (Return on Investment) and _LTV_ (Lifetime Value).
 
 Recording in-app events is performed by calling `sendEvent` with event name and value parameters. See In-App Events [documentation](https://support.appsflyer.com/hc/en-us/articles/115005544169-Rich-in-app-events-for-Android-and-iOS#introduction-predefined-and-custom-events) for more details.
 
@@ -42,8 +43,8 @@ Custom event names and parameters are user-defined and describe scenarios specif
 
 Before implementing an event, it helps to have a clear event structure definition. For example, a definition for an `af_content_view` event on an eCommerce app:
 
-| Event name | Event parameters | Parameter values | Where/When |
-|---|---|---|---|
+| Event name        | Event parameters                               | Parameter values                                                                                                                                                                     | Where/When                                             |
+| ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
 | `af_content_view` | `af_price`, `af_content_type`, `af_content_id` | `af_price`: item price. `af_content_type`: item category. `af_content_id`: item SKU. | When a user navigates to an item view. |
 
 - The event name is the value you pass as `sendEvent`'s first argument.
@@ -64,14 +65,12 @@ The SDK can cache in-app events that occur when no internet connection is availa
 
 `void sendEvent(string eventName, Dictionary<string, string> eventValues)`
 
+| parameter     | type                         | description                                   |
+| ------------- | ---------------------------- | --------------------------------------------- |
+| `eventName`   | `string`                     | The name of the event                         |
+| `eventValues` | `Dictionary<string, string>` | The event values that are sent with the event |
 
-| parameter      | type                         | description                                   |
-| -----------    |----------------------------- |------------------------------------------     |
-| `eventName`    | `string`                     | The name of the event                         |
-| `eventValues`  | `Dictionary<string, string>` | The event values that are sent with the event |
-
-
-*Example:*
+_Example:_
 
 ```c#
 Dictionary<string, string> eventValues = new Dictionary<string, string>();
@@ -80,6 +79,7 @@ eventValues.Add(AFInAppEvents.REVENUE, "0.99");
 eventValues.Add("af_quantity", "1");
 AppsFlyer.sendEvent(AFInAppEvents.PURCHASE, eventValues);
 ```
+
 ***
 
 ## Logging revenue
@@ -97,11 +97,10 @@ Currency code requirements when sending revenue events
 - Default currency: USD
 - Use a [3-character ISO 4217 code](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) (an example follows).
 - Set the currency code by calling the API:
-    
 
     ```c#
     AppsFlyer.setCurrencyCode("ZZZ")
-    ```   
+    ```
 
 **Example: In-app purchase event with revenue**
 This purchase event is for 200.12 Euros. For the revenue to reflect in the dashboard use the following.
@@ -121,7 +120,9 @@ AppsFlyer.sendEvent ("af_purchase", purchaseEvent);
 > Do not add currency symbols to the revenue value.
 
 ### Logging negative revenue
+
 Record negative revenue using a minus sign.
+
 - Revenue value is preceded by a minus sign.
 - The event name has a unique value, "cancel_purchase". This lets you identify negative revenue events in raw data reports and in the Dashboard.
 
@@ -143,6 +144,7 @@ AppsFlyer.sendEvent ("cancel_purchase", purchaseEvent);
 For In-App Purchase Receipt Validation, follow the instructions according to your operating system.
 
 **Notes**
+
 - Calling validateReceipt automatically generates an `af_purchase` in-app event, so you don't need to send this event yourself.
 - The validate purchase response is triggered in the `AppsFlyerTrackerCallbacks.cs` class.
 - **iOS Error Handling:** On iOS, the `onValidateAndLogFailure` callback is only triggered for actual errors (network errors, invalid parameters, etc.). Validation failures (e.g., invalid receipt) are returned through the `onValidateAndLogComplete` callback in the response dictionary. Check the response to determine if validation was successful.

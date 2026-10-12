@@ -15,7 +15,6 @@ minSdk 21
 
 - **Kotlin version**: If your app uses Kotlin 1.9, you may encounter metadata errors when building against the SDK V7 AAR. Update to Kotlin 2.0 or higher before installing.
 
-
 ## Installing the Android SDK
 
 Install the Android SDK using your preferred method: via Gradle (recommended), or manually.
@@ -52,7 +51,6 @@ dependencies {
 1. In **Android Studio**, switch the folder structure from **Android** to **Project**.
 2. [Download the latest Android SDK](https://mvnrepository.com/artifact/com.appsflyer/af-android-sdk) and paste it in your Android project, under **app > libs**.
 3. Right-click the `aar` you pasted and select **Add As Library**. When prompted, click **Refactor**. If prompted to commit to git, click **OK**.
-
 
 ## Setting required permissions
 
@@ -92,7 +90,6 @@ tools:node="remove"/>
 
 For more information, see [Google Play Services documentation](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info#public-string-getid).
 
-
 ## ProGuard rules
 
 <span class="annotation-optional">Optional</span>
@@ -105,7 +102,6 @@ If you are using ProGuard and you encounter a warning regarding our `AFKeystoreW
 -keep class com.appsflyer.** { *; }
 -keep class kotlin.jvm.internal.** { *; }
 ```
-
 
 ## Backup rules
 
@@ -171,7 +167,6 @@ If you're also targeting **Android 11** and lower, and you have your own backup 
     <exclude domain="sharedpref" path="appsflyer-data"/>
 </full-backup-content>
 ```
-
 
 ## Adding store referrer libraries
 
@@ -317,7 +312,6 @@ implementation ("com.appsflyer:af-android-sdk:HERE_SDK_VERSION") {
 //      exclude group: 'com.google.android.play', module: 'integrity'
 // }
 ```
-
 
 ## Known issues
 

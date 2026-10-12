@@ -11,27 +11,33 @@ Direct deep linking directs mobile users into a specific activity or content in 
 
 This in-app routing to a specific activity in the app is possible due to the parameters passed to the app when the OS opens the app and the `onAppOpenAttribution` method is called. AppsFlyer's OneLink ensures that the correct value is passed along with the user's click, thus personalizing the user’s app experience.
 
-**Only the `deep_link_value` is required for deep linking. However, other parameters and values (such as custom attribution parameters) can also be added to the link and returned by the SDK as deep linking data. **
+\*\*Only the `deep_link_value` is required for deep linking. However, other parameters and values (such as custom attribution parameters) can also be added to the link and returned by the SDK as deep linking data. \*\*
 
 **The direct deep linking flow works as follows**:  
 ![Direct Deep Linking flow](https://files.readme.io/2407f56-Ios_DL.png "Direct Deep Linking flow")
 
 1. User clicks the OneLink short URL.
+
 2. iOS reads the app’s Associated Domains Entitlements.
+
 3. iOS opens the app.
+
 4. AppsFlyer SDK is triggered inside the app.
+
 5. AppsFlyer SDK retrieves the OneLink data.
-   * In a short URL, the data is retrieved from the short URL resolver API in AppsFlyer's servers.
-   * In a long URL, the data is retrieved directly from the long URL.
+   - In a short URL, the data is retrieved from the short URL resolver API in AppsFlyer's servers.
+   - In a long URL, the data is retrieved directly from the long URL.
 
 6. AppsFlyer SDK triggers `onAppOpenAttribution()` with the retrieved parameters and cached attribution parameters (e.g.`install_time`).
+
 7. Asynchronously, `onConversionDataSuccess()` is called, holding the full cached attribution data. (You can exit this function by checking if `is_first_launch` is `true`.)
+
 8. `onAppOpenAttribution()` uses the `attributionData` map to dispatch other activities in the app and pass relevant data.
    - This creates the personalized experience for the user, which is the main goal of OneLink.
 
 ### Procedures
 
-To implement the `onAppOpenAttribution` method and set up the parameter behaviors, the following action checklist of procedures must be completed. 
+To implement the `onAppOpenAttribution` method and set up the parameter behaviors, the following action checklist of procedures must be completed.
 
 #### Procedure checklist
 
@@ -42,7 +48,7 @@ To implement the `onAppOpenAttribution` method and set up the parameter behavior
 
 #### Deciding app behavior
 
-**To decide what the app behavior is when the link is clicked**: 
+**To decide what the app behavior is when the link is clicked**:
 
 Get from the marketer: The expected behavior of the link when it is clicked.
 
@@ -118,7 +124,7 @@ func onAppOpenAttributionFailure(_ error: Error) {
 ## Deferred Deep Linking
 
 > ❗️ Important
-> 
+>
 > Deferred deep linking using the legacy method of onConversionDataSuccess may not work for iOS 14.5+, since it requires attribution data that may not be available due to privacy protection.  
 > We recommend using [unified deep linking (UDL)](https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking). UDL conforms to the iOS 14.5+ privacy standards and only returns parameters relevant to deep linking and deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. Attribution parameters (such as `media_source`, `campaign`, `af_sub1-5`, etc.), return `null` and can’t be used for deep linking purposes.  
 > [Learn more](https://content.appsflyer.com/ios-14-hub/deep-linking-deferred-deep-linking/)
@@ -127,7 +133,7 @@ func onAppOpenAttributionFailure(_ error: Error) {
 
 Deferred deep linking directs new users first to the correct app store to install the app, and then, after the first open, to a specific app experience (for example a specific page in the app).
 
-When the user first launches the app, the `onConversionDataSuccess` callback function receives both the conversion data of the new user, and OneLink data. The OneLink data makes in-app routing possible due to the `deep_link_value` or other that is passed to the app when the OS opens the app. 
+When the user first launches the app, the `onConversionDataSuccess` callback function receives both the conversion data of the new user, and OneLink data. The OneLink data makes in-app routing possible due to the `deep_link_value` or other that is passed to the app when the OS opens the app.
 
 Only the `deep_link_value` is required for deep linking. However, other parameters and values (such as custom attribution parameters) can also be added to the link and returned by the SDK as deep linking data. The AppsFlyer OneLink ensures that the correct parameters are passed along with the user's click, thus personalizing the user’s app experience.
 
@@ -144,7 +150,7 @@ It is the developer's responsibility to make sure the parameters are handled cor
 4. AppsFlyer SDK is initialized and the install is attributed in the AppsFlyer servers.
 5. The SDK triggers the `onConversionDataSuccess` method. The function receives input that includes both the `deep_link_value`, and the attribution data/parameters defined in the OneLink data.
 6. The parameter `is_first_launch` has the value `true`, which signals the deferred deep link flow.  
-   The developer uses the data received in the `onConversionDataSuccess` function to create a personalized experience for the user for the application’s first launch. 
+   The developer uses the data received in the `onConversionDataSuccess` function to create a personalized experience for the user for the application’s first launch.
 
 ### Procedures
 
@@ -157,7 +163,7 @@ To implement the `onConversionDataSuccess` method and set up the parameter behav
 
 #### Deciding app behavior on first launch
 
-**To decide app behavior on first launch**: 
+**To decide app behavior on first launch**:
 
 Get from the marketer: The expected behavior of the link when it is clicked and the app opens for the first time.
 
@@ -182,7 +188,7 @@ The marketer and developers need to plan the `deep_link_value` (and other possib
 
 1. Tell the marketer what parameters and values are needed in order to implement the desired app behavior.
 2. Decide on naming conventions for the `deep_link_value` and other parameters and values.  
-   **Note**: 
+   **Note**:
    - Custom parameters will not appear in raw data collected in AppsFlyer.
    - Conversion data will not return a custom parameter named "name, " with a lowercase "n".
 
@@ -190,7 +196,7 @@ The marketer and developers need to plan the `deep_link_value` (and other possib
 
 When the app is opened for the first time, the `onConversionDataSuccess` method is triggered in the main activity. The `deep_link_value` and other parameters in the method input are used to implement the specific user experience when the app is first launched.
 
-**To implement the logic**: 
+**To implement the logic**:
 
 1. Implement the logic based on the chosen parameters and values. See the following code example.
 2. Once completed, send confirmation to the marketer that the app behaves accordingly.
@@ -254,7 +260,7 @@ func onConversionDataFail(_ error: Error) {
 
 See the following sample payloads for Universal Links, URI schemes, and deferred deep linking. The samples contain a full payload, relevant for when all parameters in the Onelink custom link setup page  contain data.
 
-**Note**: Payloads return as a map. However, for clarity, the sample payloads that follow are displayed in JSON form. 
+**Note**: Payloads return as a map. However, for clarity, the sample payloads that follow are displayed in JSON form.
 
 ### Universal Links
 
@@ -283,6 +289,7 @@ Input to `onAppOpenAttribution(_ attributionData: [AnyHashable: Any])`
    "pid": "Email"
 }
 ```
+
 ```long_link
 {
    "path": "/H5hv",
@@ -339,6 +346,7 @@ Input to `onAppOpenAttribution(_ attributionData: [AnyHashable: Any])`
   "fruit_name ": "apples"
 }
 ```
+
 ```long_link
 {
   "af_ad ": "my_adname",

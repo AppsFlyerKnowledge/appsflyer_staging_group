@@ -16,7 +16,7 @@ Complete the following sections to set up, integrate, and test iOS uninstall mea
 To enable uninstall measurement, a `.p12` certificate is required.
 
 > 📘 Note
-> 
+>
 > Currently, `.p8` certificates are not supported.
 
 **To create a `.p12` certificate:**  
@@ -25,7 +25,7 @@ To enable uninstall measurement, a `.p12` certificate is required.
 
 ![](https://files.readme.io/affd946-cert_assistant.png "cert_assistant.png")
 
-**1.2.** Fill the form. Select **Saved to disk** and click **Continue**. 
+**1.2.** Fill the form. Select **Saved to disk** and click **Continue**.
 
 ![](https://files.readme.io/8f9c3e3-2-c.png "2-c.png")
 
@@ -36,21 +36,19 @@ If you need to create a new Apple App ID, in the Apple **Developer Members Cente
 
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/24870fc-1-b_blur.png",
-        "1-b (blur).png",
-        878
-      ],
-      "align": "center",
-      "sizing": "80"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/24870fc-1-b_blur.png",
+"1-b (blur).png",
+878
+],
+"align": "center",
+"sizing": "80"
+}
+]
 }
 [/block]
-
-
 
 **2.2.** Choose **App IDs** and click **continue**
 
@@ -78,7 +76,7 @@ If you need to create a new Apple App ID, in the Apple **Developer Members Cente
 ![](https://files.readme.io/c3276fd-create_cert.png "create_cert.png")
 
 > 📘 Note
-> 
+>
 > Use a **Production SSL Certificate** for published apps. If your app is unpublished and is in active development, you might want to work with a **Development SSL Certificate**. For example, if your app isn't ready to be published yet, a Development SSL Certificate would let you test Push-related functionalities in TestFlight.
 
 **3.2.** Upload the CSR you created in step 1 and click **Continue**.
@@ -89,21 +87,19 @@ If you need to create a new Apple App ID, in the Apple **Developer Members Cente
 
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/1d95e58-2-a.png",
-        "2-a.png",
-        1006
-      ],
-      "align": "center",
-      "sizing": "80"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/1d95e58-2-a.png",
+"2-a.png",
+1006
+],
+"align": "center",
+"sizing": "80"
+}
+]
 }
 [/block]
-
-
 
 **Step 4: Create a .p12 file**  
 **4.1.** Open the `.cer` certificate. Opening the certificate will open Keychain Access.  
@@ -112,44 +108,40 @@ If you need to create a new Apple App ID, in the Apple **Developer Members Cente
 
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/a149ab0-9-4-a-b.png",
-        "9-4-a-b.png",
-        670
-      ],
-      "align": "center",
-      "sizing": "80"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/a149ab0-9-4-a-b.png",
+"9-4-a-b.png",
+670
+],
+"align": "center",
+"sizing": "80"
+}
+]
 }
 [/block]
-
-
 
 **4.4.** Click save. Make sure to use the **Personal Information Exchange (.p12)** format.
 
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/41c7e37-274ce9d-4-c.png",
-        "274ce9d-4-c.png",
-        774
-      ],
-      "align": "center",
-      "sizing": "80"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/41c7e37-274ce9d-4-c.png",
+"274ce9d-4-c.png",
+774
+],
+"align": "center",
+"sizing": "80"
+}
+]
 }
 [/block]
 
-
-
 > 📘 Note
-> 
+>
 > If you are renewing either your Development or Production Push SSL Certificate, follow the steps listed previously. There is no need to revoke the previous certificate to make this change. Two production certificates can be in use at the same time, allowing you to continue using the old certificate while uploading the new one.
 
 **Step 5: Upload `.p12` to AppsFlyer**  
@@ -173,6 +165,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
         AppsFlyerLib.shared().registerUninstall(deviceToken)
       }
 ```
+
 ```objc
 // AppDelegate.h
 #import <AppsFlyerLib/AppsFlyerLib.h>
@@ -196,8 +189,6 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-
-
 ## Enabling push notifications in background mode
 
 If you are only using silent push notifications, make sure to enable **Remote Notifications** in **Background Modes** in your app's **Capabilities**:
@@ -217,16 +208,18 @@ If you are only using silent push notifications, make sure to enable **Remote No
 **To test iOS uninstall measurement:**
 
 1. Install the app.
-2. Uninstall the app.  **Note**! You can uninstall the app immediately after installing it. 
+2. Uninstall the app. **Note**! You can uninstall the app immediately after installing it.
 
 When testing uninstalls from XCode or TestFlight it is important to let our SDK know that the token is generated from a Sandbox environment. Use the following APIs:
 
 ```swift
 AppsFlyerLib.shared().useUninstallSandbox = true
 ```
+
 ```objc
 [AppsFlyerLib shared].setUseUninstallSandbox = true;
 ```
+
 ### Example
 
 ```objc
@@ -252,9 +245,8 @@ func application(
 }
 ```
 
-
 > 📘 Note
-> 
+>
 > `setUseUninstallSandbox` must be called **before** calling `registerUninstall`.
 
 ## Considerations

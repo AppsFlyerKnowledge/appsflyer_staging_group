@@ -8,6 +8,7 @@ hidden: false
 ESP (Email Service Provider) support allows AppsFlyer to handle deep links that are wrapped by email service providers. When users click links in emails, ESP services often wrap the original URL with their own tracking domains. This can break deep linking functionality. ESP support resolves these wrapped URLs to extract the original deep link.
 
 ### How ESP Works:
+
 1. **Email Campaign**: Your email contains a deep link to your app
 2. **ESP Wrapping**: Email provider wraps your link with their tracking domain
 3. **User Clicks**: User clicks the wrapped link from their email
@@ -431,6 +432,7 @@ useEffect(() => {
 ### Common Android Issues
 
 **1. Deep links open Google Play instead of app:**
+
 - Remove `android:autoVerify="true"` from intent filters
 - Test with ADB for direct app opening
 - Ensure app is installed and intent filters are correct
@@ -440,6 +442,7 @@ useEffect(() => {
 This is a common issue where clicking deep links from emails opens the Play Store instead of your app. This happens when the domain is disabled in Android's app link settings.
 
 **Diagnosis:**
+
 ```bash
 # Check if your app's domain is disabled
 adb shell pm get-app-links com.yourcompany.yourapp
@@ -448,6 +451,7 @@ adb shell pm get-app-links com.yourcompany.yourapp
 Look for your domain in the "Selection state" → "Disabled" section.
 
 **Solution:**
+
 ```bash
 # Enable domain for your app (replace with your actual package name and domain)
 adb shell pm set-app-links-user-selection --package com.yourcompany.yourapp --user 0 true your-onelink-domain.onelink.me
@@ -457,6 +461,7 @@ adb shell pm get-app-links com.yourcompany.yourapp
 ```
 
 **Testing:**
+
 ```bash
 # Test deep link after fix
 adb shell am force-stop com.yourcompany.yourapp
@@ -464,25 +469,30 @@ adb shell am start -W -a android.intent.action.VIEW -d "https://your-onelink-dom
 ```
 
 **Production Note:** This is a testing solution. For production apps, consider:
+
 - Domain verification (requires access to domain)
 - User education about setting app as default handler
 - Fallback handling for when app isn't the default handler
 
 **3. Manifest merger conflicts:**
+
 ```xml
 <!-- Add tools namespace and replace directive -->
 <manifest xmlns:tools="http://schemas.android.com/tools">
   <application android:allowBackup="false" tools:replace="android:allowBackup">
 ```
+
 See [AppsFlyer Android SDK documentation](https://dev.appsflyer.com/hc/docs/install-android-sdk#backup-rules) for more details.
 
 **4. Package attribute deprecated:**
+
 - Remove `package="com.yourapp"` from AndroidManifest.xml
 - Use `namespace` in build.gradle instead
 
 **5. Build Cache Issues:**
 
 If experiencing persistent build failures, perform a complete clean build:
+
 ```bash
 # Clean everything
 rm -rf node_modules
@@ -502,11 +512,13 @@ npx expo run:android / ios --clear
 ### Common iOS Issues
 
 **1. Universal Links not working:**
+
 - Verify associated domains in app.json/Xcode
 - Check AppDelegate deep link handling
 - Test with iOS Simulator using xcrun
 
 **2. Deep links not triggering:**
+
 - Ensure `onDeepLinkListener: true` in SDK config
 - Verify ESP domains are configured before SDK init
 
@@ -517,6 +529,7 @@ npx expo run:android / ios --clear
 ### Quick Deep Link Testing
 
 **Android Testing:**
+
 ```bash
 # 1. Check if app is installed
 adb shell pm list packages | grep com.yourcompany.yourapp
@@ -533,10 +546,12 @@ adb shell am start -W -a android.intent.action.VIEW -d "https://your-onelink-dom
 ```
 
 **iOS Testing:**
+
 ```bash
 # Test with iOS Simulator
 xcrun simctl openurl booted "https://your-onelink-domain.onelink.me/test"
 ```
+
 ---
 
 ## 📖 Support Resources

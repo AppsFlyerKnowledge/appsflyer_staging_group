@@ -38,10 +38,10 @@ dependencies {
 **To integrate the MSA SDK**:
 
 1. Get from the marketer: The MSA SDK (aar) file and the certificate that needs to be integrated into the app.
-    1. Copy the MSA SDK (aar) under the libs folder.
-    2. Copy and paste `supplierconfig.json` under the assets folder of the project and make the necessary changes, such as updating the appid of your app in each of the stores.
-    3. Copy and paste the certificate file (bundle name.cert.pem) under the assets folder of the project.
-    4. See [full instructions on the MSA website](http://www.msa-alliance.cn/col.jsp?id=120)
+   1. Copy the MSA SDK (aar) under the libs folder.
+   2. Copy and paste `supplierconfig.json` under the assets folder of the project and make the necessary changes, such as updating the appid of your app in each of the stores.
+   3. Copy and paste the certificate file (bundle name.cert.pem) under the assets folder of the project.
+   4. See [full instructions on the MSA website](http://www.msa-alliance.cn/col.jsp?id=120)
 2. Update the `build.gradle` file of your project as follows:
 
 ```groovy
@@ -73,6 +73,7 @@ dependencies {
   implementation 'com.huawei.hms:ads-identifier:3.4.56.300'
 }
 ```
+
 ### ProGuard rules update (when using ProGuard)
 
 Protect the necessary classes and interfaces from MSA and various device manufacturers.
@@ -114,6 +115,7 @@ Protect the necessary classes and interfaces from MSA and various device manufac
 # coolpad
 -keep class com.coolpad.deviceidsupport.** { *; }
 ```
+
 ## Additional information
 
 ### Opting out of OAID collection
@@ -122,13 +124,13 @@ Protect the necessary classes and interfaces from MSA and various device manufac
 
 - [setCollectOAID](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcollectoaid) as follows:
 
-``` java
+```java
 AppsFlyerlib.setCollectOaid(false);
 ```
 
 - [setDisableAdvertisingIdentifiers](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setdisableadvertisingidentifiers) as follows:
 
-``` java
+```java
 AppsFlyerlib.setDisableAdvertisingIdentifiers(true);
 ```
 
@@ -138,6 +140,6 @@ AppsFlyerlib.setDisableAdvertisingIdentifiers(true);
 
 - Use the [setOaidData API](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setoaiddata) as follows:
 
-``` java
+```java
 AppsFlyerlib.setOaidData(oaid);
 ```

@@ -1,54 +1,54 @@
 ---
-title: Overview
+title: Общий обзор
 hidden: false
 ---
 
-**At a glance:**
+**С взглядом:**
 
-The [App list API](https://dev.appsflyer.com/hc/reference/app-list-ad-nets-api-get) returns a list of apps (app IDs) based on the caller's account type:
+[App list API](https://dev.appsflyer.com/hc/reference/app-list-ad-nets-api-get) возвращает список приложений (ID приложений) на основе типа учетной записи вызывающего:
 
-- **Ad networks**: Get apps for which advertisers have enabled an integration with you.
-- **Advertisers**: Get apps in your account.
+- **Ad networks**: Получите приложения, для которых рекламодатели включили интеграцию с вами.
+- **Реклама**: Загрузите приложения в свою учетную запись.
 
-The response is returned as a JSON file.
+Ответ возвращается в качестве файла JSON.
 
-**To integrate the API**:
+**Чтобы интегрировать API**:
 
-Get the API token to use as the bearer authorization token.
-Follow the [App list API instructions](https://dev.appsflyer.com/hc/reference/app-list-ad-nets-api-get).
+Получить ключ API для использования в качестве ключа авторизации носителя.
+Следуйте инструкциям [App list API](https://dev.appsflyer.com/hc/reference/app-list-ad-nets-api-get).
 
-## Limitations
+## Ограничения
 
-| Limitation    | Remarks                                                                                                                                    |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Request limit | <ul><li>20 requests per minute</li><li>100 requests per day</li></ul>                                                                      |
-| Record limit  | 1,000 records per request. See [Pagination](https://dev.appsflyer.com/hc/reference/pagination) for when there are more than 1,000 records. |
+| Ограничение    | Замечания                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Лимит запросов | <ul><li>20 запросов в минуту</li><li>100 запросов в день</li></ul>                                                                                           |
+| Лимит записей  | 1000 записей за запрос. Смотрите [Pagination](https://dev.appsflyer.com/hc/reference/pagination) при более чем 1000 записей. |
 
-## Pagination
+## Пагинация
 
-### Pagination principles
+### Принципы пагинации
 
-The API has a pagination mechanism that's always operational and implemented.
+API имеет пагинационный механизм, который всегда функционирует и реализуется.
 
-The API returns up to 1,000 records per request (page).
+API возвращает до 1000 записей на каждый запрос (страница).
 
-Response JSONs contain the following pagination-related keys:
+Ответ JSONs содержит следующие ключи, связанные с пейзажами:
 
-- `meta.total_items`: The number of records to be returned by all pages combined. This represents the number of apps for which you have been granted the capabilities being queried.
-- `links.prev`: If there was a previous request, the pagination link for the request used to generate the previous page.
-- `links.self`: The pagination link for the current request, used to generate the current page.
-- `links.next`: The pagination link for the request required to get the next page. If there is no next key, this is the last page.
+- `meta.total_items`: Количество записей, которые будут возвращены всеми объединенными страницами. Это показывает количество приложений, для которых вы получили запрошенные возможности.
+- `links.prev`: Если была предыдущая просьба, то ссылка на пагинацию для запроса, используемого для генерации предыдущей страницы.
+- `links.self`: Ссылка для пагинации текущего запроса, используется для генерации текущей страницы.
+- `links.next`: Ссылка для пагинации запроса, необходимого для получения следующей страницы. Если нет следующего ключа, это последняя страница.
 
-Use one of the following pagination control methods:
+Используйте один из следующих способов управления пагинацией:
 
-- **Best practice**: Use the links in the JSON: If the `links.next` key exists, use it to create a request to get the next page. Continue to do so until you receive a JSON without a links.next key.
-- Programmatically implement limit and offset parameters in conjunction with the `total_items` key.
+- **Лучшая практика**: Используйте ссылки в JSON: Если клавиша `links.next` существует, используйте её, чтобы создать запрос, чтобы получить следующую страницу. Продолжайте делать это до тех пор, пока вы не получите JSON без links.next ключ.
+- Программируйтесь с параметром `total_items` и выполните ограничения и смещения.
 
-### Pagination JSON example
+### Пример пагинации JSON
 
-- The JSON example that follows contains the result of the first request, where the second request contains two records in the data section (not displayed).
-- The total number of records to return is 6.
-- The `links.next` key contains the request that returns the next page, meaning records 5 and 6.
+- Пример JSON содержит результат первого запроса, где второй запрос содержит две записи в разделе данных (не отображается).
+- Общее количество возвращаемых записей составляет 6.
+- Ключ `links.next` содержит запрос, возвращающий следующую страницу, что означает записи 5 и 6.
 
 ```json
 {
@@ -57,8 +57,8 @@ Use one of the following pagination control methods:
         "total_items": 6
     },
     "links": {
-        "prev": "https://hq1.appsflyer.com/api/mng/apps?capabilities=protect_360&offset=0&limit=2",
-        "self": "https://hq1.appsflyer.com/api/mng/apps?capabilities=protect_360&offset=2&limit=2",
+        "prev": "https://hq1. ppsflyer.com/api/mng/apps?capabilities=protect_360&offset=0&limit=2",
+        "себя": "https://hq1. ppsflyer.com/api/mng/apps?capabilities=protect_360&offset=2&limit=2",
         "next": "https://hq1.appsflyer.com/api/mng/apps?capabilities=protect_360&offset=4&limit=2"
     }
 }

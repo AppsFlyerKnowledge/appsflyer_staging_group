@@ -7,10 +7,10 @@ In each In-app event payload, the event parameters are sent as a JSON object whi
 
 ## Predefined Parameter options ("event_parameters")
 
-| Parameter Name | Type                   | Example                |
-| :------------- | :--------------------- | :--------------------- |
-| af_revenue     | Float                  | {“af_revenue” : 1.99}  |
-| af_currency    | String - ISO 4217 code | {“af_currency”: “USD”} |
+| Parameter Name                   | Type                   | Example                                                                    |
+| :------------------------------- | :--------------------- | :------------------------------------------------------------------------- |
+| af_revenue  | Float                  | {“af_revenue” : 1.99} |
+| af_currency | String - ISO 4217 code | {“af_currency”: “USD”}                |
 
 ### Usage example
 

@@ -5,7 +5,7 @@ hidden: false
 
 This section provides instructions for an Android developer to set up OneLink (deep linking and deferred deep linking) to work in the app.
 
-There are several stages involved in the setup: 
+There are several stages involved in the setup:
 
 1. [Initial app setup](dl_android_init_setup)
 2. [Unified deep linking (UDL)](dl_android_unified_deep_linking)

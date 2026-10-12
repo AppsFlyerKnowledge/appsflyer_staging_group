@@ -7,7 +7,7 @@ The IDFV testing tool app allows AppsFlyer to identify your device as a testing 
 
 ## Why install the IDFV testing tool app?
 
-If you repeatedly delete and reinstall your app on a device for testing purposes, the install events will not be recorded unless you [register the device identifier as belonging to a testing device in AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207031996-Registering-test-devices-). 
+If you repeatedly delete and reinstall your app on a device for testing purposes, the install events will not be recorded unless you [register the device identifier as belonging to a testing device in AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207031996-Registering-test-devices-).
 
 However, when the identifier type is IDFV (Identifier For Vendor) and the tested app is the only app on the device associated with the vendor, the IDFV value will be replaced with a new value each time the app is deleted and reinstalled. Consequently,  AppsFlyer will not recognize the device as a testing device because the IDFV value used for device registration was replaced by a different value.
 

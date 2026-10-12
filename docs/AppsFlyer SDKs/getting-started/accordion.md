@@ -9,64 +9,62 @@ hidden: true
 
 ![](https://files.readme.io/3ba689f-API.svg "API.svg")
 
-
 <Image src="https://files.readme.io/0b18afb-Screenshot_20221205-191054_Chrome.jpg" alt="986" align="center" width="80%" />
-
 
 ![](https://files.readme.io/f0086fb-Screen_Shot_2022-12-06_at_17.05.10.png "Screen Shot 2022-12-06 at 17.05.10.png")
 
 ![](https://files.readme.io/f98642e-Screen_Shot_2022-12-06_at_17.05.22.png "Screen Shot 2022-12-06 at 17.05.22.png")
 
-<HTMLBlock>{`
+<HTMLBlock>{\`
+
 <div></div>
 <div class="wrap-collabsible-breaking">
-  <input id="collapsible-breaking" class="toggle-breaking" type="checkbox">
-  <label for="collapsible-breaking" class="lbl-toggle-breaking">Expand/Collapse using HTML/CSS Widget</label>
+  <input id="collapsible-breaking" class="toggle-breaking" type="checkbox"><label for="collapsible-breaking" class="lbl-toggle-breaking">Expand/Collapse using HTML/CSS Widget</label>
   <div class="collapsible-content-breaking">
     <div class="content-inner-breaking">
-      
+
 <div class="magic-block-callout type-info ">
 	<div class="callout-info"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 	</div>
 </div>
-      
+
 <div class="magic-block-textarea">
-      
+
   <h2 class="header-scroll"><div class="anchor waypoint" id="section-lorem-ipsum-dolor-sit"></div>Lorem ipsum dolor sit amet
 <a class="fa fa-anchor" href="#section-changing-text-component-headers"></a></h2>
 
   <p>Lorem ipsum <a href="https://google.com" target="_self">dolor sit amet</a>Lorem ipsum dolor sit amet <code>Lorem</code> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 </p> 
-        
+
   <h2 class="header-scroll"><div class="anchor waypoint" id="section-lorem-ipsum-dolor-sit-amet"></div>Lorem ipsum dolor sit amet<a class="fa fa-anchor" href="#section-obfuscating-twitter-data-within-conversation-objects"></a></h2>
-      
+
 </div>
-      
+
 <div class="magic-block-callout type-danger ">
 	<h3><i title="Danger" class="fa fa-exclamation-triangle"></i>Callout Error
 	</h3>
 </div>
-      
+
 <div class="magic-block-textarea">
-      
+
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat:</p>
 
 <ul>
-	<li> <a href="https://google.com" target="_self">magna aliqua</a> </li>
-	<li> <a href="https://google.com" target="_self">labore et dolore</a> </li>
-	<li> <a href="https://google.com" target="_self">Lorem ipsum dolor</a> </li>
+	<li><a href="https://google.com" target="_self">magna aliqua</a> </li>
+	<li><a href="https://google.com" target="_self">labore et dolore</a> </li>
+	<li><a href="https://google.com" target="_self">Lorem ipsum dolor</a> </li>
 </ul>
-  
+
   <h2 class="header-scroll"><div class="anchor waypoint" id="section-labore-et-dolore-magna-aliqua"></div>labore et dolore magna aliqua.
 <a class="fa fa-anchor" href="#section-changing-ids-to-no-longer-be-unique-across-all-workspaces"></a></h2>
 
 </div>
-  
+
 <div class="magic-block-callout type-danger ">
 	<h3><i title="Danger" class="fa fa-exclamation-triangle"></i>Callout Error
 	</h3>
 </div>
-      
+
 <div class="magic-block-textarea">
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut <code>id</code> labore et dolore magna aliqua.</p>
 
@@ -74,9 +72,9 @@ hidden: true
 
 <p>Lorem ipsum dolor sit amet<b>labore et dolore magna aliqua.</b> magna aliqua <code>et</code> et dolore <a href="https://google.com" target="_self">Lorem</a> labore et dolore magna aliqua. </code>et</code>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<code>magna_aliqua</code>/<code>et_dolre</code>.
 </p>
-  
+
       </div>
-		</div>
+    	</div>
   </div>
 </div>
 
@@ -169,8 +167,10 @@ input[type='checkbox'] {
 }
   
 </style>
+
 <style></style>
-`}</HTMLBlock>
+
+\`}</HTMLBlock>
 
 ![](https://files.readme.io/89ad96b-analytics.svg "analytics.svg")
 

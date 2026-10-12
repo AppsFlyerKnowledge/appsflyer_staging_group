@@ -39,31 +39,31 @@ SDK 7 also tightens initialization: `appsFlyerDevKey` and `appleAppID` are now r
 
 Work through these in order — higher-risk changes first. The Risk column tells you whether skipping a step causes a **compile error** (caught at build time) or a **silent regression** (compiles but misbehaves at runtime).
 
-| # | Action | Risk | Section |
-|---|---|---|---|
-| **High-risk changes** | | | |
-| 1 | Replace direct assignments to `appsFlyerDevKey` and `appleAppID` with `initialize(devKey:appId:)`. Call it before any other SDK call. | Compile error | [§1](#1-initialize-credentials) |
-| 2 | Remove `onAppOpenAttribution` and `onAppOpenAttributionFailure` from your `AppsFlyerLibDelegate`. Migrate to `AppsFlyerDeepLinkDelegate.didResolveDeepLink`. | Compile error | [§3](#3-migrate-to-the-deep-link-delegate) |
-| 3 | Replace `waitForATTUserAuthorization(timeoutInterval:)` with `registerSessionReadyListener`. Call `start` inside the listener block if you're starting the SDK only after collecting ATT consent from the user. | Compile error | [§2](#2-call-start-with-the-session-readiness-listener) |
-| 4 | Swap `setHost` arguments: rename to `setHost(_:hostName:)`, reverse order — prefix first, host name second. | Silent regression | [§5](#5-swap-the-host-method-argument-order) |
-| 5 | Set `deepLinkDelegate` before `start` fires. | Silent regression | [§3](#3-migrate-to-the-deep-link-delegate) |
-| 6 | Call `handleLaunchOptions` before registering the listener (Universal Links only). | Silent regression | [§2](#2-call-start-with-the-session-readiness-listener) |
-| **Helper class updates** | | | |
-| 7 | `generateInviteUrl(linkGenerator:)` → `generateInviteLink(linkGenerator:)`. Add the `Error` handler to the completion block. | Compile error | [§8](#8-update-shareinvitehelper-method-signatures) |
-| 8 | `logInvite(_:parameters:)` → `logInvite(_:eventParameters:)`. | Compile error | [§8](#8-update-shareinvitehelper-method-signatures) |
-| 9 | Update `logCrossPromoteImpression`: `appID:` → `appId:`, `parameters:` → `userParams:`. | Compile error | [§9](#9-update-crosspromotionhelper-parameter-labels) |
-| 10 | Update `logAndOpenStore`: `appID:` → `promotedAppId:`, `parameters:` → `userParams:`. | Compile error | [§9](#9-update-crosspromotionhelper-parameter-labels) |
-| 11 | Update `AppsFlyerLinkGenerator`: remove `setAppleAppID` and `setDeeplinkPath`; `setReferrerImageURL` → `setReferrerImageUrl`; `setBaseDeeplink` → `setBaseDeepLink`; `addParameters` → `addUserParams`. | Compile error | [§10](#10-update-linkgenerator-call-sites) |
-| **Deprecated API removals** | | | |
-| 12 | Replace the 6-parameter `validateAndLogInAppPurchase` with `validateAndLogInAppPurchase(purchaseDetails:purchaseAdditionalDetails:)` using `AFSDKPurchaseDetails`. | Compile error | [§6](#6-switch-to-the-purchase-details-object) |
-| 13 | Replace `setSharingFilterForAllPartners` with `setSharingFilterForPartners(["all"])`. | Compile error | [§7](#7-remove-the-all-partners-sharing-filter) |
-| **Renames** | | | |
-| 14 | `getSDKVersion` → `getSdkVersion`. | Compile error | [§11](#11-apply-remaining-method-renames) |
-| 15 | Update Swift: `appendParametersToDeeplinkURL` → `appendParametersToDeepLinkingURL`. | Compile error (Swift) | [§11](#11-apply-remaining-method-renames) |
-| 16 | Update Swift: `setPartnerData(partnerId:partnerInfo:)` → `setPartnerData(partnerId:data:)`. | Compile error (Swift) | [§11](#11-apply-remaining-method-renames) |
-| 17 | Update Swift: `DeepLinkDelegate` → `AppsFlyerDeepLinkDelegate`. | Compile error (Swift) | [§4](#4-update-the-deep-link-delegate-name-in-swift) |
-| **Optional** | | | |
-| 18 | Add `AppsFlyerLibConfig.plist` for constant SDK configuration values. | - | [Part 2](#part-2-new-capabilities) |
+| #                           | Action                                                                                                                                                                                                                                          | Risk                                     | Section                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------- |
+| **High-risk changes**       |                                                                                                                                                                                                                                                 |                                          |                                                         |
+| 1                           | Replace direct assignments to `appsFlyerDevKey` and `appleAppID` with `initialize(devKey:appId:)`. Call it before any other SDK call.                                                                           | Compile error                            | [§1](#1-initialize-credentials)                         |
+| 2                           | Remove `onAppOpenAttribution` and `onAppOpenAttributionFailure` from your `AppsFlyerLibDelegate`. Migrate to `AppsFlyerDeepLinkDelegate.didResolveDeepLink`.                                                    | Compile error                            | [§3](#3-migrate-to-the-deep-link-delegate)              |
+| 3                           | Replace `waitForATTUserAuthorization(timeoutInterval:)` with `registerSessionReadyListener`. Call `start` inside the listener block if you're starting the SDK only after collecting ATT consent from the user. | Compile error                            | [§2](#2-call-start-with-the-session-readiness-listener) |
+| 4                           | Swap `setHost` arguments: rename to `setHost(_:hostName:)`, reverse order — prefix first, host name second.                                                                                                     | Silent regression                        | [§5](#5-swap-the-host-method-argument-order)            |
+| 5                           | Set `deepLinkDelegate` before `start` fires.                                                                                                                                                                                    | Silent regression                        | [§3](#3-migrate-to-the-deep-link-delegate)              |
+| 6                           | Call `handleLaunchOptions` before registering the listener (Universal Links only).                                                                                                                           | Silent regression                        | [§2](#2-call-start-with-the-session-readiness-listener) |
+| **Helper class updates**    |                                                                                                                                                                                                                                                 |                                          |                                                         |
+| 7                           | `generateInviteUrl(linkGenerator:)` → `generateInviteLink(linkGenerator:)`. Add the `Error` handler to the completion block.                                                                                    | Compile error                            | [§8](#8-update-shareinvitehelper-method-signatures)     |
+| 8                           | `logInvite(_:parameters:)` → `logInvite(_:eventParameters:)`.                                                                                                                                                                   | Compile error                            | [§8](#8-update-shareinvitehelper-method-signatures)     |
+| 9                           | Update `logCrossPromoteImpression`: `appID:` → `appId:`, `parameters:` → `userParams:`.                                                                                                                         | Compile error                            | [§9](#9-update-crosspromotionhelper-parameter-labels)   |
+| 10                          | Update `logAndOpenStore`: `appID:` → `promotedAppId:`, `parameters:` → `userParams:`.                                                                                                                           | Compile error                            | [§9](#9-update-crosspromotionhelper-parameter-labels)   |
+| 11                          | Update `AppsFlyerLinkGenerator`: remove `setAppleAppID` and `setDeeplinkPath`; `setReferrerImageURL` → `setReferrerImageUrl`; `setBaseDeeplink` → `setBaseDeepLink`; `addParameters` → `addUserParams`.         | Compile error                            | [§10](#10-update-linkgenerator-call-sites)              |
+| **Deprecated API removals** |                                                                                                                                                                                                                                                 |                                          |                                                         |
+| 12                          | Replace the 6-parameter `validateAndLogInAppPurchase` with `validateAndLogInAppPurchase(purchaseDetails:purchaseAdditionalDetails:)` using `AFSDKPurchaseDetails`.                                                              | Compile error                            | [§6](#6-switch-to-the-purchase-details-object)          |
+| 13                          | Replace `setSharingFilterForAllPartners` with `setSharingFilterForPartners(["all"])`.                                                                                                                                           | Compile error                            | [§7](#7-remove-the-all-partners-sharing-filter)         |
+| **Renames**                 |                                                                                                                                                                                                                                                 |                                          |                                                         |
+| 14                          | `getSDKVersion` → `getSdkVersion`.                                                                                                                                                                                              | Compile error                            | [§11](#11-apply-remaining-method-renames)               |
+| 15                          | Update Swift: `appendParametersToDeeplinkURL` → `appendParametersToDeepLinkingURL`.                                                                                                                             | Compile error (Swift) | [§11](#11-apply-remaining-method-renames)               |
+| 16                          | Update Swift: `setPartnerData(partnerId:partnerInfo:)` → `setPartnerData(partnerId:data:)`.                                                                                                                     | Compile error (Swift) | [§11](#11-apply-remaining-method-renames)               |
+| 17                          | Update Swift: `DeepLinkDelegate` → `AppsFlyerDeepLinkDelegate`.                                                                                                                                                 | Compile error (Swift) | [§4](#4-update-the-deep-link-delegate-name-in-swift)    |
+| **Optional**                |                                                                                                                                                                                                                                                 |                                          |                                                         |
+| 18                          | Add `AppsFlyerLibConfig.plist` for constant SDK configuration values.                                                                                                                                                           | -                                        | [Part 2](#part-2-new-capabilities)                      |
 
 ---
 
@@ -89,6 +89,7 @@ The following changes will cause compile errors — or, in one case, a silent ru
 // 7.0
 [[AppsFlyerLib shared] initWithDevKey:@"YOUR_DEV_KEY" appleAppId:@"123456789"];
 ```
+
 ```swift Swift
 // 6.x - DO NOT use in 7.0
 AppsFlyerLib.shared().appsFlyerDevKey = "YOUR_DEV_KEY"
@@ -133,6 +134,7 @@ Use this if your app has no pre-start conditions.
     return YES;
 }
 ```
+
 ```swift Swift
 // 6.x - DO NOT use in 7.0
 AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
@@ -202,6 +204,7 @@ If `start` must wait for both SDK readiness and your consent flow (CMP, ATT, or 
 
 @end
 ```
+
 ```swift Swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -254,6 +257,7 @@ struct MyApp: App {
 // Objective-C
 [[AppsFlyerLib shared] unregisterSessionReadyListener];
 ```
+
 ```swift Swift
 // Swift
 AppsFlyerLib.shared().unregisterSessionReadyListener()
@@ -268,6 +272,7 @@ No SDK 6 equivalent.
 ```objc Objective-C
 BOOL ready = [[AppsFlyerLib shared] isSessionReady];
 ```
+
 ```swift Swift
 let ready = AppsFlyerLib.shared().isSessionReady()
 ```
@@ -299,6 +304,7 @@ let ready = AppsFlyerLib.shared().isSessionReady()
     }
 }
 ```
+
 ```swift Swift
 // 6.x - remove these from your AppsFlyerLibDelegate conformance
 func onAppOpenAttribution(_ attributionData: [AnyHashable: Any]) { }
@@ -325,6 +331,7 @@ Assign the delegate **before** calling `start`:
 // Objective-C
 [AppsFlyerLib shared].deepLinkDelegate = self;
 ```
+
 ```swift Swift
 // Swift
 AppsFlyerLib.shared().deepLinkDelegate = self
@@ -374,6 +381,7 @@ If you don't swap the arguments, the code compiles without errors but routes tra
 // 7.0 - prefix first, host second
 [[AppsFlyerLib shared] setHost:@"custom" hostName:@"example.com"];
 ```
+
 ```swift Swift
 // 6.x
 AppsFlyerLib.shared().setHost("example.com", withHostPrefix: "custom")
@@ -409,6 +417,7 @@ AFSDKPurchaseDetails *details = [[AFSDKPurchaseDetails alloc]
                          purchaseAdditionalDetails:nil
                                         completion:^(NSDictionary *response, NSError *error) {}];
 ```
+
 ```swift Swift
 // 6.x - DO NOT use in 7.0
 AppsFlyerLib.shared().validateAndLogInAppPurchase(
@@ -440,6 +449,7 @@ AppsFlyerLib.shared().validateAndLogInAppPurchase(
 // 7.0
 [[AppsFlyerLib shared] setSharingFilterForPartners:@[@"all"]];
 ```
+
 ```swift Swift
 // 6.x - DO NOT use in 7.0
 AppsFlyerLib.shared().setSharingFilterForAllPartners()
@@ -474,6 +484,7 @@ AppsFlyerLib.shared().setSharingFilterForPartners(["all"])
     // use url
 }];
 ```
+
 ```swift Swift
 // 6.x
 AppsFlyerShareInviteHelper.generateInviteUrl(linkGenerator: { gen in
@@ -506,6 +517,7 @@ AppsFlyerShareInviteHelper.generateInviteLink(linkGenerator: { gen in
 // 7.0
 [AppsFlyerShareInviteHelper logInvite:@"email" eventParameters:@{@"af_sub1": @"val"}];
 ```
+
 ```swift Swift
 // 6.x
 AppsFlyerShareInviteHelper.logInvite("email", parameters: ["af_sub1": "val"])
@@ -535,6 +547,7 @@ AppsFlyerShareInviteHelper.logInvite("email", eventParameters: ["af_sub1": "val"
                                                 campaign:@"summer"
                                               userParams:@{@"af_sub1": @"val"}];
 ```
+
 ```swift Swift
 // 6.x
 AppsFlyerCrossPromotionHelper.logCrossPromoteImpression("123456789",
@@ -564,6 +577,7 @@ AppsFlyerCrossPromotionHelper.logCrossPromoteImpression("123456789",
                                     userParams:@{@"af_sub1": @"val"}
                                      openStore:^(NSURLSession *session, NSURL *url) {}];
 ```
+
 ```swift Swift
 // 6.x
 AppsFlyerCrossPromotionHelper.logAndOpenStore("123456789",
@@ -589,6 +603,7 @@ AppsFlyerCrossPromotionHelper.logAndOpenStore("123456789",
 [generator setAppleAppID:@"123456789"];
 [generator setDeeplinkPath:@"/product/detail"];
 ```
+
 ```swift Swift
 // 6.x - remove these calls entirely in 7.0
 generator.setAppleAppID("123456789")
@@ -597,11 +612,11 @@ generator.setDeeplinkPath("/product/detail")
 
 #### Remaining renames
 
-| 6.x | 7.0 | Breakage |
-|---|---|---|
+| 6.x    | 7.0    | Breakage      |
+| ---------------------- | ---------------------- | ------------- |
 | `setReferrerImageURL:` | `setReferrerImageUrl:` | Compile error |
-| `setBaseDeeplink:` | `setBaseDeepLink:` | Compile error |
-| `addParameters:` | `addUserParams:` | Compile error |
+| `setBaseDeeplink:`     | `setBaseDeepLink:`     | Compile error |
+| `addParameters:`       | `addUserParams:`       | Compile error |
 
 ```objc Objective-C
 // 6.x
@@ -614,6 +629,7 @@ generator.setDeeplinkPath("/product/detail")
 [generator setBaseDeepLink:@"myapp://home"];
 [generator addUserParams:@{@"af_sub1": @"val"}];
 ```
+
 ```swift Swift
 // 6.x
 generator.setReferrerImageURL("https://example.com/avatar.png")
@@ -643,6 +659,7 @@ NSString *version = [[AppsFlyerLib shared] getSDKVersion];
 // 7.0
 NSString *version = [[AppsFlyerLib shared] getSdkVersion];
 ```
+
 ```swift Swift
 // 6.x
 let version = AppsFlyerLib.shared().getSDKVersion()
@@ -678,6 +695,7 @@ AppsFlyerLib.shared().appendParametersToDeepLinkingURL(contains: "example.com", 
 // 7.0
 [[AppsFlyerLib shared] setPartnerDataWithPartnerId:@"partner_int" data:@{@"key": @"val"}];
 ```
+
 ```swift Swift
 // 6.x
 AppsFlyerLib.shared().setPartnerData(partnerId: "partner_int", partnerInfo: ["key": "val"])
@@ -696,16 +714,16 @@ SDK 7 introduces an optional property list file for configuring SDK behavior wit
 
 #### Supported keys
 
-| Plist key | Type | Default | Programmatic equivalent |
-|---|---|---|---|
-| `debug_mode` | Boolean | `false` | `AppsFlyerLib.shared().isDebug = true` |
-| `currency_code` | String | `"USD"` | `AppsFlyerLib.shared().currencyCode = "ILS"` |
-| `disable_idfa_collection` | Boolean | `false` | `AppsFlyerLib.shared().disableAdvertisingIdentifier = true` |
-| `disable_idfv_collection` | Boolean | `false` | `AppsFlyerLib.shared().disableIDFVCollection = true` |
-| `disable_skadnetwork` | Boolean | `false` | `AppsFlyerLib.shared().disableSKAdNetwork = true` |
-| `min_time_between_sessions` | Integer (seconds) | `30` | `AppsFlyerLib.shared().minTimeBetweenSessions = 1` |
-| `host` | String | `""` | `AppsFlyerLib.shared().setHost("prefix", hostName: "host.com")` |
-| `prefix` | String | `""` | *(set together with `host`)* |
+| Plist key                   | Type                                 | Default | Programmatic equivalent                                         |
+| --------------------------- | ------------------------------------ | ------- | --------------------------------------------------------------- |
+| `debug_mode`                | Boolean                              | `false` | `AppsFlyerLib.shared().isDebug = true`                          |
+| `currency_code`             | String                               | `"USD"` | `AppsFlyerLib.shared().currencyCode = "ILS"`                    |
+| `disable_idfa_collection`   | Boolean                              | `false` | `AppsFlyerLib.shared().disableAdvertisingIdentifier = true`     |
+| `disable_idfv_collection`   | Boolean                              | `false` | `AppsFlyerLib.shared().disableIDFVCollection = true`            |
+| `disable_skadnetwork`       | Boolean                              | `false` | `AppsFlyerLib.shared().disableSKAdNetwork = true`               |
+| `min_time_between_sessions` | Integer (seconds) | `30`    | `AppsFlyerLib.shared().minTimeBetweenSessions = 1`              |
+| `host`                      | String                               | `""`    | `AppsFlyerLib.shared().setHost("prefix", hostName: "host.com")` |
+| `prefix`                    | String                               | `""`    | _(set together with `host`)_                 |
 
 #### Example plist
 
@@ -754,13 +772,13 @@ Any value set via the public API overwrites the corresponding plist value for th
 
 #### Comparison with Android af_init_config.json file
 
-| | iOS | Android |
-|---|---|---|
-| **File** | `AppsFlyerLibConfig.plist` (main bundle) | `assets/af_init_config.json` |
-| **Format** | Property list (XML) | JSON |
-| **Loaded at** | `AppsFlyerLib.init()` | `AppsFlyerLib.init()` |
-| **Contains credentials** | No — use `initialize(devKey:appId:)` | No — use `init(key, listener, context)` |
-| **Unknown keys** | Ignored | Ignored (logged) |
+|                          | iOS                                                         | Android                                 |
+| ------------------------ | ----------------------------------------------------------- | --------------------------------------- |
+| **File**                 | `AppsFlyerLibConfig.plist` (main bundle) | `assets/af_init_config.json`            |
+| **Format**               | Property list (XML)                      | JSON                                    |
+| **Loaded at**            | `AppsFlyerLib.init()`                                       | `AppsFlyerLib.init()`                   |
+| **Contains credentials** | No — use `initialize(devKey:appId:)`                        | No — use `init(key, listener, context)` |
+| **Unknown keys**         | Ignored                                                     | Ignored (logged)     |
 
 ---
 
@@ -814,56 +832,56 @@ All API changes at a glance. Use this when you hit a compile error and want to f
 
 ### AppsFlyerLib
 
-| 6.x | 7.0 | Breakage |
-|---|---|---|
-| `appsFlyerDevKey` (read-write property) | `appsFlyerDevKey` (read-only) + `initialize(devKey:appId:)` | Compile |
-| `appleAppID` (read-write property) | `appleAppID` (read-only) + `initialize(devKey:appId:)` | Compile |
-| `setHost(_:withHostPrefix:)` — host, prefix | `setHost(_:hostName:)` — prefix, host (order swapped) | Compile + Silent regression |
-| `getSDKVersion` | `getSdkVersion` | Compile |
-| `validateAndLogInAppPurchase(_:price:currency:transactionId:additionalParameters:success:failure:)` | `validateAndLogInAppPurchase(purchaseDetails:purchaseAdditionalDetails:)` | Compile |
-| `setSharingFilterForAllPartners` | Removed — use `setSharingFilterForPartners` | Compile |
-| `waitForATTUserAuthorization(timeoutInterval:)` | Deprecated → `registerSessionReadyListener` | Compile warning → Silent regression |
+| 6.x                                                                                 | 7.0                                                            | Breakage                            |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------- |
+| `appsFlyerDevKey` (read-write property)                                          | `appsFlyerDevKey` (read-only) + `initialize(devKey:appId:)` | Compile                             |
+| `appleAppID` (read-write property)                                               | `appleAppID` (read-only) + `initialize(devKey:appId:)`      | Compile                             |
+| `setHost(_:withHostPrefix:)` — host, prefix                                                         | `setHost(_:hostName:)` — prefix, host (order swapped)       | Compile + Silent regression         |
+| `getSDKVersion`                                                                                     | `getSdkVersion`                                                                | Compile                             |
+| `validateAndLogInAppPurchase(_:price:currency:transactionId:additionalParameters:success:failure:)` | `validateAndLogInAppPurchase(purchaseDetails:purchaseAdditionalDetails:)`      | Compile                             |
+| `setSharingFilterForAllPartners`                                                                    | Removed — use `setSharingFilterForPartners`                                    | Compile                             |
+| `waitForATTUserAuthorization(timeoutInterval:)`                                                     | Deprecated → `registerSessionReadyListener`                                    | Compile warning → Silent regression |
 
 **Swift-specific changes**
 
-| 6.x Swift | 7.0 Swift | Breakage |
-|---|---|---|
-| `appendParametersToDeeplinkURL(contains:parameters:)` | `appendParametersToDeepLinkingURL(contains:parameters:)` | Compile |
-| `setPartnerData(partnerId:partnerInfo:)` | `setPartnerData(partnerId:data:)` | Compile |
+| 6.x Swift                             | 7.0 Swift                                | Breakage |
+| ----------------------------------------------------- | -------------------------------------------------------- | -------- |
+| `appendParametersToDeeplinkURL(contains:parameters:)` | `appendParametersToDeepLinkingURL(contains:parameters:)` | Compile  |
+| `setPartnerData(partnerId:partnerInfo:)`              | `setPartnerData(partnerId:data:)`                        | Compile  |
 
 ### AppsFlyerLibDelegate
 
-| 6.x | 7.0 | Breakage |
-|---|---|---|
-| `onAppOpenAttribution` (`@optional`) | Removed — migrate to `AppsFlyerDeepLinkDelegate.didResolveDeepLink` | Compile |
-| `onAppOpenAttributionFailure` (`@optional`) | Removed — handle errors via `result.status` in `didResolveDeepLink` | Compile |
+| 6.x                                            | 7.0                                                 | Breakage |
+| -------------------------------------------------------------- | ------------------------------------------------------------------- | -------- |
+| `onAppOpenAttribution` (`@optional`)        | Removed — migrate to `AppsFlyerDeepLinkDelegate.didResolveDeepLink` | Compile  |
+| `onAppOpenAttributionFailure` (`@optional`) | Removed — handle errors via `result.status` in `didResolveDeepLink` | Compile  |
 
 ### AppsFlyerDeepLinkDelegate
 
-| 6.x Swift name | 7.0 Swift name | Breakage |
-|---|---|---|
-| `DeepLinkDelegate` | `AppsFlyerDeepLinkDelegate` | Compile (Swift) |
+| 6.x Swift name | 7.0 Swift name | Breakage                           |
+| ------------------------------ | ------------------------------ | ---------------------------------- |
+| `DeepLinkDelegate`             | `AppsFlyerDeepLinkDelegate`    | Compile (Swift) |
 
 ### AppsFlyerShareInviteHelper
 
-| 6.x | 7.0 | Breakage |
-|---|---|---|
-| `generateInviteUrl(linkGenerator:completionHandler:)` — no error param | `generateInviteLink(linkGenerator:completionHandler:)` — adds `Error` | Compile |
-| `logInvite(_:parameters:)` | `logInvite(_:eventParameters:)` | Compile |
+| 6.x                                                    | 7.0                                                   | Breakage |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------- | -------- |
+| `generateInviteUrl(linkGenerator:completionHandler:)` — no error param | `generateInviteLink(linkGenerator:completionHandler:)` — adds `Error` | Compile  |
+| `logInvite(_:parameters:)`                                             | `logInvite(_:eventParameters:)`                                       | Compile  |
 
 ### AppsFlyerCrossPromotionHelper
 
-| 6.x | 7.0 | Breakage |
-|---|---|---|
-| `logCrossPromoteImpression(_:appID:campaign:parameters:)` | `logCrossPromoteImpression(_:appId:campaign:userParams:)` | Compile |
-| `logAndOpenStore(_:appID:campaign:parameters:openStore:)` | `logAndOpenStore(_:promotedAppId:campaign:userParams:openStore:)` | Compile |
+| 6.x                                       | 7.0                                               | Breakage |
+| --------------------------------------------------------- | ----------------------------------------------------------------- | -------- |
+| `logCrossPromoteImpression(_:appID:campaign:parameters:)` | `logCrossPromoteImpression(_:appId:campaign:userParams:)`         | Compile  |
+| `logAndOpenStore(_:appID:campaign:parameters:openStore:)` | `logAndOpenStore(_:promotedAppId:campaign:userParams:openStore:)` | Compile  |
 
 ### AppsFlyerLinkGenerator
 
-| 6.x | 7.0 | Breakage |
-|---|---|---|
-| `setReferrerImageURL` | `setReferrerImageUrl` | Compile |
-| `setAppleAppID` | Removed — no replacement | Compile |
-| `setDeeplinkPath` | Removed — no replacement | Compile |
-| `setBaseDeeplink` | `setBaseDeepLink` | Compile |
-| `addParameters` | `addUserParams` | Compile |
+| 6.x   | 7.0      | Breakage |
+| --------------------- | ------------------------ | -------- |
+| `setReferrerImageURL` | `setReferrerImageUrl`    | Compile  |
+| `setAppleAppID`       | Removed — no replacement | Compile  |
+| `setDeeplinkPath`     | Removed — no replacement | Compile  |
+| `setBaseDeeplink`     | `setBaseDeepLink`        | Compile  |
+| `addParameters`       | `addUserParams`          | Compile  |

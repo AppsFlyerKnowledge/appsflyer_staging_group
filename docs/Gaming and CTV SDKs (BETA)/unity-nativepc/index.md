@@ -36,7 +36,7 @@ AppsflyerModule(string devkey, string appid, MonoBehaviour mono, bool isSandbox 
 - `DEV_KEY`: Get from the marketer or [AppsFlyer HQ](https://support.appsflyer.com/hc/en-us/articles/211719806-App-settings-#general-app-settings).
 - `APP_ID`: The app id on Appsflyer HQ (excluding the `nativepc-` prefix).
 - `MonoBehaviour mono`: the parent MonoBehaviour.
-- `bool isSandbox`: Whether to activate sandbox mode. False by default. This option is for debugging. With the sandbox mode, AppsFlyer dashboard does not show the data. 
+- `bool isSandbox`: Whether to activate sandbox mode. False by default. This option is for debugging. With the sandbox mode, AppsFlyer dashboard does not show the data.
 
 **Usage**:
 
@@ -62,7 +62,6 @@ void Start(bool skipFirst = false)
 
 - `bool skipFirst`: Determines whether or not to skip first open events and send session events. The value is false by default. If true , first open events are skipped and session events are sent. [See example](#skipFirstExample)
 
-
 **Usage**:
 
 ```c#
@@ -73,7 +72,6 @@ afm.Start();
 bool skipFirst = [SOME_CONDITION];
 afm.Start(skipFirst);
 ```
-
 
 ### Stop
 
@@ -147,8 +145,8 @@ bool IsInstallOlderThanDate(string datestring)
 
 - `string datestring`: Date string in `yyyy-mm-ddThh:mm:ss+hh:mm` format.
 
-
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c#

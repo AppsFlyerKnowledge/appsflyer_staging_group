@@ -13,6 +13,7 @@ To successfully complete the tests in this document, you must:
 - [Register your testing device](https://support.appsflyer.com/hc/en-us/articles/207031996).
 
 ## Test Android SDK integration
+
 ----------------------------
 
 The test consists of:
@@ -53,9 +54,9 @@ https://app.appsflyer.com/com.my.app?pid=devtest&c=test1&advertising_id=********
 ```
 
 > 👍 Tip
-> 
+>
 > Often, tests using attribution links are performed more than once. That's why it's recommended to use one of the attribution parameters to "version" your tests–it makes it easier to understand which link triggered which conversion.
-> 
+>
 > In the above example, the value of `c` is `test1`. In consecutive tests, increment the value of `c` to `test2`, `test3`, and so on.
 
 **Step 2: Install the app**  
@@ -98,5 +99,5 @@ A 200 response containing the install's conversion data (truncated for readabili
 ```
 
 > 📘 Note
-> 
+>
 > It might take up to 30 minutes for the install to appear in the dashboard.

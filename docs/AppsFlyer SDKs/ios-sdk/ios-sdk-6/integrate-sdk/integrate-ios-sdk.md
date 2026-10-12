@@ -8,12 +8,12 @@ hidden: false
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Get started with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=ios&utm_source=devhub&utm_medium=integrate-sdk-ios');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_int', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Get started with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=ios&utm_source=devhub&utm_medium=integrate-sdk-ios');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_int', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
 
 - Before integrating, you must [Install the SDK](doc:install-ios-sdk).
-- This document contains example implementations. Make sure to replace the following: 
+- This document contains example implementations. Make sure to replace the following:
   - `<YOUR_DEV_KEY>`: [The AppsFlyer dev key](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieve-the-dev-key).
   - `<APPLE_APP_ID>`: The Apple App ID (without the `id` prefix).
   - Additional placeholders, where needed.
@@ -31,6 +31,7 @@ Import `AppsFlyerLib`:
 
 @end
 ```
+
 ```swift
 import UIKit
 import AppsFlyerLib
@@ -41,21 +42,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-
-
 **Step 2: Initialize the SDK**  
- In `didFinishLaunchingWithOptions` configure your Apple App ID and AppsFlyer dev key:
+In `didFinishLaunchingWithOptions` configure your Apple App ID and AppsFlyer dev key:
 
 ```objectivec
 [[AppsFlyerLib shared] setAppsFlyerDevKey:@"<YOUR_DEV_KEY>"];
 [[AppsFlyerLib shared] setAppleAppID:@"<APPLE_APP_ID>"];
 ```
+
 ```swift
 AppsFlyerLib.shared().appsFlyerDevKey = "<YOUR_DEV_KEY>"
 AppsFlyerLib.shared().appleAppID = "<APPLE_APP_ID>"
 ```
-
-
 
 ## Starting the iOS SDK
 
@@ -64,14 +62,13 @@ In `applicationDidBecomeActive`, call [`start`](doc:ios-sdk-reference-appsflyerl
 ```objectivec
 [[AppsFlyerLib shared] start];
 ```
+
 ```swift
 func applicationDidBecomeActive(_ application: UIApplication) {
     AppsFlyerLib.shared().start()
     // ...
 }
 ```
-
-
 
 ### Add SceneDelegate support
 
@@ -99,6 +96,7 @@ In `didFinishLaunchingWithOptions`, add a `UIApplicationDidBecomeActiveNotificat
 // ...
 @end
 ```
+
 ```swift
 import UIKit
 import AppsFlyerLib
@@ -118,8 +116,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-
-
 ### Start with completion handler
 
 <span class="annotation-optional">Optional</span>  
@@ -137,6 +133,7 @@ To confirm that the SDK started successfully and notified the AppsFlyer servers,
         }
     }];
 ```
+
 ```swift
 AppsFlyerLib.shared()?.start(completionHandler: { (dictionary, error) in
             if (error != nil){
@@ -148,8 +145,6 @@ AppsFlyerLib.shared()?.start(completionHandler: { (dictionary, error) in
             }
         })
 ```
-
-
 
 ## Full example
 
@@ -195,6 +190,7 @@ AppsFlyerLib.shared()?.start(completionHandler: { (dictionary, error) in
 
 @end
 ```
+
 ```swift
 import UIKit
 import AppsFlyerLib
@@ -217,8 +213,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-
-
 [Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/7c58363b01a184863d3b3fc07ba707a72d76bcda/swift/basic_app/basic_app/AppDelegate.swift#L18)
 
 ## Log sessions
@@ -227,7 +221,7 @@ The SDK sends an `af_app_opened` message whenever the app is opened or brought t
 
 ### Setting the time interval between app launches
 
-Set [`minTimeBetweenSessions`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#mintimebetweensessions) to the minimal time interval that must lapse between two `af_app_opened` messages. The default interval is 5 seconds. 
+Set [`minTimeBetweenSessions`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#mintimebetweensessions) to the minimal time interval that must lapse between two `af_app_opened` messages. The default interval is 5 seconds.
 
 ## iOS 14 support
 
@@ -239,7 +233,7 @@ Starting iOS 14.5, [IDFA access is governed by the ATT framework](https://suppor
 Enabling ATT support in the SDK handles IDFA collection on devices with iOS `14.5`+ installed.
 
 > 🚧 Attention
-> 
+>
 > Call `waitForATTUserAuthorization` only if you intend to call `requestTrackingAuthorization` somewhere in your app.
 
 **Step 1: Set up `waitForATTUserAuthorization`**  
@@ -248,13 +242,12 @@ When [Initializing the SDK](#initializing-the-ios-sdk), **before calling** [`sta
 ```objectivec
 [[AppsFlyerLib shared] waitForATTUserAuthorizationWithTimeoutInterval:60];
 ```
+
 ```swift
 AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
 ```
 
-
-
-[Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/7c58363b01a184863d3b3fc07ba707a72d76bcda/swift/basic_app/basic_app/AppDelegate.swift#L37) 
+[Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/7c58363b01a184863d3b3fc07ba707a72d76bcda/swift/basic_app/basic_app/AppDelegate.swift#L37)
 
 Set `timeoutInterval` as such that app users have enough time to see and engage with the ATT prompt. A few examples:
 
@@ -276,6 +269,7 @@ Call `requestTrackingAuthorization` where you wish to display the prompt:
     }
 }
 ```
+
 ```swift Swift
 @objc func didBecomeActiveNotification() {
     // start is usually called here:
@@ -299,14 +293,12 @@ Call `requestTrackingAuthorization` where you wish to display the prompt:
 }
 ```
 
-
-
-[Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/7c58363b01a184863d3b3fc07ba707a72d76bcda/swift/basic_app/basic_app/AppDelegate.swift#L55-L72) 
+[Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/7c58363b01a184863d3b3fc07ba707a72d76bcda/swift/basic_app/basic_app/AppDelegate.swift#L55-L72)
 
 > 📘 Note
-> 
+>
 > - You need to import the `AppTrackingTransparency` framework to call [`requestTrackingAuthorization`](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/requesttrackingauthorization(completionhandler:)).
-> - According to [Apple documentation](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/3547037-requesttrackingauthorization): 
+> - According to [Apple documentation](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/3547037-requesttrackingauthorization):
 >   - `requestTrackingAuthorization` is invoked **only** if the app is in the `UIApplicationStateActive` state.
 >   - `requestTrackingAuthorization` **can't** be invoked from App Extensions.
 
@@ -320,22 +312,28 @@ For detailed instructions, see [Apple's documentation](https://developer.apple.c
 
 Apple App Clips attribution was introduced in iOS SDK `V6.0.8`. See our [App Clips integration guide](doc:app-clip-overview) for detailed instructions.
 
-### Send SKAN and AdAttributionKit postback copies to AppsFlyer 
+### Send SKAN and AdAttributionKit postback copies to AppsFlyer
+
 If your app uses both `SKAdNetwork` and `AdAttributionKit`, configure both postback copy endpoints in the `Info.plist` file.
+
 #### Send SKAN postback copies to AppsFlyer
+
 Use this setup to send SKAdNetwork postback copies to AppsFlyer.
+
 1. Add the `NSAdvertisingAttributionReportEndpoint` key to your app's `info.plist`.
 2. Set the key's value to `https://appsflyer-skadnetwork.com/`.
-Once configured, Apple will send SKAdNetwork postback copies to AppsFlyer.
-Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
+   Once configured, Apple will send SKAdNetwork postback copies to AppsFlyer.
+   Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
+
 #### Send AdAttributionKit postback copies to AppsFlyer
+
 Use this setup to send AdAttributionKit postback copies to AppsFlyer.
+
 1. In your app's Info.plist, add a new key.
 2. Type the key name `AdAttributionKit` and select `AdAttributionKit - Postback Copy URL` from the pop-up menu.
 3. Set the key’s value to `https://appsflyer-skadnetwork.com/`.
-Once configured, Apple will send AdAttributionKit postback copies to AppsFlyer.
-Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
-
+   Once configured, Apple will send AdAttributionKit postback copies to AppsFlyer.
+   Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
 
 ## Enabling debug mode
 
@@ -344,20 +342,19 @@ You can enable debug logs by setting [isDebug](doc:ios-sdk-reference-appsflyerli
 ```objectivec
 [AppsFlyerLib shared].isDebug = true;
 ```
+
 ```swift
 AppsFlyerLib.shared().isDebug = true
 ```
 
-
-
 > 📘 Note
-> 
+>
 > To see full debug logs, make sure to set `isDebug` before invoking other SDK methods.
-> 
+>
 > See [example](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/2ca84bfb983d60ef9dc5bcb72bb0269bc581caa8/swift/basic_app/basic_app/AppDelegate.swift#L30).
 
 > 🚧 Warning
-> 
+>
 > To avoid leaking sensitive information, make sure debug logs are disabled before distributing the app.
 
 ## Test the integration
@@ -374,7 +371,7 @@ It's performed by:
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-ios-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-ios-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
 
@@ -392,84 +389,85 @@ To avoid mixing production data with test conversions and in-app events, you can
 You can utilize Xcode's compilation configuration capabilities to configure an easy-to-use debug app. It will enable you to switch between your debug and production apps by tapping into Xcode's active compilation conditions.
 [block:callout]
 {
-  "type": "info",
-  "title": "Note",
-  "body": "If you don't mind mixing production data with test traffic, you can skip to [testing the integration](#test-ios-sdk-integration). All tests can be performed for both production and debug apps."
+"type": "info",
+"title": "Note",
+"body": "If you don't mind mixing production data with test traffic, you can skip to [testing the integration](#test-ios-sdk-integration). All tests can be performed for both production and debug apps."
 }
 [/block]
 This is achieved by configuring a User-Defined Setting in your project's Build Settings and exposing it via an `info.plist` property.
 
 **Step 1: Add a debug app to AppsFlyer**
-[Add a new pending iOS app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-New-Application-to-the-AppsFlyer-Dashboard) or ask a team member with dashboard access to add it. Choose any available app ID–You will need it in step 3. Make sure the ID is 9 digits and starts with four 1s, for example, 111167538. 
+[Add a new pending iOS app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-New-Application-to-the-AppsFlyer-Dashboard) or ask a team member with dashboard access to add it. Choose any available app ID–You will need it in step 3. Make sure the ID is 9 digits and starts with four 1s, for example, 111167538.
 
 **Step 2: Add a User-Defined Setting**
- 1. In Xcode, in the file navigator view, select your project root and go to **Build Settings**.
- 2. Click **+** in the toolbar and select **Add User-Defined Setting**. In this case, we name it `AF_APP_ID`.
- 3. Expand the newly created User-Defined Setting:
-    * Set the **Debug** Conditional Setting to your test app's app ID (mentioned in step 1)
-    * Set the **Release** Conditional Setting to your production app's app ID. 
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/6c8e25c-2021-08-02_19-12-34.png",
-        "2021-08-02_19-12-34.png",
-        987,
-        597,
-        "#302b2e"
-      ],
-      "border": false
-    }
-  ]
-}
-[/block]
-**Step 3: Expose app IDs via info.plist**
-Go to the project's `info.plist` and add a new property (called `AFAppID` in this case). Set its value to `$(AF_APP_ID)` (based on the User-Defined Setting name in step 2).
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/2073949-2021-08-02_19-41-31.png",
-        "2021-08-02_19-41-31.png",
-        971,
-        434,
-        "#322d31"
-      ]
-    }
-  ]
-}
-[/block]
-**Step 4: Retrieve and set the app ID**
-To access and use app ID [during SDK initialization](doc:integrate-ios-sdk#initializing-the-ios-sdk), add the following code to `didFinishLaunchingWithOptions` in your `AppDelegate`:
-[block:code]
-{
-  "codes": [
-    {
-      "code": "func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {\n    // ...\n    guard let appID : String = Bundle.main.object(forInfoDictionaryKey: \"AFAppID\") as? String else {\n        fatalError(\"Cannot find app ID\")\n    }\n    AppsFlyerLib.shared().appleAppID = appID\n    // ...\n    return true\n}\n",
-      "language": "swift"
-    }
-  ]
-}
-[/block]
-**Step 5: Run app using Debug build configuration**
-To change the active build configuration:
- 1. go to **Product** > **Scheme** > **Edit Scheme...**.
- 2. Select **Run** and change the **Build configuration** to **Debug** or **Release**, as needed.
-[block:image]
-{
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/bc4100b-2021-08-02_19-58-57.png",
-        "2021-08-02_19-58-57.png",
-        945,
-        312,
-        "#313034"
-      ]
-    }
-  ]
-}
-[/block]
-Now, when you use the Debug configuration to build your app, Xcode will use the debug app ID that you configured in step 2.
+
+1. In Xcode, in the file navigator view, select your project root and go to **Build Settings**.
+2. Click **+** in the toolbar and select **Add User-Defined Setting**. In this case, we name it `AF_APP_ID`.
+3. Expand the newly created User-Defined Setting:
+   - Set the **Debug** Conditional Setting to your test app's app ID (mentioned in step 1)
+   - Set the **Release** Conditional Setting to your production app's app ID.
+     [block:image]
+     {
+     "images": [
+     {
+     "image": [
+     "https://files.readme.io/6c8e25c-2021-08-02_19-12-34.png",
+     "2021-08-02_19-12-34.png",
+     987,
+     597,
+     "#302b2e"
+     ],
+     "border": false
+     }
+     ]
+     }
+     [/block]
+     **Step 3: Expose app IDs via info.plist**
+     Go to the project's `info.plist` and add a new property (called `AFAppID` in this case). Set its value to `$(AF_APP_ID)` (based on the User-Defined Setting name in step 2).
+     [block:image]
+     {
+     "images": [
+     {
+     "image": [
+     "https://files.readme.io/2073949-2021-08-02_19-41-31.png",
+     "2021-08-02_19-41-31.png",
+     971,
+     434,
+     "#322d31"
+     ]
+     }
+     ]
+     }
+     [/block]
+     **Step 4: Retrieve and set the app ID**
+     To access and use app ID [during SDK initialization](doc:integrate-ios-sdk#initializing-the-ios-sdk), add the following code to `didFinishLaunchingWithOptions` in your `AppDelegate`:
+     [block:code]
+     {
+     "codes": [
+     {
+     "code": "func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {\n    // ...\n    guard let appID : String = Bundle.main.object(forInfoDictionaryKey: \"AFAppID\") as? String else {\n        fatalError(\"Cannot find app ID\")\n    }\n    AppsFlyerLib.shared().appleAppID = appID\n    // ...\n    return true\n}\n",
+     "language": "swift"
+     }
+     ]
+     }
+     [/block]
+     **Step 5: Run app using Debug build configuration**
+     To change the active build configuration:
+4. go to **Product** > **Scheme** > **Edit Scheme...**.
+5. Select **Run** and change the **Build configuration** to **Debug** or **Release**, as needed.
+   [block:image]
+   {
+   "images": [
+   {
+   "image": [
+   "https://files.readme.io/bc4100b-2021-08-02_19-58-57.png",
+   "2021-08-02_19-58-57.png",
+   945,
+   312,
+   "#313034"
+   ]
+   }
+   ]
+   }
+   [/block]
+   Now, when you use the Debug configuration to build your app, Xcode will use the debug app ID that you configured in step 2.

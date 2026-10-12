@@ -12,15 +12,14 @@ Want to see a full example? check out the recipe:
 
 [block:tutorial-tile]
 {
-  "backgroundColor": "#01f44a",
-  "emoji": "✍️",
-  "id": "61b66080b17b13005ba40a18",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/onelink-user-invite-in-ios-1",
-  "slug": "onelink-user-invite-in-ios-1",
-  "title": "OneLink user invite in iOS"
+"backgroundColor": "#01f44a",
+"emoji": "✍️",
+"id": "61b66080b17b13005ba40a18",
+"link": "https://dev.appsflyer.com/v0.1/recipes/onelink-user-invite-in-ios-1",
+"slug": "onelink-user-invite-in-ios-1",
+"title": "OneLink user invite in iOS"
 }
 [/block]
-
 
 ## Implement user-invites
 
@@ -53,7 +52,7 @@ To enable users to invite their friends to your app, you need a way to generate 
    ```
 
    > 📘 Note
-   > 
+   >
    > - Make sure to set `appInviteOneLinkID` **before** calling `start`
    > - The OneLink template must be related to the app.
 
@@ -98,7 +97,7 @@ To enable users to invite their friends to your app, you need a way to generate 
         <br />
 
       > 📘 Note
-      > 
+      >
       > You can also include other standard AppsFlyer parameters, such as redirection parameters like `af_web_dp`, when generating OneLinks via the SDK. To learn more about the available parameters, see [About link structure and parameters](https://support.appsflyer.com/hc/en-us/articles/207447163-About-link-structure-and-parameters).
 
 3. In the `completionHandler`, check if the URL was created successfully (`url` not `nil`), and retrieve the generated user invite link.
@@ -127,10 +126,10 @@ AppsFlyerShareInviteHelper.logInvite(<CHANNEL>, parameters: [
 ]);
 ```
 
-`logInvite` results in an `af_invite` in-app event. 
+`logInvite` results in an `af_invite` in-app event.
 
 > 📘 Note
-> 
+>
 > If you don't want to use a channel, you can use `logEvent` instead.
 
 ### Set up UDL for user invite attribution
@@ -138,7 +137,7 @@ AppsFlyerShareInviteHelper.logInvite(<CHANNEL>, parameters: [
 <span class="annotation-optional">Optional</span>  
 **To set up UDL for user invite attribution:**
 
-1. Set up [Unified Deep Linking](doc:dl_ios_unified_deep_linking) (UDL). 
+1. Set up [Unified Deep Linking](doc:dl_ios_unified_deep_linking) (UDL).
 
 2. In `DeepLinkDelegate.didResolveDeepLink`, retrieve the deep linking parameters created during the link generation step. In this example, the following properties are retrieved:
 
@@ -180,9 +179,10 @@ User A's referrer ID is available in the UDL `didResolveDeepLink` (in this examp
 4. When User A launches the app, check if their referrer ID is on the list of users to be rewarded and reward them if it is.
 
 > 📘 Note
-> 
+>
 > - Steps 2-3 are not carried out by the mobile developer. Step 4 depends on how steps 2-3 are implemented.
 > - A purchase event is just an example. This applies to any type of in-app event.
+
 ----------------
 
 <span class="annotation-optional">Optional</span>  
@@ -213,6 +213,6 @@ User A's referrer ID is available in the UDL `didResolveDeepLink` (in this examp
 4. When User A launches the app, check if their referrer ID is on the list of users to be rewarded and reward them if it is.
 
 > 📘 Note
-> 
+>
 > - Steps 2-3 are not carried out by the mobile developer. Step 4 depends on how steps 2-3 are implemented.
 > - A purchase event is just an example. This applies to any type of in-app event.

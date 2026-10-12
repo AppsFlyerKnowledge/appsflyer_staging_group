@@ -36,7 +36,7 @@ AppsflyerEpicModule(string appid, string devkey, MonoBehaviour mono, bool isSand
 - `DEV_KEY`: Get from the marketer or [AppsFlyer HQ](https://support.appsflyer.com/hc/en-us/articles/211719806-App-settings-#general-app-settings).
 - `EPIC_APP_ID`: Found in the Epic store link
 - `MonoBehaviour mono`: the parent MonoBehaviour.
-- `bool isSandbox`: Whether to activate sandbox mode. False by default. This option is for debugging. With the sandbox mode, AppsFlyer dashboard does not show the data. 
+- `bool isSandbox`: Whether to activate sandbox mode. False by default. This option is for debugging. With the sandbox mode, AppsFlyer dashboard does not show the data.
 
 **Usage**:
 
@@ -131,7 +131,6 @@ event_custom_parameters.Add("goodsName", "新人邀约购物日");
 afm.LogEvent(event_name, event_parameters, event_custom_parameters);
 ```
 
-
 ### IsInstallOlderThanDate
 
 This method receives a date string and returns true if the game folder creation date is older than the date string. The date string format is: "2023-03-13T10:00:00+00:00"
@@ -147,6 +146,7 @@ bool IsInstallOlderThanDate(string datestring)
 - `string datestring`: Date string in `yyyy-mm-ddThh:mm:ss+hh:mm` format.
 
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c#
@@ -183,7 +183,6 @@ afm.Start();
 string af_uid = afm.GetAppsFlyerUID();
 ```
 
-
 ### SetCustomerUserId
 
 This method sets a customer ID that enables you to cross-reference your unique ID with the AppsFlyer unique ID and other device IDs. Note: You can only use this method before calling `Start()`.
@@ -198,7 +197,6 @@ void SetCustomerUserId(string cuid)
 **Arguments**:
 
 - `string cuid`: Custom user id.
-
 
 **Usage**:
 

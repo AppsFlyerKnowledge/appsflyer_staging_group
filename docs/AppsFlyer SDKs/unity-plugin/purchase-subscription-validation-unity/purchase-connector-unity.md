@@ -3,6 +3,7 @@ title: Purchase connector
 excerpt: Used to validate and report in-app purchase and subscription revenue events
 hidden: false
 ---
+
 ## Overview
 
 The AppsFlyer ROI360 purchase connector is used to validate and report in-app purchase and subscription revenue events. It's part of the ROI360 in-app purchase and subscription revenue measurement solution.
@@ -14,15 +15,18 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 ## Prerequisites
 
 ### iOS Requirements
+
 - StoreKit SDK v1 or v2 (StoreKit 2 requires iOS 15+)
 - iOS version 9 and higher
 - Unity AppsFlyer plugin **6.17.1** and higher
 
 ### Android Requirements
+
 - Google Play Billing library version **7.x.x** and **8.x.x**
 - Unity AppsFlyer plugin **6.17.1** and higher
 
 ### General Requirements
+
 - Unity version **2020.3** and higher
 - ROI360 subscription
 
@@ -31,11 +35,13 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 We have released **two** versions of the AppsFlyer Unity plugin to support teams at different stages of migrating to **Google Play Billing Library v8.0.0**.
 
 ### Option A — `v6.17.7` (Billing Library v8)
+
 - **What’s included:** Support for **Google Play Billing Library 8.0.0** on Android (Android Purchase Connector version - 2.2.0).
 - **Impact:** This version may introduce **breaking changes** for apps that have **not yet migrated** to the Billing v8 APIs.
 - **Unity IAP requirement:** If you choose this option, update **Unity IAP (`com.unity.purchasing`) to version 5.0.0 or newer** (we recommend the latest 5.x). Unity IAP 4.x does **not** include Billing v8.
 
 ### Option B — `v6.17.72` (Billing Library v7)
+
 - **Purpose:** For developers **not ready** to adopt Billing v8.
 - **Bundled SDKs:** **iOS SDK 6.17.7** and **Android SDK 6.17.3**.
 - **Impact:** Lets you update the AppsFlyer SDKs without changing your existing (pre‑v8) billing integration.
@@ -90,7 +96,9 @@ Make sure to use the strict mode AppsFlyer Unity plugin along with the Purchase 
 ## Choosing Your Implementation Method
 
 ### When to Use Integrated Approach (v6.17.1+)
+
 ✅ **Recommended for:**
+
 - New projects starting with v6.17.1+
 - Existing projects that can upgrade to v6.17.1+
 - Simplified setup and maintenance
@@ -105,6 +113,7 @@ The implementation differs slightly depending on which installation method you c
 Your MonoBehaviour class must implement the following interfaces:
 
 **For Integrated Approach (v6.17.1+):**
+
 ```csharp
 using AppsFlyerSDK;
 
@@ -119,6 +128,7 @@ public class AppsFlyerObjectScript : MonoBehaviour,
 ```
 
 **For Separate Repository Approach:**
+
 ```csharp
 using AppsFlyerSDK;
 using AppsFlyerConnector; // Additional namespace for separate repository
@@ -265,18 +275,21 @@ AppsFlyerPurchaseConnector.init(this, Store.GOOGLE);
 ### Configuration Options
 
 #### StoreKit Version (iOS Only)
+
 ```csharp
 // Set StoreKit version - SK1 or SK2
 AppsFlyerPurchaseConnector.setStoreKitVersion(StoreKitVersion.SK2);
 ```
 
 #### Sandbox Mode
+
 ```csharp
 // Enable sandbox mode for testing
 AppsFlyerPurchaseConnector.setIsSandbox(true);
 ```
 
 #### Auto-Logging Options
+
 ```csharp
 // Enable automatic logging for specific purchase types
 AppsFlyerPurchaseConnector.setAutoLogPurchaseRevenue(
@@ -286,6 +299,7 @@ AppsFlyerPurchaseConnector.setAutoLogPurchaseRevenue(
 ```
 
 **Available Options:**
+
 - `AppsFlyerAutoLogPurchaseRevenueOptionsDisabled`: Disable automatic logging
 - `AppsFlyerAutoLogPurchaseRevenueOptionsAutoRenewableSubscriptions`: Log auto-renewable subscriptions
 - `AppsFlyerAutoLogPurchaseRevenueOptionsInAppPurchases`: Log in-app purchases
@@ -308,6 +322,7 @@ AppsFlyerPurchaseConnector.build();
 ```
 
 ## Interface Implementations
+
 ### IAppsFlyerPurchaseValidation
 
 ```csharp
@@ -375,9 +390,10 @@ public Dictionary<string, object> PurchaseRevenueAdditionalParametersStoreKit2Fo
 
 ### StoreKit 2 Consumable Transactions (iOS 15+ to iOS 18+)
 
-On iOS 15 and above, consumable in-app purchases are handled via StoreKit 2.  
+On iOS 15 and above, consumable in-app purchases are handled via StoreKit 2.
+
 - **On iOS 18 and later:**  
-  Apple introduced a new Info.plist flag: `SKIncludeConsumableInAppPurchaseHistory`.  
+  Apple introduced a new Info.plist flag: `SKIncludeConsumableInAppPurchaseHistory`.
   - If you set `SKIncludeConsumableInAppPurchaseHistory` to `YES` in your Info.plist, automatic collection will happen.
   - If the flag is not present or is set to `NO`, you must manually log consumable transactions as shown below.
 
@@ -388,7 +404,7 @@ On iOS 15 and above, consumable in-app purchases are handled via StoreKit 2.
     AppsFlyerPurchaseConnector.logConsumableTransaction(transactionId); //(iOS SK2 only)
 
 ```
-  
+
 ### Custom Purchase Validation Callbacks
 
 Enable validation callbacks to receive detailed purchase information:
@@ -400,11 +416,13 @@ AppsFlyerPurchaseConnector.setPurchaseRevenueValidationListeners(true);
 ## Testing in Sandbox
 
 ### iOS Testing
+
 1. Set sandbox mode: `AppsFlyerPurchaseConnector.setIsSandbox(true)`
 2. Use TestFlight sandbox accounts for testing
 3. Test on real devices with Xcode
 
-### Android Testing  
+### Android Testing
+
 1. Set sandbox mode: `AppsFlyerPurchaseConnector.setIsSandbox(true)`
 2. Follow [Google Play Billing testing guidelines](https://developer.android.com/google/play/billing/test)
 3. Use test accounts and test products
@@ -703,7 +721,7 @@ If you're upgrading from the separate repository approach to the integrated appr
    ```csharp
    // OLD (Separate Repository)
    using AppsFlyerConnector; //Remove
-   
+
    // NEW (Integrated)
    using AppsFlyerSDK; // Only this namespace needed
    AppsFlyerPurchaseConnector.init(this, Store.GOOGLE);

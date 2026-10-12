@@ -2,6 +2,7 @@
 title: Purchase and subscription validation
 hidden: false
 ---
+
 Purchase validation ensures that only real, store-confirmed in-app purchases and subscriptions are measured in AppsFlyer. It improves revenue accuracy, helps prevent reporting errors, and supports better campaign decisions.
 
 AppsFlyer offers two products to support purchase validation:
@@ -24,7 +25,6 @@ Call Validate and Log (`validateAndSendInAppPurchase`) every time a transaction 
 
 To get started see: [`Validate and Log`](https://dev.appsflyer.com/hc/docs/validate-and-log-unity)
 
-
 ### 2. Automated Integration method – Purchase Connector
 
 Purchase Connector automatically detects in-app purchases and subscriptions made on the device. Once initialized, it sends the required data to AppsFlyer without additional logging code.
@@ -32,13 +32,13 @@ Purchase Connector automatically detects in-app purchases and subscriptions made
 - Supported only by ROI360 products and recommended for most apps
 - Triggers validation automatically and returns the result to the client in real time
 - The following capabilities cannot be supported through simple customization of the Validate and Log method and therefore require Purchase Connector:
-    - Logging subscription revenue from users who subscribed before the integration was added.
-    - Logging subscription price changes, ensuring revenue reflects updated pricing.
+  - Logging subscription revenue from users who subscribed before the integration was added.
+  - Logging subscription price changes, ensuring revenue reflects updated pricing.
 
 To get started see: [Unity purchase SDK connector](https://dev.appsflyer.com/hc/docs/purchase-connector-unity)
 
-
 ---
+
 > ⚠️ Important
-> 
+>
 > To avoid duplicate event logging and inconsistent validation results, it’s recommended to use only one integration method per application.

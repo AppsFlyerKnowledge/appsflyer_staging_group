@@ -24,11 +24,13 @@ If your app uses Kotlin 1.9, you may encounter metadata errors when building aga
 SDK 7 raises the minimum Android API level from 19 to 21. Update your `build.gradle` before proceeding.
 
 **SDK 6**
+
 ```groovy
 minSdk 19
 ```
 
 **SDK 7**
+
 ```groovy
 minSdk 21
 ```
@@ -52,30 +54,30 @@ SDK 7 also addresses long-standing inconsistencies between iOS and Android. The 
 ---
 
 ## Upgrade checklist
- 
+
 Work through these in order — higher-risk changes first. The Risk column tells you whether skipping a step causes a **compile error** (caught at build time) or a **silent regression** (compiles but misbehaves at runtime).
- 
-| # | Action | Risk | § |
-|---|--------|------|---|
-| **Prerequisites** | | | |
-| 1 | Update to Kotlin 2.0 or higher if your app uses Kotlin 1.9. | Prerequisite | [Before you begin](#before-you-begin) |
-| 2 | Set `minSdkVersion` to at least 21 in your `build.gradle`. | Prerequisite | [Before you begin](#before-you-begin) |
-| **High-risk changes** | | | |
-| 3 | Update all imports from their previous packages to `com.appsflyer.share`. Use Android Studio's auto-import to resolve them. | Compile error | [§1](#1-update-class-imports) |
-| 4 | Remove `Context` and dev key from `start()`. Use `start()` or `start(AppsFlyerRequestListener)` only. | Compile error | [§2](#2-update-the-start-method) |
-| 5 | Update `registerConversionListener`: remove the `Context` parameter, remove `onAppOpenAttribution` and `onAttributionFailure`, and update the import to `com.appsflyer.share.AppsFlyerConversionListener`. | Compile error | [§4](#4-update-the-conversion-listener) |
-| 6 | Add `registerSessionReadyListener` after `init()`. Call `start()` inside the callback, or use the coordinator pattern if your app has pre-start conditions. | Silent regression | [§3](#3-add-a-session-ready-listener) |
-| 7 | Re-apply all `AppsFlyerLib` setter values after every cold start, or move constant values to `af_init_config.json`. | Silent regression | [Part 2 §1](#1-setter-values-are-no-longer-persisted-between-sessions) |
-| **Deep linking** | | | |
-| 8 | Replace `performOnDeepLinking` and `performOnAppAttribution` with `performDeepLinking(String, boolean)`. Replace `subscribeForDeepLink(listener, timeout)` with `setDeepLinkTimeout(long)` followed by `subscribeForDeepLink(listener)`. | Compile error | [§5](#5-update-deep-linking) |
-| **Deprecated API removals** | | | |
-| 9 | Remove `SingleInstallBroadcastReceiver` and `MultipleInstallBroadcastReceiver` from your manifest. Add `implementation 'com.android.installreferrer:installreferrer:2.2'` to your app's `build.gradle`. | Compile error | [§8](#8-remove-legacy-broadcast-receivers) |
-| 10 | Update `setUserEmails`: replace MD5 or SHA1 with `SHA256` or `NONE`, and update the import to `com.appsflyer.share.EmailsCryptType`. | Compile error | [§7](#7-update-the-user-emails-method) |
-| 11 | Remove or replace: `waitForCustomerUserId`, `setCustomerIdAndLogSession`, `setCollectIMEI`, `setCollectOaid`, `setExtension`, `registerValidatorListener`, `validateAndLogInAppPurchase` V1, `setSharingFilter`, and `setSharingFilterForAllPartners`. | Compile error | [§9](#9-remove-or-replace-other-removed-apis) |
-| **Optional** | | | |
-| 12 | Call `collectDataFromLauncherActivity(this)` from your launcher activity's `onCreate` to opt in to app-open and web referrer collection. | — | [Part 2 §3](#3-opt-in-to-app-open-referrer-and-web-referrer-collection) |
-| 13 | If you distribute on Samsung, Xiaomi, or Huawei stores, add the relevant store referrer library to your app's Gradle dependencies. | — | [§11](#11-add-optional-store-referrer-libraries) |
- 
+
+| #                           | Action                                                                                                                                                                                                                                                                                 | Risk              | §                                                                       |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ----------------------------------------------------------------------- |
+| **Prerequisites**           |                                                                                                                                                                                                                                                                                        |                   |                                                                         |
+| 1                           | Update to Kotlin 2.0 or higher if your app uses Kotlin 1.9.                                                                                                                                                                            | Prerequisite      | [Before you begin](#before-you-begin)                                   |
+| 2                           | Set `minSdkVersion` to at least 21 in your `build.gradle`.                                                                                                                                                                                                             | Prerequisite      | [Before you begin](#before-you-begin)                                   |
+| **High-risk changes**       |                                                                                                                                                                                                                                                                                        |                   |                                                                         |
+| 3                           | Update all imports from their previous packages to `com.appsflyer.share`. Use Android Studio's auto-import to resolve them.                                                                                                                            | Compile error     | [§1](#1-update-class-imports)                                           |
+| 4                           | Remove `Context` and dev key from `start()`. Use `start()` or `start(AppsFlyerRequestListener)` only.                                                                                                                                                  | Compile error     | [§2](#2-update-the-start-method)                                        |
+| 5                           | Update `registerConversionListener`: remove the `Context` parameter, remove `onAppOpenAttribution` and `onAttributionFailure`, and update the import to `com.appsflyer.share.AppsFlyerConversionListener`.                                             | Compile error     | [§4](#4-update-the-conversion-listener)                                 |
+| 6                           | Add `registerSessionReadyListener` after `init()`. Call `start()` inside the callback, or use the coordinator pattern if your app has pre-start conditions.                                                                                            | Silent regression | [§3](#3-add-a-session-ready-listener)                                   |
+| 7                           | Re-apply all `AppsFlyerLib` setter values after every cold start, or move constant values to `af_init_config.json`.                                                                                                                                                    | Silent regression | [Part 2 §1](#1-setter-values-are-no-longer-persisted-between-sessions)  |
+| **Deep linking**            |                                                                                                                                                                                                                                                                                        |                   |                                                                         |
+| 8                           | Replace `performOnDeepLinking` and `performOnAppAttribution` with `performDeepLinking(String, boolean)`. Replace `subscribeForDeepLink(listener, timeout)` with `setDeepLinkTimeout(long)` followed by `subscribeForDeepLink(listener)`.               | Compile error     | [§5](#5-update-deep-linking)                                            |
+| **Deprecated API removals** |                                                                                                                                                                                                                                                                                        |                   |                                                                         |
+| 9                           | Remove `SingleInstallBroadcastReceiver` and `MultipleInstallBroadcastReceiver` from your manifest. Add `implementation 'com.android.installreferrer:installreferrer:2.2'` to your app's `build.gradle`.                                                | Compile error     | [§8](#8-remove-legacy-broadcast-receivers)                              |
+| 10                          | Update `setUserEmails`: replace MD5 or SHA1 with `SHA256` or `NONE`, and update the import to `com.appsflyer.share.EmailsCryptType`.                                                                                                                   | Compile error     | [§7](#7-update-the-user-emails-method)                                  |
+| 11                          | Remove or replace: `waitForCustomerUserId`, `setCustomerIdAndLogSession`, `setCollectIMEI`, `setCollectOaid`, `setExtension`, `registerValidatorListener`, `validateAndLogInAppPurchase` V1, `setSharingFilter`, and `setSharingFilterForAllPartners`. | Compile error     | [§9](#9-remove-or-replace-other-removed-apis)                           |
+| **Optional**                |                                                                                                                                                                                                                                                                                        |                   |                                                                         |
+| 12                          | Call `collectDataFromLauncherActivity(this)` from your launcher activity's `onCreate` to opt in to app-open and web referrer collection.                                                                                                                               | —                 | [Part 2 §3](#3-opt-in-to-app-open-referrer-and-web-referrer-collection) |
+| 13                          | If you distribute on Samsung, Xiaomi, or Huawei stores, add the relevant store referrer library to your app's Gradle dependencies.                                                                                                                                     | —                 | [§11](#11-add-optional-store-referrer-libraries)                        |
+
 ## Part 1: Breaking changes
 
 The following changes will cause compile errors if not addressed. Work through them in the order below, as some steps depend on others.
@@ -86,14 +88,14 @@ The following changes will cause compile errors if not addressed. Work through t
 
 **Compile error:** Existing code breaks on upgrade.
 
-| SDK 6 import | SDK 7 import |
-|---|---|
-| `com.appsflyer.AppsFlyerConversionListener` | `com.appsflyer.share.AppsFlyerConversionListener` |
-| `com.appsflyer.attribution.AppsFlyerRequestListener` | `com.appsflyer.share.attribution.AppsFlyerRequestListener` |
-| `com.appsflyer.attribution.RequestError` | `com.appsflyer.share.attribution.RequestError` |
-| `com.appsflyer.deeplink.DeepLinkListener` | `com.appsflyer.share.deeplink.DeepLinkListener` |
-| `com.appsflyer.deeplink.DeepLinkResult` | `com.appsflyer.share.deeplink.DeepLinkResult` |
-| `com.appsflyer.internal.platform_extension.PluginInfo` | `com.appsflyer.share.platform_extension.PluginInfo` |
+| SDK 6 import                                                                                                                                                                 | SDK 7 import                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `com.appsflyer.AppsFlyerConversionListener`                                                                                                                                  | `com.appsflyer.share.AppsFlyerConversionListener`                          |
+| `com.appsflyer.attribution.AppsFlyerRequestListener`                                                                                                                         | `com.appsflyer.share.attribution.AppsFlyerRequestListener`                 |
+| `com.appsflyer.attribution.RequestError`                                                                                                                                     | `com.appsflyer.share.attribution.RequestError`                             |
+| `com.appsflyer.deeplink.DeepLinkListener`                                                                                                                                    | `com.appsflyer.share.deeplink.DeepLinkListener`                            |
+| `com.appsflyer.deeplink.DeepLinkResult`                                                                                                                                      | `com.appsflyer.share.deeplink.DeepLinkResult`                              |
+| `com.appsflyer.internal.platform_extension.PluginInfo`                                                                                                                       | `com.appsflyer.share.platform_extension.PluginInfo`                        |
 | `com.appsflyer.AFAdRevenueData`, `AFInAppEventType`, `AFInAppEventParameterName`, `AFPurchaseDetails`, `AdRevenueScheme`, `MediationNetwork`, `AppsFlyerConsent`, and others | `com.appsflyer.share.*` (same class names, new package) |
 
 > 📘 Note
@@ -111,6 +113,7 @@ The following changes will cause compile errors if not addressed. Work through t
 The `Context` and dev key parameters have been removed from `start()`. Both are already provided to `init()` and don't need to be passed again. SDK 7 supports only two `start()` signatures: one with no arguments, and one with an `AppsFlyerRequestListener`.
 
 **SDK 6**
+
 ```java Java
 // Application.onCreate or Activity
 AppsFlyerLib.getInstance().init(devKey, conversionListener, applicationContext);
@@ -119,6 +122,7 @@ AppsFlyerLib.getInstance().start(this);
 AppsFlyerLib.getInstance().start(this, devKey);
 AppsFlyerLib.getInstance().start(this, devKey, requestListener);
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().init(devKey, conversionListener, applicationContext)
 
@@ -128,6 +132,7 @@ AppsFlyerLib.getInstance().start(this, devKey, requestListener)
 ```
 
 **SDK 7**
+
 ```java Java
 // Application.onCreate — Context is only passed to init
 AppsFlyerLib.getInstance().init(devKey, conversionListener, applicationContext);
@@ -136,6 +141,7 @@ AppsFlyerLib.getInstance().init(devKey, conversionListener, applicationContext);
 AppsFlyerLib.getInstance().start();
 AppsFlyerLib.getInstance().start(requestListener);
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().init(devKey, conversionListener, applicationContext)
 
@@ -163,6 +169,7 @@ Use this pattern if your app has no pre-start conditions, meaning you don't need
 > There was no `SessionReadyListener` API in SDK 6. `start()` could be called directly after `init`.
 
 **SDK 7**
+
 ```java Java
 AppsFlyerLib.getInstance().init(devKey, conversionListener, applicationContext);
 
@@ -175,6 +182,7 @@ AppsFlyerLib.getInstance().registerSessionReadyListener(() -> {
 
 boolean ready = AppsFlyerLib.getInstance().isSessionReady();
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().init(devKey, conversionListener, applicationContext)
 
@@ -193,6 +201,7 @@ val ready = AppsFlyerLib.getInstance().isSessionReady
 Use this pattern if your app must satisfy conditions before sending the first session, for example, collecting user consent or waiting for a CUID from your backend. The coordinator class synchronizes the SDK's readiness signal with your app's own readiness, and calls `start()` only when both conditions are met.
 
 **`AfSdkStartupManager`**
+
 ```java Java
 package com.yourapp;
 
@@ -237,6 +246,7 @@ public final class AfSdkStartupManager {
     }
 }
 ```
+
 ```kotlin Kotlin
 package com.yourapp
 
@@ -293,6 +303,7 @@ AppsFlyerLib.getInstance().registerSessionReadyListener(() -> {
 // When your consent flow completes:
 // startupManager.onConsentReady();
 ```
+
 ```kotlin Kotlin
 val startupManager = AfSdkStartupManager()
 
@@ -318,6 +329,7 @@ AppsFlyerLib.getInstance().registerSessionReadyListener {
 **Compile error:** Existing code breaks on upgrade.
 
 **SDK 6**
+
 ```java Java
 import com.appsflyer.AppsFlyerConversionListener;
 
@@ -335,6 +347,7 @@ AppsFlyerLib.getInstance().registerConversionListener(context, new AppsFlyerConv
     public void onAttributionFailure(String errorMessage) { }
 });
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.AppsFlyerConversionListener
 
@@ -350,6 +363,7 @@ AppsFlyerLib.getInstance().registerConversionListener(
 ```
 
 **SDK 7**
+
 ```java Java
 import com.appsflyer.share.AppsFlyerConversionListener;
 
@@ -361,6 +375,7 @@ AppsFlyerLib.getInstance().registerConversionListener(new AppsFlyerConversionLis
     public void onConversionDataFail(String errorMessage) { }
 });
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.share.AppsFlyerConversionListener
 
@@ -388,27 +403,31 @@ AppsFlyerLib.getInstance().registerConversionListener(
 
 Replace both with the new `performDeepLinking(String url, boolean shouldTriggerSession)` method. This method accepts the deep link as a plain string, supports both intent-based and non-intent-based sources such as Firebase Messaging Service, and gives you explicit control over whether a Launch event is sent to AppsFlyer.
 
-| Parameter | Description |
-|---|---|
-| `url` | The deep link string to resolve: full URL, OneLink, `Intent` `data` string. |
+| Parameter              | Description                                                                                                                                                                                                                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `url`                  | The deep link string to resolve: full URL, OneLink, `Intent` `data` string.                                                                                                                                         |
 | `shouldTriggerSession` | `false`: resolve `url` for `DeepLinkListener` without an extra Launch. `true`: also enqueue a Launch for re-engagement — even if `start()` has already been called in that session. |
 
 **SDK 6**
+
 ```java Java
 AppsFlyerLib.getInstance().subscribeForDeepLink(listener, 3000L);
 AppsFlyerLib.getInstance().performOnDeepLinking(intent, context);
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().subscribeForDeepLink(listener, 3000L)
 AppsFlyerLib.getInstance().performOnDeepLinking(intent, context)
 ```
 
 **SDK 7**
+
 ```java Java
 AppsFlyerLib.getInstance().setDeepLinkTimeout(3000L);
 AppsFlyerLib.getInstance().subscribeForDeepLink(listener);
 AppsFlyerLib.getInstance().performDeepLinking("https://your.onelink/...", true);
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().setDeepLinkTimeout(3000L)
 AppsFlyerLib.getInstance().subscribeForDeepLink(listener)
@@ -464,6 +483,7 @@ AFPushData pushData = new AFPushData(
 );
 AppsFlyerLib.getInstance().sendPushNotificationData(pushData);
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.share.AFPushData
 
@@ -485,12 +505,14 @@ AppsFlyerLib.getInstance().sendPushNotificationData(
 ### 7. Update the user emails method
 
 **What changed:** Two changes apply to `setUserEmails`:
+
 - SHA1 and MD5 encryption types have been removed. Only `NONE` and `SHA256` are supported in SDK 7. If you used MD5 or SHA1, update your code to use `SHA256` or `NONE`.
 - `EmailsCryptType` has moved from `AppsFlyerProperties` to `com.appsflyer.share`. Update the import.
 
 **Compile error:** Existing code breaks on upgrade.
 
 **SDK 6**
+
 ```java Java
 AppsFlyerLib.getInstance().setUserEmails(
     AppsFlyerProperties.EmailsCryptType.SHA256,
@@ -498,6 +520,7 @@ AppsFlyerLib.getInstance().setUserEmails(
 );
 // Also: NONE, SHA1, MD5 under AppsFlyerProperties.EmailsCryptType
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().setUserEmails(
     AppsFlyerProperties.EmailsCryptType.SHA256,
@@ -507,6 +530,7 @@ AppsFlyerLib.getInstance().setUserEmails(
 ```
 
 **SDK 7**
+
 ```java Java
 import com.appsflyer.share.EmailsCryptType;
 
@@ -516,6 +540,7 @@ AppsFlyerLib.getInstance().setUserEmails(
 );
 // Only NONE and SHA256 remain
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.share.EmailsCryptType
 
@@ -555,14 +580,14 @@ implementation 'com.android.installreferrer:installreferrer:2.2'
 
 **Compile error:** Existing code that calls these APIs breaks on upgrade.
 
-| Removed API | Replacement |
-|---|---|
-| `waitForCustomerUserId(boolean)` / `setCustomerIdAndLogSession()` | No replacement needed. See the note below. |
-| `setCollectIMEI(boolean)` | Use `setImeiData(String)` to provide IMEI manually when needed. |
-| `setCollectOaid(boolean)` | Use `setDisableAdvertisingIdentifiers` and other supported identifier APIs. |
-| `setExtension(String)` | Use `PluginInfo` (imported from `com.appsflyer.share.platform_extension`). |
-| `registerValidatorListener` / `validateAndLogInAppPurchase` V1 | Use `validateAndLogInAppPurchase(AFPurchaseDetails, Map, AppsFlyerInAppPurchaseValidationCallback)` with `com.appsflyer.share.AFPurchaseDetails`. The V2 API has the listener built in. |
-| `setSharingFilter(String...)` / `setSharingFilterForAllPartners()` | Use `setSharingFilterForPartners(String...)`. Pass `"all"` to block all partners. |
+| Removed API                                                        | Replacement                                                                                                                                                                                                             |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `waitForCustomerUserId(boolean)` / `setCustomerIdAndLogSession()`  | No replacement needed. See the note below.                                                                                                                                              |
+| `setCollectIMEI(boolean)`                                          | Use `setImeiData(String)` to provide IMEI manually when needed.                                                                                                                                         |
+| `setCollectOaid(boolean)`                                          | Use `setDisableAdvertisingIdentifiers` and other supported identifier APIs.                                                                                                                             |
+| `setExtension(String)`                                             | Use `PluginInfo` (imported from `com.appsflyer.share.platform_extension`).                                                                                                           |
+| `registerValidatorListener` / `validateAndLogInAppPurchase` V1     | Use `validateAndLogInAppPurchase(AFPurchaseDetails, Map, AppsFlyerInAppPurchaseValidationCallback)` with `com.appsflyer.share.AFPurchaseDetails`. The V2 API has the listener built in. |
+| `setSharingFilter(String...)` / `setSharingFilterForAllPartners()` | Use `setSharingFilterForPartners(String...)`. Pass `"all"` to block all partners.                                                                                                       |
 
 > 📘 Customer user ID flow in SDK 7
 >
@@ -588,10 +613,10 @@ implementation 'com.android.installreferrer:installreferrer:2.2'
 
 `com.appsflyer.share.LinkGenerator#generateLink(android.content.Context, com.appsflyer.share.LinkGenerator.ResponseListener)`
 
-| | SDK 6 | SDK 7 |
-|---|---|---|
-| `onResponse(String)` | Called for multiple outcomes: short link when OneLink API succeeded, and also a long (query-style) link when the task did not complete with a usable short URL. | Called only when the OneLink HTTP request finishes with a successful response body — the short URL from the API. |
-| `onResponseError(String)` | Used mainly when the SDK failed to parse a response, for example a `ParsingException` on a body that looked successful. | Called for all other outcomes. The parameter is the long-link fallback string from `LinkGenerator.generateLink()`. Your app decides whether that string is acceptable for display or sharing. |
+|                           | SDK 6                                                                                                                                                                                                              | SDK 7                                                                                                                                                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onResponse(String)`      | Called for multiple outcomes: short link when OneLink API succeeded, and also a long (query-style) link when the task did not complete with a usable short URL. | Called only when the OneLink HTTP request finishes with a successful response body — the short URL from the API.                                                                                                              |
+| `onResponseError(String)` | Used mainly when the SDK failed to parse a response, for example a `ParsingException` on a body that looked successful.                                                                            | Called for all other outcomes. The parameter is the long-link fallback string from `LinkGenerator.generateLink()`. Your app decides whether that string is acceptable for display or sharing. |
 
 > ⚠️ Warning
 >
@@ -662,27 +687,27 @@ In SDK 6, many `AppsFlyerLib` setter values were written to disk on Android and 
 
 You must re-apply any setter values you rely on after every cold start, typically right after `init()`. If you relied on persistence without realizing it, your integration may silently send incomplete data after upgrading.
 
-| API method | Setting | Status in SDK 7 |
-|---|---|---|
-| `anonymizeUser(boolean)` | User anonymization | Runtime only, re-apply each cold start |
-| `enableTCFDataCollection(boolean)` | TCF data collection flag | Runtime only, re-apply each cold start |
-| `setDisableNetworkData(boolean)` | Disable outbound network payloads | Runtime only, re-apply each cold start |
-| `setCustomerUserId(String)` | Customer user ID | Runtime only, re-apply each cold start |
-| `setOutOfStore(String)` | Out-of-store / store override | Runtime only, re-apply each cold start |
-| `setAppInviteOneLink(String)` | User-invite OneLink ID | Runtime only, re-apply each cold start |
-| `setAdditionalData(Map)` | Custom event and launch map | Runtime only, re-apply each cold start |
-| `setUserEmails(...)` | Masked emails | Runtime only, re-apply each cold start |
-| `setCollectAndroidID(boolean)` | Collect Android ID | Runtime only, re-apply each cold start |
-| `setImeiData(String)` | Manual IMEI | Runtime only, re-apply each cold start |
-| `setOaidData(String)` | Manual OAID | Runtime only, re-apply each cold start |
-| `setAppId(String)` | App ID override | Runtime only, re-apply each cold start |
-| `setIsUpdate(boolean)` | Fresh install vs. update flag | Runtime only, re-apply each cold start |
-| `setCurrencyCode(String)` | In-app currency | Runtime only. Alternatively, set `currency_code` in `af_init_config.json` (see below). |
-| `setPreinstallAttribution(String...)` | OEM / preinstall override | Runtime only, re-apply each cold start |
-| `setLogLevel(AFLogger.LogLevel)` | Log level | Runtime only, re-apply each cold start |
-| `setDebugLog(boolean)` | Debug logging shortcut | Runtime only. Alternatively, set `debug_mode` in `af_init_config.json` (see below). |
-| `waitForCustomerUserId` / `setCustomerIdAndLogSession` | CUID wait flow | Removed. See Part 1, §9. |
-| `setCollectIMEI` / `setCollectOaid` / `setExtension` | Various | Removed. See Part 1, §9. |
+| API method                                             | Setting                                       | Status in SDK 7                                                                                                                           |
+| ------------------------------------------------------ | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `anonymizeUser(boolean)`                               | User anonymization                            | Runtime only, re-apply each cold start                                                                                                    |
+| `enableTCFDataCollection(boolean)`                     | TCF data collection flag                      | Runtime only, re-apply each cold start                                                                                                    |
+| `setDisableNetworkData(boolean)`                       | Disable outbound network payloads             | Runtime only, re-apply each cold start                                                                                                    |
+| `setCustomerUserId(String)`                            | Customer user ID                              | Runtime only, re-apply each cold start                                                                                                    |
+| `setOutOfStore(String)`                                | Out-of-store / store override                 | Runtime only, re-apply each cold start                                                                                                    |
+| `setAppInviteOneLink(String)`                          | User-invite OneLink ID                        | Runtime only, re-apply each cold start                                                                                                    |
+| `setAdditionalData(Map)`                               | Custom event and launch map                   | Runtime only, re-apply each cold start                                                                                                    |
+| `setUserEmails(...)`                                   | Masked emails                                 | Runtime only, re-apply each cold start                                                                                                    |
+| `setCollectAndroidID(boolean)`                         | Collect Android ID                            | Runtime only, re-apply each cold start                                                                                                    |
+| `setImeiData(String)`                                  | Manual IMEI                                   | Runtime only, re-apply each cold start                                                                                                    |
+| `setOaidData(String)`                                  | Manual OAID                                   | Runtime only, re-apply each cold start                                                                                                    |
+| `setAppId(String)`                                     | App ID override                               | Runtime only, re-apply each cold start                                                                                                    |
+| `setIsUpdate(boolean)`                                 | Fresh install vs. update flag | Runtime only, re-apply each cold start                                                                                                    |
+| `setCurrencyCode(String)`                              | In-app currency                               | Runtime only. Alternatively, set `currency_code` in `af_init_config.json` (see below). |
+| `setPreinstallAttribution(String...)`                  | OEM / preinstall override                     | Runtime only, re-apply each cold start                                                                                                    |
+| `setLogLevel(AFLogger.LogLevel)`                       | Log level                                     | Runtime only, re-apply each cold start                                                                                                    |
+| `setDebugLog(boolean)`                                 | Debug logging shortcut                        | Runtime only. Alternatively, set `debug_mode` in `af_init_config.json` (see below).    |
+| `waitForCustomerUserId` / `setCustomerIdAndLogSession` | CUID wait flow                                | Removed. See Part 1, §9.                                                                                  |
+| `setCollectIMEI` / `setCollectOaid` / `setExtension`   | Various                                       | Removed. See Part 1, §9.                                                                                  |
 
 ---
 
@@ -692,20 +717,21 @@ SDK 7 introduces a JSON-based initialization helper. If you place a file named `
 
 This is the recommended approach for any configuration value that is constant and known at build time. Instead of calling the setter on every cold start, put the value in the file once.
 
-| JSON key | Type | Equivalent setter | Example value |
-|---|---|---|---|
-| `debug_mode` | boolean | Debug logging | `true` |
-| `disable_advertising_identifiers` | boolean | `setDisableAdvertisingIdentifiers` | `true` |
-| `currency_code` | string | `setCurrencyCode` | `"USD"` |
-| `host` | object `{ "prefix": string, "host": string }` | `setHost` | `{ "prefix": "", "host": "af-sdk.net" }` |
-| `min_time_between_sessions` | number (int) | `setMinTimeBetweenSessions` | `1` |
-| `ddlTimeout` | number (int, ms) | `setDeepLinkTimeout` | `3000` |
+| JSON key                          | Type                                          | Equivalent setter                  | Example value                            |
+| --------------------------------- | --------------------------------------------- | ---------------------------------- | ---------------------------------------- |
+| `debug_mode`                      | boolean                                       | Debug logging                      | `true`                                   |
+| `disable_advertising_identifiers` | boolean                                       | `setDisableAdvertisingIdentifiers` | `true`                                   |
+| `currency_code`                   | string                                        | `setCurrencyCode`                  | `"USD"`                                  |
+| `host`                            | object `{ "prefix": string, "host": string }` | `setHost`                          | `{ "prefix": "", "host": "af-sdk.net" }` |
+| `min_time_between_sessions`       | number (int)               | `setMinTimeBetweenSessions`        | `1`                                      |
+| `ddlTimeout`                      | number (int, ms)           | `setDeepLinkTimeout`               | `3000`                                   |
 
 > 📘 SDK 6
 >
 > There was no file-based init in SDK 6. All configuration was done in code.
 
 **Example `src/main/assets/af_init_config.json`**
+
 ```json
 {
   "disable_advertising_identifiers": true,
@@ -739,6 +765,7 @@ protected void onCreate(Bundle savedInstanceState) {
     AppsFlyerLib.getInstance().collectDataFromLauncherActivity(this);
 }
 ```
+
 ```kotlin Kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -756,13 +783,13 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 The following log messages indicate common integration issues. Search your logcat output for these substrings.
 
-| Symptom | Log message to look for |
-|---|---|
+| Symptom                                                 | Log message to look for                                                                                                      |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `start()` called without `registerSessionReadyListener` | `SessionReadyListener is not registered! — You must call registerSessionReadyListener(SessionReadyListener) before start().` |
-| An API was called before `init()` | `AppsFlyer SDK is not initialized! The API call '…' must be called after the 'init(String, AppsFlyerConversionListener)'` |
-| Dev key missing from `init()` | `You must provide AppsFlyer Dev-Key in the 'init' API method` |
-| `init()` called with a null context | `AppsFlyer SDK requires a valid Context!` |
-| `start()` called twice in the same session | `AppsFlyer SDK session already started. Skipping duplicate start call.` |
-| Session not started when finishing | `AppsFlyer SDK session not started. Skipping session finish.` |
+| An API was called before `init()`                       | `AppsFlyer SDK is not initialized! The API call '…' must be called after the 'init(String, AppsFlyerConversionListener)'`    |
+| Dev key missing from `init()`                           | `You must provide AppsFlyer Dev-Key in the 'init' API method`                                                                |
+| `init()` called with a null context                     | `AppsFlyer SDK requires a valid Context!`                                                                                    |
+| `start()` called twice in the same session              | `AppsFlyer SDK session already started. Skipping duplicate start call.`                                                      |
+| Session not started when finishing                      | `AppsFlyer SDK session not started. Skipping session finish.`                                                                |
 
 Enable verbose or debug logging per your integration if messages do not appear at default levels.

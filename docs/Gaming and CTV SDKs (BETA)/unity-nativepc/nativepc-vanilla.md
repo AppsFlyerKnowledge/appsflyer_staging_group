@@ -11,7 +11,7 @@ hidden: false
 AppsFlyer empowers gaming marketers to make better decisions by providing powerful tools that solve real pain points, including cross-platform attribution, mobile and web analytics, deep linking, fraud detection, privacy management and preservation, and more.
 
 Game attribution requires the game to communicate with AppsFlyer APIs over HTTPS and report user activities like first opens, consecutive sessions, and in-app events. For example, purchase events.
-We recommend you use this sample app as a reference for integrating the code that reports user activities in your C++. 
+We recommend you use this sample app as a reference for integrating the code that reports user activities in your C++.
 
 **Note**: The sample code that follows is currently only supported in a Windows environment.
 
@@ -30,7 +30,6 @@ vcpkg install openssl:x86-windows
 ## AppsflyerLauncherModule - Interface
 
 `AppsflyerLauncherModule.h`, included in the `appsflyer-module` folder, contains the required code and logic to connect to AppsFlyer servers and report events.
-
 
 ### Init
 
@@ -66,7 +65,6 @@ void Start(bool skipFirst = false)
 **Arguments**
 
 - `bool skipFirst`: Determines whether or not to skip first open events and send session events. The value is false by default. If true , first open events are skipped and session events are sent. [See example](#skipFirstExample)
-
 
 **Usage**:
 
@@ -164,8 +162,6 @@ AppsflyerLauncherModule()->SetCustomerUserId("Test-18-9-23");
 AppsflyerLauncherModule()->Start();
 ```
 
-
-
 ### OnCallbackSuccess, OnCallbackFailure
 
 The above methods are placeholders for the desired actions upon success/failure.  
@@ -229,8 +225,8 @@ bool IsInstallOlderThanDate(std::string datestring)
 
 - `std::string datestring`: Date string in `yyyy-mm-ddThh:mm:ss+hh:mm` format.
 
-
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c++
@@ -281,7 +277,6 @@ using json = nlohmann::json;
 ## Resetting the attribution
 
 Remove the registry data from `SOFTWARE\Microsoft\Windows\CurrentVersion\Run`. The Registry keys are `AF_counter_[APPID]` and `AF_uuid_[APPID]`.
-
 
 ## Deleting AppsFlyer data on uninstall
 

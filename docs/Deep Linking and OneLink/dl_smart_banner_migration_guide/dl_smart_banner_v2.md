@@ -11,7 +11,7 @@ Therefore, **the Smart Banner SDK should be accessible from all pages displayin
 
 The Smart Banner SDK authenticates using the unique **Web key**, which you can get from the [Website workplace](https://support.appsflyer.com/hc/en-us/articles/360000764837#1-website-setup).
 
-To install Smart Banners or Smart Banners and PBA on your website, perform the following: 
+To install Smart Banners or Smart Banners and PBA on your website, perform the following:
 
 1. Select a code snippet
 2. Embed the code snippet in your website
@@ -31,8 +31,7 @@ You can select between two Smart Banners snippets:
 - **Advanced SDK Verification**: An enhanced integration that adds supply-chain protection for the Web SDK. Use this to add an extra layer of security against CDN compromise, DNS hijacking, and man-in-the-middle attacks.
 
 > **Important!**
-If you are transitioning from the Standard Web SDK to Advanced SDK Verification, replace your existing snippet with the new one. Do not add the new snippet on top of the existing one.
-> 
+> If you are transitioning from the Standard Web SDK to Advanced SDK Verification, replace your existing snippet with the new one. Do not add the new snippet on top of the existing one.
 
 #### **Standard code snippet**
 
@@ -86,8 +85,7 @@ You can select between two Smart Banners and PBA snippets
 - **Advanced SDK Verification**: An enhanced integration that adds supply-chain protection for the Web SDK. Use this to add an extra layer of security against CDN compromise, DNS hijacking, and man-in-the-middle attacks.
 
 > **Important!**
-If you are transitioning from the Standard Web SDK to Advanced SDK Verification, replace your existing snippet with the new one. Do not add the new snippet on top of the existing one.
-> 
+> If you are transitioning from the Standard Web SDK to Advanced SDK Verification, replace your existing snippet with the new one. Do not add the new snippet on top of the existing one.
 
 #### Standard code snippet
 
@@ -136,24 +134,24 @@ AF('banners', 'showBanner', { bannerZIndex: 1000, additionalParams: { p1: "v1", 
 
 After selecting a code snippet, perform the following:
 
-1. Replace the *YOUR_WEB_KEY* placeholder in the script with your **Web key**. The web key is created when you create a new Website workplace.
-2. If you selected a Smart Banners and PBA snippet, replace the *YOUR_PBA_KEY* placeholder in the script with your **web dev key**. The web dev key is created when you create a brand bundle.
+1. Replace the _YOUR_WEB_KEY_ placeholder in the script with your **Web key**. The web key is created when you create a new Website workplace.
+2. If you selected a Smart Banners and PBA snippet, replace the _YOUR_PBA_KEY_ placeholder in the script with your **web dev key**. The web dev key is created when you create a brand bundle.
 3. Paste this code snippet in the `head` tag on your website. Make sure to paste it near the top of the `head` tag.
 
 > 📘 Note
-> 
-> - The `showBanner` method at the end of installation code can take more parameters. [Learn more](https://dev.appsflyer.com/hc/docs/dl_smart_banner_v2#showbanner).
+>
+> - The `showBanner` method at the end of installation code can take more parameters.[Learn more](https://dev.appsflyer.com/hc/docs/dl_smart_banner_v2#showbanner).
 > - To overcome iOS 26/Safari storage limitations, declare the storage-mode flag as a global variable before SDK initialization to control how the web SDK stores data for Smart Banners. See Set storage mode below.
 
 ### Set Storage Mode (Optional)
 
 Smart Banners use browser storage to handle banner state and functionality. With the release of iOS 26, Safari introduced changes that affect how browser storage behaves. To help websites maintain consistent Smart Banner behavior in these environments, you can configure the storage method with the `storage-mode` flag.
 
-- **local (default):** Uses browser `localStorage` / `sessionStorage`. This is the default mode and does not require any changes to your cookie consent or privacy setup. 
+- **local (default):** Uses browser `localStorage` / `sessionStorage`. This is the default mode and does not require any changes to your cookie consent or privacy setup.
 - **cookie:** Uses first-party cookies (on your domain) to overcome iOS 26/Safari storage limitations.
 
 > ⚠️ Important
-> 
+>
 > If you enable **cookie** mode, your website may be subject to additional cookie consent and disclosure requirements under privacy regulations (e.g., GDPR, ePrivacy). It is the website owner’s responsibility to ensure their consent management platform (CMP) and privacy policy are updated accordingly.
 
 ```js
@@ -172,7 +170,7 @@ Smart Banners use browser storage to handle banner state and functionality. With
 
 ## Control Smart Banner font
 
-Using the same font in the smart banner as the rest of the website creates a consistent and cohesive visual identity for your brand. 
+Using the same font in the smart banner as the rest of the website creates a consistent and cohesive visual identity for your brand.
 
 In order to change the default font in the Smart Banner, you need to add the following rule to your **CSS**
 
@@ -190,8 +188,8 @@ For example:
 }
 ```
 
-> 🚧 
-> 
+> 🚧
+>
 > - The `!important` is required
 > - Make sure that the font is already loaded in your website
 > - The custom font will apply to **all** banners on the website
@@ -213,16 +211,16 @@ AF('banners', 'showBanner', { bannerContainerQuery: String,
 Start showing the Smart Banner according to the banner key provided in the snippet.
 
 > ℹ️ **Note**
-> 
+>
 > Don't use this function when implementing Smart Banners in a wrapper/hybrid app to load the banner page from the app (and not from the browser), as using `showBanner` will display the banner within the app. If you do use `showBanner` for a wrapper/hybrid app, use `hideBanner` for mobile app loads.
 
 **Input arguments**
 
-| Type                      | Name                   | Description                                                                                                                                                                                     |
-| :------------------------ | :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Type                      | Name                   | Description                                                                                                                                                                                                                     |
+| :------------------------ | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `String`                  | `bannerContainerQuery` | If passed, the SDK tries to locate an element in the page with this query and treats it as the entry point for the banner placement. Otherwise, `document.body` is used.                        |
 | `Integer`                 | `bannerZIndex`         | Smart Banners are by default set to the max z-index value, so they won't be hidden by the website elements. This can be changed if you want some website components to be on top of the banner. |
-| `<Key, Value Dictionary>` | `additionalParams`     | If passed, these keys and values (for example, `deep_link_value: apples`) are added as query parameters to the OneLink URL.                                                                     |
+| `<Key, Value Dictionary>` | `additionalParams`     | If passed, these keys and values (for example, `deep_link_value: apples`) are added as query parameters to the OneLink URL.                                                                  |
 
 **Usage examples**
 
@@ -248,25 +246,25 @@ AF('banners', 'updateParams', { <Key, Value Dictionary> });
 ```
 
 **Description**  
-Programmatically add up to 10 parameters (for example, `deep_link_value`) to the OneLink URL assigned to the call-to-action (CTA) button, after the banner displays. 
+Programmatically add up to 10 parameters (for example, `deep_link_value`) to the OneLink URL assigned to the call-to-action (CTA) button, after the banner displays.
 
 The input is an object with parameter keys and values.
 
 A key can’t have an empty value.  
 A key can’t be named: undefined, null, NaN, or arg  
 Invalid characters:  
-Key: ```/, \, *, !, @, #, ?, $, %, ^, &, ~, ``, =, +, ', ", ;, :, >, <```  
-Value = ```\, ;, $, >, <, ^, #, `` ```
+Key: `/, \, *, !, @, #, ?, $, %, ^, &, ~, ``, =, +, ', ", ;, :, >, <`  
+Value = `\, ;, $, >, <, ^, #, `` `
 
-- The parameters are added as query parameters to the OneLink URL. 
+- The parameters are added as query parameters to the OneLink URL.
 - When you use updateParams to add parameters, the impression URL is different than the click URL.
-- Parameters added don’t replace those on the original OneLink URL. If the parameter you add is already in the OneLink URL, it doesn’t change. 
+- Parameters added don’t replace those on the original OneLink URL. If the parameter you add is already in the OneLink URL, it doesn’t change.
 - If updateParams is called more than once, only the parameters from the last call are added to the URL.
 
 **Input arguments**
 
-| Type                      | Name | Description                                                                                                      |
-| :------------------------ | :--- | :--------------------------------------------------------------------------------------------------------------- |
+| Type                      | Name | Description                                                                                                                                         |
+| :------------------------ | :--- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<Key, Value Dictionary>` | N/A  | These keys and values (for example, `deep_link_value: apples`) are added as query parameters to the OneLink URL. |
 
 **Usage examples**
@@ -285,9 +283,9 @@ AF('banners', 'updateParams', { deep_link_value: "new_param", deep_link_sub4: "g
 AF('banners', 'hideBanner');
 ```
 
-**Description**  
+**Description**
 
-Programmatically remove any displayed banner from the page (e.g. after a certain user input). 
+Programmatically remove any displayed banner from the page (e.g. after a certain user input).
 
 **Input arguments**
 
@@ -303,7 +301,7 @@ AF('banners', 'hideBanner');
 
 ## Traits and Limitations
 
-| Trait                         | Remarks                                                                                                                                                                                                                                                                                              |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Single page application (SPA) | Smart Banners are by default only displayed once, even if users navigate between pages.<br> To display banners when users navigate between pages, you need to manually call hideBanner and showBanner for every navigation that doesn't reload the page and trigger the Smart Banners default logic. |
-| Click ID auto forwarding | The following click IDs are automatically forwarded to the outgoing URL when they are present on the incoming URL:<br> - Google: `gclid`, `gbraid`, `wbraid`<br> - Facebook: `fbclid`<br> - TikTok: `ttclid`<br> - X (formerly Twitter): `twclid`<br> - Snap: `ScCid` |
+| Trait                                            | Remarks                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Single page application (SPA) | Smart Banners are by default only displayed once, even if users navigate between pages.<br> To display banners when users navigate between pages, you need to manually call hideBanner and showBanner for every navigation that doesn't reload the page and trigger the Smart Banners default logic.                                                     |
+| Click ID auto forwarding                         | The following click IDs are automatically forwarded to the outgoing URL when they are present on the incoming URL:<br> - Google: `gclid`, `gbraid`, `wbraid`<br> - Facebook: `fbclid`<br> - TikTok: `ttclid`<br> - X (formerly Twitter): `twclid`<br> - Snap: `ScCid` |

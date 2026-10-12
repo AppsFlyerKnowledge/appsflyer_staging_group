@@ -46,6 +46,7 @@ Currently doesn't support tvOS apps.
 > 📘 Note
 >
 > The link above links to a static library. If you're upgrading to a newer iOS version, do the following:
+>
 > 1. Remove the Run Script stage from Xcode that runs copy-frameworks.
 > 2. Make sure the library is not embedded.
 >
@@ -85,6 +86,7 @@ Drag the `AppsFlyerLib.framework` folder and drop it into your Xcode project. Ma
 > 📘 Note
 >
 > This approach is only compatible with iOS 8 and above. For tvOS apps, you need a different `AppsFlyerFramework`:
+>
 > 1. Clone this [repo](https://github.com/AppsFlyerSDK/AppsFlyerFramework).
 > 2. Find `AppsFlyerLib.framework` in [this folder of the cloned repo](https://github.com/AppsFlyerSDK/AppsFlyerFramework/tree/master/tvOS).
 > 3. Repeat step 3.

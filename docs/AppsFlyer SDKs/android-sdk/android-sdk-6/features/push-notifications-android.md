@@ -40,7 +40,7 @@ When calling `addPushNotificationDeepLinkPath` the SDK verifies that:
 - The key contains a valid OneLink URL.
 
 > 📘 Note
-> 
+>
 > `addPushNotificationDeepLinkPath` accepts an array of strings too, to allow you to extract the relevant key from nested JSON structures. For more information, see [`addPushNotificationDeepLinkPath`](doc:android-sdk-reference-appsflyerlib#addpushnotificationdeeplinkpath).
 
 ## Integrating AppsFlyer with Android push notifications using JSON (legacy)
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 The SDK expects to get the `af` key in the `Intent`'s `extras` Bundle. If an `af` key is found, the SDK sends the value to AppsFlyer.
 
 ## Optional: Update the contents of the Intent manually
+
 Some Push Providers don’t automatically create an `Intent` that contains the custom data required by the AppsFlyer SDK. In these cases, your app can extract the necessary values directly from the push payload and add them to the `Intent` before it’s passed to the SDK.
 
 ```java

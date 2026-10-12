@@ -8,19 +8,18 @@ hidden: false
 
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/01aedec-ue_logo.png",
-        "",
-        ""
-      ],
-      "align": "center"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/01aedec-ue_logo.png",
+"",
+""
+],
+"align": "center"
+}
+]
 }
 [/block]
-
 
 v6.12.2
 

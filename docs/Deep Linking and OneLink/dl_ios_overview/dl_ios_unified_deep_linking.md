@@ -16,18 +16,18 @@ hidden: false
 The flow works as follows:
 
 1. User clicks a OneLink link.
-   * If the user has the app installed, the Universal Links or URI scheme opens the app. 
-   * If the user doesn’t have the app installed, they are redirected to the app store, and after downloading, the user opens the app. 
+   - If the user has the app installed, the Universal Links or URI scheme opens the app.
+   - If the user doesn’t have the app installed, they are redirected to the app store, and after downloading, the user opens the app.
 2. The app open triggers the AppsFlyer SDK.
-3. The AppsFlyer SDK runs the UDL API. 
-4. The UDL API retrieves OneLink data from AppsFlyer servers. 
+3. The AppsFlyer SDK runs the UDL API.
+4. The UDL API retrieves OneLink data from AppsFlyer servers.
 5. The UDL API calls back the [`didResolveDeepLink()`] in the [`DeepLinkDelegate`].
-6. The [`didResolveDeepLink()`] method gets a [`DeepLinkResult`] object. 
+6. The [`didResolveDeepLink()`] method gets a [`DeepLinkResult`] object.
 7. The [`DeepLinkResult`] object includes:
-   * Status (Found/Not found/Failure).
-   * A DeepLink object that carries: 
-      - **For users with app not yet installed**: The `deep_link_value` and `deep_link_sub1-10` parameters.
-      - **For users with the app already installed**:The `deep_link_value` and `deep_link_sub1-10` parameters and all parameters contained in the `link` parameter of the OneLink attribution link.
+   - Status (Found/Not found/Failure).
+   - A DeepLink object that carries:
+     - **For users with app not yet installed**: The `deep_link_value` and `deep_link_sub1-10` parameters.
+     - **For users with the app already installed**:The `deep_link_value` and `deep_link_sub1-10` parameters and all parameters contained in the `link` parameter of the OneLink attribution link.
 
 [`didResolveDeepLink()`]: https://dev.appsflyer.com/hc/docs/deeplinkdelegate#didresolvedeeplink
 [`DeepLinkDelegate`]: https://dev.appsflyer.com/hc/docs/appsflyerlib-1#deeplinkdelegate
@@ -36,7 +36,7 @@ The flow works as follows:
 
 ## Planning
 
-* UDL requires AppsFlyer iOS SDK V6.1+.
+- UDL requires AppsFlyer iOS SDK V6.1+.
 
 When setting up OneLink, the marketer uses parameters to create the links, and the developer customizes the behavior of the app based on the values received. It is the developer's responsibility to make sure the parameters are handled correctly in the app, for both in-app routing, and personalizing data in the link.
 
@@ -44,35 +44,35 @@ When setting up OneLink, the marketer uses parameters to create the links, and t
 
 1. Get from the marketer the desired behavior and personal experience a user gets when they click the URL.
 2. Based on the desired behavior, plan the `deep_link_value` and other parameters that are needed to give the user the desired personal experience.
-   * The `deep_link_value` is set by the marketer in the URL and used by the developer to redirect the user to a specific place inside the app. For example, if you have a fruit store and want to direct users to apples, the value of `deep_link_value` can be `apples`.
-    * The `deep_link_sub1-10`  parameters can also be added to the URL to help personalize the user experience. For example, to give a 10% discount, the value of `deep_link_sub1` can be `10`.
+   - The `deep_link_value` is set by the marketer in the URL and used by the developer to redirect the user to a specific place inside the app. For example, if you have a fruit store and want to direct users to apples, the value of `deep_link_value` can be `apples`.
+   - The `deep_link_sub1-10`  parameters can also be added to the URL to help personalize the user experience. For example, to give a 10% discount, the value of `deep_link_sub1` can be `10`.
 
 ## Implementation
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    border: 1px solid #d8d8d8;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 180px; margin: 0 0; margin-right: 20px\">\n  <div>\n    <h1 style=\"margin-top: 20px\">\n      Let's save you some time  >>\n    </h1>   \n      <h3>\n        Set Deep Linking with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=ios&utm_source=devhub&utm_medium=dl_ios_unified_deep_linking');\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    border: 1px solid #d8d8d8;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 180px; margin: 0 0; margin-right: 20px\">\n  <div>\n    <h1 style=\"margin-top: 20px\">\n      Let's save you some time  >>\n    </h1>   \n      <h3>\n        Set Deep Linking with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=ios&utm_source=devhub&utm_medium=dl_ios_unified_deep_linking');\\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
 
-
 Implement the UDL API logic based on the chosen parameters and values.
+
 1. Assign the `AppDelegate` using `self` to [`AppsFlyerLib.shared().deepLinkDelegate`](https://dev.appsflyer.com/hc/docs/appsflyerlib-1#deeplinkdelegate).
 2. Implement application function to allow:
-     * Universal Links support with [`continue`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#continue).
-     * URI scheme support with [`handleOpen`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#handleopen).
+   - Universal Links support with [`continue`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#continue).
+   - URI scheme support with [`handleOpen`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#handleopen).
 3. Create [`DeepLinkDelegate`](https://dev.appsflyer.com/hc/docs/deeplinkdelegate) as an extension of `AppDelegate`.
-4. Add `application` functions to support Universal Links and URI schemes. 
-5. In `DeepLinkDelegate`, make sure you override the callback function, [`didResolveDeepLink()`](https://dev.appsflyer.com/hc/docs/deeplinkdelegate#didresolvedeeplink). 
-`didResolveDeepLink()` accepts a [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1) object as an argument. 
+4. Add `application` functions to support Universal Links and URI schemes.
+5. In `DeepLinkDelegate`, make sure you override the callback function, [`didResolveDeepLink()`](https://dev.appsflyer.com/hc/docs/deeplinkdelegate#didresolvedeeplink).
+   `didResolveDeepLink()` accepts a [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1) object as an argument.
 6. Use [`DeepLinkResult.status`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1#status) to query whether the deep linking match is found.
 7. For when the status is an error, call [`DeepLinkResult.error`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1#error) and run your error flow.
-8. For when the status is found, use [`DeepLinkResult.deepLink`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1#deeplink) to retrieve the [`DeepLink`](https://dev.appsflyer.com/hc/docs/deeplink-1) object. 
-The `DeepLink` object contains the deep linking information arranged in public variables to retrieve the values from well-known OneLink keys, for example, [`DeepLink.deeplinkValue`](https://dev.appsflyer.com/hc/docs/deeplink-1#deeplinkvalue) for `deep_link_value`.
+8. For when the status is found, use [`DeepLinkResult.deepLink`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1#deeplink) to retrieve the [`DeepLink`](https://dev.appsflyer.com/hc/docs/deeplink-1) object.
+   The `DeepLink` object contains the deep linking information arranged in public variables to retrieve the values from well-known OneLink keys, for example, [`DeepLink.deeplinkValue`](https://dev.appsflyer.com/hc/docs/deeplink-1#deeplinkvalue) for `deep_link_value`.
 9. Use [`deepLinkObj.clickEvent["deep_link_sub1"]`](https://dev.appsflyer.com/hc/docs/deeplink-1#clickevent) to retrieve `deep_link_sub1`. Do the same for `deep_link_sub2-10` parameters, changing the string value as required.
 10. Once `deep_link_value` and `deep_link_sub1-10` are retrieved, pass them to an in-app router and use them to personalize the user experience.
 
-### Supporting legacy OneLink links 
+### Supporting legacy OneLink links
 
 Legacy OneLink links are links that don't contain the parameters recommended for Unified Deep Linking: `deep_link_value` and `deep_link_sub1-10`.
 Usually these are links that already exist in the field when migrating from legacy methods to UDL.
@@ -164,6 +164,7 @@ fileprivate func walkToSceneWithParams(deepLinkObj: DeepLink) {
     }
 }
 ```
+
 ```objectivec
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Set isDebug to true to see AppsFlyer debug logs
@@ -272,21 +273,22 @@ fileprivate func walkToSceneWithParams(deepLinkObj: DeepLink) {
 In some cases the application might require consent from the user in order to connect to the network, in a dialog similar to this one:
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/c4ac931-network_consent_dialog.png",
-        "c4ac931-network_consent_dialog.png",
-        null
-      ],
-      "align": "center",
-      "sizing": "250px"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/c4ac931-network_consent_dialog.png",
+"c4ac931-network_consent_dialog.png",
+null
+],
+"align": "center",
+"sizing": "250px"
+}
+]
 }
 [/block]
 
 In order to support deferred deep linking once the network consent is given we recommend:
+
 - Implement [eDDL](./dl_ios_ocds_ddl) to allow UDL to handle the deferred deep linking
 
 ## Testing deferred deep linking
@@ -295,32 +297,37 @@ In order to support deferred deep linking once the network consent is given we r
 
 - Complete UDL [integration](#implementation).
 - [Register your testing device](https://support.appsflyer.com/hc/en-us/articles/207031996).
-- [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode) in the app. 
+- [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode) in the app.
 - Make sure the app isn't installed on your device.
-- Ask your marketer for a OneLink template. 
-  - It will look something like this `https://onelink-basic-app.onelink.me/H5hv`. 
+- Ask your marketer for a OneLink template.
+  - It will look something like this `https://onelink-basic-app.onelink.me/H5hv`.
   - This example uses the OneLink subdomain `onelink-basic-app.onelink.me` and the OneLink template ID `H5hv`.
 
 ### The test link
+
 You can use an existing OneLink link or ask your marketer to create a new one for testing. Both short and long OneLink URLs can be used.
 
 #### Adding ad-hoc parameters to an existing link
- 
+
 - Use only the domain and OneLink template of your link. For example: `https://onelink-basic-app.onelink.me/H5hv`.
 - Add OneLink parameters `deep_link_value` and `deep_link_sub1-10` as expected by your application. The parameters should be added as query parameters.
-  - Example: `https://onelink-basic-app.onelink.me/H5hv?pid=my_media_source&deep_link_value=apples&deep_link_sub1=23` 
+  - Example: `https://onelink-basic-app.onelink.me/H5hv?pid=my_media_source&deep_link_value=apples&deep_link_sub1=23`
 
 ### Perform the test
+
 1. Click the link on your device.
-2. OneLink redirects you according to the link setup, to either the App Store or a website. 
+2. OneLink redirects you according to the link setup, to either the App Store or a website.
 3. Install the application.
-> ** Important **
-> - If the application is still in development and not uploaded to the store yet, you see this image:
-> <img src="https://files.readme.io/8d43627-Screenshot_20221205-191054_Chrome.jpg" alt="drawing" width="250" style={{textAlign: "center"}} />
+
+> \*\* Important \*\*
+>
+> - If the application is still in development and not uploaded to the store yet, you see this image:> <img src="https://files.readme.io/8d43627-Screenshot_20221205-191054_Chrome.jpg" alt="drawing" width="250" style={{textAlign: "center"}} />
 > - Install the application from Xcode.
-4. UDL detects the deferred deep linking, matches the install to the click, and retrieves the OneLink parameters to `didResolveDeepLink` callback. 
+
+4. UDL detects the deferred deep linking, matches the install to the click, and retrieves the OneLink parameters to `didResolveDeepLink` callback.
 
 ### Expected logs results
+
 > 📘 The following logs are available only when [debug mode is enabled](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode).
 
 - SDK initialized:
@@ -328,7 +335,9 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
   [AppsFlyerSDK] [com.apple.main-thread] AppsFlyer SDK version 6.6.0 started build
   ```
   ```
-- UDL API starts:  
+
+  ```
+- UDL API starts:
   ```
   D/AppsFlyer_6.9.0: [DDL] start
   ```
@@ -344,44 +353,56 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
 ## Testing deep linking (Universal Links)
 
 ### Prerequisites
+
 - Complete UDL [integration](#implementation).
 - [Register your testing device](https://support.appsflyer.com/hc/en-us/articles/207031996).
-- [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode) in the app. 
+- [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode) in the app.
 - Make sure the app is already installed on your device.
-- Ask your marketer for a **OneLink template**. 
-  - It will look something like this `https://onelink-basic-app.onelink.me/H5hv`. 
+- Ask your marketer for a **OneLink template**.
+  - It will look something like this `https://onelink-basic-app.onelink.me/H5hv`.
   - This example uses the OneLink subdomain `onelink-basic-app.onelink.me` and the OneLink template ID `H5hv`
 - [Configure Universal Links](dl_ios_init_setup#procedures-for-ios-universal-links).
 
 ### Create the test link
+
 Use the same method as in [deferred deep linking](#testing-deferred-deep-linking).
 
 ### Perform the test
-1. Click the link on your device.
-2. UDL detects the Universal Link and retrieves the OneLink parameters to `didResolveDeepLink` callback. 
 
+1. Click the link on your device.
+2. UDL detects the Universal Link and retrieves the OneLink parameters to `didResolveDeepLink` callback.
 
 ### Expected logs results
+
 > 📘 The following logs are available only when [debug mode is enabled](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode).
+
 - If the link is a OneLink shortlink (e.g. https://onelink-basic-app.onelink.me/H5hv/apples):
   ```
- [AppsFlyerSDK] [com.apple.main-thread] NSUserActivity `webpageURL`: https://onelink-basic-app.onelink.me/H5hv/apples
- [AppsFlyerSDK] [com.appsflyer.serial] UniversalLink/Deeplink found:
+
+  ```
+
+[AppsFlyerSDK] [com.apple.main-thread] NSUserActivity `webpageURL`: https://onelink-basic-app.onelink.me/H5hv/apples
+[AppsFlyerSDK] [com.appsflyer.serial] UniversalLink/Deeplink found:
 https://onelink-basic-app.onelink.me/H5hv/apples
 [AppsFlyerSDK] [com.appsflyer.serial] Shortlink found. Executing: https://onelink.appsflyer.com/shortlink-sdk/v2/H5hv?id=apples
- ...
-[AppsFlyerSDK] [com.appsflyer.serial]                        
+...
+[AppsFlyerSDK] [com.appsflyer.serial]  
 [Shortlink] OneLink:{
-    c = test1;
-    campaign = test1;
-    "deep_link_sub1" = 23;
-    "deep_link_value" = peaches;
-    "is_retargeting" = true;
-    "media_source" = SMS;
-    pid = SMS;
-} 
+c = test1;
+campaign = test1;
+"deep_link_sub1" = 23;
+"deep_link_value" = peaches;
+"is_retargeting" = true;
+"media_source" = SMS;
+pid = SMS;
+}
+
   ```
-- UDL calls `didResolveDeepLink` callback with `status=FOUND` and OneLink link data:
+  - UDL calls `didResolveDeepLink` callback with `status=FOUND` and OneLink link data:
   ```
+
 [AppsFlyerSDK] [com.appsflyer.serial] [DDL] Calling didResolveDeepLink with: {"af_sub4":null,"click_http_referrer":null,"af_sub1":null,"click_event":{"campaign":"test1","deep_link_sub1":"23","deep_link_value":"peaches","media_source":"SMS"},"af_sub3":null,"deep_link_value":"peaches","campaign":"test1","match_type":null,"af_sub5":null,"media_source":"SMS","campaign_id":null,"af_sub2":null}
+
+  ```
+  
   ```

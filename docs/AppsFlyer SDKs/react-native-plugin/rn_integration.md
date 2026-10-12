@@ -4,17 +4,17 @@ hidden: false
 ---
 
 # Basic integration of the SDK
+
 Initialize the SDK to enable AppsFlyer to detect installations, sessions (app opens) and updates.
 
-| Setting  | Description   |
-| -------- | ------------- |
-| devKey   | Your application [devKey](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieving-the-dev-key) provided by AppsFlyer (required)  |
-| appId      | [App ID](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-new-app#available-in-the-app-store-google-play-store-windows-phone-store)  (iOS only) you configured in your AppsFlyer dashboard  |
-| isDebug    | Debug mode - set to `true` for testing only  |
-|onInstallConversionDataListener| Set listener for GCD response: [Android](https://dev.appsflyer.com/hc/docs/conversion-data-android-7) | [iOS](https://dev.appsflyer.com/hc/docs/conversion-data-ios-7) (Optional. default=true) |
-|onDeepLinkListener| Set listener for [UDL](https://dev.appsflyer.com/hc/docs/unified-deep-linking-udl) response (Optional. default=false) |
-|timeToWaitForATTUserAuthorization| Waits for request user authorization to access app-related data. please read more [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-X-integration-guide-for-developers#configure-app-tracking-transparency-att-support) |
-
+| Setting                           | Description                                                                                                                                                                                                                                                       |                                                                                                                            |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| devKey                            | Your application [devKey](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieving-the-dev-key) provided by AppsFlyer (required)                                                                       |                                                                                                                            |
+| appId                             | [App ID](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-new-app#available-in-the-app-store-google-play-store-windows-phone-store)  (iOS only) you configured in your AppsFlyer dashboard                                   |                                                                                                                            |
+| isDebug                           | Debug mode - set to `true` for testing only                                                                                                                                                                                                                       |                                                                                                                            |
+| onInstallConversionDataListener   | Set listener for GCD response: [Android](https://dev.appsflyer.com/hc/docs/conversion-data-android-7)                                                                                                                                             | [iOS](https://dev.appsflyer.com/hc/docs/conversion-data-ios-7) (Optional. default=true) |
+| onDeepLinkListener                | Set listener for [UDL](https://dev.appsflyer.com/hc/docs/unified-deep-linking-udl) response (Optional. default=false)                                                                                                          |                                                                                                                            |
+| timeToWaitForATTUserAuthorization | Waits for request user authorization to access app-related data. please read more [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-X-integration-guide-for-developers#configure-app-tracking-transparency-att-support) |                                                                                                                            |
 
 ```javascript
 import appsFlyer from 'react-native-appsflyer';

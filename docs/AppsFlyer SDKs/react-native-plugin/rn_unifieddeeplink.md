@@ -4,7 +4,7 @@ hidden: false
 ---
 
 > 📘 **UDL privacy protection**
-> 
+>
 > For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1` to `deep_link_sub10`. If you try to get any other parameters (`media_source`, `campaign`, `af_sub1-5`, etc.), they return `null`.
 
 ### UDL flow
@@ -19,14 +19,14 @@ hidden: false
 
 ### Considerations:
 
-* Requires AppsFlyer Android SDK V6.1.3 or later.
-* Does not support SRN campaigns.
-* Does not provide af_dp in the API response.
-* onAppOpenAttribution will not be called. All code should migrate to `onDeepLink`.
+- Requires AppsFlyer Android SDK V6.1.3 or later.
+- Does not support SRN campaigns.
+- Does not provide af_dp in the API response.
+- onAppOpenAttribution will not be called. All code should migrate to `onDeepLink`.
 
 ### Implementation:
 
-___Important___  The code implementation for `onDeepLink` must be made **prior to the initialization** code of the SDK.
+_**Important**_  The code implementation for `onDeepLink` must be made **prior to the initialization** code of the SDK.
 
 Example:
 

@@ -164,7 +164,6 @@ AppsflyerQuest2Module()->SetCustomerUserId("Test-18-9-23");
 AppsflyerQuest2Module()->Start();
 ```
 
-
 ### To_utf8
 
 This method receives a reference of a `std::wstring` and returns UTF-8 encoded `std::string`
@@ -174,7 +173,9 @@ This method receives a reference of a `std::wstring` and returns UTF-8 encoded `
 ```c++
 std::string to_utf8(std::wstring& wide_string);
 ```
+
 **Usage**:
+
 ```c++
 // Set non-English values for testing UTF-8 support
 std::wstring ws = L"車B1234 こんにちは";
@@ -197,6 +198,7 @@ bool IsInstallOlderThanDate(std::string datestring)
 - `std::string datestring`: Date string in `yyyy-mm-ddThh:mm:ss+hh:mm` format.
 
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c++
@@ -227,7 +229,7 @@ AppsflyerLauncherModule()->Start(isInstallOlderThanDate);
 ### Setup
 
 1. Open the project in your preferred C++ editor and in the `[YOUR-APP-NAME].Build.cs` file, add `OpenSSL` to your dependencies and `HTTP` as a private dependency:
-(example can be found in `/Quest2_Sample/Quest2_Sample.Build`)
+   (example can be found in `/Quest2_Sample/Quest2_Sample.Build`)
 
 ```c#
 PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "OpenSSL" });
@@ -235,6 +237,7 @@ PrivateDependencyModuleNames.Add("HTTP");
 ```
 
 2. In your Unreal Project files, under the `Source/[YOUR-APP-NAME]` directory, create a new directory named `AppsflyerQuest2Module`.
+
 3. Copy the following files from `appsflyer-meta-quest2-unreal-sample-app/AppsflyerQuest2Module` to the new folder:
 
    - AppsflyerQuest2Module.cpp
@@ -244,6 +247,7 @@ PrivateDependencyModuleNames.Add("HTTP");
    - RequestData.h
 
 4. Generate project files in order to add OpenSSL. [Learn more](https://forums.unrealengine.com/t/how-to-use-included-openssl/670971/2)
+
 5. In the `GameMode.h` file, add the `StartPlay()` function:
 
 ```c++
@@ -259,8 +263,8 @@ public:
 
 ```
 
-6. Create a C++ Actor Component, attach it to a object of your choice, and add the following lines: 
-(Alternatively you may use the example component: `Quest2_Sample/Private/AF_ActorComponent.cpp`)
+6. Create a C++ Actor Component, attach it to a object of your choice, and add the following lines:
+   (Alternatively you may use the example component: `Quest2_Sample/Private/AF_ActorComponent.cpp`)
 
 ```c++
 #include "../AppsflyerQuest2Module/AppsflyerQuest2Module.h"

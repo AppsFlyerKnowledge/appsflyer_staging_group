@@ -14,11 +14,10 @@ hidden: true
 - [Set Customer User Id](#set-customer-user-id)
 - [Set Consent Data](#set-consent-data)
 - [Uninstall Measurement](#uninstall-measurement)
-    - [iOS Uninstall](#ios-uninstall)
-    - [Android Uninstall](#android-uninstall)
+  - [iOS Uninstall](#ios-uninstall)
+  - [Android Uninstall](#android-uninstall)
 - [Set Additional Data](#set-additional-data)
 - [Validate And Log In App Purchase](#validate-and-log-in-app-purchase)
-
 
 ## Configure
 
@@ -31,7 +30,6 @@ See [here](BasicIntegration.md#setup) for configuration details.
 static void configure();
 ```
 
-
 ## Start
 
 - Starts the SDK and sends the session to the server.
@@ -40,6 +38,7 @@ static void configure();
 - If the Plugin is configured for a manual start, the developer should call the `start` method under the blueprint, and configure it to be called every foreground-background transition.
 
 ### Blueprint:
+
 <img src="https://files.readme.io/4134798fbbda92d0d6ba026f086b140b3abba27f0d827a9cf2e3fe1bf253a3dc-6-AppsFlyer-SDK-start-example.png"  width="710"/>
 
 ### C++
@@ -48,10 +47,9 @@ static void configure();
 static void start();
 ```
 
-
 ## Log Event
 
-The `logEvent` method allows you to send in-app events to AppsFlyer. 
+The `logEvent` method allows you to send in-app events to AppsFlyer.
 For more information about defining in-app events,  see [here](https://support.appsflyer.com/hc/en-us/articles/115005544169-AppsFlyer-Rich-In-App-Events-Android-and-iOS#Introduction).
 
 ### Blueprint:
@@ -65,21 +63,18 @@ static void logEvent(FString eventName,
                      TMap<FString,FString> values);
 ```
 
--   **eventName** – canonical AppsFlyer event code, e.g. `"af_purchase"`.
-    
--   **values** – key/values payload (UTF‑8).  
-    Special handling: on iOS the helper converts `"af_revenue"` string to `NSNumber` so you may pass `"4.99"` without casting.
+- **eventName** – canonical AppsFlyer event code, e.g. `"af_purchase"`.
 
+- **values** – key/values payload (UTF‑8).  
+  Special handling: on iOS the helper converts `"af_revenue"` string to `NSNumber` so you may pass `"4.99"` without casting.
 
 ## Get AppsFlyerUID
 
-Retrieve the AppsFlyer ID (unique installation Id) from the SDK. 
-
+Retrieve the AppsFlyer ID (unique installation Id) from the SDK.
 
 ### Blueprint
 
 ![](https://files.readme.io/4bdabe0-GetAppsFlyerUID.png)
-
 
 ### C++
 
@@ -89,7 +84,7 @@ static FString getAppsFlyerUID();
 
 ## Get Advertising Identifier
 
-Retrieve the advertising identifier (IDFA on iOS) from the SDK. 
+Retrieve the advertising identifier (IDFA on iOS) from the SDK.
 
 **Note**: This API is iOS-only. On Android, it returns an empty string.
 
@@ -101,21 +96,19 @@ static FString advertisingIdentifier();
 
 - Returns the advertising identifier string (IDFA on iOS, empty string on Android).
 
-
 ## waitForATTUserAuthorizationWithTimeoutInterval
 
-iOS 14+ utility that defers `start()` until user responds to the ATT prompt or the timeout elapses. 
+iOS 14+ utility that defers `start()` until user responds to the ATT prompt or the timeout elapses.
 See more information about this API [here](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-app-tracking-transparency-att-support).
 
 **IMPORTANT**: When using this API, please perform the following:
-1.  Set the  `Automatically start the AppsFlyer SDK`  flag under the plugin setting to `false`.
-2.  Call the  `Set Custom User ID`  API before the call to the  `Start`  API.
 
+1. Set the  `Automatically start the AppsFlyer SDK`  flag under the plugin setting to `false`.
+2. Call the  `Set Custom User ID`  API before the call to the  `Start`  API.
 
 ### Blueprint:
 
 <img src="https://files.readme.io/d7ed853b30ed4d2159220fc40444e827656490cf09d00ea2c3624e319995bfd3-5-Wait-for-att-example.png" width="1100"/>
-
 
 ### C++
 
@@ -123,12 +116,12 @@ See more information about this API [here](https://dev.appsflyer.com/hc/docs/int
 static void waitForATTUserAuthorizationWithTimeoutInterval(int timeoutSeconds);
 ```
 
-
 ## Set Customer User ID
 
 Setting your own Custom ID enables you to cross-reference your own unique ID with AppsFlyer’s user ID and the other devices IDs. This ID is available in AppsFlyer CSV reports along with postback APIs for cross-referencing with your internal IDs.
 
 **IMPORTANT**: To set the user ID in the first SDK session, please perform the following:
+
 1. Set the `Automatically start the AppsFlyer SDK` flag under the plugin setting to false.
 2. Call the `Set Custom User ID` API before the call to the `Start` API.
 
@@ -150,17 +143,16 @@ To comply with the legislation, Google requires AppsFlyer customers to include s
 
 If the app collects consent information from users manually, and not via a CMP, it should use the `SetConsentData` API and pass the following parameters:
 
--   `isUserSubjectToGDPR`  - Indicates whether GDPR applies to the user.
--   `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
--   `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising.
--   `hasConsentForAdStorage`  - indicates whether the user has consented to store or access information on a device.
+- `isUserSubjectToGDPR`  - Indicates whether GDPR applies to the user.
+- `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
+- `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising.
+- `hasConsentForAdStorage`  - indicates whether the user has consented to store or access information on a device.
 
-These parameters can either be preset by the developer or be set as parameters based on the end user's response. 
+These parameters can either be preset by the developer or be set as parameters based on the end user's response.
 
 ### Blueprint:
 
 <img src="https://files.readme.io/5ee996e24da01d8f664eefa745bee2fa9129a656d624e5040808615df91e4629-3-Set-Consent-Data.png" width="822"/>
-
 
 ### C++
 
@@ -191,22 +183,22 @@ First, please make sure to read the relevant information about the [uninstall fe
 **Important!**
 To support remote notifications in iOS follow the [official unreal docs](https://docs.unrealengine.com/4.27/en-US/SharingAndReleasing/Mobile/LocalNotifications). Don't forget to [download, compile, and run the Unreal Engine from the source](https://docs.unrealengine.com/4.27/en-US/ProgrammingAndScripting/ProgrammingWithCPP/DownloadingSourceCode).
 
-#### Blueprint: 
+#### Blueprint:
 
 1. After Unreal Engine is running, open the Unreal IDE, go to Settings > Platforms -> iOS, and check **Enable Remote Notification Support**.
 
    <img src="https://files.readme.io/0f87999-iOSenableRemoteNotification.png" width="1100"/>
 
-3. Under the setting -> Maps & Mods -> Game instance -> change the instance class to `PlatformGameInstance`
+2. Under the setting -> Maps & Mods -> Game instance -> change the instance class to `PlatformGameInstance`
 
    <img src="https://files.readme.io/cd6e6b92cfb199645dafda15b68012e9a6ead8670b9e58553aa918c59f72712e-9-Uninstall-game-instance.png" width="1100"/>
 
-4. Configure the nodes under the relevant blueprint:
+3. Configure the nodes under the relevant blueprint:
 
    <img src="https://files.readme.io/4a4549b-nodeEvents.png"  width="1100"/>
 
    - **Register for remote notification** Will show a pop-up to the user from the OS, asking permission for remote notification
-   - The application registered for remote notifications delegate** call AppsFlyer uninstall API from [iOS lifecycle](https://support.appsflyer.com/hc/en-us/articles/360017822118-Integrate-Android-uninstall-measurement-into-an-app)
+   - The application registered for remote notifications delegate\*\* call AppsFlyer uninstall API from [iOS lifecycle](https://support.appsflyer.com/hc/en-us/articles/360017822118-Integrate-Android-uninstall-measurement-into-an-app)
    - **AppsFlyerSDK remote notification token** call AppsFlyer API for sending the token.
 
 #### C++
@@ -214,13 +206,14 @@ To support remote notifications in iOS follow the [official unreal docs](https:/
 ```c++
 static void setRemoteNotificationsToken(const TArray<uint8>& token);
 ```
+
 Registers the device push‑token with AppsFlyer to enable uninstall measurement.
 
 #### Debugging
 
 When debugging, enable AppsFlyer debug logs and check for the Register endpoint
 
-   <img src="https://files.readme.io/0b3a257-iOSLogs.png" width="1100"/>
+<img src="https://files.readme.io/0b3a257-iOSLogs.png" width="1100"/>
 
 ### Android Uninstall
 
@@ -244,13 +237,11 @@ Complete the steps in the [following article](https://support.appsflyer.com/hc/e
 
    ```
 
-### Blueprint: 
+### Blueprint:
 
 The same nodes as in iOS could be used for Android under the relevant blueprint. No API call is needed.
 
-   <img src="https://files.readme.io/4a4549b-nodeEvents.png" width="1100"/>
-
-
+<img src="https://files.readme.io/4a4549b-nodeEvents.png" width="1100"/>
 
 ## Set Additional Data
 
@@ -260,7 +251,6 @@ Add custom key-value pairs to the payload of the install event and any in-app ev
 
 1. Set the **Automatically start the AppsFlyer SDK** under the plugin setting to false.
 2. Call the `setAdditionalData` API before the call to the `start` API
-
 
 ### Blueprint:
 
@@ -276,7 +266,8 @@ static void setAdditionalData(TMap<FString,FString> customData);
 
 Validates and logs an in-app purchase using the updated VAL V2 flow. This method should be called after a successful transaction. Results are broadcast via the `OnValidateAndLogInAppPurchaseComplete` callback delegate.
 
-**IMPORTANT**: 
+**IMPORTANT**:
+
 - This API is iOS-only. On other platforms, it will return an error.
 - The `productId` and `transactionId` must be non-empty strings.
 
@@ -291,6 +282,7 @@ Validates and logs an in-app purchase using the updated VAL V2 flow. This method
 ### Response
 
 The result is delivered via the `OnValidateAndLogInAppPurchaseComplete` callback delegate, which provides a `FAppsFlyerPurchaseResponse` struct containing:
+
 - `Status` (EAFValidateAndLogStatus) - Either `Success` or `Error`
 - `ResultJson` (FString) - Raw AppsFlyer response serialized as JSON (on success)
 - `Error` (FString) - Error message (on failure)

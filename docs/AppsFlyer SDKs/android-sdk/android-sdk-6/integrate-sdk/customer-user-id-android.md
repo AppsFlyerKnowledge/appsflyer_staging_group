@@ -5,7 +5,7 @@ hidden: false
 
 ## Setting the Customer User ID
 
-<span class="annotation-optional">Optional</span>  
+<span class="annotation-optional">Optional</span>
 
 The Customer User ID (CUID) is a unique user identifier created by the app owner outside the SDK. It can be associated with in-app events if provided to the SDK. Once associated with the CUID, these events can be cross-referenced with user data from other devices and applications.
 
@@ -28,9 +28,9 @@ The CUID can only be associated with in-app events after it was set. Since `star
 
 ### Associate the CUID with the install event
 
-If it’s important for you to associate the install event with the CUID, you should set it before calling `start`. 
+If it’s important for you to associate the install event with the CUID, you should set it before calling `start`.
 
-You can set the CUID before `start`  in two ways, depending on whether you start the SDK in the `Application` or the `Activity` class. 
+You can set the CUID before `start`  in two ways, depending on whether you start the SDK in the `Application` or the `Activity` class.
 
 **When starting from the application class**
 
@@ -39,7 +39,7 @@ If you started the SDK from the `Application` class (see: [`Starting the Androi
 To activate the waiting mode, set [`waitForCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#waitforcustomeruserid) to `true` after [`init`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#init) and before [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start).
 
 > ⚠️ **Important**
-> It's important to remember that putting the SDK in a waiting mode may block the SDK from sending the install event and consequently prevent attribution. This can occur, for example, when the user launches the application for the first time and then exits before the SDK can set the CUID. 
+> It's important to remember that putting the SDK in a waiting mode may block the SDK from sending the install event and consequently prevent attribution. This can occur, for example, when the user launches the application for the first time and then exits before the SDK can set the CUID.
 
 ```java
 AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, getConversionListener(), getApplicationContext());
@@ -59,7 +59,7 @@ Other than [`setCustomerIdAndLogSession`](https://dev.appsflyer.com/hc/docs/and
 
 ### Note
 
-If you wish to remove the waiting mode from the SDK initialization flow, it is not enough to delete the call to `waitForCustomerUserId(true)`. It is also required to replace it with `waitForCustomerUserID(false)`. Simply removing the call is insufficient because the 'waitForCustomerUserId' boolean flag is stored in the Android Shared Preferences. 
+If you wish to remove the waiting mode from the SDK initialization flow, it is not enough to delete the call to `waitForCustomerUserId(true)`. It is also required to replace it with `waitForCustomerUserID(false)`. Simply removing the call is insufficient because the 'waitForCustomerUserId' boolean flag is stored in the Android Shared Preferences.
 
 **Example code**
 

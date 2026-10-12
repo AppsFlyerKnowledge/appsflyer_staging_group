@@ -5,7 +5,7 @@ hidden: false
 
 [block:api-header]
 {
-  "title": "Overview"
+"title": "Overview"
 }
 [/block]
 The `AppsFlyerConversionListener` is a public interface that lets you listen to [conversions](doc:conversion-data-android).
@@ -13,20 +13,25 @@ The `AppsFlyerConversionListener` is a public interface that lets you listen to 
 Go back to the [SDK reference index](doc:android-sdk-reference).
 
 ### AppsFlyerConversionListener
+
 The `AppsFlyerConversionListener` interface requires you override the following methods:
- * [onConversionDataSuccess](#onconversiondatasuccess)
- * [onConversionDataFail](#onconversiondatafail)
- * [onAppOpenAttrtibution](#onappopenattribution)
- * [onAttributionFailure](#onattributionfailure)
+
+- [onConversionDataSuccess](#onconversiondatasuccess)
+- [onConversionDataFail](#onconversiondatafail)
+- [onAppOpenAttrtibution](#onappopenattribution)
+- [onAttributionFailure](#onattributionfailure)
 
 All methods must be overridden. Otherwise, a compilation error is thrown.
 [block:api-header]
 {
-  "title": "Public Methods"
+"title": "Public Methods"
 }
 [/block]
+
 ### onAppOpenAttribution
+
 **Method signature**
+
 ```java
 void onAppOpenAttribution(java.util.Map<java.lang.String,java.lang.String> attributionData)
 ```
@@ -36,32 +41,37 @@ This callback will NOT be invoked if AppsFlyerLib.subscribeForDeepLink is used.
 
 **Callback parameters**
 
-| Type | name | Description |
-|:----------|:-----------------|:--------------|
-| `Map<String, String>` | `attributionData` | |
+| Type                  | name              | Description |
+| :-------------------- | :---------------- | :---------- |
+| `Map<String, String>` | `attributionData` |             |
 
 **Returns**
 `void`
 
 ### onAttributionFailure
+
 **Method signature**
+
 ```java
 void onAttributionFailure(java.lang.String errorMessage)
 ```
+
 **Description**
 This callback will NOT be invoked if AppsFlyerLib.subscribeForDeepLink is used.
 
 **Callback parameters**
 
-| Type | name | Description |
-|:----------|:-----------------|:--------------|
-| `String ` | `errorMessage` | |
+| Type      | name           | Description |
+| :-------- | :------------- | :---------- |
+| `String ` | `errorMessage` |             |
 
 **Returns**
-``void``
+`void`
 
 ### onConversionDataSuccess
+
 **Method signature**
+
 ```java
 void onConversionDataSuccess(java.util.Map<java.lang.String,java.lang.Object> conversionData)
 ```
@@ -71,15 +81,17 @@ Triggered upon successful conversion data resolution.
 
 **Callback parameters**
 
-| Type | name | Description |
-|:----------|:-----------------|:--------------|
-| `Map<String, Object>` | `conversionData ` |  You must explicitly handle `null` keys. |
+| Type                  | name              | Description                                             |
+| :-------------------- | :---------------- | :------------------------------------------------------ |
+| `Map<String, Object>` | `conversionData ` | You must explicitly handle `null` keys. |
 
 **Returns**
 `void`.
 
 ### onConversionDataFail
+
 **Method signature**
+
 ```java
 void onConversionDataFail(java.lang.String errorMessage)
 ```
@@ -89,9 +101,9 @@ Triggered upon failed conversion data resolution.
 
 **Callback parameters**
 
-| Type | name | Description |
-|:----------|:-----------------|:--------------|
-| `String ` | `errorMessage` | |
+| Type      | name           | Description |
+| :-------- | :------------- | :---------- |
+| `String ` | `errorMessage` |             |
 
 **Returns**
 `void`.

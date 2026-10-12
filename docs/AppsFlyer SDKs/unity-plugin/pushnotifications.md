@@ -2,6 +2,7 @@
 title: Push Notifications
 hidden: false
 ---
+
 ## Unity push notifications using OneLink & Firebase
 
 <span class="annotation-recommended">Recommended</span>  
@@ -22,11 +23,11 @@ When calling `addPushNotificationDeepLinkPath` the SDK verifies that:
 - The key contains a valid OneLink URL.
 
 > 📘 Note
-> 
+>
 > `addPushNotificationDeepLinkPath` accepts an array of strings too, to allow you to extract the relevant key from nested JSON structures. For more information, see [`addPushNotificationDeepLinkPath`](https://dev.appsflyer.com/hc/docs/api#addpushnotificationdeeplinkpath).
 
 2. Create a new Firebase Unity app and follow the [Firebase guide](https://firebase.google.com/docs/unity/setup) (Import the SDK package and the GoogleService files to Unity)
-3. Create FirebaseManager empty object and add `FirebaseManager.cs` to it: 
+3. Create FirebaseManager empty object and add `FirebaseManager.cs` to it:
 
 ```csharp
 using System.Collections;
@@ -206,7 +207,7 @@ public class FirebaseManager : MonoBehaviour
 ```
 
 > 📘 Note
-> 
+>
 > In the `OnMessageReceived` function, for iOS specifically, we are calling the `AppsFlyeriOS.handlePushNotification(Dictionary<string, string> pushPayload)` method ([read more](https://dev.appsflyer.com/hc/docs/api#addpushnotificationdeeplinkpath)) in order to trigger the AppsFlyerSDK method that is getting overridden due to Firebase's swizzling.
 
 ## iOS
@@ -226,6 +227,6 @@ public class FirebaseManager : MonoBehaviour
    <service android:name="com.google.firebase.messaging.MessageForwardingService"
                android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true" />
    ```
-2. Create a Keystore and a key for your app and generate the SHA1 fingerprint ([and the SHA256 fingerprint for Android App Links](https://dev.appsflyer.com/hc/docs/dl_android_init_setup#procedures-for-android-app-links)) 
+2. Create a Keystore and a key for your app and generate the SHA1 fingerprint ([and the SHA256 fingerprint for Android App Links](https://dev.appsflyer.com/hc/docs/dl_android_init_setup#procedures-for-android-app-links))
    - SHA1 for Firebase  
      ![Firebase - app settings - Android app - adding SHA1 fingerprint](https://files.readme.io/0bfbfe6-Screenshot_2023-05-30_at_18.39.06.png)

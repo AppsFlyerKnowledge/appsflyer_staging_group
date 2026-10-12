@@ -6,37 +6,32 @@ hidden: false
 
 [block:embed]
 {
-  "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Ffast.wistia.net%2Fembed%2Fiframe%2Fqo9qauberm&display_name=Wistia%2C+Inc.&url=https%3A%2F%2Fappsflyer.wistia.com%2Fmedias%2Fqo9qauberm&image=https%3A%2F%2Fembed-ssl.wistia.com%2Fdeliveries%2F479ad78a31932db5e727279e79bbdfe9.jpg%3Fimage_crop_resized%3D960x540&key=f2aa6fc3595946d0afc3d76cbbd25dc3&type=text%2Fhtml&schema=wistia\" width=\"960\" height=\"540\" scrolling=\"no\" title=\"Wistia, Inc. embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
-  "url": "https://appsflyer.wistia.com/medias/qo9qauberm",
-  "title": "IOS SDK install and integrate",
-  "favicon": "https://appsflyer.wistia.com/favicon.ico",
-  "image": "https://embed-ssl.wistia.com/deliveries/479ad78a31932db5e727279e79bbdfe9.jpg?image_crop_resized=960x540"
+"html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Ffast.wistia.net%2Fembed%2Fiframe%2Fqo9qauberm&display_name=Wistia%2C+Inc.&url=https%3A%2F%2Fappsflyer.wistia.com%2Fmedias%2Fqo9qauberm&image=https%3A%2F%2Fembed-ssl.wistia.com%2Fdeliveries%2F479ad78a31932db5e727279e79bbdfe9.jpg%3Fimage_crop_resized%3D960x540&key=f2aa6fc3595946d0afc3d76cbbd25dc3&type=text%2Fhtml&schema=wistia\" width=\"960\" height=\"540\" scrolling=\"no\" title=\"Wistia, Inc. embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+"url": "https://appsflyer.wistia.com/medias/qo9qauberm",
+"title": "IOS SDK install and integrate",
+"favicon": "https://appsflyer.wistia.com/favicon.ico",
+"image": "https://embed-ssl.wistia.com/deliveries/479ad78a31932db5e727279e79bbdfe9.jpg?image_crop_resized=960x540"
 }
 [/block]
 
-iOS SDK Implementation Flow
---------------------------------
+## iOS SDK Implementation Flow
+
 1. <a href="https://dev.appsflyer.com/hc/docs/install-ios-sdk">SDK installation</a>
 2. <a href="https://dev.appsflyer.com/hc/docs/integrate-ios-sdk">SDK integration</a>
 3. <a href="https://dev.appsflyer.com/hc/docs/testing-ios">Integration testing</a>
 
-Core capabilities
------------------
+## Core capabilities
 
-<div class="button-container">
-  <a class="button" href="https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#ios-14-support">iOS 14 support</a>
+<div class="button-container"><a class="button" href="https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#ios-14-support">iOS 14 support</a>
   <a class="button" href="https://dev.appsflyer.com/hc/docs/in-app-events-ios">In-app events</a>
   <a class="button" href="https://dev.appsflyer.com/hc/docs/ios">Deep linking</a>
 </div>
-<div class="button-container">
-  <a class="button" href="https://dev.appsflyer.com/hc/docs/conversion-data-ios">Conversion data</a>
+<div class="button-container"><a class="button" href="https://dev.appsflyer.com/hc/docs/conversion-data-ios">Conversion data</a>
 </div>
 
-Reference documents
--------------------
+## Reference documents
 
-<div class="button-container">
-  <a class="button" href="https://dev.appsflyer.com/hc/docs/ios-sdk-reference-new">iOS SDK reference</a>
+<div class="button-container"><a class="button" href="https://dev.appsflyer.com/hc/docs/ios-sdk-reference-new">iOS SDK reference</a>
 <a class="button" href="https://support.appsflyer.com/hc/en-us/articles/115001224823">iOS SDK release notes</a>
 </div>
 
@@ -51,8 +46,7 @@ Reference documents
 | IDFV-based cross-promotion | `V6.0.2` |
 -->
 
-SDK compatibility
------------------
+## SDK compatibility
 
 - iOS 9+ (iPhone, iPod, iPad)
 - tvOS 9+ (Apple TV)

@@ -30,7 +30,7 @@ Some methods below anonymize data by deleting or hashing all user-level identifi
 
 ## Use start to share only the install event
 
-If you prefer to send only the install event and no additional information, you can invoke [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start), with a completion handler. Once you receive a success response indicating that the install event has been received, either set [`isStopped`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#isstopped)  or [`anonymizeUser`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#anonymizeuser) to `true` in the completion handler. 
+If you prefer to send only the install event and no additional information, you can invoke [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start), with a completion handler. Once you receive a success response indicating that the install event has been received, either set [`isStopped`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#isstopped)  or [`anonymizeUser`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#anonymizeuser) to `true` in the completion handler.
 
 - [`anonymizeUser`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#anonymizeuser) = true  sends data to AppsFlyer, but upon reaching AppsFlyer, all identifiers, including the IP address, are removed or hashed.
 - [`isStopped`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#isstopped) = true reverts the [`start`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#start-1) call, thereby preventing the SDK from sending out any data to AppsFlyer.
@@ -65,14 +65,14 @@ To learn how to implement the method without anonymizing install events, see: [s
 
 ## Disable IDs
 
-The SDK is capable of sending several specific identifiers to AppsFlyer. You can choose to exclude them in accordance to your needs. 
+The SDK is capable of sending several specific identifiers to AppsFlyer. You can choose to exclude them in accordance to your needs.
 
 **Note:** Disabling the advertiser ID before calling start will prevent SRN attribution.
 
-| Disable identifier                                                                                                               | Description                                                                                                                                         |
-| -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Disable identifier                                                                                                               | Description                                                                                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`disableAdvertisingIdentifier `](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#disableadvertisingidentifier) | Disables the collection of IDFA by the SDK (iOS 14 and below). From iOS 14.5, access to IDFA is managed by the App Tracking Transparency framework. |
-| [`disableIDFVCollection`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#disableidfvcollection)                | Disables the collection of IDFV by the SDK.                                                                                                         |
+| [`disableIDFVCollection`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#disableidfvcollection)                | Disables the collection of IDFV by the SDK.                                                                                                                                                            |
 
 ## Send data only after the user opts-in
 

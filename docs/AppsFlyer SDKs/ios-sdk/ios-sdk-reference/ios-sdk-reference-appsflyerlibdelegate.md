@@ -5,30 +5,31 @@ hidden: false
 
 [block:api-header]
 {
-  "title": "Overview"
+"title": "Overview"
 }
 [/block]
 Protocol extending AppDelegate. Holds the callback method for OneLink legacy APIs and attribution.
 
 Go back to the [SDK reference index](doc:ios-sdk-reference).
 
-**Protocol declaration** 
+**Protocol declaration**
 [block:code]
 {
-  "codes": [
-    {
-      "code": "extension AppDelegate: AppsFlyerLibDelegate {\n     \n    func onConversionDataSuccess(_ data: [AnyHashable: Any]) {\n    ...\n    }\n    \n    func onConversionDataFail(_ error: Error) {\n    ...\n    }\n    \n    func onAppOpenAttribution(_ attributionData: [AnyHashable: Any]) {\n    ...\n    }\n    \n    func onAppOpenAttributionFailure(_ error: Error) {\n    ...\n    }\n}\n",
-      "language": "swift"
-    }
-  ]
+"codes": [
+{
+"code": "extension AppDelegate: AppsFlyerLibDelegate {\n     \n    func onConversionDataSuccess(_ data: [AnyHashable: Any]) {\n    ...\n    }\n    \n    func onConversionDataFail(_ error: Error) {\n    ...\n    }\n    \n    func onAppOpenAttribution(_ attributionData: [AnyHashable: Any]) {\n    ...\n    }\n    \n    func onAppOpenAttributionFailure(_ error: Error) {\n    ...\n    }\n}\n",
+"language": "swift"
+}
+]
 }
 [/block]
 
 [block:api-header]
 {
-  "title": "Public methods"
+"title": "Public methods"
 }
 [/block]
+
 ### onAppOpenAttribution
 
 **Description**
@@ -38,18 +39,19 @@ Learn more about `onAppOpenAttribution()` for [iOS](https://dev.appsflyer.com/do
 **Method signature**
 [block:code]
 {
-  "codes": [
-    {
-      "code": "func onAppOpenAttribution(_ attributionData: [AnyHashable: Any]) {\n\t\t//Handle Deep Link Data\n}",
-      "language": "swift"
-    },
-    {
-      "code": "(void) onAppOpenAttribution:(NSDictionary*) attributionData {\n\t\t//Handle Deep Link\n\t}",
-      "language": "objectivec"
-    }
-  ]
+"codes": [
+{
+"code": "func onAppOpenAttribution(_ attributionData: [AnyHashable: Any]) {\n\t\t//Handle Deep Link Data\n}",
+"language": "swift"
+},
+{
+"code": "(void) onAppOpenAttribution:(NSDictionary\*) attributionData {\n\t\t//Handle Deep Link\n\t}",
+"language": "objectivec"
+}
+]
 }
 [/block]
+
 ### onConversionDataSuccess
 
 **Description**
@@ -60,18 +62,19 @@ Learn more about `onConversionDataSuccess()` for [iOS](https://dev.appsflyer.com
 **Method signature**
 [block:code]
 {
-  "codes": [
-    {
-      "code": "func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {\n\t  //Handle Conversion Data (Deferred Deep Link)\n}",
-      "language": "swift"
-    },
-    {
-      "code": "-(void)onConversionDataSuccess:(NSDictionary*) installData {\n\t  //Handle Conversion Data (Deferred Deep Link)\n}",
-      "language": "objectivec"
-    }
-  ]
+"codes": [
+{
+"code": "func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {\n\t  //Handle Conversion Data (Deferred Deep Link)\n}",
+"language": "swift"
+},
+{
+"code": "-(void)onConversionDataSuccess:(NSDictionary\*) installData {\n\t  //Handle Conversion Data (Deferred Deep Link)\n}",
+"language": "objectivec"
+}
+]
 }
 [/block]
+
 ### onAppOpenAttributionFailure
 
 **Description**
@@ -82,18 +85,19 @@ Learn more about `onAppOpenAttributionFailure()` for [iOS](https://dev.appsflyer
 **Method signature**
 [block:code]
 {
-  "codes": [
-    {
-      "code": "func onAppOpenAttributionFailure(_ error: Error?)",
-      "language": "swift"
-    },
-    {
-      "code": "- (void)onAppOpenAttributionFailure:(NSError *)error;",
-      "language": "objectivec"
-    }
-  ]
+"codes": [
+{
+"code": "func onAppOpenAttributionFailure(_ error: Error?)",
+"language": "swift"
+},
+{
+"code": "- (void)onAppOpenAttributionFailure:(NSError \*)error;",
+"language": "objectivec"
+}
+]
 }
 [/block]
+
 ### onConversionDataFail
 
 **Description**
@@ -104,36 +108,37 @@ Learn more about `onConversionDataFail()` for [iOS](https://dev.appsflyer.com/do
 **Method signature**
 [block:code]
 {
-  "codes": [
-    {
-      "code": "func onConversionDataFail(_ error: Error?) {\n\t\t//    print(\"\\(error)\")\n\t\t// handle conversion data failure\n}",
-      "language": "swift"
-    },
-    {
-      "code": "-(void)onConversionDataFail:(NSError *) error {\n\t  NSLog(@\"%@\",error);\n\t  // handle conversion data failure\n}",
-      "language": "objectivec"
-    }
-  ]
+"codes": [
+{
+"code": "func onConversionDataFail(_ error: Error?) {\n\t\t//    print(\"\\(error)\")\n\t\t// handle conversion data failure\n}",
+"language": "swift"
+},
+{
+"code": "-(void)onConversionDataFail:(NSError \*) error {\n\t  NSLog(@\"%@\",error);\n\t  // handle conversion data failure\n}",
+"language": "objectivec"
+}
+]
 }
 [/block]
+
 ### performOnAppAttribution
 
 **Description**
 
 Allows developers to manually re-trigger onAppOpenAttribution and enables developers to access deep link data at any time without connection to the app launch process. This might be needed because the regular onAppOpenAttribution callback is only called **if the app was opened with the deep link**.
- 
+
 **Method signature**
 [block:code]
 {
-  "codes": [
-    {
-      "code": "AppsFlyerLib.shared().performOnAppAttribution(with: url)               ",
-      "language": "swift"
-    },
-    {
-      "code": "[[AppsFlyerLib shared] performOnAppAttributionWithURL:(NSURL * _Nullable)url];   ",
-      "language": "objectivec"
-    }
-  ]
+"codes": [
+{
+"code": "AppsFlyerLib.shared().performOnAppAttribution(with: url)               ",
+"language": "swift"
+},
+{
+"code": "[[AppsFlyerLib shared] performOnAppAttributionWithURL:(NSURL \* _Nullable)url];   ",
+"language": "objectivec"
+}
+]
 }
 [/block]

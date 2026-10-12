@@ -11,7 +11,7 @@ hidden: false
 AppsFlyer empowers gaming marketers to make better decisions by providing powerful tools to perform cross-platform attribution.
 
 Game attribution requires the game to integrate the AppsFlyer SDK that records first opens, consecutive sessions, and in-app events. For example, purchase events.
-We recommend you use this sample app as a reference for integrating the AppsFlyer SDK into your Unreal Steam game. 
+We recommend you use this sample app as a reference for integrating the AppsFlyer SDK into your Unreal Steam game.
 
 **Note**: The sample code that follows is currently only supported in a Windows environment.
 
@@ -53,7 +53,8 @@ AppsflyerSteamModule()->Init(<< DEV_KEY >>, << STEAM_APP_ID >>);
 AppsflyerSteamModule()->Init(<< DEV_KEY >>, << STEAM_APP_ID >>, false);
 ```
 
-`
+\`
+
 ### Start
 
 This method sends first open and /session requests to AppsFlyer.
@@ -67,7 +68,6 @@ void Start(bool skipFirst = false)
 **Arguments**
 
 - `bool skipFirst`: Determines whether or not to skip first open events and send session events. The value is false by default. If true , first open events are skipped and session events are sent. [See example](#skipFirstExample)
-
 
 **Usage**:
 
@@ -105,7 +105,6 @@ AppsflyerSteamModule()->Stop();
 This method receives an event name and JSON object and sends in-app events to AppsFlyer.
 
 **Method signature**
-
 
 ```c++
 void LogEvent(std::string event_name, std::string event_values, std::string custom_event_values = "")
@@ -149,7 +148,6 @@ void SetCustomerUserId(std::string cuid)
 
 - `std::string cuid`: Custom user id.
 
-
 **Usage**:
 
 ```c++
@@ -167,7 +165,9 @@ This method receives a reference of a `std::wstring` and returns UTF-8 encoded `
 ```c++
 std::string to_utf8(std::wstring& wide_string);
 ```
+
 **Usage**:
+
 ```c++
 // Set non-English values for testing UTF-8 support
 std::wstring ws = L"車B1234 こんにちは";
@@ -218,6 +218,7 @@ bool IsInstallOlderThanDate(std::string datestring)
 - `std::string datestring`: Date string in `yyyy-mm-ddThh:mm:ss+hh:mm` format.
 
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c++

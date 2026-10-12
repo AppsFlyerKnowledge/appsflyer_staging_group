@@ -11,25 +11,25 @@ hidden: true
 
 Since users may or may not have the mobile app installed, there are 2 types of deep linking:
 
-- Deferred Deep Linking - Serving personalized content to new or former users, directly after the installation. 
+- Deferred Deep Linking - Serving personalized content to new or former users, directly after the installation.
 - Direct Deep Linking - Directly serving personalized content to existing users, which already have the mobile app installed.
 
 For more info please check out the [OneLink™ Deep Linking Guide](https://support.appsflyer.com/hc/en-us/articles/208874366-OneLink-Deep-Linking-Guide#Intro).
-   
-   ![](https://files.readme.io/e0f07bc-AddMethodsGCD.png)
+
+![](https://files.readme.io/e0f07bc-AddMethodsGCD.png)
 
 The set up for _deferred deep linking_ and _direct deeplinking_ is the same for UE4:
 
 1. Create a new _Actor_ object.
 
-      <img src="https://files.readme.io/83370fb-AddNewActor.png"  width="400"/>
+   <img src="https://files.readme.io/83370fb-AddNewActor.png"  width="400"/>
 
-2. Click _Add Component_ and and the **AppsFlyer SDKCallback** Component. 
- 
+2. Click _Add Component_ and and the **AppsFlyer SDKCallback** Component.
+
    <img src="https://files.readme.io/698d455-AddComponent.png"  width="400"/>
 
 3. You can now add the required callbacks.
-  
+
    <img src="https://files.readme.io/e0f07bc-AddMethodsGCD.png"  width="900"/>
 
 Now you are ready to implement Deeplinking!
@@ -38,7 +38,7 @@ Now you are ready to implement Deeplinking!
 
 Check out the deferred deeplinkg guide from the AppFlyer knowledge base [here](https://support.appsflyer.com/hc/en-us/articles/208874366-OneLink-links-and-experiences#deep-linking-and-deferred-deep-linking)
 
-Code Sample to handle the conversion data:  
+Code Sample to handle the conversion data:
 
 ![](https://files.readme.io/59611f1-GCDExample.png)
 

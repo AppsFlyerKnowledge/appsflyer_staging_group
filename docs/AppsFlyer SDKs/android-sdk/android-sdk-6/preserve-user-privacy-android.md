@@ -56,7 +56,7 @@ appsflyer.start(getApplicationContext(), null, new AppsFlyerRequestListener() {
 
 ## Prevent sharing data with third parties
 
-If you want to prevent sharing install and in-app event information with third parties such as SRNs and ad networks, use the `setSharingFilterForPartners` method before calling `start`. Partners that are excluded with this method will not receive data through postbacks, APIs, raw data reports, or any other means.  
+If you want to prevent sharing install and in-app event information with third parties such as SRNs and ad networks, use the `setSharingFilterForPartners` method before calling `start`. Partners that are excluded with this method will not receive data through postbacks, APIs, raw data reports, or any other means.
 
 **Note:** You can call [`setSharingFilterForPartners`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setsharingfilterforpartners) again if the user changes the app sharing settings (adding or removing partners) later in the session.  
 For a code example please refer to [`setSharingFilterForPartners`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setsharingfilterforpartners).
@@ -72,14 +72,14 @@ To learn how to implement the method without anonymizing install events, see: [S
 
 ## Disable IDs
 
-The SDK is capable of sending several specific identifiers to AppsFlyer. You can choose to exclude them in accordance to your needs. 
+The SDK is capable of sending several specific identifiers to AppsFlyer. You can choose to exclude them in accordance to your needs.
 
 **Note:** Disabling the advertiser ID before calling start will prevent SRN attribution.
 
-| Disable identifier                                                                                                                                | Description                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Disable identifier                                                                                                                                                   | Description                                                                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`setDisableAdvertisingIdentifiers`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setdisableadvertisingidentifiers)(true) | Disables collection of various Advertising IDs by the SDK. This includes Google Advertising ID (GAID), OAID, and Amazon Advertising ID (AAID). |
-| [`setCollectOaid`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcollectoaid)(false)                                    | Disables the collection of OAID by the SDK.                                                                                                    |
+| [`setCollectOaid`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcollectoaid)(false)                                    | Disables the collection of OAID by the SDK.                                                                                                                                                          |
 
 ## Send data only after the user opts-in
 

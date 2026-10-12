@@ -15,6 +15,7 @@ Game attribution and user measurement require the game to integrate an AppsFlyer
 <hr/>
 
 ## Prerequisites
+
 - Unity 2021.3.16f1
 - The Oculus SDK: Follow the [Oculus SDK for Unity integration guide](https://developer.oculus.com/documentation/unity/unity-gs-overview/).
 - Oculus Quest 2/3 Headset
@@ -38,7 +39,7 @@ AppsflyerModule(string devkey, string appid, MonoBehaviour mono, bool isSandbox 
 - `string DEV_KEY`: Get from the marketer or [AppsFlyer HQ](https://support.appsflyer.com/hc/en-us/articles/211719806-App-settings-#general-app-settings).
 - `string QUEST_APP_ID`: Your Quest Store app ID. For Quest 2/3, this is the number in the store URL. For example: https://www.oculus.com/experiences/quest/XXXXXXXXXXXXXXXX/.
 - `MonoBehaviour mono`: The parent MonoBehaviour.
-- `bool isSandbox`: Flag that determines whether to activate sandbox mode. False by default. This option is for debugging. With the sandbox mode, AppsFlyer dashboard doesn't show the data. 
+- `bool isSandbox`: Flag that determines whether to activate sandbox mode. False by default. This option is for debugging. With the sandbox mode, AppsFlyer dashboard doesn't show the data.
 
 **Usage**:
 
@@ -133,7 +134,6 @@ event_custom_parameters.Add("goodsName", "新人邀约购物日");
 afm.LogEvent(event_name, event_parameters, event_custom_parameters);
 ```
 
-
 ### SetCustomerUserId
 
 This method sets a customer ID that enables you to cross-reference your unique ID with the AppsFlyer unique ID and other device IDs. **Note**: You can only use this method before calling `Start()`.
@@ -171,8 +171,8 @@ bool IsInstallOlderThanDate(string datestring)
 
 - `string datestring`: Date string in `yyyy-mm-ddThh:mm:ss+hh:mm` format.
 
-
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c#

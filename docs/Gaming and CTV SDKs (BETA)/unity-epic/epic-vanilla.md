@@ -11,7 +11,7 @@ hidden: false
 AppsFlyer empowers gaming marketers to make better decisions by providing powerful tools that solve real pain points, including cross-platform attribution, mobile and web analytics, deep linking, fraud detection, privacy management and preservation, and more.
 
 Game attribution requires the game to communicate with AppsFlyer APIs over HTTPS and report user activities like first opens, consecutive sessions, and in-app events. For example, purchase events.
-We recommend you use this sample app as a reference for integrating the code that reports user activities in your C++. 
+We recommend you use this sample app as a reference for integrating the code that reports user activities in your C++.
 
 **Note**: The sample code that follows is currently only supported in a Windows environment.
 
@@ -174,8 +174,8 @@ void SetSharingFilterForPartners(std::string sharingFilter)
 
 **Arguments**:
 
-- `std::string sharingFilter`: a list of partners to filter. For example:  `std::string list = "[\"partner1\",\"partner2\"]"`. 
-Please use `[\"all\"]` in order to not send the event to any source.
+- `std::string sharingFilter`: a list of partners to filter. For example:  `std::string list = "[\"partner1\",\"partner2\"]"`.
+  Please use `[\"all\"]` in order to not send the event to any source.
 
 **Usage**:
 
@@ -253,6 +253,7 @@ bool IsInstallOlderThanDate(std::string datestring)
 - `std::string datestring`: Date string in `yyyy-mm-ddThh:mm:ss+hh:mm` format.
 
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c++
@@ -303,7 +304,6 @@ using json = nlohmann::json;
 ## Resetting the attribution
 
 Remove the registry data from `SOFTWARE\Microsoft\Windows\CurrentVersion\Run`. The Registry keys are `AF_counter_[APPID]` and `AF_uuid_[APPID]`.
-
 
 ## Deleting AppsFlyer data on uninstall
 

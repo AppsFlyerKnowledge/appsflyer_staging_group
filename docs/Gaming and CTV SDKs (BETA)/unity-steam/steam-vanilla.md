@@ -11,7 +11,7 @@ hidden: false
 AppsFlyer empowers gaming marketers to make better decisions by providing powerful tools that solve real pain points, including cross-platform attribution, mobile and web analytics, deep linking, fraud detection, privacy management and preservation, and more.
 
 Game attribution requires the game to communicate with AppsFlyer APIs over HTTPS and report user activities like first opens, consecutive sessions, and in-app events. For example, purchase events.
-We recommend you use this sample app as a reference for integrating the code that reports user activities in your C++. 
+We recommend you use this sample app as a reference for integrating the code that reports user activities in your C++.
 
 **Note**: The sample code that follows is currently only supported in a Windows environment.
 
@@ -102,7 +102,6 @@ AppsflyerSteamModule()->Start();
 // Stopping the SDK, preventing further communication with AppsFlyer
 AppsflyerSteamModule()->Stop();
 ```
-
 
 ### LogEvent
 
@@ -206,7 +205,9 @@ This method receives a reference of a `std::wstring` and returns UTF-8 encoded `
 ```c++
 std::string to_utf8(std::wstring& wide_string);
 ```
+
 **Usage**:
+
 ```c++
 std::wstring ws = L"車B1234 こんにちは";
 std::wstring ws2 = L"新人邀约购物日";
@@ -215,7 +216,6 @@ custom_event_parameters = {
     {"goodsName2", AppsflyerLauncherModule()->to_utf8(ws2)} 
 };
 ```
-
 
 ### IsInstallOlderThanDate
 
@@ -232,6 +232,7 @@ bool IsInstallOlderThanDate(std::string datestring)
 - `std::string datestring`: Date string in `yyyy-mm-ddThh:mm:ss+hh:mm` format.
 
 **Usage**:
+
 <div id="skipFirstExample"></div>
 
 ```c++

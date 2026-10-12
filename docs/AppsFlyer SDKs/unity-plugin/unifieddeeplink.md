@@ -2,8 +2,9 @@
 title: Unified Deep Linking (UDL)
 hidden: false
 ---
+
 > 📘 **UDL privacy protection**
-> 
+>
 > For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1` to `deep_link_sub10`. If you try to get any other parameters (`media_source`, `campaign`, `af_sub1-5`, etc.), they return `null`.
 
 # UDL flow
@@ -18,12 +19,12 @@ hidden: false
 
 # Considerations
 
-* Requires AppsFlyer Android SDK V6.1.3 or later.
-* Does not support SRN campaigns.
-* For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. If you try to get any other parameters (media_source, campaign, af_sub1-5, etc.), they return `null`.
-* `onAppOpenAttribution` will not be called. All code should migrate to `OnDeepLink`.
-* `OnDeepLink` must be called **after** `initSDK`.
-* `AppsFlyer.cs` **must** be attached to the game object.
+- Requires AppsFlyer Android SDK V6.1.3 or later.
+- Does not support SRN campaigns.
+- For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. If you try to get any other parameters (media_source, campaign, af_sub1-5, etc.), they return `null`.
+- `onAppOpenAttribution` will not be called. All code should migrate to `OnDeepLink`.
+- `OnDeepLink` must be called **after** `initSDK`.
+- `AppsFlyer.cs` **must** be attached to the game object.
 
 # Implementation
 
@@ -31,11 +32,11 @@ hidden: false
 2. Call initSDK with the `this` parameter in order for the `OnDeepLinkReceived` callback to be invoked:
     ```c#
     AppsFlyer.initSDK("devkey", "appID", this);
-    ```    
+    ```
 3. Assign `OnDeepLink` to `AppsFlyer.OnDeepLinkReceived` in `Start()`
    ```c#
     AppsFlyer.OnDeepLinkReceived += OnDeepLink;
-   ``` 
+   ```
 4. After `initSDK()` implement `OnDeepLink`.
 
 ## Example

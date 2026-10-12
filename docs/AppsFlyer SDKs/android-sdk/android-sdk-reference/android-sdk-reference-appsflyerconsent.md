@@ -20,12 +20,12 @@ public AppsFlyerConsent(
 
 ### Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| `isUserSubjectToGDPR` | Boolean | Indicates whether GDPR applies to the user. |
-| `hasConsentForDataUsage` | Boolean | Indicates whether the user has consented to use their data for advertising purposes. |
+| Parameter                         | Type    | Description                                                                                                       |
+| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
+| `isUserSubjectToGDPR`             | Boolean | Indicates whether GDPR applies to the user.                                                       |
+| `hasConsentForDataUsage`          | Boolean | Indicates whether the user has consented to use their data for advertising purposes.              |
 | `hasConsentForAdsPersonalization` | Boolean | Indicates whether the user has consented to use their data for personalized advertising purposes. |
-| `hasConsentForAdStorage` | Boolean | Indicates whether the user has consented to store or access information on a device. |
+| `hasConsentForAdStorage`          | Boolean | Indicates whether the user has consented to store or access information on a device.              |
 
 ### Usage example
 
@@ -39,13 +39,11 @@ AppsFlyerConsent gdprUser = new AppsFlyerConsent(true, true, true, false);
 AppsFlyerLib.getInstance().setConsentData(gdprUser);
 ```
 
-
 ## Methods
 
 ### forGDPRUser
 
-<span class="annotation-deprecated">Deprecated since V6.16.1</span>  
-
+<span class="annotation-deprecated">Deprecated since V6.16.1</span>
 
 **Method signature**
 
@@ -54,13 +52,13 @@ public AppsFlyerConsent forGDPRUser(Boolean hasConsentForDataUsage, Boolean hasC
 ```
 
 **Description**  
-Acquires user consent for data usage and ad personalization. Call the function when DMA is applicable to the user.  
+Acquires user consent for data usage and ad personalization. Call the function when DMA is applicable to the user.
 
 **Input arguments**
 
-| Type    | Name                            | Description                                                                   |
-| ------- | ------------------------------- | ----------------------------------------------------------------------------- |
-| Boolean | hasConsentForDataUsage          | Indicates whether the user give consent to send their user data to Google. |
+| Type    | Name                            | Description                                                                                          |
+| ------- | ------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Boolean | hasConsentForDataUsage          | Indicates whether the user give consent to send their user data to Google.           |
 | Boolean | hasConsentForAdsPersonalization | Indicates whether the user consented to use their data for personalized advertising. |
 
 **Returns**
@@ -77,8 +75,7 @@ AppsFlyerConsent gdprUserConsent = AppsFlyerConsent.forGDPRUser(hasConsentForDat
 
 ### forNonGDPRUser
 
-<span class="annotation-deprecated">Deprecated since V6.16.1</span>  
-
+<span class="annotation-deprecated">Deprecated since V6.16.1</span>
 
 **Method signature**
 
@@ -87,12 +84,12 @@ public AppsFlyerConsent forNonGDPRUser()
 ```
 
 **Description**  
-Return an empty AppsFlyerConsent object without any consent data. Call the method when DMA is not applicable to the user. 
+Return an empty AppsFlyerConsent object without any consent data. Call the method when DMA is not applicable to the user.
 
 **Returns**
 
-| Type             | Description                               |
-| ---------------- | ----------------------------------------- |
+| Type             | Description                                               |
+| ---------------- | --------------------------------------------------------- |
 | AppsFlyerConsent | An empty object without any consent data. |
 
 **Usage example**

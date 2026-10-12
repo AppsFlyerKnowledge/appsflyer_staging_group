@@ -2,8 +2,7 @@
 title: Push notifications
 hidden: false
 metadata:
-  description: Learn how to configure push notification measurement in the AppsFlyer
-    iOS SDK.
+  description: Learn how to configure push notification measurement in the AppsFlyer iOS SDK.
 ---
 
 ## Overview
@@ -82,16 +81,16 @@ Before you continue, make sure you have:
      }
    }
    ```
-3. <span id="addpushnotificationdeeplinkpath-recommended"></span>**This step is required only if you're implementing the [recommended OneLink-based solution](<>)**.  
+3. <span id="addpushnotificationdeeplinkpath-recommended"></span>**This step is required only if you're implementing the [recommended OneLink-based solution]()**.  
    In `didFinishLaunchingWithOptions`, call [`addPushNotificationDeepLinkPath`](doc:ios-sdk-reference-appsflyerlib#addpushnotificationdeeplinkpath) **before** calling [`start`](doc:ios-sdk-reference-appsflyerlib#start):
    ```swift
    AppsFlyerLib.shared().addPushNotificationDeepLinkPath(["af_push_link"])
    ```
-      In this example, the SDK is configured to look for the `af_push_link` key in the push notification payload.  
-      When calling [`addPushNotificationDeepLinkPath`](doc:ios-sdk-reference-appsflyerlib#addpushnotificationdeeplinkpath) the SDK verifies that:
+   In this example, the SDK is configured to look for the `af_push_link` key in the push notification payload.  
+   When calling [`addPushNotificationDeepLinkPath`](doc:ios-sdk-reference-appsflyerlib#addpushnotificationdeeplinkpath) the SDK verifies that:
    - The required key exists in the payload.
    - The key contains a valid OneLink URL.
 
 > 📘 Note
-> 
+>
 > [`addPushNotificationDeepLinkPath`](doc:ios-sdk-reference-appsflyerlib#addpushnotificationdeeplinkpath) accepts an array of strings too, to allow you to extract the relevant key from nested JSON structures. For more information, see [`addPushNotificationDeepLinkPath`](doc:ios-sdk-reference-appsflyerlib#addpushnotificationdeeplinkpath).

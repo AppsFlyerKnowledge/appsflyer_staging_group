@@ -2,18 +2,20 @@
 title: Migration guide from v4
 hidden: false
 ---
+
 1. [Remove the old Plugin](#remove-the-old-plugin)
 2. [Init the new Plugin](#init-the-new-plugin)
 3. [Update deeplink logic](#update-deeplink-logic)
 4. [Update code](#update-other-code)
 
 :warning: There are breaking changes when migrating to Unity v5. This includes:
-* New class names
-* New android package name
-* `com.appsflyer.GetDeepLinkingActivity` does not exist in Unity v5. This is no longer required for deeplinking
-* unity-jar-resolver is used to import assets
 
-# Remove the old plugin 
+- New class names
+- New android package name
+- `com.appsflyer.GetDeepLinkingActivity` does not exist in Unity v5. This is no longer required for deeplinking
+- unity-jar-resolver is used to import assets
+
+# Remove the old plugin
 
 1. Remove all the items contained in `AppsFlyerUnityPlugin_v4.x.x.unitypackage`
 
@@ -42,17 +44,18 @@ Assets/Plugins/iOS/libAppsFlyerLib.a
 ```
 
 # Init the new plugin
-    
-1. Add the new .unitypackage, which can be found in the new plugin. 
-    
-2. There are two main options of initialization: 
-   1. Remove all old init code and use the new .prefab object. 
+
+1. Add the new .unitypackage, which can be found in the new plugin.
+
+2. There are two main options of initialization:
+   1. Remove all old init code and use the new .prefab object.
    2. Update your existing init code.
-   
-## 1. remove all old init code 
+
+## 1. remove all old init code
+
 To do this simpily remove the game object or all the appsflyer code in the game object where there sdk is being initalized.
 Then follow the init guide for the new plugin.
-    
+
 ## 2. Update old init code with new code
 
 Replace old init code:
@@ -74,7 +77,6 @@ void Start () {
 
 With new init code:
 
-
 ```c#
 using AppsFlyerSDK;
 
@@ -90,13 +92,14 @@ public class AppsFlyerObjectScript : MonoBehaviour , IAppsFlyerConversionData
  // .....   
 }
 ```
+
 **Important**
 If you are also implementing conversion data and/or deeplinking then you need to initialize the SDK with the `IAppsFlyerConversionData` interface.
 
-## Update deeplink logic 
-    
+## Update deeplink logic
+
 Unity v5 does not include `com.appsflyer.GetDeepLinkingActivity`. <br>This was used in Unity v4 as a workaround for deeplinking.<br>
-If you are using this class for deeplinking, then make sure to remove the GetDeepLinkingActivity from the AndroidManifest.xml file. 
+If you are using this class for deeplinking, then make sure to remove the GetDeepLinkingActivity from the AndroidManifest.xml file.
 
 ## Update other Code
 
@@ -146,8 +149,8 @@ Here is a list of all the old API, and the new API.
 - [setGCMProjectNumber](#deprecated)
 - [setShouldCollectDeviceName](#deprecated)
 
-
 ## Init SDK
+
 ```c#
 // Old API's
 AppsFlyer.setAppsFlyerKey(string key);
@@ -165,6 +168,7 @@ AppsFlyer.startSDK();
 ```
 
 ## API that did not change
+
 ```c#
 AppsFlyer.setCurrencyCode(string currencyCode);
 AppsFlyer.setCustomerUserID(string customerUserID);
@@ -181,6 +185,7 @@ AppsFlyer.setAppInviteOneLinkID(string oneLinkID);
 ```
 
 ## Updated core API
+
 ```c#
 // old
 AppsFlyer.trackRichEvent(string eventName, Dictionary<string, string> eventValues);
@@ -209,6 +214,7 @@ AppsFlyer.trackAndOpenStore(string appID, string campaign, Dictionary<string, st
 ```
 
 ## iOS Only API
+
 ```c#
 // old
 AppsFlyer.setIsSandbox(bool isSandbox);
@@ -231,7 +237,6 @@ AppsFlyer.handleOpenUrl(string url, string sourceApplication, string annotation)
         AppsFlyer.handleOpenUrl(string url, string sourceApplication, string annotation);
 #endif
 ```
-
 
 ## Android Only API
 
@@ -321,7 +326,7 @@ AppsFlyer.createValidateInAppListener(string aObject, string callbackMethod, str
 ```
 
 ## Deprecated
-    
+
 ```c#
 //@Deprecated
 AppsFlyer.enableUninstallTracking(string senderId);

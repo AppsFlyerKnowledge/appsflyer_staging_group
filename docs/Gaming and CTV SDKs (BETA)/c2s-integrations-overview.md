@@ -19,22 +19,20 @@ The AppsFlyer Software Development Kits (SDKs) and plugins are the primary way t
 
 [block:html]
 {
-  "html": "<div class=\"button-container\">\n  <a class=\"button unity\" href=\"https://dev.appsflyer.com/hc/docs/unity-steam\">Unity Steam</a>\n  <a class=\"button unreal\" href=\"https://dev.appsflyer.com/hc/docs/unreal-steam\">Unreal Steam</a>\n  <a class=\"button cpp\" href=\"https://dev.appsflyer.com/hc/docs/steam-vanilla\">Steam C++</a>\n</div>\n\n<style>\n  .button-container {\n  \tdisplay: flex;\n  }\n  .button {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 180px;\n\t  border-radius: 6px;\n    padding: 8px;\n    margin-right: 4px;\n\t}\n  \n  .button:before {\n  \tmargin-right: 4px;\n  }\n  .button {\n    border: solid 2px #3DDC84;\n  }\n  .button.unreal, .button.ctv-html {\n  \tborder-radius: 6px;\n    padding: 8px;\n    border: solid 2px #7D7D7D;\n  }\n  .button.cpp, .button.tizen, .button.android {\n    border: solid 2px #118cfd;\n  }\n  \n  .unreal:before {\n  \tbackground: url(\"https://files.readme.io/800db75-unreal.svg\");\n  }\n  \n  .tizen:before {\n  \tbackground: url(\"https://files.readme.io/52286b1-small-samsung.png\");\n  }\n  \n  .webos:before {\n  \tbackground: url(\"https://files.readme.io/ee926d1-small-lg.png\");\n  }\n  \n  .unity:before {\n  \tbackground: url(\"https://files.readme.io/d4ce5b7-small-unity.png\");\n  }\n  \n  .cpp:before {\n  \tbackground: url(\"https://files.readme.io/56240fb-small-cpp.png\");\n  }\n\n  .roku:before {\n    background: url(\"https://files.readme.io/a9e3cfd-small-roku.png\");\n  }\n  \n  .ctv-html:after {\n    content: \"\" !important;\n  }\n  \n  .ios:before {\n    background: url(\"https://files.readme.io/19fdc72-apple-icon.svg\");\n  }\n\n  .android:before {\n    background: url(\"https://files.readme.io/d7dc5a3-android-icon.svg\");\n  }\n  \n  .button:before {\n    background-size: 25px;\n    width: 25px;\n    height: 25px;\n    margin-right: 5px;\n    background-repeat: no-repeat;\n    content: \"\";\n  }\n</style>"
+"html": "<div class=\"button-container\">\n  <a class=\"button unity\" href=\"https://dev.appsflyer.com/hc/docs/unity-steam\\">Unity Steam</a>\n  <a class=\"button unreal\" href=\"https://dev.appsflyer.com/hc/docs/unreal-steam\\">Unreal Steam</a>\n  <a class=\"button cpp\" href=\"https://dev.appsflyer.com/hc/docs/steam-vanilla\\">Steam C++</a>\n</div>\n\n<style>\n  .button-container {\n  \tdisplay: flex;\n  }\n  .button {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 180px;\n\t  border-radius: 6px;\n    padding: 8px;\n    margin-right: 4px;\n\t}\n  \n  .button:before {\n  \tmargin-right: 4px;\n  }\n  .button {\n    border: solid 2px #3DDC84;\n  }\n  .button.unreal, .button.ctv-html {\n  \tborder-radius: 6px;\n    padding: 8px;\n    border: solid 2px #7D7D7D;\n  }\n  .button.cpp, .button.tizen, .button.android {\n    border: solid 2px #118cfd;\n  }\n  \n  .unreal:before {\n  \tbackground: url(\"https://files.readme.io/800db75-unreal.svg\\");\\n  }\n  \n  .tizen:before {\n  \tbackground: url(\"https://files.readme.io/52286b1-small-samsung.png\\");\\n  }\n  \n  .webos:before {\n  \tbackground: url(\"https://files.readme.io/ee926d1-small-lg.png\\");\\n  }\n  \n  .unity:before {\n  \tbackground: url(\"https://files.readme.io/d4ce5b7-small-unity.png\\");\\n  }\n  \n  .cpp:before {\n  \tbackground: url(\"https://files.readme.io/56240fb-small-cpp.png\\");\\n  }\n\n  .roku:before {\n    background: url(\"https://files.readme.io/a9e3cfd-small-roku.png\\");\\n  }\n  \n  .ctv-html:after {\n    content: \"\" !important;\n  }\n  \n  .ios:before {\n    background: url(\"https://files.readme.io/19fdc72-apple-icon.svg\\");\\n  }\n\n  .android:before {\n    background: url(\"https://files.readme.io/d7dc5a3-android-icon.svg\\");\\n  }\n  \n  .button:before {\n    background-size: 25px;\n    width: 25px;\n    height: 25px;\n    margin-right: 5px;\n    background-repeat: no-repeat;\n    content: \"\";\n  }\n</style>"
 }
 [/block]
 
 ### Epic
 
-<div class="button-container">
-  <a class="button unity" href="https://dev.appsflyer.com/hc/docs/unity-epic">Unity Epic</a>
+<div class="button-container"><a class="button unity" href="https://dev.appsflyer.com/hc/docs/unity-epic">Unity Epic</a>
   <a class="button unreal" href="https://dev.appsflyer.com/hc/docs/unreal-epic">Unreal Epic</a>
   <a class="button cpp" href="https://dev.appsflyer.com/hc/docs/epic-vanilla">Epic C++</a>
 </div>
 
 ### Meta Quest (Oculus)
 
-<div class="button-container">
-  <a class="button unity" href="https://dev.appsflyer.com/hc/docs/meta-quest2-unity">Unity Quest</a>
+<div class="button-container"><a class="button unity" href="https://dev.appsflyer.com/hc/docs/meta-quest2-unity">Unity Quest</a>
   <a class="button unreal" href="https://dev.appsflyer.com/hc/docs/meta-quest2-unreal">Unreal Quest</a>
 </div>
 
@@ -43,24 +41,21 @@ The AppsFlyer Software Development Kits (SDKs) and plugins are the primary way t
 Windows SDK (legacy) supports only MS Windows App Store installs.  
 Any other PC app that does not fall into the above categories (Microsoft Store, Steam, or Epic) should fall under native PC.
 
-<div class="button-container">
-  <a class="button unity" href="https://dev.appsflyer.com/hc/docs/unity-nativepc">Unity Native PC</a>
+<div class="button-container"><a class="button unity" href="https://dev.appsflyer.com/hc/docs/unity-nativepc">Unity Native PC</a>
   <a class="button unreal" href="https://dev.appsflyer.com/hc/docs/unreal-nativepc">Unreal Native PC</a>
   <a class="button cpp" href="https://dev.appsflyer.com/hc/docs/nativepc-vanilla">Native PC C++</a>
 </div>
 
 ### CTV
 
-<div class="button-container">
-  <a class="button roku" href="https://dev.appsflyer.com/hc/docs/roku-brighscript">Roku (brs)</a>
+<div class="button-container"><a class="button roku" href="https://dev.appsflyer.com/hc/docs/roku-brighscript">Roku (brs)</a>
   <a class="button ctv-html webos" href="https://github.com/AppsFlyerSDK/appsflyer-html5-ctv-sdk">LG Webos</a>
   <a class="button ctv-html tizen" href="https://github.com/AppsFlyerSDK/appsflyer-html5-ctv-sdk">Samsung Tizen</a>
 </div>
 
 ### Mobile
 
-<div class="button-container">
-  <a class="button unity" href="https://dev.appsflyer.com/hc/docs/unity-plugin">Unity Plugin</a>
+<div class="button-container"><a class="button unity" href="https://dev.appsflyer.com/hc/docs/unity-plugin">Unity Plugin</a>
   <a class="button unreal" href="https://dev.appsflyer.com/hc/docs/unreal-plugin">Unreal Plugin</a>
   <a class="button android" href="https://dev.appsflyer.com/hc/docs/android-sdk">Android SDK</a>
   <a class="button ios" href="https://dev.appsflyer.com/hc/docs/ios-sdk">iOS SDK</a>

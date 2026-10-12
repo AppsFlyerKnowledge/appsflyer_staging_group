@@ -82,7 +82,7 @@ private static boolean testDomainInEspDomains(String testDomain) {
 }
 ```
 
-5. Check if the wrapped `link` is a OneLink link. If it is, the deep link flow will continue as usual. 
+5. Check if the wrapped `link` is a OneLink link. If it is, the deep link flow will continue as usual.
    If not, `link` will be open in the default browser.
 
 ```java

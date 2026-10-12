@@ -2,7 +2,9 @@
 title: API reference
 hidden: false
 ---
+
 The list of available methods for this plugin is described below.
+
 - [Android, iOS and Windows API](#android-ios-and-windows-api)
   - [initSDK](#initsdk)
   - [startSDK](#startsdk)
@@ -26,15 +28,15 @@ The list of available methods for this plugin is described below.
   - [getAppsFlyerId](#getappsflyerid)
   - [setMinTimeBetweenSessions](#setmintimebetweensessions)
   - [setHost](#sethost)
-  - [setUserEmails *Soon to be deprecated*](#setuseremails-soon-to-be-deprecated)
-  - [setPhoneNumber *Soon to be deprecated*](#setphonenumber-soon-to-be-deprecated)
+  - [setUserEmails _Soon to be deprecated_](#setuseremails-soon-to-be-deprecated)
+  - [setPhoneNumber _Soon to be deprecated_](#setphonenumber-soon-to-be-deprecated)
   - [getConversionData](#getconversiondata)
   - [attributeAndOpenStore](#attributeandopenstore)
   - [logAdRevenue](#logadrevenue)
   - [recordCrossPromoteImpression](#recordcrosspromoteimpression)
   - [generateUserInviteLink](#generateuserinvitelink)
-  - [setSharingFilterForAllPartners *Deprecated*](#setsharingfilterforallpartners-deprecated)
-  - [setSharingFilter *Deprecated*](#setsharingfilter-deprecated)
+  - [setSharingFilterForAllPartners _Deprecated_](#setsharingfilterforallpartners-deprecated)
+  - [setSharingFilter _Deprecated_](#setsharingfilter-deprecated)
   - [setSharingFilterForPartners](#setsharingfilterforpartners)
   - [setPartnerData](#setpartnerdata)
 - [Android Only API](#android-only-api)
@@ -93,26 +95,25 @@ The list of available methods for this plugin is described below.
   - [onInAppResponse](#oninappresponse)
   - [onDeepLinkReceived](#ondeeplinkreceived)
 
-
 ---
 
 ## Android, iOS and Windows API
 
-### initSDK 
+### initSDK
+
 **`void initSDK(string devKey, string appID, MonoBehaviour gameObject)`**
 
 Initialize the AppsFlyer SDK with the devKey and appID.
-The dev key is required for all apps and the appID is required only for iOS. 
+The dev key is required for all apps and the appID is required only for iOS.
 If you app is for Android only pass null for the appID.
 
+| parameter                                  | type            | description                                                                                                                 |
+| ------------------------------------------ | --------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `dev_key`                                  | `string`        | AppsFlyer's Dev-Key, which is accessible from your AppsFlyer account under 'App Settings' in the dashboard. |
+| `app_id`                                   | `string`        | Your app's Apple ID.                                                                                        |
+| `gameObject` (optional) | `MonoBehaviour` | The game object containing the IAppsFlyerConversionData interface.                                          |
 
-| parameter               | type                        | description  |
-| -----------             |-----------------------------|--------------|
-| `dev_key`               | `string`                    | AppsFlyer's Dev-Key, which is accessible from your AppsFlyer account under 'App Settings' in the dashboard.                  |
-| `app_id`                | `string`                    | Your app's Apple ID. |
-| `gameObject` (optional) | `MonoBehaviour`             |  The game object containing the IAppsFlyerConversionData interface.           |
-
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.initSDK("dev_key", "app_id"); // without deeplinking
@@ -124,11 +125,12 @@ AppsFlyer.initSDK("dev_key", "app_id", this); // with deeplinking
 ---
 
 ### startSDK
+
 **`void startSDK()`**
-    
+
 Once this API is invoked the SDK will start,  sessions will be immediately sent, and all background foreground transitions will record a session.
 
-*Example:*
+_Example:_
 
 ```c#
  AppsFlyer.startSDK();
@@ -138,7 +140,8 @@ Once this API is invoked the SDK will start,  sessions will be immediately sent,
 
 ## Android and iOS API
 
-### stopSDK 
+### stopSDK
+
 **`void stopSDK(bool isSDKStopped)`**
 
 In some extreme cases you might want to shut down all SDK functions due to legal and privacy compliance. This can be achieved with the stopSDK API. Once this API is invoked, our SDK no longer communicates with our servers and stops functioning.
@@ -147,21 +150,21 @@ There are several different scenarios for user opt-out. We highly recommend foll
 
 In any event, the SDK can be reactivated by calling the same API, by passing false.
 
- **Important :**
+**Important :**
 Do not call startSDK() if stopSDK() is set to true.
 
 To restart SDK functions again, use the following API:
 
 `AppsFlyer.stopSDK(false);`
 
- **Warning**
+**Warning**
 Use the stopSDK API only in cases where you want to fully ignore the user's SDK functions. Using this API SEVERELY impacts your attribution, data collection and deep linking mechanism.
 
-| parameter       | type    | description                                          |
-| -------------   |---------|----------------------------                          |
-| `isSDKStopped`  | `bool`  | True if the SDK is stopped (default value is false). |
+| parameter      | type   | description                                                                             |
+| -------------- | ------ | --------------------------------------------------------------------------------------- |
+| `isSDKStopped` | `bool` | True if the SDK is stopped (default value is false). |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.stopSDK(true);
@@ -170,11 +173,12 @@ AppsFlyer.stopSDK(true);
 ---
 
 ### isSDKStopped
+
 **`bool isSDKStopped()`**
 
 Was the stopSDK(boolean) API set to `true`.
 
-*Example:*
+_Example:_
 
 ```c#
 if (!AppsFlyer.isSDKStopped())
@@ -185,12 +189,13 @@ if (!AppsFlyer.isSDKStopped())
 
 ---
 
-### getSdkVersion 
+### getSdkVersion
+
 **`string getSdkVersion()`**
 
 Get the AppsFlyer SDK version used in the app.
 
-*Example:*
+_Example:_
 
 ```c#
 string version = AppsFlyer.getSdkVersion();
@@ -199,18 +204,19 @@ string version = AppsFlyer.getSdkVersion();
 ---
 
 ### setIsDebug
+
 **`void setIsDebug(bool shouldEnable)`**
 
 Enables Debug logs for the AppsFlyer SDK.
 
- **Warning**
+**Warning**
 Only set to true in development / debug.
 
-| parameter      | type   | description                                 |
-| -----------    |------- |---------------------------------------------|
+| parameter      | type   | description                                                    |
+| -------------- | ------ | -------------------------------------------------------------- |
 | `shouldEnable` | `bool` | True if debug mode is on (default is false) |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setIsDebug(true);
@@ -224,11 +230,11 @@ AppsFlyer.setIsDebug(true);
 
 Adds array of keys, which are used to compose key path to resolve deeplink from push notification payload.
 
-| parameter      | type   | description                                 |
-| -----------    |------- |---------------------------------------------|
-| `paths` | `string[]` | array of strings that represent the key path to the deeplink in the push notification payload |
+| parameter | type       | description                                                                                   |
+| --------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `paths`   | `string[]` | array of strings that represent the key path to the deeplink in the push notification payload |
 
-*Example:*
+_Example:_
 
 **Usage example**  
 Basic configuration:
@@ -267,15 +273,16 @@ This call matches the following payload structure:
 ---
 
 ### setCustomerUserId
+
 **`void setCustomerUserId(string id)`**
 
 Setting your own Custom ID enables you to cross-reference your own unique ID with AppsFlyer’s user ID and the other devices’ IDs. This ID is available in AppsFlyer CSV reports along with postbacks APIs for cross-referencing with your internal IDs.
 
-| parameter | type     | description     |
-| --------- |--------- |--------------   |
-| `id`      | `string` | custom user ID  |
+| parameter | type     | description    |
+| --------- | -------- | -------------- |
+| `id`      | `string` | custom user ID |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setCustomerUserId("custom_user_id");
@@ -283,17 +290,18 @@ AppsFlyer.setCustomerUserId("custom_user_id");
 
 ---
 
-### setAppInviteOneLinkID 
+### setAppInviteOneLinkID
+
 **`void setAppInviteOneLinkID(string oneLinkId)`**
 
 Set the OneLink ID that should be used for User-Invite-API
 The link that is generated for the user invite will use this OneLink as the base link.
 
 | parameter   | type     | description                            |
-| ----------- |--------- |----------------------------------------|
+| ----------- | -------- | -------------------------------------- |
 | `oneLinkId` | `string` | OneLink ID for User-Invite attribution |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setAppInviteOneLinkID("abcd");
@@ -302,33 +310,36 @@ AppsFlyer.setAppInviteOneLinkID("abcd");
 ---
 
 ### setAdditionalData
+
 **`void setAdditionalData(Dictionary<string, string> customData)`**
 
-The setAdditionalData API is required to integrate on the SDK level with several external partner platforms, including Segment, Adobe and Urban Airship. Use this API only if the integration article of the platform specifically states setAdditionalData API is needed. 
+The setAdditionalData API is required to integrate on the SDK level with several external partner platforms, including Segment, Adobe and Urban Airship. Use this API only if the integration article of the platform specifically states setAdditionalData API is needed.
 
 | parameter    | type                         | description     |
-| -----------  |----------------------------- |--------------   |
+| ------------ | ---------------------------- | --------------- |
 | `customData` | `Dictionary<string, string>` | additional data |
 
-*Example:*
+_Example:_
 
 ```c#
 Dictionary<string, string> customData = new Dictionary<string, string>();
 customData.Add("custom1", "someData");
 AppsFlyer.setAdditionalData(customData);
 ```
+
 ---
 
 ### setResolveDeepLinkURLs
+
 **`void setResolveDeepLinkURLs(params string[] urls)`**
 
 If you are using OneLinks which support Android App Links and wrapping them with a 3rd Party Universal Link, you can use the setResolveDeepLinkURLs API to notify the AppsFlyer SDK which click domains that invoke the app should be resolved by the SDK and have the underlying OneLink extracted from them. This will allow you to maintain deep linking and attribution while wrapping the OneLink with a 3rd party Universal Link. Make sure to call this API before SDK initialization.
 
 | parameter | type              | description   |
-| ----------|-------------------|-------------- |
+| --------- | ----------------- | ------------- |
 | `urls`    | `params string[]` | array of urls |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setResolveDeepLinkURLs("test.com", "test2.ca");
@@ -336,16 +347,17 @@ AppsFlyer.setResolveDeepLinkURLs("test.com", "test2.ca");
 
 ---
 
-### setOneLinkCustomDomain 
+### setOneLinkCustomDomain
+
 **`void setOneLinkCustomDomain(params string[] domains)`**
-    
+
 Advertisers can use this method to set vanity onelink domains.
 
-| parameter  | type              | description             |
-| ---------- | ----------------- |-------------------------|
-| `domains`  | `params string[]` | array of custom domains |
+| parameter | type              | description             |
+| --------- | ----------------- | ----------------------- |
+| `domains` | `params string[]` | array of custom domains |
 
-*Example:*
+_Example:_
 
 ```c#
  AppsFlyer.setOneLinkCustomDomain("test.domain", "test2.domain");
@@ -353,18 +365,19 @@ Advertisers can use this method to set vanity onelink domains.
 
 ---
 
-### setCurrencyCode 
+### setCurrencyCode
+
 **`void setCurrencyCode(string currencyCode)`**
 
 Setting user local currency code for in-app purchases.
 The currency code should be a 3 character ISO 4217 code. (default is USD).
 You can set the currency code for all events by calling the following method.
 
-| parameter      | type     | description                                 |
-| -----------    |----------|---------------------------------------------|
+| parameter      | type     | description                                                                    |
+| -------------- | -------- | ------------------------------------------------------------------------------ |
 | `currencyCode` | `string` | 3 character ISO 4217 code. (default is USD) |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setCurrencyCode("GBP");
@@ -374,17 +387,18 @@ AppsFlyer.setCurrencyCode("GBP");
 
 ---
 
-### setDeepLinkTimeout 
+### setDeepLinkTimeout
+
 **`void setDeepLinkTimeout(long deepLinkTimeout)`**
 
 Setting the deepLink timeout value that should be used for DDL.
 If you want to use it, set it before the DDL setting.
 
-| parameter          | type     | description      |
-| ------------------ |----------|------------------|
-| `deepLinkTimeout`  | `long`   | in milliseconds  |
+| parameter         | type   | description     |
+| ----------------- | ------ | --------------- |
+| `deepLinkTimeout` | `long` | in milliseconds |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setDeepLinkTimeout(2000);
@@ -392,17 +406,18 @@ AppsFlyer.setDeepLinkTimeout(2000);
 
 ---
 
-### enableTCFDataCollection 
+### enableTCFDataCollection
+
 **`void enableTCFDataCollection(bool shouldCollectTcfData)`**
 
 Calling enableTCFDataCollection(true) will enable collecting and sending any TCF related data.
 Calling enableTCFDataCollection(false) will disable the collection of TCF related data and from sending it.
 
-| parameter                | type     | description                     |
-| ------------------------ |----------|-------------------------------- |
-| `shouldCollectTcfData`   | `bool`   | true to enable data collection  |
+| parameter              | type   | description                    |
+| ---------------------- | ------ | ------------------------------ |
+| `shouldCollectTcfData` | `bool` | true to enable data collection |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.enableTCFDataCollection(true);;
@@ -410,16 +425,17 @@ AppsFlyer.enableTCFDataCollection(true);;
 
 ---
 
-### setConsentData 
+### setConsentData
+
 **`void setConsentData(AppsFlyerConsent appsFlyerConsent)`**
 
 Sets or updates the user consent data related to GDPR and DMA regulations for advertising and data usage purposes within the application.
 
-| parameter                   | type                | description                                                           |
-| --------------------------- |----------           |------------------------------------ |
-| `appsFlyerConsent`          | `AppsFlyerConsent`  | Instance of AppsFlyerConsent class  |
+| parameter          | type               | description                        |
+| ------------------ | ------------------ | ---------------------------------- |
+| `appsFlyerConsent` | `AppsFlyerConsent` | Instance of AppsFlyerConsent class |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyerConsent consent = new AppsFlyerConsent(true, false, false, false);
@@ -429,17 +445,17 @@ AppsFlyer.setConsentData(consent);
 ---
 
 ### recordLocation
+
 **`void recordLocation(double latitude, double longitude)`**
 
 Manually record the location of the user.
 
 | parameter   | type     | description       |
-| ----------- |--------- |--------------     |
+| ----------- | -------- | ----------------- |
 | `latitude`  | `double` | latitude of user  |
 | `longitude` | `double` | longitude of user |
 
-
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.recordLocation(40.7128, 74.0060);
@@ -448,6 +464,7 @@ AppsFlyer.recordLocation(40.7128, 74.0060);
 ---
 
 ### anonymizeUser
+
 **`void anonymizeUser(bool shouldAnonymizeUser)`**
 
 AppsFlyer provides you with a method to anonymize specific user identifiers in AppsFlyer analytics. This method complies with the latest privacy requirements and complies with Facebook data and privacy policies. Default is NO, meaning no anonymization is performed by default.
@@ -458,10 +475,10 @@ You can cancel anonymization by calling anonymizeUser again, set to false.
 Anonymizing users SEVERELY impacts your attribution information. Use this option ONLY for regions which legally prevents you from collecting your users' information.
 
 | parameter             | type   | description                   |
-| --------------------  |--------|-------------------------------|
+| --------------------- | ------ | ----------------------------- |
 | `shouldAnonymizeUser` | `bool` | true to perform anonymization |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.anonymizeUser(true);
@@ -469,12 +486,13 @@ AppsFlyer.anonymizeUser(true);
 
 ---
 
-### getAppsFlyerId 
+### getAppsFlyerId
+
 **`string getAppsFlyerId()`**
 
 AppsFlyer's unique device ID is created for every new install of an app. Use the following API to obtain AppsFlyer’s Unique ID.
 
-*Example:*
+_Example:_
 
 ```c#
 string uid = AppsFlyer.getAppsFlyerId(); 
@@ -482,18 +500,19 @@ string uid = AppsFlyer.getAppsFlyerId();
 
 ---
 
-### setMinTimeBetweenSessions 
+### setMinTimeBetweenSessions
+
 **`void setMinTimeBetweenSessions(int seconds)`**
 
 By default, at least 5 seconds must lapse between 2 app launches to count as separate 2 sessions (more about counting sessions). However, you can use the following API to set your custom value for the minimum required time between sessions.
 
 **Note:** Setting a high value to the custom time between launches may badly impact APIs relying on sessions data, such as deep linking.
 
-| parameter   | type   | description                                  |
-| ----------- |------- |--------------------------------------------- |
-| `seconds`   | `int`  | time between sessions (default is 5 seconds) |
+| parameter | type  | description                                                     |
+| --------- | ----- | --------------------------------------------------------------- |
+| `seconds` | `int` | time between sessions (default is 5 seconds) |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setMinTimeBetweenSessions(4);
@@ -502,17 +521,17 @@ AppsFlyer.setMinTimeBetweenSessions(4);
 ---
 
 ### setHost
+
 **`void setHost(string hostPrefixName, string hostName)`**
 
 Set a custom host.
 
-| parameter        | type      | description  |
-| -----------      |---------- |--------------|
-| `hostPrefixName` | `string`  |              |
-| `hostName`       | `string`  |              |
+| parameter        | type     | description |
+| ---------------- | -------- | ----------- |
+| `hostPrefixName` | `string` |             |
+| `hostName`       | `string` |             |
 
-
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setHost("hostPrefixName","hostName");
@@ -520,7 +539,7 @@ AppsFlyer.setHost("hostPrefixName","hostName");
 
 ---
 
-### setUserEmails *Soon to be deprecated*
+### setUserEmails _Soon to be deprecated_
 
 **`void setUserEmails(EmailCryptType cryptMethod, params string[] emails)`**
 
@@ -530,14 +549,12 @@ cryptMethod Encryption methods:
 EmailCryptType.EmailCryptTypeSHA256
 EmailCryptType.EmailCryptTypeNone
 
-
-| parameter     | type              | description               |
-| -----------   |-------------------|---------------------------|
+| parameter     | type              | description     |
+| ------------- | ----------------- | --------------- |
 | `cryptMethod` | `EmailCryptType`  | none, or sha256 |
-| `emails`      | `params string[]` | list of emails            |
+| `emails`      | `params string[]` | list of emails  |
 
-
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setUserEmails(EmailCryptType.EmailCryptTypeSHA256, "test1@test1.com", "test2@test2.com");
@@ -545,18 +562,17 @@ AppsFlyer.setUserEmails(EmailCryptType.EmailCryptTypeSHA256, "test1@test1.com", 
 
 ---
 
-### setPhoneNumber *Soon to be deprecated*
+### setPhoneNumber _Soon to be deprecated_
+
 **`void setPhoneNumber(string phoneNumber)`**
 
 Set the user phone number.
 
+| parameter     | type     | description |
+| ------------- | -------- | ----------- |
+| `phoneNumber` | `string` |             |
 
-| parameter     | type              | description               |
-| -----------   |-------------------|---------------------------|
-| `phoneNumber` | `string`  |  |
-
-
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setPhoneNumber("4166358181");
@@ -565,6 +581,7 @@ AppsFlyer.setPhoneNumber("4166358181");
 ---
 
 ### getConversionData
+
 **`void getConversionData(string objectName);`**
 
 Register a Conversion Data Listener.
@@ -575,10 +592,10 @@ which can greatly enhance their engagement with your app.
 Get the callbacks by implementing the IAppsFlyerConversionData interface.
 
 | parameter    | type     | description                                             |
-| -----------  |----------|-------------------------------------------------------- |
+| ------------ | -------- | ------------------------------------------------------- |
 | `objectName` | `string` | game object with the IAppsFlyerConversionData interface |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.getConversionData(gameObject.name);
@@ -587,20 +604,21 @@ AppsFlyer.getConversionData(gameObject.name);
 ---
 
 ### attributeAndOpenStore
+
 **`void attributeAndOpenStore(string appID, string campaign, Dictionary<string, string> userParams, MonoBehaviour gameObject)`**
 
 Use the following API to attribute the click and launch the app store's app page.
 
 Get the callbacks by implementing the IAppsFlyerUserInvite interface.
 
-| parameter     | type                         | description                                         |
-| -----------   |----------------------------- |-----------------------------------------------------|
-| `appID`       | `string`                     |                                                     |
-| `campaign`    | `string`                     |                                                     |
-| `userParams`  | `Dictionary<string, string> `|                                                     |
-| `gameObject`  | `MonoBehaviour`              | game object with the IAppsFlyerUserInvite interface |
+| parameter    | type                          | description                                         |
+| ------------ | ----------------------------- | --------------------------------------------------- |
+| `appID`      | `string`                      |                                                     |
+| `campaign`   | `string`                      |                                                     |
+| `userParams` | `Dictionary<string, string> ` |                                                     |
+| `gameObject` | `MonoBehaviour`               | game object with the IAppsFlyerUserInvite interface |
 
-*Example:*
+_Example:_
 
 ```c#
 Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -612,16 +630,17 @@ AppsFlyer.attributeAndOpenStore("123456789", "test campaign", parameters, this);
 ---
 
 ### logAdRevenue
+
 **`void logAdRevenue(AFAdRevenueData adRevenueData, Dictionary<string, string> additionalParameters)`**
 
 Logs ad revenue data along with additional parameters if provided.
 
-| parameter               | type                         | description                                         |
-| -------------------     |----------------------------- |-----------------------------------------------------|
-| `adRevenueData`         | `AFAdRevenueData`            |  Instance of AFAdRevenueData containing ad revenue information                                                   |
-| `additionalParameters`  | `Dictionary<string, string> `|  An optional map of additional parameters to be logged with ad revenue data                                                  |
+| parameter              | type                          | description                                                                |
+| ---------------------- | ----------------------------- | -------------------------------------------------------------------------- |
+| `adRevenueData`        | `AFAdRevenueData`             | Instance of AFAdRevenueData containing ad revenue information              |
+| `additionalParameters` | `Dictionary<string, string> ` | An optional map of additional parameters to be logged with ad revenue data |
 
-*Example:*
+_Example:_
 
 ```c#
 Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -633,20 +652,20 @@ AppsFlyer.logAdRevenue(logRevenue, parameters);
 
 ---
 
-### recordCrossPromoteImpression 
+### recordCrossPromoteImpression
+
 **`void recordCrossPromoteImpression(string appID, string campaign);`**
 
 To attribute an impression use the following API call.
 Make sure to use the promoted App ID as it appears within the AppsFlyer dashboard.
 
-| parameter    | type      | description  |
-| -----------  |-----------|--------------|
-| `appID`      | `string`  | appID        |
-| `campaign`   | `string`  | campaign     |
-| `params`     | `Dictionary<string, string>`    | additional params     |
+| parameter  | type                         | description       |
+| ---------- | ---------------------------- | ----------------- |
+| `appID`    | `string`                     | appID             |
+| `campaign` | `string`                     | campaign          |
+| `params`   | `Dictionary<string, string>` | additional params |
 
-
-*Example:*
+_Example:_
 
 ```c#
 Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -658,18 +677,18 @@ AppsFlyer.recordCrossPromoteImpression("appID", "campaign", parameters);
 ---
 
 ### generateUserInviteLink
+
 **`void generateUserInviteLink(Dictionary<string, string> parameters, MonoBehaviour gameObject)`**
 
 The LinkGenerator class builds the invite URL according to various setter methods which allow passing on additional information on the click.
 See - https://support.appsflyer.com/hc/en-us/articles/115004480866-User-invite-attribution-
 
-
 | parameter    | type                         | description                                         |
-| -----------  |----------------------------- |-----------------------------------------------------|
+| ------------ | ---------------------------- | --------------------------------------------------- |
 | `parameters` | `Dictionary<string, string>` |                                                     |
 | `gameObject` | `MonoBehaviour`              | game object with the IAppsFlyerUserInvite interface |
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.generateUserInviteLink(params, this);
@@ -677,12 +696,13 @@ AppsFlyer.generateUserInviteLink(params, this);
 
 ---
 
-### setSharingFilterForAllPartners *Deprecated*
-**`void setSharingFilterForAllPartners()`** 
+### setSharingFilterForAllPartners _Deprecated_
+
+**`void setSharingFilterForAllPartners()`**
 
 Used by advertisers to exclude all networks/integrated partners from getting data.
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setSharingFilterForAllPartners();
@@ -690,19 +710,17 @@ AppsFlyer.setSharingFilterForAllPartners();
 
 ---
 
-### setSharingFilter *Deprecated*
-**`void setSharingFilter(params string[] partners)`** 
+### setSharingFilter _Deprecated_
 
+**`void setSharingFilter(params string[] partners)`**
 
- Used by advertisers to set some (one or more) networks/integrated partners to exclude from getting data.
+Used by advertisers to set some (one or more) networks/integrated partners to exclude from getting data.
 
+| parameter  | type                       | description                           |
+| ---------- | -------------------------- | ------------------------------------- |
+| `partners` | `params string[] partners` | partners to exclude from getting data |
 
-| parameter    | type                         | description                                         |
-| -----------  |----------------------------- |-----------------------------------------------------|
-| `partners` | `params string[] partners` | partners to exclude from getting data                                                    |
-
-
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setSharingFilter("googleadwords_int","snapchat_int","doubleclick_int");
@@ -710,18 +728,17 @@ AppsFlyer.setSharingFilter("googleadwords_int","snapchat_int","doubleclick_int")
 
 ---
 
-### setSharingFilterForPartners 
-**`void setSharingFilterForPartners(params string[] partners)`** 
+### setSharingFilterForPartners
 
+**`void setSharingFilterForPartners(params string[] partners)`**
 
- Used by advertisers to set some (one or more) networks/integrated partners to exclude from getting data.
+Used by advertisers to set some (one or more) networks/integrated partners to exclude from getting data.
 
+| parameter  | type                       | description                           |
+| ---------- | -------------------------- | ------------------------------------- |
+| `partners` | `params string[] partners` | partners to exclude from getting data |
 
-| parameter    | type                         | description                                         |
-| -----------  |----------------------------- |-----------------------------------------------------|
-| `partners` | `params string[] partners` | partners to exclude from getting data                                                    |
-
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.setSharingFilterForPartners("partner1_int"); // Single partner
@@ -734,17 +751,17 @@ AppsFlyer.setSharingFilterForPartners(); // Reset list (default)
 ---
 
 ### setPartnerData
-**`void setPartnerData(string partnerID, params string[] partnerInfo)`** 
+
+**`void setPartnerData(string partnerID, params string[] partnerInfo)`**
 
 Allows sending custom data for partner integration purposes.
 
-| parameter    | type                         |description       |
-| -----------  |------------------------------| -----------------------------------------|
-| `partnerID` | `string` | ID of the partner (usually suffixed with "_int").|
-|`partnerInfo` | `params string[]` | Customer data, depends on the integration configuration with the specific partner. |
+| parameter     | type              | description                                                                                               |
+| ------------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
+| `partnerID`   | `string`          | ID of the partner (usually suffixed with "_int"). |
+| `partnerInfo` | `params string[]` | Customer data, depends on the integration configuration with the specific partner.        |
 
-
-*Example:*
+_Example:_
 
 ```c#
    Dictionary<string, string> partnerInfo = new Dictionary<string, string>();
@@ -752,21 +769,21 @@ Allows sending custom data for partner integration purposes.
         AppsFlyer.setPartnerData("partner_test", partnerInfo);
 ```
 
----- 
+----&#x20;
 
 ## Android Only API
-  
+
 ### updateServerUninstallToken
+
 **`void updateServerUninstallToken(string token)`**
- 
- Manually pass the Firebase Device Token for Uninstall measurement.
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `token`     | `string`  | Firebase FCM token |
+Manually pass the Firebase Device Token for Uninstall measurement.
 
+| parameter | type     | description        |
+| --------- | -------- | ------------------ |
+| `token`   | `string` | Firebase FCM token |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -776,20 +793,19 @@ Allows sending custom data for partner integration purposes.
 
 ---
 
-### setImeiData 
+### setImeiData
+
 **`void setImeiData(string imei)`**
- 
+
 By default, IMEI and Android ID are not collected by the SDK if the OS version is higher than KitKat (4.4)
 and the device contains Google Play Services(on SDK versions 4.8.8 and below the specific app needed GPS).
 Use this API to explicitly send IMEI to AppsFlyer.
 
+| parameter | type     | description   |
+| --------- | -------- | ------------- |
+| `imei`    | `string` | device's IMEI |
 
-| parameter   | type     | description   |
-| ----------- |----------|-------------- |
-| `imei`      | `string` | device's IMEI |
-
-
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -800,16 +816,17 @@ Use this API to explicitly send IMEI to AppsFlyer.
 ---
 
 ### setAndroidIdData
+
 **`void setAndroidIdData(string androidId)`**
- 
+
 By default, IMEI and Android ID are not collected by the SDK if the OS version is higher than KitKat(4.4)and the device contains Google Play Services(on SDK versions 4.8.8 and below the specific app needed GPS).
 Use this API to explicitly send Android ID to AppsFlyer.
 
-| parameter   | type     | description          |
-| ----------- | ---------|--------------------- |
-| `androidId` | `string` | device's Android ID  |
+| parameter   | type     | description         |
+| ----------- | -------- | ------------------- |
+| `androidId` | `string` | device's Android ID |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -819,20 +836,19 @@ Use this API to explicitly send Android ID to AppsFlyer.
 
 ---
 
-### waitForCustomerUserId 
+### waitForCustomerUserId
+
 **`void waitForCustomerUserId(bool wait)`**
- 
+
 It is possible to delay the SDK Initialization until the customerUserID is set.
 This feature makes sure that the SDK doesn't begin functioning until the customerUserID is provided.
 If this API is used, all in-app events and any other SDK API calls are discarded, until the customerUserID is provided.
 
+| parameter | type   | description                                         |
+| --------- | ------ | --------------------------------------------------- |
+| `wait`    | `bool` | True if you want the SDK to wait for customerUserID |
 
-| parameter   | type    | description                                         |
-| ----------  |-------- |-----------------------------------------------------|
-| `wait`      | `bool`  | True if you want the SDK to wait for customerUserID |
-
-
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -850,11 +866,11 @@ If this API is used, all in-app events and any other SDK API calls are discarded
 
 Use this API to provide the SDK with the relevant customer user id and trigger the SDK to begin its normal activity.
 
-| parameter   | type      | description             |
-| ----------- |---------- |------------------------ |
-| `id`        | `string`  | Customer ID for client. |
+| parameter | type     | description                             |
+| --------- | -------- | --------------------------------------- |
+| `id`      | `string` | Customer ID for client. |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -864,12 +880,13 @@ Use this API to provide the SDK with the relevant customer user id and trigger t
 
 ---
 
- ### getOutOfStore 
- **`string getOutOfStore()`**
- 
- Get the current AF_STORE value.
+### getOutOfStore
 
-*Example:*
+**`string getOutOfStore()`**
+
+Get the current AF_STORE value.
+
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -879,16 +896,17 @@ Use this API to provide the SDK with the relevant customer user id and trigger t
 
 ---
 
- ### setOutOfStore 
- **`void setOutOfStore(string sourceName)`**
- 
- Manually set the AF_STORE value.
+### setOutOfStore
 
-| parameter    | type      | description  |
-| -----------  |---------- |--------------|
-| `sourceName` | `string`  |              |
+**`void setOutOfStore(string sourceName)`**
 
-*Example:*
+Manually set the AF_STORE value.
+
+| parameter    | type     | description |
+| ------------ | -------- | ----------- |
+| `sourceName` | `string` |             |
+
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -898,19 +916,19 @@ Use this API to provide the SDK with the relevant customer user id and trigger t
 
 ---
 
- ### setCollectAndroidID
- **`void setCollectAndroidID(bool isCollect)`**
+### setCollectAndroidID
+
+**`void setCollectAndroidID(bool isCollect)`**
 
 Opt-out of collection of Android ID.
 If the app does NOT contain Google Play Services, Android ID is collected by the SDK.
 However, apps with Google play services should avoid Android ID collection as this is in violation of the Google Play policy.
- 
-| parameter   | type     | description  |
-| ----------- |--------- |--------------|
-| `isCollect` | `bool`   |              |
 
+| parameter   | type   | description |
+| ----------- | ------ | ----------- |
+| `isCollect` | `bool` |             |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -920,19 +938,19 @@ However, apps with Google play services should avoid Android ID collection as th
 
 ---
 
+### setCollectIMEI
 
- ### setCollectIMEI
- **`void setCollectIMEI(bool isCollect)`**
- 
+**`void setCollectIMEI(bool isCollect)`**
+
 Opt-out of collection of IMEI.
 If the app does NOT contain Google Play Services, device IMEI is collected by the SDK.
 However, apps with Google play services should avoid IMEI collection as this is in violation of the Google Play policy.
 
-| parameter          | type                        | description  |
-| -----------        |-----------------------------|--------------|
-| `isCollect`        | `bool`                      |              |
+| parameter   | type   | description |
+| ----------- | ------ | ----------- |
+| `isCollect` | `bool` |             |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -942,16 +960,17 @@ However, apps with Google play services should avoid IMEI collection as this is 
 
 ---
 
- ### setIsUpdate
- **`void setIsUpdate(bool isUpdate)`**
- 
+### setIsUpdate
+
+**`void setIsUpdate(bool isUpdate)`**
+
 Manually set that the application was updated.
 
-| parameter   | type    | description             |
-| ----------- |-------- |-------------------------|
-| `isUpdate`  | `bool`  | true if app was updated |
+| parameter  | type   | description             |
+| ---------- | ------ | ----------------------- |
+| `isUpdate` | `bool` | true if app was updated |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -961,18 +980,19 @@ Manually set that the application was updated.
 
 ---
 
- ### setPreinstallAttribution
- **`void setPreinstallAttribution(string mediaSource, string campaign, string siteId)`**
- 
- Specify the manufacturer or media source name to which the preinstall is attributed.
+### setPreinstallAttribution
 
-| parameter      | type     | description                                                   |
-| -----------    |----------|---------------------------------------------------------------|
-| `mediaSource`  | `string` | Manufacturer or media source name for preinstall attribution. |
-| `campaign`     | `string` | Campaign name for preinstall attribution.                     |
-| `siteId`       | `string` | Site ID for preinstall attribution.                           |
+**`void setPreinstallAttribution(string mediaSource, string campaign, string siteId)`**
 
-*Example:*
+Specify the manufacturer or media source name to which the preinstall is attributed.
+
+| parameter     | type     | description                                                                   |
+| ------------- | -------- | ----------------------------------------------------------------------------- |
+| `mediaSource` | `string` | Manufacturer or media source name for preinstall attribution. |
+| `campaign`    | `string` | Campaign name for preinstall attribution.                     |
+| `siteId`      | `string` | Site ID for preinstall attribution.                           |
+
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -980,15 +1000,15 @@ Manually set that the application was updated.
 #endif
 ```
 
-
 ---
 
- ### isPreInstalledApp
- **`bool isPreInstalledApp()`**
- 
+### isPreInstalledApp
+
+**`bool isPreInstalledApp()`**
+
 Boolean indicator for preinstall by Manufacturer.
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -998,6 +1018,7 @@ Boolean indicator for preinstall by Manufacturer.
         }
 #endif
 ```
+
 ---
 
 ### handlePushNotifications
@@ -1005,7 +1026,7 @@ Boolean indicator for preinstall by Manufacturer.
 **`void handlePushNotifications()`**
 When the handlePushNotifications API is called push notifications will be recorded.
 
-*Example:*
+_Example:_
 
 ```c#
 AppsFlyer.handlePushNotifications();
@@ -1013,20 +1034,19 @@ AppsFlyer.handlePushNotifications();
 
 ---
 
-
 ### getAttributionId
+
 **`string getAttributionId()`**
- 
+
 Get the Facebook attribution ID, if one exists.
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
         string attributionId = AppsFlyer.getAttributionId();
 #endif
 ```
-
 
 ---
 
@@ -1038,19 +1058,19 @@ AppsFlyer provides two versions of the `validateAndSendInAppPurchase` method:
 - **Legacy**: Uses individual string parameters (deprecated, maintained for backward compatibility)
 
 ### validateAndSendInAppPurchase (V2 - Recommended)
+
 **`void validateAndSendInAppPurchase(AFPurchaseDetailsAndroid details, Dictionary<string, string> purchaseAdditionalDetails, MonoBehaviour gameObject)`**
- 
+
 API for server verification of in-app purchases (V2).
 An af_purchase event with the relevant values will be automatically sent if the validation is successful.
 
+| parameter                   | type                         | description                                        |
+| --------------------------- | ---------------------------- | -------------------------------------------------- |
+| `details`                   | `AFPurchaseDetailsAndroid`   | Instance of AFPurchaseDetailsAndroid class         |
+| `purchaseAdditionalDetails` | `Dictionary<string, string>` | Additional parameters to be sent with the purchase |
+| `gameObject`                | `MonoBehaviour`              | Game object for the callbacks to be sent           |
 
-| parameter                    | type                         | description                                        |
-| -----------                  |------------------------------|----------------------------------------------------|
-| `details`                    | `AFPurchaseDetailsAndroid`   | Instance of AFPurchaseDetailsAndroid class |
-| `purchaseAdditionalDetails`  | `Dictionary<string, string>` | Additional parameters to be sent with the purchase |
-| `gameObject`                 | `MonoBehaviour`              | Game object for the callbacks to be sent           |
-
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -1071,24 +1091,24 @@ An af_purchase event with the relevant values will be automatically sent if the 
 ---
 
 ### validateAndSendInAppPurchase (Legacy - Deprecated)
+
 **`void validateAndSendInAppPurchase(string publicKey, string signature, string purchaseData, string price, string currency, Dictionary<string, string> additionalParameters, MonoBehaviour gameObject)`**
- 
+
 **⚠️ Deprecated:** This legacy API is deprecated. Use the V2 version with `AFPurchaseDetailsAndroid` instead. This method is maintained for backward compatibility only.
 API for server verification of in-app purchases.
 An af_purchase event with the relevant values will be automatically sent if the validation is successful.
 
+| parameter              | type                         | description                                                                                          |
+| ---------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `publicKey`            | `string`                     | License Key obtained from the Google Play Console.                                   |
+| `signature`            | `string`                     | data.INAPP_DATA_SIGNATURE. |
+| `purchaseData`         | `string`                     | data.INAPP_PURCHASE_DATA                   |
+| `price`                | `string`                     | Purchase price                                                                                       |
+| `currency`             | `string`                     | Purchase currency                                                                                    |
+| `additionalParameters` | `Dictionary<string, string>` | Parameters to be sent with the purchase                                                              |
+| `gameObject`           | `MonoBehaviour`              | Game object for the callbacks to be sent                                                             |
 
-| parameter              | type     | description  |
-| -----------            |----------|--------------|
-| `publicKey`            | `string` | License Key obtained from the Google Play Console. |
-| `signature`            | `string` | data.INAPP_DATA_SIGNATURE.                         |
-| `purchaseData`         | `string` | data.INAPP_PURCHASE_DATA                           |
-| `price`                | `string` | Purchase price                                     |
-| `currency`             | `string` | Purchase currency                                   |
-|`additionalParameters`  | `Dictionary<string, string>` | Parameters to be sent with the purchase |
-| `gameObject`           | `MonoBehaviour` | Game object for the callbacks to be sent   |
-
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -1106,17 +1126,18 @@ An af_purchase event with the relevant values will be automatically sent if the 
 ---
 
 ### setCollectOaid
+
 **`void setCollectOaid(boolean isCollect)`**
 
     setCollectOaid
-
+    
     You must include the appsflyer oaid library for this api to work.
 
-| parameter   | type    | description             |
-| ----------- |-------- |-------------------------|
-| `isCollect` | `bool`  | true to allow oaid collection |
+| parameter   | type   | description                   |
+| ----------- | ------ | ----------------------------- |
+| `isCollect` | `bool` | true to allow oaid collection |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -1125,19 +1146,20 @@ An af_purchase event with the relevant values will be automatically sent if the 
 ```
 
 ---
-    
-### setDisableAdvertisingIdentifiers 
+
+### setDisableAdvertisingIdentifiers
+
 **`void setDisableAdvertisingIdentifiers(boolean disable)`**
 
     setDisableAdvertisingIdentifiers
-
+    
     Disables collection of various Advertising IDs by the SDK. This includes Google Advertising ID (GAID), OAID and Amazon Advertising ID (AAID)
 
-| parameter   | type    | description             |
-| ----------- |-------- |-------------------------|
-| `disable` | `bool`  | true to disable|
+| parameter | type   | description     |
+| --------- | ------ | --------------- |
+| `disable` | `bool` | true to disable |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -1148,19 +1170,20 @@ An af_purchase event with the relevant values will be automatically sent if the 
 ---
 
 ---
-    
+
 ### setDisableNetworkData
+
 **`void setDisableNetworkData(boolean disable)`**
 
     setDisableNetworkData
-
+    
     Use to opt-out of collecting the network operator name (carrier) and sim operator name from the device.
 
-| parameter   | type    | description             |
-| ----------- |-------- |-------------------------|
-| `disable` | `bool`  | true to opt-out|
+| parameter | type   | description     |
+| --------- | ------ | --------------- |
+| `disable` | `bool` | true to opt-out |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -1170,19 +1193,20 @@ An af_purchase event with the relevant values will be automatically sent if the 
 
 ---
 
-##  iOS Only API
-           
-### setDisableCollectAppleAdSupport 
+## iOS Only API
+
+### setDisableCollectAppleAdSupport
+
 **`void setDisableCollectAppleAdSupport(bool disable)`**
- 
+
 AppsFlyer SDK collects Apple's `advertisingIdentifier` if the `AdSupport.framework` is included in the SDK.
 You can disable this behavior by setting the following property to true.
 
-| parameter      | type     | description  |
-| -----------    |----------|--------------|
-| `disable`      | `bool`   |              |
+| parameter | type   | description |
+| --------- | ------ | ----------- |
+| `disable` | `bool` |             |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1198,10 +1222,10 @@ You can disable this behavior by setting the following property to true.
 When the handlePushNotifications API is called from a service that is swizzling, like Firebase, the push notifications payload will be handled by the AppsflyerSDK.
 
 | parameter     | type                         | description                   |
-| --------------|------------------------------|-------------------------------|
+| ------------- | ---------------------------- | ----------------------------- |
 | `pushPayload` | `Dictionary<string, string>` | the push notification payload |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1214,15 +1238,16 @@ When the handlePushNotifications API is called from a service that is swizzling,
 ---
 
 ### setShouldCollectDeviceName
-**`void setShouldCollectDeviceName(bool shouldCollectDeviceName)`**
- 
-Set this flag to true, to collect the current device name(e.g. "My iPhone"). Default value is false.
-        
-| parameter                 | type      | description  |
-| ----------------------    |---------- |--------------|
-| `shouldCollectDeviceName` | `bool`    |              |
 
-*Example:*
+**`void setShouldCollectDeviceName(bool shouldCollectDeviceName)`**
+
+Set this flag to true, to collect the current device name(e.g. "My iPhone"). Default value is false.
+
+| parameter                 | type   | description |
+| ------------------------- | ------ | ----------- |
+| `shouldCollectDeviceName` | `bool` |             |
+
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1232,15 +1257,16 @@ Set this flag to true, to collect the current device name(e.g. "My iPhone"). Def
 
 ---
 
- ### setDisableCollectIAd
- **`void setDisableCollectIAd(bool disableCollectIAd)`**
- 
+### setDisableCollectIAd
+
+**`void setDisableCollectIAd(bool disableCollectIAd)`**
+
 Opt-out for Apple Search Ads attributions.
 
-| parameter           | type     | description  |
-| -----------         |----------|--------------|
-| `disableCollectIAd` | `bool`   |              |
-*Example:*
+| parameter                  | type   | description |
+| -------------------------- | ------ | ----------- |
+| `disableCollectIAd`        | `bool` |             |
+| _Example:_ |        |             |
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1251,16 +1277,16 @@ Opt-out for Apple Search Ads attributions.
 ---
 
 ### setUseReceiptValidationSandbox
+
 **`void setUseReceiptValidationSandbox(bool useReceiptValidationSandbox)`**
- 
 
 In app purchase receipt validation Apple environment(production or sandbox). The default value is false.
 
-| parameter                     | type      | description                                  |
-| ----------------------------  |---------- |--------------------------------------------- |
-| `useReceiptValidationSandbox` | `bool`    | true if In app purchase is done with sandbox |
+| parameter                     | type   | description                                  |
+| ----------------------------- | ------ | -------------------------------------------- |
+| `useReceiptValidationSandbox` | `bool` | true if In app purchase is done with sandbox |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1270,16 +1296,17 @@ In app purchase receipt validation Apple environment(production or sandbox). The
 
 ---
 
-### setUseUninstallSandbox 
+### setUseUninstallSandbox
+
 **`void setUseUninstallSandbox(bool useUninstallSandbox)`**
- 
+
 Set this flag to test uninstall on Apple environment(production or sandbox). The default value is false.
 
-| parameter             | type    | description                             |
-| -----------           |-------  |---------------------------------------- |
-| `useUninstallSandbox` | `bool`  | true if you are using a APN certificate |
+| parameter             | type   | description                             |
+| --------------------- | ------ | --------------------------------------- |
+| `useUninstallSandbox` | `bool` | true if you are using a APN certificate |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1297,19 +1324,20 @@ AppsFlyer provides two versions of the `validateAndSendInAppPurchase` method for
 - **Legacy**: Uses individual string parameters (deprecated, maintained for backward compatibility)
 
 ### validateAndSendInAppPurchase (V2 - Recommended) {#validateandsendinapppurchase-v2---recommended-1}
+
 **`void validateAndSendInAppPurchase(AFSDKPurchaseDetailsIOS details, Dictionary<string, string> purchaseAdditionalDetails, MonoBehaviour gameObject)`**
- 
+
 To send and validate in app purchases you can call this method from the processPurchase method (V2).
 
 > **Note on iOS Error Handling:** The `onValidateAndLogFailure` callback is only triggered for actual errors (network errors, invalid parameters, etc.). Validation failures (e.g., invalid receipt) are returned through the `onValidateAndLogComplete` callback in the response dictionary. Always check the response to determine if validation was successful.
 
-| parameter                    | type                           | description  |
-| -----------                  |-------------------             | ------------------------------------------|
-| `details`                    | `AFSDKPurchaseDetailsIOS`      | Instance of AFSDKPurchaseDetailsIOS class |
-| `purchaseAdditionalDetails`  | `Dictionary<string, string>`   | Additional parameters to be sent with the purchase |
-| `gameObject`                 | `MonoBehaviour`                | Game object for the callbacks to be sent |
+| parameter                   | type                         | description                                        |
+| --------------------------- | ---------------------------- | -------------------------------------------------- |
+| `details`                   | `AFSDKPurchaseDetailsIOS`    | Instance of AFSDKPurchaseDetailsIOS class          |
+| `purchaseAdditionalDetails` | `Dictionary<string, string>` | Additional parameters to be sent with the purchase |
+| `gameObject`                | `MonoBehaviour`              | Game object for the callbacks to be sent           |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1330,21 +1358,22 @@ To send and validate in app purchases you can call this method from the processP
 ---
 
 ### validateAndSendInAppPurchase (Legacy - Deprecated) {#validateandsendinapppurchase-legacy-1}
+
 **`void validateAndSendInAppPurchase(string productIdentifier, string price, string currency, string transactionId, Dictionary<string, string> additionalParameters, MonoBehaviour gameObject)`**
- 
+
 **⚠️ Deprecated:** This legacy API is deprecated. Use the V2 version with `AFSDKPurchaseDetailsIOS` instead. This method is maintained for backward compatibility only.
 To send and validate in app purchases you can call this method from the processPurchase method.
 
-| parameter              | type                           | description  |
-| -----------            |-------------------             | --------------|
-| `productIdentifier`    | `string`                       | The product identifier |
-| `price`                | `string`                       | The product price |
-| `currency`             | `string`                       | The product currency |
-| `transactionId`        | `string`                       | The purchase transaction ID |
-| `additionalParameters` | `Dictionary<string, string>`   | Additional parameters to be sent with the purchase |
-| `gameObject`           | `MonoBehaviour`                | Game object for the callbacks |
+| parameter              | type                         | description                                        |
+| ---------------------- | ---------------------------- | -------------------------------------------------- |
+| `productIdentifier`    | `string`                     | The product identifier                             |
+| `price`                | `string`                     | The product price                                  |
+| `currency`             | `string`                     | The product currency                               |
+| `transactionId`        | `string`                     | The purchase transaction ID                        |
+| `additionalParameters` | `Dictionary<string, string>` | Additional parameters to be sent with the purchase |
+| `gameObject`           | `MonoBehaviour`              | Game object for the callbacks                      |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1360,18 +1389,17 @@ To send and validate in app purchases you can call this method from the processP
 
 ---
 
-
 ### registerUninstall
+
 **` void registerUninstall(byte[] deviceToken)`**
- 
 
 Register uninstall - you should register for remote notification and provide AppsFlyer the push device token.
 
-| parameter     | type       | description  |
-| -----------   |----------  |--------------|
-| `deviceToken` | `byte[]`   | APN token    |
+| parameter     | type     | description |
+| ------------- | -------- | ----------- |
+| `deviceToken` | `byte[]` | APN token   |
 
-*Example:*
+_Example:_
 
 ```c#
     private bool tokenSent;
@@ -1395,21 +1423,21 @@ Register uninstall - you should register for remote notification and provide App
 
 ---
 
-### handleOpenUrl 
-**`void handleOpenUrl(string url, string sourceApplication, string annotation)`**
+### handleOpenUrl
 
+**`void handleOpenUrl(string url, string sourceApplication, string annotation)`**
 
     In case you want to track deep linking manually call handleOpenUrl.
     The continueUserActivity and onOpenURL are implemented in the AppsFlyerAppController.mm class, so 
     only use this method if the other methods do not cover your apps deeplinking needs.
 
-| parameter     | type       | description  |
-| -----------   |----------  |--------------|
-| `url`         | `string`   |      The URL to be passed to your AppDelegate        |
-| `sourceApplication` | `string`   |    The sourceApplication to be passed to your AppDelegate    |
-| `annotation`  | `string`   |       The annotation to be passed to your app delegate       |
+| parameter           | type     | description                                            |
+| ------------------- | -------- | ------------------------------------------------------ |
+| `url`               | `string` | The URL to be passed to your AppDelegate               |
+| `sourceApplication` | `string` | The sourceApplication to be passed to your AppDelegate |
+| `annotation`        | `string` | The annotation to be passed to your app delegate       |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1419,33 +1447,35 @@ Register uninstall - you should register for remote notification and provide App
 
 ---
 
-### waitForATTUserAuthorizationWithTimeoutInterval 
+### waitForATTUserAuthorizationWithTimeoutInterval
+
 **` void waitForATTUserAuthorizationWithTimeoutInterval(int timeoutInterval)`**
 
-See [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-X-integration-guide-for-developers#integration-33-configuring-app-tracking-transparency-att-support) for more info. 
+See [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-X-integration-guide-for-developers#integration-33-configuring-app-tracking-transparency-att-support) for more info.
 
-| parameter     | type       | description  |
-| -----------   |----------  |--------------|
-| `timeoutInterval`         | `int`   |      Time to wait for idfa        |
+| parameter         | type  | description           |
+| ----------------- | ----- | --------------------- |
+| `timeoutInterval` | `int` | Time to wait for idfa |
 
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
     AppsFlyer.waitForATTUserAuthorizationWithTimeoutInterval(60);
 #endif
 ```
+
 ---
 
-### disableSKAdNetwork 
+### disableSKAdNetwork
+
 **` bools disableSKAdNetwork(bool isDisabled)`**
 
+| parameter    | type   | description                 |
+| ------------ | ------ | --------------------------- |
+| `isDisabled` | `bool` | True to disable SKAdNetwork |
 
-| parameter     | type       | description  |
-| -----------   |----------  |--------------|
-| `isDisabled`         | `bool`   |      True to disable SKAdNetwork     |
-
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1456,14 +1486,14 @@ See [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-
 ---
 
 ### setLanguage
+
 **` setCurrentDeviceLanguage(string language)`**
 
+| parameter  | type     | description         |
+| ---------- | -------- | ------------------- |
+| `language` | `String` | The language to set |
 
-| parameter     | type       | description  |
-| -----------   |----------  |--------------|
-| `language`         | `String`   |    The language to set   |
-
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1474,14 +1504,14 @@ See [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-
 ---
 
 ### disableIDFVCollection
+
 **` disableIDFVCollection(bool isDisabled)`**
 
+| parameter    | type   | description                     |
+| ------------ | ------ | ------------------------------- |
+| `isDisabled` | `bool` | True to disable IDFV collection |
 
-| parameter     | type       | description  |
-| -----------   |----------  |--------------|
-| `isDisabled`         | `bool`   |    True to disable IDFV collection   |
-
-*Example:*
+_Example:_
 
 ```c#
 #if UNITY_IOS && !UNITY_EDITOR
@@ -1492,18 +1522,18 @@ See [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-
 ---
 
 ## IAppsFlyerConversionData
-  
-### onConversionDataSuccess 
+
+### onConversionDataSuccess
+
 **`public void onConversionDataSuccess(string conversionData)`**
- 
- ConversionData contains information about install.<br> Organic/non-organic, etc. See [here](https://support.appsflyer.com/hc/en-us/articles/360000726098-Conversion-Data-Scenarios#Introduction) for more info.
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `conversionData`     | `string`  | JSON string of the returned conversion data |
+ConversionData contains information about install.<br> Organic/non-organic, etc. See [here](https://support.appsflyer.com/hc/en-us/articles/360000726098-Conversion-Data-Scenarios#Introduction) for more info.
 
+| parameter        | type     | description                                 |
+| ---------------- | -------- | ------------------------------------------- |
+| `conversionData` | `string` | JSON string of the returned conversion data |
 
-*Example:*
+_Example:_
 
 ```c#
    public void onConversionDataSuccess(string conversionData)
@@ -1517,15 +1547,14 @@ See [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-
 ---
 
 ### onConversionDataFail
+
 **`public void onConversionDataFail(string error)`**
- 
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `error`     | `string`  | A string describing the error |
+| parameter | type     | description                   |
+| --------- | -------- | ----------------------------- |
+| `error`   | `string` | A string describing the error |
 
-
-*Example:*
+_Example:_
 
 ```c#
     public void onConversionDataFail(string error)
@@ -1537,16 +1566,16 @@ See [here](https://support.appsflyer.com/hc/en-us/articles/207032066-iOS-SDK-V6-
 ---
 
 ### onAppOpenAttribution
+
 **`public void onAppOpenAttribution(string attributionData)`**
- 
+
 attributionData contains information about OneLink, deeplink.
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `attributionData`     | `string`  | JSON string of the returned deeplink data |
+| parameter         | type     | description                               |
+| ----------------- | -------- | ----------------------------------------- |
+| `attributionData` | `string` | JSON string of the returned deeplink data |
 
-
-*Example:*
+_Example:_
 
 ```c#
     public void onAppOpenAttribution(string attributionData)
@@ -1559,17 +1588,17 @@ attributionData contains information about OneLink, deeplink.
 
 ---
 
-### onAppOpenAttributionFailure 
+### onAppOpenAttributionFailure
+
 **`public void onAppOpenAttributionFailure(string error)`**
-    
+
 Any errors that occurred during the attribution request.
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `error`     | `string`  | string describing the error |
+| parameter | type     | description                 |
+| --------- | -------- | --------------------------- |
+| `error`   | `string` | string describing the error |
 
-
-*Example:*
+_Example:_
 
 ```c#
   public void onAppOpenAttributionFailure(string error)
@@ -1581,18 +1610,18 @@ Any errors that occurred during the attribution request.
 ---
 
 ## IAppsFlyerUserInvite
-  
-### onInviteLinkGenerated 
+
+### onInviteLinkGenerated
+
 **`public void onInviteLinkGenerated(string link)`**
- 
-The success callback for generating OneLink URLs. 
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `link`     | `string`  | generated link |
+The success callback for generating OneLink URLs.
 
+| parameter | type     | description    |
+| --------- | -------- | -------------- |
+| `link`    | `string` | generated link |
 
-*Example:*
+_Example:_
 
 ```c#
    public void onInviteLinkGenerated(string link)
@@ -1603,17 +1632,17 @@ The success callback for generating OneLink URLs.
 
 ---
 
-### onInviteLinkGeneratedFailure 
+### onInviteLinkGeneratedFailure
+
 **`public void onInviteLinkGeneratedFailure(string error)`**
- 
- The error callback for generating OneLink URLs
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `error`     | `string`  | A string describing the error |
+The error callback for generating OneLink URLs
 
+| parameter | type     | description                   |
+| --------- | -------- | ----------------------------- |
+| `error`   | `string` | A string describing the error |
 
-*Example:*
+_Example:_
 
 ```c#
     public void onInviteLinkGeneratedFailure(string error)
@@ -1625,20 +1654,18 @@ The success callback for generating OneLink URLs.
 ---
 
 ### onOpenStoreLinkGenerated
+
 **`public void onOpenStoreLinkGenerated(string link)`**
- 
-       
- (ios only) iOS allows you to utilize the StoreKit component to open
- the App Store while remaining in the context of your app.<br>
- More details at [here](https://support.appsflyer.com/hc/en-us/articles/115004481946-Cross-Promotion-Tracking#tracking-cross-promotion-impressions)
-     
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `attributionData`     | `string`  | JSON string of the returned deeplink data |
+(ios only) iOS allows you to utilize the StoreKit component to open
+the App Store while remaining in the context of your app.<br>
+More details at [here](https://support.appsflyer.com/hc/en-us/articles/115004481946-Cross-Promotion-Tracking#tracking-cross-promotion-impressions)
 
+| parameter         | type     | description                               |
+| ----------------- | -------- | ----------------------------------------- |
+| `attributionData` | `string` | JSON string of the returned deeplink data |
 
-*Example:*
+_Example:_
 
 ```c#
     public void onOpenStoreLinkGenerated(string link)
@@ -1649,21 +1676,21 @@ The success callback for generating OneLink URLs.
 
 ---
 
-##  IAppsFlyerValidateReceipt
-  
-### didFinishValidateReceipt 
+## IAppsFlyerValidateReceipt
+
+### didFinishValidateReceipt
+
 **`public void didFinishValidateReceipt(string result)`**
- 
+
 The success callback for validateAndSendInAppPurchase API.<br>
 For Android : the callback will return "Validate success".<br>
 For iOS : the callback will return a JSON string from apples verifyReceipt API. <br>
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `result`     | `string`  | validate result |
+| parameter | type     | description     |
+| --------- | -------- | --------------- |
+| `result`  | `string` | validate result |
 
-
-*Example:*
+_Example:_
 
 ```c#
    public void didFinishValidateReceipt(string link)
@@ -1674,21 +1701,22 @@ For iOS : the callback will return a JSON string from apples verifyReceipt API. 
 
 ---
 
-##  IAppsFlyerValidateAndLog
-  
-### onValidateAndLogComplete 
+## IAppsFlyerValidateAndLog
+
+### onValidateAndLogComplete
+
 **`public void onValidateAndLogComplete(string result)`**
- 
+
 The success callback for validateAndSendInAppPurchase API.<br>
 The callback will return a JSON string which can be converted to dictionary. <br>
+
 > **Note for iOS:** On iOS, this callback is invoked for all successful API calls, including cases where validation fails (e.g., invalid receipt). Always check the response dictionary to determine the actual validation result. Only network errors and invalid parameters trigger `onValidateAndLogFailure`.
 
-| parameter   | type      | description        |
-| ----------  |---------- |--------------------|
-| `result`    | `string`  | validate result     |
+| parameter | type     | description     |
+| --------- | -------- | --------------- |
+| `result`  | `string` | validate result |
 
-
-*Example:*
+_Example:_
 
 ```c#
    public void onValidateAndLogComplete(string result)
@@ -1700,19 +1728,20 @@ The callback will return a JSON string which can be converted to dictionary. <br
 
 ---
 
-### onValidateAndLogFailure 
+### onValidateAndLogFailure
+
 **`public void onValidateAndLogFailure(string error)`**
- 
- The error callback for validating receipts.<br>
- The callback will return a JSON string which can be converted to dictionary. <br>
+
+The error callback for validating receipts.<br>
+The callback will return a JSON string which can be converted to dictionary. <br>
+
 > **Note for iOS:** On iOS, this callback is only triggered for actual errors (network errors, invalid parameters, etc.). Validation failures (e.g., invalid receipt) are returned through `onValidateAndLogComplete` in the response dictionary.
 
-| parameter   | type      | description                   |
-| ----------  |---------- |----------------------------   |
-| `error`     | `string`  | A string describing the error |
+| parameter | type     | description                   |
+| --------- | -------- | ----------------------------- |
+| `error`   | `string` | A string describing the error |
 
-
-*Example:*
+_Example:_
 
 ```c#
     public void onValidateAndLogFailure(string error)
@@ -1724,22 +1753,23 @@ The callback will return a JSON string which can be converted to dictionary. <br
 ---
 
 ## Events
-    
+
 ### onRequestResponse
+
 **`public static event EventHandler OnRequestResponse`**
- 
- The callback for Sessions.<br>
 
-| statusCode      | errorDescription | 
-| ----------- | ----------- | 
-| 200      | null       | 
-| 10   | "Event timeout. Check 'minTimeBetweenSessions' param"        | 
-| 11   | "Skipping event because 'isStopTracking' enabled"        | 
-| 40   | Network error: Error description comes from Android        | 
-| 41   | "No dev key"        | 
-| 50   | "Status code failure" + actual response code from the server        | 
+The callback for Sessions.<br>
 
-*Example:*
+| statusCode | errorDescription                                                      |
+| ---------- | --------------------------------------------------------------------- |
+| 200        | null                                                                  |
+| 10         | "Event timeout. Check 'minTimeBetweenSessions' param" |
+| 11         | "Skipping event because 'isStopTracking' enabled"                     |
+| 40         | Network error: Error description comes from Android   |
+| 41         | "No dev key"                                                          |
+| 50         | "Status code failure" + actual response code from the server          |
+
+_Example:_
 
 ```c#
     AppsFlyer.OnRequestResponse += (sender, args) =>
@@ -1752,20 +1782,21 @@ The callback will return a JSON string which can be converted to dictionary. <br
 ---
 
 ### onInAppResponse
+
 **`public static event EventHandler OnInAppResponse`**
- 
- The callback for In-App Events.<br>
 
-| statusCode      | errorDescription | 
-| ----------- | ----------- | 
-| 200      | null       | 
-| 10   | "Event timeout. Check 'minTimeBetweenSessions' param"        | 
-| 11   | "Skipping event because 'isStopTracking' enabled"        | 
-| 40   | Network error: Error description comes from Android        | 
-| 41   | "No dev key"        | 
-| 50   | "Status code failure" + actual response code from the server        | 
+The callback for In-App Events.<br>
 
-*Example:*
+| statusCode | errorDescription                                                      |
+| ---------- | --------------------------------------------------------------------- |
+| 200        | null                                                                  |
+| 10         | "Event timeout. Check 'minTimeBetweenSessions' param" |
+| 11         | "Skipping event because 'isStopTracking' enabled"                     |
+| 40         | Network error: Error description comes from Android   |
+| 41         | "No dev key"                                                          |
+| 50         | "Status code failure" + actual response code from the server          |
+
+_Example:_
 
 ```c#
 
@@ -1779,13 +1810,13 @@ The callback will return a JSON string which can be converted to dictionary. <br
 
 ---
 
-### onDeepLinkReceived 
+### onDeepLinkReceived
+
 **`public static event EventHandler OnDeepLinkReceived`**
- 
- The callback for Unified Deeplink API.<br>
 
+The callback for Unified Deeplink API.<br>
 
-*Example:*
+_Example:_
 
 ```c#
 

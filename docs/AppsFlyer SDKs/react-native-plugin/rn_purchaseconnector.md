@@ -5,20 +5,21 @@ hidden: false
 
 **At a glance:** Automatically validate and measure revenue from in-app purchases and auto-renewable subscriptions to get the full picture of your customers' life cycles and accurate ROAS measurements.
 For more information please check the following pages:
-*  [ROI360 in-app purchase (IAP) and subscription revenue measurement](https://support.appsflyer.com/hc/en-us/articles/7459048170769-ROI360-in-app-purchase-IAP-and-subscription-revenue-measurement?query=purchase)
-* [Android Purchase Connector](https://dev.appsflyer.com/hc/docs/purchase-connector-android)
-* [iOS Purchase Connector](https://dev.appsflyer.com/hc/docs/purchase-connector-ios)
+
+- [ROI360 in-app purchase (IAP) and subscription revenue measurement](https://support.appsflyer.com/hc/en-us/articles/7459048170769-ROI360-in-app-purchase-IAP-and-subscription-revenue-measurement?query=purchase)
+- [Android Purchase Connector](https://dev.appsflyer.com/hc/docs/purchase-connector-android)
+- [iOS Purchase Connector](https://dev.appsflyer.com/hc/docs/purchase-connector-ios)
 
 🛠 You can contact AppsFlyer support through the Customer Assistant Chatbot for assistance with troubleshooting issues or product guidance. To do so, please follow this article: https://support.appsflyer.com/hc/en-us/articles/23583984402193-Using-the-Customer-Assistant-Chatbot.
 
-> *When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , production steps, logs, code snippets and any additional relevant information.*
+> _When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , production steps, logs, code snippets and any additional relevant information._
 
 ## <a id="important-note"></a>Important Note ⚠️ ⚠️
 
 The Purchase Connector feature of the AppsFlyer SDK depends on specific libraries provided by Google and Apple for managing in-app purchases:
 
--   For Android, it depends on the  [Google Play Billing Library](https://developer.android.com/google/play/billing/integrate) (Supported versions: 5.x.x - 7.x.x).
--   For iOS, it depends on  [StoreKit](https://developer.apple.com/documentation/storekit) (Supported versions: StoreKit1 and StoreKit2).
+- For Android, it depends on the  [Google Play Billing Library](https://developer.android.com/google/play/billing/integrate) (Supported versions: 5.x.x - 7.x.x).
+- For iOS, it depends on  [StoreKit](https://developer.apple.com/documentation/storekit) (Supported versions: StoreKit1 and StoreKit2).
 
 However, these dependencies aren't actively included with the SDK. This means that the responsibility of managing these dependencies and including the necessary libraries in your project falls on you as the consumer of the SDK.
 
@@ -35,13 +36,17 @@ The Purchase Connector feature in AppsFlyer SDK React Native Plugin is an option
 To opt-in and include this feature in your app, you need to set specific properties based on your platform:
 
 For **iOS**, in your Podfile located within the `iOS` folder of your React Native project, set `$AppsFlyerPurchaseConnector` to `true`.
+
 ```ruby
 $AppsFlyerPurchaseConnector = true
 ```
+
 For **Android**, in your `gradle.properties` file located within the `Android` folder of your React Native project, set `appsflyer.enable_purchase_connector` to `true`.
+
 ```groovy
 appsflyer.enable_purchase_connector=true
 ```
+
 Once you set these properties, the Purchase Validation feature will be integrated into your project and you can utilize its functionality in your app.
 
 ### <a id="important-callout-what-happens-if-you-use-the-purchase-connector-files-without-opting-in"></a>Important Callout: What Happens if You Use the Purchase Connector Files Without Opting In?
@@ -49,7 +54,6 @@ Once you set these properties, the Purchase Validation feature will be integrate
 The files for the Purchase Validation feature are always included in the plugin. If you try to use these JS APIs without opting into the feature, the APIs will not have effect because the corresponding native code necessary for them to function will not be included in your project.
 
 In such cases, you'll likely experience errors or exceptions when trying to use functionalities provided by the Purchase Validation feature. To avoid these issues, ensure that you opt-in to the feature if you intend to use any related APIs.
-
 
 ## <a id="proguard-rules-for-android"></a>ProGuard Rules for Android
 
@@ -64,7 +68,9 @@ Add following keep rules to your  `proguard-rules.pro`  file:
 ```
 
 ## <a id="basic-integration-of-the-connector"></a>Basic Integration Of The Connector
+
 ### <a id="create-purchaseconnector-instance"></a>Create PurchaseConnector Instance
+
 The `PurchaseConnector` requires a configuration object of type `PurchaseConnectorConfig` at instantiation time. This configuration object governs how the `PurchaseConnector` behaves in your application.
 
 To properly set up the configuration object, you must specify certain parameters:
@@ -141,13 +147,17 @@ For example:
 Thus, always ensure that the initial configuration fully suits your requirements, as subsequent changes are not considered.
 
 Remember to set `sandbox` to `false` before releasing your app to production. If the production purchase event is sent in sandbox mode, your event won't be validated properly by AppsFlyer.
+
 ### <a id="start-observing-transactions"></a>Start Observing Transactions
+
 Start the SDK instance to observe transactions. </br>
 
 **⚠️ Please Note**
+
 > This should be called right after calling the `appsFlyer.startSdk()` [start](https://github.com/AppsFlyerSDK/appsflyer-react-native-plugin/blob/master/Docs/RN_API.md#startsdk).
->  Calling `startObservingTransactions` activates a listener that automatically observes new billing transactions. This includes new and existing subscriptions and new in app purchases.
->  The best practice is to activate the listener as early as possible.
+> Calling `startObservingTransactions` activates a listener that automatically observes new billing transactions. This includes new and existing subscriptions and new in app purchases.
+> The best practice is to activate the listener as early as possible.
+
 ```javascript
         import appsFlyer, {
         AppsFlyerPurchaseConnector,
@@ -180,8 +190,10 @@ Start the SDK instance to observe transactions. </br>
 ```
 
 ### <a id="stop-observing-transactions"></a>Stop Observing Transactions
+
 Stop the SDK instance from observing transactions. </br>
 **⚠️ Please Note**
+
 > This should be called if you would like to stop the Connector from listening to billing transactions. This removes the listener and stops observing new transactions.
 > An example for using this API is if the app wishes to stop sending data to AppsFlyer due to changes in the user's consent (opt-out from data sharing). Otherwise, there is no reason to call this method.
 > If you do decide to use it, it should be called right before calling the Android SDK's [`stop`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#stop) API
@@ -192,6 +204,7 @@ Stop the SDK instance from observing transactions. </br>
 ```
 
 ### <a id="log-subscriptions"></a>Log Subscriptions
+
 Enables automatic logging of subscription events.  
 Set `true` to enable, `false` to disable.  
 If this field is not used, by default, the connector will not record Subscriptions.
@@ -204,6 +217,7 @@ const purchaseConnectorConfig = {
 ```
 
 ### <a id="log-in-app-purchases"></a>Log In App Purchases
+
 Enables automatic logging of In-App purchase events  
 Set `true` to enable, `false` to disable.  
 If this field is not used, by default, the connector will not record In App Purchases.
@@ -240,7 +254,7 @@ const purchaseConnectorConfigSK2 = AppsFlyerPurchaseConnectorConfig.setConfig({
 On iOS 15 and above, consumable in-app purchases are handled via StoreKit 2. The behavior depends on your iOS version:
 
 - **On iOS 18 and later:**  
-  Apple introduced a new Info.plist flag: `SKIncludeConsumableInAppPurchaseHistory`.  
+  Apple introduced a new Info.plist flag: `SKIncludeConsumableInAppPurchaseHistory`.
   - If you set `SKIncludeConsumableInAppPurchaseHistory` to `YES` in your Info.plist, automatic collection will happen.
   - If the flag is not present or is set to `NO`, you must manually log consumable transactions as shown below.
 
@@ -282,12 +296,13 @@ AppsFlyerPurchaseConnector.logConsumableTransaction(transactionId: string): void
 ```
 
 **Parameters:**
+
 - `transactionId` (string): The unique transaction identifier from the App Store transaction
 
 **Note:** This method is iOS-specific and should only be called on iOS devices. On Android, consumable transactions are automatically handled by the Purchase Connector.
 
-
 ## <a id="register-validation-results-listeners"></a>Register Validation Results Listeners
+
 You can register listeners to get the validation results once getting a response from AppsFlyer servers to let you know if the purchase was validated successfully.</br>
 
 ### <a id="cross-platform-considerations"></a>Cross-Platform Considerations
@@ -302,14 +317,14 @@ By splitting the callbacks, you can ensure platform-specific responses and tailo
 
 ### <a id="android-callback-types"></a>Android Callback Types
 
-| Listener Method               | Description  |
-|-------------------------------|--------------|
-| `onResponse(result: Result?)` | Invoked when we got 200 OK response from the server (INVALID purchase is considered to be successful response and will be returned to this callback) |
-|`onFailure(result: String, error: Throwable?)`|Invoked when we got some network exception or non 200/OK response from the server.|
+| Listener Method                                | Description                                                                                                                                                             |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onResponse(result: Result?)`                  | Invoked when we got 200 OK response from the server (INVALID purchase is considered to be successful response and will be returned to this callback) |
+| `onFailure(result: String, error: Throwable?)` | Invoked when we got some network exception or non 200/OK response from the server.                                                                      |
 
 ### <a id="android---subscription-and-inapps-validation-result-listener"></a>Android - Subscription Validation Result Listener and In Apps Validation Result Listener
 
-```javascript   
+```javascript
 import appsFlyer , {AppsFlyerPurchaseConnector} from 'react-native-appsflyer';
 
   const handleValidationSuccess = (validationResult) => {
@@ -345,6 +360,7 @@ import appsFlyer , {AppsFlyerPurchaseConnector} from 'react-native-appsflyer';
 ```
 
 ### <a id="ios-combined-validation-result-listener"></a>iOS Combined Validation Result Listener
+
 ```javascript
 import appsFlyer , {AppsFlyerPurchaseConnector} from 'react-native-appsflyer';
 
@@ -367,6 +383,7 @@ const handleOnReceivePurchaseRevenueValidationInfo = (validationInfo, error) => 
 ```
 
 ## <a id="full-code-example"></a>Full Code Example
+
 ```javascript
 import appsFlyer, {
   StoreKitVersion,
@@ -455,6 +472,7 @@ For iOS, there are two types of data sources:
 2. **StoreKit2 Data Source**: For iOS 15.0 and later, supporting the newer StoreKit2 framework
 
 #### StoreKit1 Data Source
+
 ```javascript
 // Set additional parameters for StoreKit1 purchases
 AppsFlyerPurchaseConnector.setPurchaseRevenueDataSource({
@@ -469,6 +487,7 @@ AppsFlyerPurchaseConnector.setPurchaseRevenueDataSource({
 ```
 
 #### StoreKit2 Data Source
+
 ```javascript
 // Set additional parameters for StoreKit2 purchases
 AppsFlyerPurchaseConnector.setPurchaseRevenueDataSourceStoreKit2({
@@ -490,6 +509,7 @@ For Android, there are two types of data sources:
 2. **In-App Purchase Data Source**: For one-time in-app purchases
 
 #### Subscription Purchase Data Source
+
 ```javascript
 // Set additional parameters for subscription purchases
 AppsFlyerPurchaseConnector.setSubscriptionPurchaseEventDataSource({
@@ -504,6 +524,7 @@ AppsFlyerPurchaseConnector.setSubscriptionPurchaseEventDataSource({
 ```
 
 #### In-App Purchase Data Source
+
 ```javascript
 // Set additional parameters for in-app purchases
 AppsFlyerPurchaseConnector.setInAppPurchaseEventDataSource({
@@ -570,7 +591,7 @@ const setupPurchaseDataSources = () => {
 
 1. **iOS StoreKit2**: The StoreKit2 data source is only available on iOS 15.0 and later. Make sure to check the iOS version before using it.
 
-2. **Parameter Structure**: 
+2. **Parameter Structure**:
    - For iOS StoreKit1 and Android, use the `additionalParameters` object to add custom parameters
    - For iOS StoreKit2, use the `products` and `transactions` arrays to specify product and transaction IDs
 
@@ -617,4 +638,4 @@ Remember to switch the environment back to production (set `sandbox` to `false`)
 
 To test purchases in an iOS environment on a real device with a TestFlight sandbox account, you also need to set `sandbox` to `true`.
 
-> *IMPORTANT NOTE: Before releasing your app to production please be sure to set `sandbox` to `false`. If a production purchase event is sent in sandbox mode, your event will not be validated properly! *
+> \*IMPORTANT NOTE: Before releasing your app to production please be sure to set `sandbox` to `false`. If a production purchase event is sent in sandbox mode, your event will not be validated properly! \*

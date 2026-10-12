@@ -15,12 +15,13 @@ To set the CUID:
 ```objectivec
 [AppsFlyerLib shared].customerUserID = @"my user id";
 ```
+
 ```swift
 AppsFlyerLib.shared().customerUserID = "my user id"
 ```
 
 > 📘 Note
-> 
+>
 > The Customer User ID must be set with every app launch.
 
 ### Associate the CUID with the install event
@@ -39,6 +40,7 @@ If it’s important for you to associate the install event with the CUID, you sh
     }
 }
 ```
+
 ```swift
 func applicationDidBecomeActive(_ application: UIApplication) {
   //  your logic to retrieve CUID

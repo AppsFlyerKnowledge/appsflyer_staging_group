@@ -8,11 +8,11 @@ hidden: false
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Get started with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-android-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_Anrd_int', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Get started with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-android-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_Anrd_int', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
 
-- You must [install the Android SDK](doc:install-android-sdk). 
+- You must [install the Android SDK](doc:install-android-sdk).
 - Ensure that in your app `build.gradle` file, `applicationId`'s value (in the `defaultConfig` block) matches the app's app ID in AppsFlyer.
 - Get the [AppsFlyer dev key](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieve-the-dev-key). It is required to successfully initialize the SDK.
 
@@ -26,6 +26,7 @@ In your global Application class, import [`AppsFlyerLib`](doc:android-sdk-refere
 ```java Java
 import com.appsflyer.AppsFlyerLib;
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.AppsFlyerLib
 ```
@@ -36,6 +37,7 @@ In the global Application `onCreate`, call [`init`](doc:android-sdk-reference-ap
 ```java
 AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this);
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this)
 ```
@@ -51,6 +53,7 @@ In the Application's `onCreate` method, after calling [`init`](doc:android-sdk-r
 ```java
 AppsFlyerLib.getInstance().start(this);
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().start(this)
 ```
@@ -63,7 +66,7 @@ You can defer the SDK initialization by calling [`start`](doc:android-sdk-refere
 Typical usage of deferred SDK start is when an app would like to request consent from the user to collect data in the Main Activity, and call [`start`](doc:android-sdk-reference-appsflyerlib#start) after getting the user's consent.
 
 > ⚠️ **Important notice**
-> 
+>
 > If the app calls `start` from an Activity, it should pass the **Activity Context** to the SDK.  
 > Failing to pass the activity context will not trigger the SDK, thus losing attribution data and in-app events.
 
@@ -86,6 +89,7 @@ AppsFlyerLib.getInstance().start(getApplicationContext(), <YOUR_DEV_KEY>, new Ap
   }
 });
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().start(this, <YOUR_DEV_KEY>, object : AppsFlyerRequestListener {
   override fun onSuccess() {
@@ -124,6 +128,7 @@ public class AFApplication extends Application {
     // ...
 }
 ```
+
 ```kotlin
 import android.app.Application
 import com.appsflyer.AppsFlyerLib
@@ -162,18 +167,19 @@ You can enable debug logs by calling [`setDebugLog`](doc:android-sdk-reference-a
 ```java
 AppsFlyerLib.getInstance().setDebugLog(true);
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().setDebugLog(true)
 ```
 
 > 📘 Note
-> 
+>
 > To see full debug logs, make sure to call `setDebugLog` before invoking other SDK methods.
-> 
+>
 > See [example](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/d3d0d9dcf1c1dcb2f873f5b50708fc4fa24a7868/java/basic_app/app/src/main/java/com/appsflyer/onelink/appsflyeronelinkbasicapp/AppsflyerBasicApp.java#L28).
 
 > 🚧 Warning
-> 
+>
 > To avoid leaking sensitive information, make sure debug logs are disabled before distributing the app.
 
 ## Test the integration
@@ -190,7 +196,7 @@ It's performed by:
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-android-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_Anrd_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-android-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_Anrd_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
 

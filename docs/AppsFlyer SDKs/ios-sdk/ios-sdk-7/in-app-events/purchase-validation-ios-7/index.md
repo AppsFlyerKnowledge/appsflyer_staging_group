@@ -32,12 +32,13 @@ Purchase Connector automatically detects in-app purchases and subscriptions made
 - Supported only by ROI360 products and recommended for most apps
 - Triggers validation automatically and returns the result to the client in real time
 - The following capabilities cannot be supported through simple customization of the Validate and Log method and therefore require Purchase Connector:
-    - Logging subscription revenue from users who subscribed before the integration was added.
-    - Logging subscription price changes, ensuring revenue reflects updated pricing.
+  - Logging subscription revenue from users who subscribed before the integration was added.
+  - Logging subscription price changes, ensuring revenue reflects updated pricing.
 
 To get started see: [Android purchase SDK connector](https://dev.appsflyer.com/hc/docs/purchase-connector-ios-7)
 
 ---
+
 > ⚠️ Important
-> 
+>
 > To avoid duplicate event logging and inconsistent validation results, it’s recommended to use only one integration method per application.

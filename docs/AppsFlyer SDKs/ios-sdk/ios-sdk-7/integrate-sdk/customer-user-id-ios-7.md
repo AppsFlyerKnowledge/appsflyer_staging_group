@@ -16,6 +16,7 @@ To set the CUID:
 ```objc Objective-C
 [AppsFlyerLib shared].customerUserID = @"my user id";
 ```
+
 ```swift Swift
 AppsFlyerLib.shared().customerUserID = "my user id"
 ```

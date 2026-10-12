@@ -12,6 +12,7 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 - Before implementing the purchase connector, the ROI360 in-app purchase and subscription revenue measurement needs to be integrated with Google Play and the App Store. [See instructions (steps 1 and 2)](https://support.appsflyer.com/hc/en-us/articles/7459048170769)
 
 ## This Module is Built for
+
 - AppsFlyer SDK:
 - iOS AppsFlyer SDK **6.17.0** .
 - 6.8.0+: StoreKit 1 support
@@ -19,22 +20,22 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 - Minimum iOS Version: 12
 
 > ⚠️ Important
-> 
+>
 > See the following table for purchase connector and AppsFlyer SDK version compatability and use the correct version to avoid unexpected behavior.
 
-|  Purchase connector  | AppsFlyer SDK |
-| :------: | :--------: |
-| 6.8.0    | 6.8.0 - 6.9.2 |
-| 6.8.1    | 6.8.0 - 6.9.2 |
-| 6.10.0   |  6.10.0 |
-| 6.10.1   |  6.10.1 |
-| 6.12.2   |  6.12.2 |
-| 6.12.3   |  6.12.2 |
-| 6.17.0   |  6.17.0 |
+|           Purchase connector           |                                 AppsFlyer SDK                                 |
+| :------------------------------------: | :---------------------------------------------------------------------------: |
+|  6.8.0 | 6.8.0 - 6.9.2 |
+|  6.8.1 | 6.8.0 - 6.9.2 |
+| 6.10.0 |                     6.10.0                    |
+| 6.10.1 |                     6.10.1                    |
+| 6.12.2 |                     6.12.2                    |
+| 6.12.3 |                     6.12.2                    |
+| 6.17.0 |                     6.17.0                    |
 
 > 📘 Note
-> 
-> Currently, the Purchase Connector does not support macOS and tvOS. 
+>
+> Currently, the Purchase Connector does not support macOS and tvOS.
 
 ## Install via Cocoapods
 
@@ -44,9 +45,9 @@ Add the following to your Podfile and run `pod install`:
 pod 'PurchaseConnector'
 ```
 
-## Install via Carthage 
+## Install via Carthage
 
-1. Go to the `Carthage` folder in the root of the repository. 
+1. Go to the `Carthage` folder in the root of the repository.
 2. Open `purchase-connector-dynamic.json` or `purchase-connector-static.json`.
 3. Click **ra**.
 4. Copy and paste one of the following file URLs to your `Cartfile`:
@@ -66,9 +67,9 @@ binary "https://raw.githubusercontent.com/AppsFlyerSDK/AppsFlyerFramework/master
 Follow standard SPM dependency manager instructions.
 
 > 📘 Note
-> 
+>
 > - This repository contains statically linked `PurchaseConnector.xcframework`. If you want to use dynamic .xcframework, integrate it for SPM from ththe following repository:
-https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
+>   https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic\*
 > - PurchaseConnector has a dependency on [AppsFlyerLib framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework), so make sure to integrate it as well for Carthage and SPM.
 
 ## StoreKit 2 Overview
@@ -79,9 +80,9 @@ StoreKit 2, introduced by Apple, offers a modern, Swift-first API for managing i
 
 With the release of AppsFlyer SDK 6.16.2 and Purchase Connector 6.16.2, the Purchase Connector now supports both StoreKit 1 and StoreKit 2, enabling automatic capture of various transaction types, including:
 
-- Auto-Renewable Subscriptions  
-- Non-Renewing Subscriptions  
-- Non-Consumable Purchases  
+- Auto-Renewable Subscriptions
+- Non-Renewing Subscriptions
+- Non-Consumable Purchases
 - Consumable Purchases (from iOS 18+ with appropriate configuration)
 
 Due to limitations in earlier iOS versions, consumable purchases require manual logging. This process is detailed later in this document.
@@ -148,6 +149,7 @@ if #available(iOS 15.0, *) {
     PurchaseConnector.shared().purchaseRevenueDelegate = self
     PurchaseConnector.shared().purchaseRevenueDataSource = self
 ```
+
 ```objectivec
 // Import the library
     #import "AppDelegate.h"
@@ -171,13 +173,14 @@ Enables automatic logging of auto-renewable subscriptions and in-app purchases.
 ```swift
 PurchaseConnector.shared().autoLogPurchaseRevenue = [.autoRenewableSubscriptions, .inAppPurchases]
 ```
+
 ```objectivec
 [[PurchaseConnector shared] setAutoLogPurchaseRevenue:AFSDKAutoLogPurchaseRevenueOptionsRenewable | AFSDKAutoLogPurchaseRevenueOptionsInAppPurchases];
 ```
 
 > **Note**: If `autoLogPurchaseRevenue` hasn't been set, it is disabled by default. The value is an option set, so you can choose what kind of user purchases you want to observe.
 
-###  Logging Consumable Transactions (StoreKit 2 Only)
+### Logging Consumable Transactions (StoreKit 2 Only)
 
 For iOS versions prior to 18, or when the `SKIncludeConsumableInAppPurchaseHistory` flag is not enabled, consumable purchases must be manually logged. This requires a verified transaction to be wrapped in an `AFSDKTransactionSK2` object before invoking the `logConsumableTransaction` API.
 
@@ -238,8 +241,7 @@ private func purchaseProductSK2(with productId: String, completion: @escaping (S
 }
 ```
 
-
-###  Info.plist Flag for iOS 18+
+### Info.plist Flag for iOS 18+
 
 To enable automatic logging of consumable purchases on iOS 18+, add the following entry to your `Info.plist`:
 
@@ -248,13 +250,11 @@ To enable automatic logging of consumable purchases on iOS 18+, add the followin
 <true/>
 ```
 
-###  Conform to Purchase Connector Data Source and Delegate Protocols
+### Conform to Purchase Connector Data Source and Delegate Protocols
 
 - To receive purchase validation event callbacks, conform to and implement the `PurchaseRevenueDelegate` (Swift) or `AppsFlyerPurchaseRevenueDelegate` (Objective-C) protocol.
 - **StoreKit 1**: To add custom parameters to purchase events sent by the connector, conform to and implement the `PurchaseRevenueDataSource` (Swift) or `AppsFlyerPurchaseRevenueDataSource` (Objective-C) protocol.
 - **StoreKit 2**: To add custom parameters to purchase events sent by the connector, conform to and implement the `PurchaseRevenueDataSourceStoreKit2` (Swift) or `AppsFlyerPurchaseRevenueDataSourceStoreKit2` (Objective-C) protocol.
-
-
 
 ```swift
 extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate, PurchaseRevenueDataSourceStoreKit2 {
@@ -288,6 +288,7 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate, Purch
     }
 }
 ```
+
 ```objective-c
 @interface AppDelegate () <AppsFlyerPurchaseRevenueDelegate, AppsFlyerPurchaseRevenueDataSource, AppsFlyerPurchaseRevenueDataSourceStoreKit2>
 @end
@@ -340,11 +341,13 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate, Purch
 ### Start observing transactions
 
 To observe transactions, you need to call `startObservingTransactions`.
- > **Note**: Call this right after the AppsFlyer iOS SDK start method.
+
+> **Note**: Call this right after the AppsFlyer iOS SDK start method.
 
 ```swift
     PurchaseConnector.shared().startObservingTransactions()
 ```
+
 ```objectivec
     [[PurchaseConnector shared] startObservingTransactions];
 ```
@@ -356,6 +359,7 @@ To stop observing transactions, you need to call `stopObservingTransactions`.
 ```swift
     PurchaseConnector.shared().stopObservingTransactions()
 ```
+
 ```objectivec
     [[PurchaseConnector shared] stopObservingTransactions];
 ```
@@ -369,6 +373,7 @@ To test purchases in an Xcode environment on a real device with a TestFlight san
 ```swift
     PurchaseConnector.shared().isSandbox = true
 ```
+
 ```objectivec
     [[PurchaseConnector shared] setIsSandbox:YES];
 ```
@@ -415,6 +420,7 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
     }
 }
 ```
+
 ```objectivec
 #import "AppDelegate.h"
 #import <PurchaseConnector/PurchaseConnector.h>

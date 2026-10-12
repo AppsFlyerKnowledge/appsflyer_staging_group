@@ -2,6 +2,7 @@
 title: Uninstall Measurement
 hidden: false
 ---
+
 - [iOS](#ios)
 - [Android](#android)
 
@@ -11,7 +12,7 @@ AppsFlyer enables you to track app uninstalls. To handle notifications it requir
 
 UnityEngine.iOS.NotificationServices is now deprecated. Please use the "Mobile Notifications" package instead. It is available in the Unity package manager.
 
-*Example:*
+_Example:_
 
 ```c#
 using AppsFlyerSDK;
@@ -77,7 +78,7 @@ Read more about Uninstall register: [Appsflyer SDK support site](https://support
 1. Download the Unity Firebase SDK from: https://firebase.google.com/docs/unity/setup.
 2. Import FirebaseMessaging.unitypackage into the project.
 3. Import google-services.json into the project (obtained in the Firebase console)
-    **Note** Manifest receivers should be automatically added by the Unity Firebase SDK.
+   **Note** Manifest receivers should be automatically added by the Unity Firebase SDK.
 4. In the Unity class handling the AppsFlyer code, add the following:
 
 ```c#

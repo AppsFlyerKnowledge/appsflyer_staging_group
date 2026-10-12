@@ -4,9 +4,11 @@ hidden: false
 ---
 
 ## Overview
+
 Intercept requests to the AppsFlyer servers by implementing the `AppsFlyerRequestListener` interface and [registering it with `start`](doc:android-sdk-reference-appsflyerlib#start).
 
 **Interface declaration**
+
 ```java
 public interface AppsFlyerRequestListener {
     void onSuccess();
@@ -15,16 +17,21 @@ public interface AppsFlyerRequestListener {
 ```
 
 **Import the interface**
+
 ```java Java
 import com.appsflyer.attribution.AppsFlyerRequestListener;
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.attribution.AppsFlyerRequestListener
 ```
 
 ## Methods
+
 ### onSuccess
+
 **Method signature**
+
 ```java
 void onSuccess();
 ```
@@ -36,7 +43,9 @@ This callback returns no parameters.
 Triggered upon a successful response.
 
 ### onError
+
 **Method signature**
+
 ```java
 void onError(int code, @NonNull String error);
 ```
@@ -46,7 +55,7 @@ Triggered upon a successful response.
 
 **Callback parameters**
 
-| Type | Name | Description |
-|:--------|:----------|:------------------|
-| `int` | `code` | Error code. |
+| Type     | Name    | Description                    |
+| :------- | :------ | :----------------------------- |
+| `int`    | `code`  | Error code.    |
 | `String` | `error` | Error message. |

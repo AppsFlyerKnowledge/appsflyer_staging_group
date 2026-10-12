@@ -11,7 +11,7 @@ hidden: false
 
 AppsFlyer enables you to measure app uninstalls. To handle notifications it requires  to modify your `AppDelegate.m`. Use [didRegisterForRemoteNotificationsWithDeviceToken](https://developer.apple.com/reference/uikit/uiapplicationdelegate) to register to the uninstall feature.
 
-*Example:*
+_Example:_
 
 ```objective-c
 @import AppsFlyerLib;
@@ -30,7 +30,7 @@ Read more about Uninstall Measurement: [Appsflyer SDK support site](https://supp
 
 Pass the device token to AppsFlyer
 
-*Example:*
+_Example:_
 
 ```javascript
 appsFlyer.updateServerUninstallToken(deviceToken, (success) => {
@@ -42,7 +42,7 @@ appsFlyer.updateServerUninstallToken(deviceToken, (success) => {
 
 Update Firebase device token so it can be sent to AppsFlyer
 
-*Example:*
+_Example:_
 
 ```javascript
 appsFlyer.updateServerUninstallToken(newFirebaseToken, (success) => {

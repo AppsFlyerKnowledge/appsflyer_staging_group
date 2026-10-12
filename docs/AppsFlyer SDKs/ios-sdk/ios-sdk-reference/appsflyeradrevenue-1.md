@@ -8,48 +8,52 @@ hidden: false
 
 [block:api-header]
 {
-  "title": "Overview"
+"title": "Overview"
 }
 [/block]
 AppsFlyerAdRevenue is the parent class for the ad revenue SDK.
 [block:api-header]
 {
-  "title": "Properties"
+"title": "Properties"
 }
 [/block]
+
 ### MediationNetworkType
 
 #### Constants
 
-| Type | Name | Description |
-|:--------|:-----------------|:--------------|
-| `String` | `ironsource` | The name of the mediation network. |
-| `String` | `applovinmax` |  The name of the mediation network. |
-| `String` | `googleadmob` |  The name of the mediation network. |
-| `String` | `fyber` | The name of the mediation network. |
-| `String` | `appodeal` | The name of the mediation network. |
-| `String` | `admost` | The name of the mediation network. |
-| `String` | `topon` | The name of the mediation network. |
-| `String` | `tradplus` | The name of the mediation network. |
-| `String` | `yandex` | The name of the mediation network. |
-| `String` | `chartboost` | The name of the mediation network. |
-| `String` | `unity` | The name of the mediation network. |
-| `String` | `customMediation` | The mediation solution is not on the list of supported mediation partners. |
-| `String` | `directMonetizationNetwork` | The app integrates directly with monetization networks without mediation. |
-[block:api-header]
-{
-  "title": "Methods"
-}
-[/block]
+| Type                                                                                   | Name                        | Description                                                                                |
+| :------------------------------------------------------------------------------------- | :-------------------------- | :----------------------------------------------------------------------------------------- |
+| `String`                                                                               | `ironsource`                | The name of the mediation network.                                         |
+| `String`                                                                               | `applovinmax`               | The name of the mediation network.                                         |
+| `String`                                                                               | `googleadmob`               | The name of the mediation network.                                         |
+| `String`                                                                               | `fyber`                     | The name of the mediation network.                                         |
+| `String`                                                                               | `appodeal`                  | The name of the mediation network.                                         |
+| `String`                                                                               | `admost`                    | The name of the mediation network.                                         |
+| `String`                                                                               | `topon`                     | The name of the mediation network.                                         |
+| `String`                                                                               | `tradplus`                  | The name of the mediation network.                                         |
+| `String`                                                                               | `yandex`                    | The name of the mediation network.                                         |
+| `String`                                                                               | `chartboost`                | The name of the mediation network.                                         |
+| `String`                                                                               | `unity`                     | The name of the mediation network.                                         |
+| `String`                                                                               | `customMediation`           | The mediation solution is not on the list of supported mediation partners. |
+| `String`                                                                               | `directMonetizationNetwork` | The app integrates directly with monetization networks without mediation.  |
+| [block:api-header] |                             |                                                                                            |
+| {                                                                                      |                             |                                                                                            |
+| "title": "Methods"                                                     |                             |                                                                                            |
+| }                                                                                      |                             |                                                                                            |
+| [/block]                           |                             |                                                                                            |
+
 ### start
+
 **Method signature**
+
 ```swift
 (void)start;
 ```
 
 **Description**
 Initializes the ad revenue SDK.
- 
+
 **Input arguments**
 
 This method doesn't accept input arguments.
@@ -58,7 +62,9 @@ This method doesn't accept input arguments.
 `void`.
 
 ### logAdRevenue
+
 **Method signature**
+
 ```swift
 (void)logAdRevenueWithMonetizationNetwork:(NSString * _Nonnull)monetizationNetwork
       mediationNetwork:(AppsFlyerAdRevenueMediationNetworkType)mediationNetwork
@@ -72,18 +78,19 @@ Logs an ad revenue impression.
 
 **Input arguments**
 
-| Type | Name | Description |
-|:--------|:-----------------|:--------------|
-| `String` | `monetizationNetwork` | The name of the monetization network. |
-| [`MediationNetworkType`](https://dev.appsflyer.com/hc/docs/appsflyeradrevenue-1#mediationnetworktype) | `mediationNetwork` | Enum of the mediation network. |
-| `String` | `revenueCurrency` | Currency of the ad revenue event. |
-| `NSNumber` | `eventRevenue` | Amount of the ad revenue event. |
-| `NSDictionary` | `additionalParameters` | Contains native and custom fields for the ad revenue payload, as described in the following usage example. |
+| Type                                                                                                  | Name                   | Description                                                                                                                |
+| :---------------------------------------------------------------------------------------------------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| `String`                                                                                              | `monetizationNetwork`  | The name of the monetization network.                                                                      |
+| [`MediationNetworkType`](https://dev.appsflyer.com/hc/docs/appsflyeradrevenue-1#mediationnetworktype) | `mediationNetwork`     | Enum of the mediation network.                                                                             |
+| `String`                                                                                              | `revenueCurrency`      | Currency of the ad revenue event.                                                                          |
+| `NSNumber`                                                                                            | `eventRevenue`         | Amount of the ad revenue event.                                                                            |
+| `NSDictionary`                                                                                        | `additionalParameters` | Contains native and custom fields for the ad revenue payload, as described in the following usage example. |
 
 **Returns**
 `void`.
 
 **Usage example**
+
 ```swift
 let adRevenueParams:[AnyHashable: Any] = [
             kAppsFlyerAdRevenueCountry : "us",

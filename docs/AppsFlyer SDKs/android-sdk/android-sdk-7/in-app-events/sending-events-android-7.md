@@ -38,7 +38,7 @@ You must [integrate the SDK](doc:integrate-android-sdk).
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Integrate In-App Events with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=in-app-events-android');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_Anrd_events', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Integrate In-App Events with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=in-app-events-android');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_Anrd_events', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
 
@@ -55,6 +55,7 @@ To access the `logEvent` method, import [`AppsFlyerLib`](doc:android-sdk-referen
 ```java Java
 import com.appsflyer.AppsFlyerLib;
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.AppsFlyerLib
 ```
@@ -65,6 +66,7 @@ To access [predefined event constants](#event-constants), import `AFInAppEventTy
 import com.appsflyer.AFInAppEventType; // Predefined event names
 import com.appsflyer.AFInAppEventParameterName; // Predefined parameter names
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.AFInAppEventType // Predefined event names
 import com.appsflyer.AFInAppEventParameterName // Predefined parameter names
@@ -96,6 +98,7 @@ eventValues.put(AFInAppEventParameterName.CONTENT_ID,"1234567");
 AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
                                     AFInAppEventType.ADD_TO_WISHLIST , eventValues);
 ```
+
 ```kotlin
 val eventValues = HashMap<String, Any>() 
 eventValues.put(AFInAppEventParameterName.PRICE, 1234.56)
@@ -116,8 +119,8 @@ In the above `logEvent` invocation:
 
 Before implementing an event, it helps to have a clear event structure definition. For example, a definition for an `af_content_view` event on an eCommerce app:
 
-| Event name | Event parameters | Parameter values | Where/When |
-|---|---|---|---|
+| Event name        | Event parameters                               | Parameter values                                                                                                                                                                     | Where/When                                             |
+| ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
 | `af_content_view` | `af_price`, `af_content_type`, `af_content_id` | `af_price`: item price. `af_content_type`: item category. `af_content_id`: item SKU. | When a user navigates to an item view. |
 
 - The event name is the value you pass as the event name argument to `logEvent`.
@@ -138,6 +141,7 @@ eventValues.put(AFInAppEventParameterName.CONTENT_ID, <ITEM_SKU>);
 AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
                                     AFInAppEventType.CONTENT_VIEW, eventValues);
 ```
+
 ```kotlin
 val eventValues = HashMap<String, Any>() 
 eventValues.put(AFInAppEventParameterName.PRICE, <ITEM_PRICE>)
@@ -172,6 +176,7 @@ AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
                     }
                 });
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
                                     AFInAppEventType.PURCHASE,
@@ -190,13 +195,13 @@ AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
 
 In the event that an error occurs when recording the in-app event, an error code and string description are provided, as indicated in the table that follows.
 
-| Error code | Description (NSError)                                        |
-| :--------- | :----------------------------------------------------------- |
-| `10`       | "Event timeout. Check 'minTimeBetweenSessions' param"        |
-| `11`       | "Skipping event because 'isStopTracking' enabled"            |
-| `40`       | Network error: Error description comes from Android          |
-| `41`       | "No dev key"                                                 |
-| `50`       | "Status code failure" + actual response code from the server |
+| Error code | Description (NSError)                              |
+| :--------- | :-------------------------------------------------------------------- |
+| `10`       | "Event timeout. Check 'minTimeBetweenSessions' param" |
+| `11`       | "Skipping event because 'isStopTracking' enabled"                     |
+| `40`       | Network error: Error description comes from Android   |
+| `41`       | "No dev key"                                                          |
+| `50`       | "Status code failure" + actual response code from the server          |
 
 ### Recording offline events
 
@@ -234,6 +239,7 @@ eventValues.put(AFInAppEventParameterName.REVENUE, 200);
 AppsFlyerLib.getInstance().logEvent(getApplicationContext(), 
                                     AFInAppEventType.PURCHASE, eventValues);
 ```
+
 ```kotlin
 val eventValues = HashMap<String, Any>() 
 eventValues.put(AFInAppEventParameterName.CONTENT_ID, <ITEM_SKU>)
@@ -247,7 +253,7 @@ AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
 The purchase event above has $200 in revenue, appearing as revenue in the dashboard.
 
 > 📘 Note
-> 
+>
 > Do not add currency symbols to the revenue value.
 
 ### Configuring revenue currency
@@ -261,6 +267,7 @@ eventValues.put(AFInAppEventParameterName.REVENUE, <TRANSACTION_REVENUE>);
 AppsFlyerLib.getInstance().logEvent(getApplicationContext(), 
                                     AFInAppEventType.PURCHASE, eventValues);
 ```
+
 ```kotlin
 val eventValues = HashMap<String, Any>() 
 eventValues.put(AFInAppEventParameterName.REVENUE, <TRANSACTION_REVENUE>)
@@ -271,7 +278,7 @@ AppsFlyerLib.getInstance().logEvent(getApplicationContext() , AFInAppEventType.P
 - The currency code should be a 3 character ISO 4217 code
 - The default currency is USD
 
-To learn about currency settings, display, and currency conversion, see our guide on [revenue currency](<>).
+To learn about currency settings, display, and currency conversion, see our guide on [revenue currency]().
 
 ### Logging negative revenue
 
@@ -287,6 +294,7 @@ AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
                                     "cancel_purchase",
                                     eventValues);
 ```
+
 ```kotlin
 val eventValues = HashMap<String, Any>() 
 eventValues.put(AFInAppEventParameterName.REVENUE, -1234.56)
@@ -297,15 +305,16 @@ AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
 ```
 
 > 📘 Note
-> 
+>
 > Notice the following in the code above:
-> 
+>
 > - The revenue value is preceded by a minus sign
 > - The event name is a custom event name called "cancel_purchase" - it helps you easily identify negative revenue events in the dashboard and raw data reports
 
 ## Validating purchases
 
-AppsFlyer provides server verification for in-app purchases. For more information see [Validate and log purchase](doc:validate-and-log-purchase-android) 
+AppsFlyer provides server verification for in-app purchases. For more information see [Validate and log purchase](doc:validate-and-log-purchase-android)
+
 ## Event constants
 
 ### Predefined event names
@@ -315,6 +324,7 @@ To use the following constants, import com.appsflyer.AFInAppEventType:
 ```java Java
 import com.appsflyer.AFInAppEventType;
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.AFInAppEventType
 ```
@@ -358,6 +368,7 @@ To use the following constants, import `AFInAppEventParameterName`:
 ```java Java
 import com.appsflyer.AFInAppEventParameterName;
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.AFInAppEventParameterName
 ```
@@ -373,8 +384,8 @@ Predefined event parameter constants follow a `AFInAppEventParameterName.PARAMET
 | `"af_success"`                     | <div id="af_success">`SUCCESS`</div>                                              | `String`                                     |
 | `"af_price"`                       | <div id="af_price">`PRICE`</div>                                                  | `float`                                      |
 | `"af_content_type"`                | <div id="af_content_type">`CONTENT_TYPE`</div>                                    | `String`                                     |
-| `"af_content_id"`                  | <div id="af_content_id">`CONTENT_ID`</div>                                        | `String`                                   |
-| `"af_content_list"`                | <div id="af_content_list">`CONTENT_LIST`</div>                                    | `String[]`                                     |
+| `"af_content_id"`                  | <div id="af_content_id">`CONTENT_ID`</div>                                        | `String`                                     |
+| `"af_content_list"`                | <div id="af_content_list">`CONTENT_LIST`</div>                                    | `String[]`                                   |
 | `"af_currency"`                    | <div id="af_currency">`CURRENCY`</div>                                            | `String`                                     |
 | `"af_quantity"`                    | <div id="af_quantity">`QUANTITY`</div>                                            | `int`                                        |
 | `"af_registration_method"`         | <div id="af_registration_method">`REGISTRATION_METHOD`</div>                      | `String`                                     |
@@ -394,8 +405,8 @@ Predefined event parameter constants follow a `AFInAppEventParameterName.PARAMET
 | `"af_long"`                        | <div id="af_long">`LONG`</div>                                                    | `String`                                     |
 | `"af_customer_user_id"`            | <div id="af_customer_user_id">`CUSTOMER_USER_ID`</div>                            | `String`                                     |
 | `"af_validated"`                   | <div id="af_validated">`VALIDATED`</div>                                          | `boolean`                                    |
-| `"af_revenue"`                     | <div id="af_revenue">`REVENUE`</div>                                              | `float`                                        |
-| `"af_projected_revenue"`           | <div id="af_projected_revenue">`PROJECTED_REVENUE`</div>                          | `float`                                        |
+| `"af_revenue"`                     | <div id="af_revenue">`REVENUE`</div>                                              | `float`                                      |
+| `"af_projected_revenue"`           | <div id="af_projected_revenue">`PROJECTED_REVENUE`</div>                          | `float`                                      |
 | `"af_receipt_id"`                  | <div id="af_receipt_id">`RECEIPT_ID`</div>                                        | `String`                                     |
 | `"af_tutorial_id"`                 | <div id="af_tutorial_id">`TUTORIAL_ID`</div>                                      | `String`                                     |
 | `"af_virtual_currency_name"`       | <div id="af_virtual_currency_name">`VIRTUAL_CURRENCY_NAME`</div>                  | `String`                                     |

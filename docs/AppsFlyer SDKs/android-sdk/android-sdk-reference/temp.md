@@ -38,8 +38,8 @@ Configures how the SDK extracts deep link values from push notification payloads
 
 **Input arguments**
 
-| Type        | Name           | Description                                                               |
-| :---------- | :------------- | :------------------------------------------------------------------------ |
+| Type        | Name           | Description                                                                               |
+| :---------- | :------------- | :---------------------------------------------------------------------------------------- |
 | `String...` | `deepLinkPath` | An array of `String`s that corresponds to the JSON path of the deep link. |
 
 **Returns**  
@@ -51,6 +51,7 @@ Basic configuration:
 ```java
 AppsFlyerLib.getInstance().addPushNotificationDeepLinkPath("af_push_link");
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().addPushNotificationDeepLinkPath("af_push_link")
 ```
@@ -60,6 +61,7 @@ Advanced configuration:
 ```java
 AppsFlyerLib.getInstance().addPushNotificationDeepLinkPath("deeply", "nested", "deep_link");
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().addPushNotificationDeepLinkPath("deeply", "nested", "deep_link")
 ```
@@ -89,8 +91,8 @@ Anonymize a user's installs, events, and sessions.
 
 **Input arguments**
 
-| Type      | Name              | Description          |
-| :-------- | :---------------- | :------------------- |
+| Type      | Name              | Description                          |
+| :-------- | :---------------- | :----------------------------------- |
 | `boolean` | `shouldAnonymize` | Defaults to `false`. |
 
 **Returns**  
@@ -101,6 +103,7 @@ Anonymize a user's installs, events, and sessions.
 ```java
 AppsFlyerLib.getInstance().anonymizeUser(true);
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().anonymizeUser(true)
 ```
@@ -115,10 +118,10 @@ void appendParametersToDeepLinkingURL(java.lang.String contains,
 ```
 
 **Description**  
-Enables app owners using App Links for deep linking (without OneLink) to attribute sessions initiated via a domain associated with their app. 
+Enables app owners using App Links for deep linking (without OneLink) to attribute sessions initiated via a domain associated with their app.
 
-> 🚧 
-> 
+> 🚧
+>
 > Call this method before calling [`start`](#start)
 
 You must provide the following parameters in the `parameters` `Map`:
@@ -144,6 +147,7 @@ urlParameters.put("pid", "exampleDomain"); // Required
 urlParameters.put("is_retargeting", "true"); // Required
 AppsFlyerLib.getInstance().appendParametersToDeepLinkingURL("example.com", urlParameters);
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().appendParametersToDeepLinkingURL("example.com",
 mapOf("pid" to "exampleDomain", "is_retargeting" to "true")) // Required
@@ -169,8 +173,8 @@ Enable the collection of Facebook Deferred AppLinks. Requires Facebook SDK and F
 This API must be invoked before initializing the AppsFlyer SDK in order to function properly.  
 **Input arguments**
 
-| Type      | Name         | Description                                                             |
-| :-------- | :----------- | :---------------------------------------------------------------------- |
+| Type      | Name         | Description                                                                             |
+| :-------- | :----------- | :-------------------------------------------------------------------------------------- |
 | `boolean` | `isEnabled ` | Should Facebook's deferred app links be processed by the AppsFlyer SDK. |
 
 **Returns**  
@@ -212,8 +216,8 @@ Enables the collection of Transparency and Consent Framework (TCF) data from `Sh
 
 **Input arguments**
 
-| Type    | Name | Description                                                                                                                                   |
-| ------- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Type    | Name | Description                                                                                                                                                                                                         |
+| ------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | boolean | flag | A boolean value to enable (`true`) or disable (`false`) the collection of TCF data. The SDK collects TCF data when the flag is set to `true`. |
 
 **Returns**  
@@ -232,8 +236,8 @@ Get AppsFlyer's unique device ID. The SDK generates an AppsFlyer unique device I
 
 **Input arguments**
 
-| Type      | Name       | Description                     |
-| :-------- | :--------- | :------------------------------ |
+| Type      | Name       | Description                                     |
+| :-------- | :--------- | :---------------------------------------------- |
 | `Context` | `context ` | Application / Activity context. |
 
 **Returns**  
@@ -244,6 +248,7 @@ AppsFlyer's unique device ID.
 ```java Java
 String appsFlyerId = AppsFlyerLib.getInstance().getAppsFlyerUID(this);
 ```
+
 ```kotlin Kotlin
 String appsFlyerId = AppsFlyerLib.getInstance().getAppsFlyerUID(this)
 ```
@@ -261,8 +266,8 @@ Get the Facebook attribution ID, if one exists.
 
 **Input arguments**
 
-| Type      | Name      | Description                     |
-| :-------- | :-------- | :------------------------------ |
+| Type      | Name      | Description                                     |
+| :-------- | :-------- | :---------------------------------------------- |
 | `Context` | `context` | Application / Activity context. |
 
 **Returns**  
@@ -273,6 +278,7 @@ Get the Facebook attribution ID, if one exists.
 ```java Java
 String attributionId = AppsFlyerLib.getInstance().getAttributionId(this);
 ```
+
 ```kotlin Kotlin
 String attributionId = AppsFlyerLib.getInstance().getAttributionId(this)
 ```
@@ -294,8 +300,8 @@ This function takes no parameters.
 
 **Returns**
 
-| Type     | Description             |
-| :------- | :---------------------- |
+| Type     | Description                             |
+| :------- | :-------------------------------------- |
 | `String` | Currently set hostname. |
 
 **Usage example**
@@ -347,8 +353,8 @@ Get the third-party app store referrer value.
 
 **Input arguments**
 
-| Type      | Name       | Description                     |
-| :-------- | :--------- | :------------------------------ |
+| Type      | Name       | Description                                     |
+| :-------- | :--------- | :---------------------------------------------- |
 | `Context` | `context ` | Application / Activity context. |
 
 **Returns**  
@@ -386,11 +392,11 @@ Use this method to initialize AppsFlyer SDK. This API should be called inside th
 
 **Input arguments**
 
-| Type                              | Name                     | Description                                                                                                  |
-| :-------------------------------- | :----------------------- | :----------------------------------------------------------------------------------------------------------- |
-| `String`                          | `key`                    | AppsFlyer dev key                                                                                            |
+| Type                              | Name                     | Description                                                                                                                                                     |
+| :-------------------------------- | :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `String`                          | `key`                    | AppsFlyer dev key                                                                                                                                               |
 | `AppsFlyerConversionDataListener` | `conversionDataListener` | (Optional) implement the AppsFlyerConversionDataListener to access AppsFlyer's conversion data. Can be null. |
-| `Context`                         | `context`                | Application Context.                                                                                         |
+| `Context`                         | `context`                | Application Context.                                                                                                                            |
 
 **Returns**  
 `void`
@@ -411,8 +417,8 @@ Boolean indicator for preinstall by Manufacturer.
 
 **Input arguments**
 
-| Type      | Name       | Description                     |
-| :-------- | :--------- | :------------------------------ |
+| Type      | Name       | Description                                     |
+| :-------- | :--------- | :---------------------------------------------- |
 | `Context` | `context ` | Application / Activity context. |
 
 **Returns**  
@@ -436,8 +442,8 @@ This function takes no parameters.
 
 **Returns**
 
-| Type       | Description                           |
-| :--------- | :------------------------------------ |
+| Type       | Description                                           |
+| :--------- | :---------------------------------------------------- |
 | `boolean ` | `true` if stopped, `false` otherwise. |
 
 **Usage example**
@@ -481,9 +487,9 @@ void logEvent(Context context,
 
 **Description**  
 Same as logEvent, with AppsFlyerRequestListener. `HttpURLConnection.HTTP_OK` from  
- server will invoke the AppsFlyerRequestListener#onSuccess()  
- method. AppsFlyerRequestListener#onError(int, String) will return  
- the error in case one occurs
+server will invoke the AppsFlyerRequestListener#onSuccess()  
+method. AppsFlyerRequestListener#onError(int, String) will return  
+the error in case one occurs
 
 **Input arguments**  
 This function takes no parameters.  
@@ -542,6 +548,7 @@ If your app is a background utility app, you can use this API in your Activity�
 ```java Java
 public void logSession(Context context);
 ```
+
 ```kotlin Kotlin
 public void logSession(Context context)
 ```
@@ -559,8 +566,8 @@ void onPause(Context context)
 
 **Description**  
 For Cocos2dx platform only  
- Cocos2dx has his own applicationDidEnterBackground event.  
- Therefore 'onPause' will be called from C++ by JNI
+Cocos2dx has his own applicationDidEnterBackground event.  
+Therefore 'onPause' will be called from C++ by JNI
 
 **Input arguments**
 
@@ -601,6 +608,7 @@ Used to manually resolve deep links.
 ```java Java
 AppsFlyerLib.getInstance().performOnAppAttribution(context, uri);
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().performOnAppAttribution(context, uri)
 ```
@@ -638,9 +646,9 @@ protected void onResume() {
 
 **Input arguments**
 
-| Type      | Name       | Description                     |
-| :-------- | :--------- | :------------------------------ |
-| `Intent`  | `intent `  |                                 |
+| Type      | Name       | Description                                     |
+| :-------- | :--------- | :---------------------------------------------- |
+| `Intent`  | `intent `  |                                                 |
 | `Context` | `context ` | Application / Activity context. |
 
 **Returns**  
@@ -660,8 +668,8 @@ Register a [conversion data listener](doc:conversion-data-android). You can also
 
 **Input arguments**
 
-| Type                          | Name                     | Description                                           |
-| :---------------------------- | :----------------------- | :---------------------------------------------------- |
+| Type                          | Name                     | Description                                                           |
+| :---------------------------- | :----------------------- | :-------------------------------------------------------------------- |
 | `Context`                     | `context `               | Application / Activity context.                       |
 | `AppsFlyerConversionListener` | `conversionDataListener` | The `AppsFlyerConversionListener` object to register. |
 
@@ -674,6 +682,7 @@ Register a [conversion data listener](doc:conversion-data-android). You can also
 // conversionDataListener is an object of type AppsFlyerConversionListener.
 AppsFlyerLib.getInstance().registerConversionListener(getApplicationContext(), conversionDataListener);
 ```
+
 ```kotlin Kotlin
 // conversionDataListener is an object of type AppsFlyerConversionListener.
 AppsFlyerLib.getInstance().registerConversionListener(getApplicationContext(), conversionDataListener)
@@ -695,8 +704,8 @@ Register a validation listener for the `validateAndLogInAppPurchase` API.
 
 **Input arguments**
 
-| Type                                      | Name                 | Description                                                       |
-| :---------------------------------------- | :------------------- | :---------------------------------------------------------------- |
+| Type                                      | Name                 | Description                                                                       |
+| :---------------------------------------- | :------------------- | :-------------------------------------------------------------------------------- |
 | `Context`                                 | `context`            | Application / Activity context.                                   |
 | `AppsFlyerInAppPurchaseValidatorListener` | `validationListener` | The `AppsFlyerInAppPurchaseValidatorListener` object to register. |
 
@@ -718,10 +727,10 @@ void sendAdRevenue(Context context,
 
 **Input arguments**
 
-| Type                  | Name                 | Description                     |
-| :-------------------- | :------------------- | :------------------------------ |
+| Type                  | Name                 | Description                                     |
+| :-------------------- | :------------------- | :---------------------------------------------- |
 | `Context`             | `context`            | Application / Activity context. |
-| `Map<String, Object>` | `validationListener` |                                 |
+| `Map<String, Object>` | `validationListener` |                                                 |
 
 **Returns**  
 `void`
@@ -739,8 +748,8 @@ Measure and get data from push-notification campaigns. Call this method inside t
 
 **Input arguments**
 
-| Type       | Name       | Description                                            |
-| :--------- | :--------- | :----------------------------------------------------- |
+| Type       | Name       | Description                                                            |
+| :--------- | :--------- | :--------------------------------------------------------------------- |
 | `Activity` | `activity` | The `Activity` which is launched via the notification. |
 
 **Returns**  
@@ -750,8 +759,8 @@ Measure and get data from push-notification campaigns. Call this method inside t
 
 ### setAdditionalData
 
-> 📘 
-> 
+> 📘
+>
 > Calling `setAddiotionalData` before first launch will have the additional data included in installs, sessions, as well as in-app events.
 
 **Method signature**
@@ -784,8 +793,8 @@ By default, IMEI and Android ID are not collected by the SDK if the Android vers
 
 **Input arguments**
 
-| Type     | Name         | Description        |
-| :------- | :----------- | :----------------- |
+| Type     | Name         | Description                        |
+| :------- | :----------- | :--------------------------------- |
 | `String` | `aAndroidId` | Android device ID. |
 
 **Returns**  
@@ -803,8 +812,8 @@ void setAppId(java.lang.String id)
 
 **Input arguments**
 
-| Type     | Name | Description     |
-| :------- | :--- | :-------------- |
+| Type     | Name | Description                     |
+| :------- | :--- | :------------------------------ |
 | `String` | `id` | Android App ID. |
 
 **Returns**  
@@ -823,8 +832,8 @@ Set the OneLink ID that should be used for attributing user-Invite. The link tha
 
 **Input arguments**
 
-| Type     | Name        | Description                                       |
-| :------- | :---------- | :------------------------------------------------ |
+| Type     | Name        | Description                                                       |
+| :------- | :---------- | :---------------------------------------------------------------- |
 | `String` | `oneLinkId` | OneLink ID obtained from the AppsFlyer Dashboard. |
 
 **Returns**  
@@ -843,8 +852,8 @@ Opt-in to Android ID collection. Forces the SDK to collect Android ID.
 
 **Input arguments**
 
-| Type      | Name        | Description              |
-| :-------- | :---------- | :----------------------- |
+| Type      | Name        | Description                              |
+| :-------- | :---------- | :--------------------------------------- |
 | `boolean` | `isCollect` | Set to `true` to opt-in. |
 
 **Returns**  
@@ -863,8 +872,8 @@ Opt-in to IMEI collection. Forces the SDK to collect IMEI.
 
 **Input arguments**
 
-| Type      | Name        | Description              |
-| :-------- | :---------- | :----------------------- |
+| Type      | Name        | Description                              |
+| :-------- | :---------- | :--------------------------------------- |
 | `boolean` | `isCollect` | Set to `true` to opt-in. |
 
 **Returns**  
@@ -883,8 +892,8 @@ Opt-in/opt-out of OAID collection. By default, the SDK tries to collect OAID.
 
 **Input arguments**
 
-| Type      | Name        | Description                                    |
-| :-------- | :---------- | :--------------------------------------------- |
+| Type      | Name        | Description                                                                    |
+| :-------- | :---------- | :----------------------------------------------------------------------------- |
 | `boolean` | `isCollect` | Defaults to `true`. Set to `false` to opt-out. |
 
 **Returns**  
@@ -922,8 +931,8 @@ Sets the currency for in-app purchases. The currency code should be a 3 characte
 
 **Input arguments**
 
-| Type     | Name           | Description                                     |
-| :------- | :------------- | :---------------------------------------------- |
+| Type     | Name           | Description                                                                     |
+| :------- | :------------- | :------------------------------------------------------------------------------ |
 | `String` | `currencyCode` | 3 character ISO 4217 code. Defaults to `"USD"`. |
 
 **Returns**  
@@ -945,8 +954,8 @@ Use to set customer user id and starts the SDK.
 
 **Input arguments**
 
-| Type     | Name      | Description                     |
-| :------- | :-------- | :------------------------------ |
+| Type     | Name      | Description                                     |
+| :------- | :-------- | :---------------------------------------------- |
 | `String` | `id`      | Customer ID for client.         |
 | `String` | `context` | Application / Activity context. |
 
@@ -967,8 +976,8 @@ This ID is available in raw-data reports and in the Postback APIs for cross-refe
 
 **Input arguments**
 
-| Type     | Name | Description             |
-| :------- | :--- | :---------------------- |
+| Type     | Name | Description                             |
+| :------- | :--- | :-------------------------------------- |
 | `String` | `id` | Customer ID for client. |
 
 **Returns**  
@@ -987,8 +996,8 @@ Enables Debug logs for the AppsFlyer SDK. Should only be set to true in developm
 
 **Input arguments**
 
-| Type      | Name           | Description          |
-| :-------- | :------------- | :------------------- |
+| Type      | Name           | Description                          |
+| :-------- | :------------- | :----------------------------------- |
 | `boolean` | `shouldEnable` | Defaults to `false`. |
 
 **Returns**  
@@ -1010,8 +1019,8 @@ Disables collection of various Advertising IDs by the SDK. This includes Google 
 
 **Input arguments**
 
-| Type      | Name      | Description          |
-| :-------- | :-------- | :------------------- |
+| Type      | Name      | Description                          |
+| :-------- | :-------- | :----------------------------------- |
 | `boolean` | `disable` | Defaults to `false`. |
 
 **Returns**  
@@ -1031,8 +1040,8 @@ Use to opt-out of collecting the network operator name (carrier) and sim operato
 
 **Input arguments**
 
-| Type      | Name      | Description          |
-| :-------- | :-------- | :------------------- |
+| Type      | Name      | Description                          |
+| :-------- | :-------- | :----------------------------------- |
 | `boolean` | `disable` | Defaults to `false`. |
 
 **Returns**  
@@ -1051,8 +1060,8 @@ SDK plugins and extensions will set this field.
 
 **Input arguments**
 
-| Type     | Name        | Description     |
-| :------- | :---------- | :-------------- |
+| Type     | Name        | Description                     |
+| :------- | :---------- | :------------------------------ |
 | `String` | `extension` | Extension name. |
 
 **Returns**  
@@ -1072,8 +1081,8 @@ Set a custom host. **Note**: Starting SDK V6.10, if the host is sent with an emp
 
 **Input arguments**
 
-| Type     | Name             | Description  |
-| :------- | :--------------- | :----------- |
+| Type     | Name             | Description                  |
+| :------- | :--------------- | :--------------------------- |
 | `String` | `hostPrefixName` | Host prefix. |
 | `String` | `hostName`       | Host name.   |
 
@@ -1093,8 +1102,8 @@ By default, IMEI and Android ID are not collected by the SDK if the OS version i
 
 **Input arguments**
 
-| Type     | Name    | Description  |
-| :------- | :------ | :----------- |
+| Type     | Name    | Description                  |
+| :------- | :------ | :--------------------------- |
 | `String` | `aImei` | Device IMEI. |
 
 **Returns**  
@@ -1133,9 +1142,9 @@ Set the SDK log level.
 
 **Input arguments**
 
-| Type     | Name       | Description |
-| :------- | :--------- | :---------- |
-| `String` | `logLevel` | Log level.  |
+| Type     | Name       | Description                |
+| :------- | :--------- | :------------------------- |
+| `String` | `logLevel` | Log level. |
 
 **Returns**  
 `void`.
@@ -1153,8 +1162,8 @@ Set a custom value for the minimum required time between sessions.
 
 **Input arguments**
 
-| Type  | Name      | Description                                                                                                                                                          |
-| :---- | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Type  | Name      | Description                                                                                                                                                                                          |
+| :---- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `int` | `seconds` | Sets the minimum time that must pass between two app launches to count as two separate sessions. If not set, the default minimum time between sessions is 5 seconds. |
 
 **Returns**  
@@ -1173,8 +1182,8 @@ By default, OAID is not collected by the SDK.  Use this API to explicitly send O
 
 **Input arguments**
 
-| Type     | Name   | Description  |
-| :------- | :----- | :----------- |
+| Type     | Name   | Description                  |
+| :------- | :----- | :--------------------------- |
 | `String` | `oaid` | Device OAID. |
 
 **Returns**  
@@ -1193,8 +1202,8 @@ In order for AppsFlyer SDK to successfully resolve hidden (decoded in shortlink 
 
 **Input arguments**
 
-| Type        | Name      | Description                                                                                                   |
-| :---------- | :-------- | :------------------------------------------------------------------------------------------------------------ |
+| Type        | Name      | Description                                                                                                                                      |
+| :---------- | :-------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `String...` | `domains` | Array of domains that the SDK should treat as branded domains (the SDK will try to resolve them as OneLinks). |
 
 **Returns**  
@@ -1213,8 +1222,8 @@ Specify the alternative app store that the app is downloaded from.
 
 **Input arguments**
 
-| Type     | Name         | Description                 |
-| :------- | :----------- | :-------------------------- |
+| Type     | Name         | Description                                 |
+| :------- | :----------- | :------------------------------------------ |
 | `String` | `sourceName` | Third-party app store name. |
 
 **Returns**  
@@ -1225,6 +1234,7 @@ Specify the alternative app store that the app is downloaded from.
 ```java Java
 AppsFlyerLib.getInstance().setOutOfStore("baidu");
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().setOutOfStore("baidu")
 ```
@@ -1242,10 +1252,10 @@ Allows sending custom data for partner integration purposes.
 
 **Input arguments**
 
-| Type     | Name        | Description                                                                        |
-| :------- | :---------- | :--------------------------------------------------------------------------------- |
-| `String` | `partnerId` | ID of the partner (usually suffixed with "\_int").                                 |
-| `Map`    | `data`      | Customer data, depends on the integration configuration with the specific partner. |
+| Type     | Name        | Description                                                                                                 |
+| :------- | :---------- | :---------------------------------------------------------------------------------------------------------- |
+| `String` | `partnerId` | ID of the partner (usually suffixed with "\_int"). |
+| `Map`    | `data`      | Customer data, depends on the integration configuration with the specific partner.          |
 
 **Returns**  
 `void`.
@@ -1257,6 +1267,7 @@ Map<String, Object> partnerData = new HashMap();
 partnerData.put("puid", "123456789");
 AppsFlyerLib.getInstance().setPartnerData("test_int", partnerData);
 ```
+
 ```kotlin Kotlin
 val partnerData = mapOf("puid" to "123456789")
 AppsFlyerLib.getInstance().setPartnerData("test_int", partnerData)
@@ -1296,8 +1307,8 @@ void setPreinstallAttribution(java.lang.String mediaSource,
 Specify the manufacturer or media source name to which the preinstall is attributed.  
 **Input arguments**
 
-| Type     | Name          | Description                                                   |
-| :------- | :------------ | :------------------------------------------------------------ |
+| Type     | Name          | Description                                                                   |
+| :------- | :------------ | :---------------------------------------------------------------------------- |
 | `String` | `mediaSource` | Manufacturer or media source name for preinstall attribution. |
 | `String` | `campaign`    | Campaign name for preinstall attribution.                     |
 | `String` | `siteId`      | Site ID for preinstall attribution.                           |
@@ -1320,8 +1331,8 @@ Advertisers can wrap an AppsFlyer OneLink within another Universal Link. This Un
 
 **Input arguments**
 
-| Type        | Name   | Description                       |
-| :---------- | :----- | :-------------------------------- |
+| Type        | Name   | Description                                       |
+| :---------- | :----- | :------------------------------------------------ |
 | `String...` | `urls` | Be sure to provide explicit URLs. |
 
 **Returns**  
@@ -1349,15 +1360,15 @@ Lets you configure how which partners should the SDK exclude from data-sharing.
 
 **Input arguments**
 
-| Type        | Name       | Description                                                                                                                          |
-| :---------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| Type        | Name       | Description                                                                                                                                                                          |
+| :---------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `String...` | `partners` | One or more partner identifiers you wish to exclude. Must include letters/digits and underscores only. Maximum partner ID length: 45 |
 
 **Note:**  
 To find out the required partner IDs:
 
 1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
-2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
+2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array.
 
 **Exceptions**:
 
@@ -1371,6 +1382,7 @@ AppsFlyerLib.getInstance().setSharingFilterForPartners("partner1_int", "partner2
 AppsFlyerLib.getInstance().setSharingFilterForPartners("all"); // All partners
 AppsFlyerLib.getInstance().setSharingFilterForPartners(); // Reset list (default)
 ```
+
 ```kotlin
 AppsFlyerLib.getInstance().setSharingFilterForPartners("partner1_int") // Single partner
 AppsFlyerLib.getInstance().setSharingFilterForPartners("partner1_int", "partner2_int") // Multiple partners
@@ -1394,8 +1406,8 @@ Stops events from propagating to the specified AppsFlyer partners.
 (Deprecated and replaced by setSharingFilterForPartners)  
 **Input arguments**
 
-| Type        | Name       | Description                                                                                           |
-| :---------- | :--------- | :---------------------------------------------------------------------------------------------------- |
+| Type        | Name       | Description                                                                                                                                           |
+| :---------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `String...` | `partners` | One or more partner identifiers. Must include letters/digits and underscores only. Maximum length: 45 |
 
 **Returns**  
@@ -1435,10 +1447,10 @@ Set the user emails and encrypt them.
 
 **Input arguments**
 
-| Type                                  | Name          | Description                                                                                                                        |
-| :------------------------------------ | :------------ | :--------------------------------------------------------------------------------------------------------------------------------- |
+| Type                                  | Name          | Description                                                                                                                                                                                                        |
+| :------------------------------------ | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `AppsFlyerProperties.EmailsCryptType` | `cryptMethod` | Encryption methods: <ul><li>AppsFlyerProperties.EmailsCryptType.NONE</li><li> AppsFlyerProperties.EmailsCryptType.SHA256</li></ul> |
-| `String...`                           | `emails`      | One or more  user emails.                                                                                                          |
+| `String...`                           | `emails`      | One or more  user emails.                                                                                                                                                                          |
 
 **Returns**  
 `void`.
@@ -1458,11 +1470,11 @@ Starts the SDK.
 
 **Input arguments**
 
-| Type                       | Name       | Description                                                                                                                          |
-| :------------------------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| Type                       | Name       | Description                                                                                                                                          |
+| :------------------------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Context`                  | `context`  | Application Context if calling in the Application `onCreate` method, Activity Context if calling after Activity's `onResume` method. |
-| `String`                   | `key`      | Your AppsFlyer dev key                                                                                                               |
-| `AppsFlyerRequestListener` | `listener` | (Optional) Listener for getting the request status.                                                                                  |
+| `String`                   | `key`      | Your AppsFlyer dev key                                                                                                                               |
+| `AppsFlyerRequestListener` | `listener` | (Optional) Listener for getting the request status.                                                               |
 
 **Returns**  
 `void`.
@@ -1484,13 +1496,13 @@ Once this API is invoked, our SDK no longer communicates with our servers and st
 Useful when implementing user opt-in/opt-out.
 
 > 📘 SDK restart
-> 
+>
 > After `stop(true)` was called, you need to call `stop(false)` and only then call `start()`
 
 **Input arguments**
 
-| Type      | Name         | Description                     |
-| :-------- | :----------- | :------------------------------ |
+| Type      | Name         | Description                                     |
+| :-------- | :----------- | :---------------------------------------------- |
 | `boolean` | `shouldStop` | should logging be stopped.      |
 | `Context` | `context`    | Application / Activity context. |
 
@@ -1512,27 +1524,26 @@ void subscribeForDeepLink(DeepLinkListener deepLinkListener,
 
 [block:parameters]
 {
-  "data": {
-    "h-0": "Type",
-    "h-1": "Name",
-    "h-2": "Description",
-    "0-0": "`DeepLinkListener`",
-    "0-1": "`deepLinkListener`",
-    "0-2": "",
-    "1-0": "`long`",
-    "1-1": "`timeout`",
-    "1-2": "Optional.  \nUnits in milliseconds"
-  },
-  "cols": 3,
-  "rows": 2,
-  "align": [
-    "left",
-    "left",
-    "left"
-  ]
+"data": {
+"h-0": "Type",
+"h-1": "Name",
+"h-2": "Description",
+"0-0": "`DeepLinkListener`",
+"0-1": "`deepLinkListener`",
+"0-2": "",
+"1-0": "`long`",
+"1-1": "`timeout`",
+"1-2": "Optional.  \nUnits in milliseconds"
+},
+"cols": 3,
+"rows": 2,
+"align": [
+"left",
+"left",
+"left"
+]
 }
 [/block]
-
 
 **Returns**  
 `void`
@@ -1568,8 +1579,8 @@ For developers who use Firebase for purposes other than uninstall measurement. F
 
 **Input arguments**
 
-| Type      | Name      | Description                     |
-| :-------- | :-------- | :------------------------------ |
+| Type      | Name      | Description                                     |
+| :-------- | :-------- | :---------------------------------------------- |
 | `Context` | `context` | Application / Activity context. |
 | `String`  | `token`   | Firebase Device Token.          |
 
@@ -1581,6 +1592,7 @@ For developers who use Firebase for purposes other than uninstall measurement. F
 ```java Java
 AppsFlyerlib.getInstance().updateServerUninstallToken(getApplicationContext(), <TOKEN>);
 ```
+
 ```kotlin Kotlin
 AppsFlyerlib.getInstance().updateServerUninstallToken(getApplicationContext(), <TOKEN>);
 ```
@@ -1596,17 +1608,17 @@ public abstract void validateAndLogInAppPurchase(@NonNull AFPurchaseDetails purc
 ```
 
 **Description**  
-The method validates a purchase event with the store and if the validation is successful, the SDK sends an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-android#af_purchase) event to AppsFlyer. 
+The method validates a purchase event with the store and if the validation is successful, the SDK sends an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-android#af_purchase) event to AppsFlyer.
 
 See detailed instructions in [Validate and log in-app purchase](#validateandloginapppurchase).
 
 **Input arguments**
 
-| Name                    | Type                                                                                      | Description                                                                                                      |
-| ----------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `purchaseDetails` \*    | [`AFPurchaseDetails`](#afpurchasedetails)                                                 | An object that encapsulates all data related to the purchase provided to the validateAndLogInAppPurchase method. |
-| `additionalParameters`  | Map\<String, String>                                                                      | Additional parameters to log with the purchase.                                                                  |
-| `validationCallback` \* | [`AppsFlyerInAppPurchaseValidationCallback`](#appsflyerinapppurchasevalidationcallback)\` | A callback for delivering validation results.                                                                    |
+| Name                    | Type                                                                                        | Description                                                                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `purchaseDetails` \*    | [`AFPurchaseDetails`](#afpurchasedetails)                                                   | An object that encapsulates all data related to the purchase provided to the validateAndLogInAppPurchase method. |
+| `additionalParameters`  | Map\<String, String>                                              | Additional parameters to log with the purchase.                                                                  |
+| `validationCallback` \* | [`AppsFlyerInAppPurchaseValidationCallback`](#appsflyerinapppurchasevalidationcallback)\\` | A callback for delivering validation results.                                                                    |
 
 **Returns**  
 void
@@ -1627,13 +1639,13 @@ data class AFPurchaseDetails(
 
 **AFPurchaseDetails parameters**
 
-| Name            | Type             | Description                                                                                                                                                                                                                                                                                                                                                            |
-| --------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `purchaseType`  | `AFPurchaseType` | Field to distinguish between one-time purchases and subscriptions. The field can accept either subscription or one-time-purchase.                                                                                                                                                                                                                                      |
+| Name            | Type             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| --------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `purchaseType`  | `AFPurchaseType` | Field to distinguish between one-time purchases and subscriptions. The field can accept either subscription or one-time-purchase.                                                                                                                                                                                                                                                                            |
 | `purchaseToken` | String           | Token that uniquely identifies a purchase for a given item and user pair. Part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase). To retrieve the token call the [`getPurchaseToken` API](https://developer.android.com/reference/com/android/billingclient/api/Purchase#getPurchaseToken()) |
-| `productId`     | String           | ID of the product item that has been purchased. Also part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase).                                                                                                                                                                                 |
-| `price`         | String           | The full price of the one-time purchase or the subscription. Also part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase).                                                                                                                                                                    |
-| `currency`      | String           | Currency used to make the purchase.                                                                                                                                                                                                                                                                                                                                    |
+| `productId`     | String           | ID of the product item that has been purchased. Also part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase).                                                                                                                                                                                                                       |
+| `price`         | String           | The full price of the one-time purchase or the subscription. Also part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase).                                                                                                                                                                                                          |
+| `currency`      | String           | Currency used to make the purchase.                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ### validateAndLogInAppPurchase (LEGACY)
 
@@ -1656,15 +1668,15 @@ See detailed instructions in [validating purchases](doc:in-app-events-android#va
 
 **Input arguments**
 
-| Type                  | Name                   | Description                                                                                   |
-| :-------------------- | :--------------------- | :-------------------------------------------------------------------------------------------- |
-| `Context`             | `context`              | Application / Activity context.                                                               |
-| `String`              | `publicKey`            | License Key obtained from the Google Play Console.                                            |
+| Type                  | Name                   | Description                                                                                                                                                                |
+| :-------------------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Context`             | `context`              | Application / Activity context.                                                                                                                            |
+| `String`              | `publicKey`            | License Key obtained from the Google Play Console.                                                                                                         |
 | `String`              | `signature`            | data.INAPP_DATA_SIGNATURE from onActivityResult(int requestCode, int resultCode, Intent data) |
 | `String`              | `purchaseData`         | data.INAPP_PURCHASE_DATA from onActivityResult(int requestCode, int resultCode, Intent data)  |
-| `String`              | `price`                | Purchase price, should be derived from skuDetails.getStringArrayList("DETAILS_LIST")          |
-| `String`              | `currency`             | Purchase currency, should be derived from skuDetails.getStringArrayList("DETAILS_LIST")       |
-| `Map<String, String>` | `additionalParameters` | Freehand parameters to be logged with the purchase (if validated).                            |
+| `String`              | `price`                | Purchase price, should be derived from skuDetails.getStringArrayList("DETAILS_LIST")                               |
+| `String`              | `currency`             | Purchase currency, should be derived from skuDetails.getStringArrayList("DETAILS_LIST")                            |
+| `Map<String, String>` | `additionalParameters` | Freehand parameters to be logged with the purchase (if validated).                                                                      |
 
 **Returns**  
 `void`.
@@ -1695,6 +1707,7 @@ All in-app events and any other SDK API calls are discarded until the `customerU
 ```java Java
 AppsFlyerLib.getInstance().waitForCustomerUserId(true);
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().waitForCustomerUserId(true);
 ```

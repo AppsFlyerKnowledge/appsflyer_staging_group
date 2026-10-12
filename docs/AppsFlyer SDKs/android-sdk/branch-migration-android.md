@@ -1,7 +1,6 @@
 ---
 title: Branch Migration Navigator on Android
-excerpt: Activate the Branch Migration Navigator to streamline your traffic migration
-  journey from Branch to AppsFlyer
+excerpt: Activate the Branch Migration Navigator to streamline your traffic migration journey from Branch to AppsFlyer
 hidden: true
 ---
 
@@ -17,11 +16,11 @@ To ensure a smooth handoff of the navigator, your app should collect attribution
 
 Before implementing the flow it is important to understand the rational behind it. Any other implementation is accepted, as long as you follow this rational.
 
-| **Scenario**                  | **Suggested Indication**                                                        | **Action**                                                                                         | **Branch Method (Click Data Retrieval)**                               | **AppsFlyer Method**                                                   |
-|-------------------------------|---------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
-| **Organic App Open**          | `branchUniversalObject` is `null`                                                | No Branch data to retrieve; proceed to start AppsFlyer SDK                                         | N/A                                                                    | N/A                                  |
-| **Branch Deferred Deep Link** | `branchUniversalObject` is not `null` and `+is_first_session` is `true`          | Introduce a 3-second delay, then retrieve and pass install-attributed click data to AppsFlyer      | `Branch.getInstance().getLastAttributedTouchData()`                    | `AppsFlyerMigrationHelper.setAttributionData()`                        |
-| **Branch Direct Deep Link**   | `branchUniversalObject` is not `null` and `+is_first_session` is `false`         | Retrieve and pass direct deep link click data to AppsFlyer                                         | `Branch.getInstance().getLatestReferringParams()` or `branchUniversalObject.getContentMetadata().convertToJson()` | `AppsFlyerMigrationHelper.setDeepLinkingData()`                        |
+| **Scenario**                  | **Suggested Indication**                                                 | **Action**                                                                                    | **Branch Method (Click Data Retrieval)**                                                       | **AppsFlyer Method**                            |
+| ----------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **Organic App Open**          | `branchUniversalObject` is `null`                                        | No Branch data to retrieve; proceed to start AppsFlyer SDK                                    | N/A                                                                                                               | N/A                                             |
+| **Branch Deferred Deep Link** | `branchUniversalObject` is not `null` and `+is_first_session` is `true`  | Introduce a 3-second delay, then retrieve and pass install-attributed click data to AppsFlyer | `Branch.getInstance().getLastAttributedTouchData()`                                                               | `AppsFlyerMigrationHelper.setAttributionData()` |
+| **Branch Direct Deep Link**   | `branchUniversalObject` is not `null` and `+is_first_session` is `false` | Retrieve and pass direct deep link click data to AppsFlyer                                    | `Branch.getInstance().getLatestReferringParams()` or `branchUniversalObject.getContentMetadata().convertToJson()` | `AppsFlyerMigrationHelper.setDeepLinkingData()` |
 
 # SDK and migration module initiazation
 
@@ -29,7 +28,7 @@ Before implementing the flow it is important to understand the rational behind i
   - In the `application` context, initialize both the Branch and AppsFlyer SDKs globally.
 
 > ⚠️ Important
-> 
+>
 > Do not run AppsFlyer SDK `start` immediately after the `init`.
 > Read below when to start AppsFlyer SDK
 
@@ -41,7 +40,7 @@ Before implementing the flow it is important to understand the rational behind i
 
 All the migration module flow is implemented in the Branch callback `onInitFinished`.  
 Branch recommends `onInitFinished` implemeneted in `onStart` of your `MainActivity`. `MainActivity` refers to the applications where you chose to handle deep linking.
-The following code describes the migration code in `onInitFinished`. The full reference can be found [here](#full-code-example). 
+The following code describes the migration code in `onInitFinished`. The full reference can be found [here](#full-code-example).
 
 ## Error check
 
@@ -50,12 +49,13 @@ Initially check if `onInitFinished` returned a non empty `BranchError`. In this 
 ## Organic flow
 
 Organic flow means install or launch of the application not initiated by a click on a Branch link.
-In this case the `BranchUniversalObject` will come back empty. 
+In this case the `BranchUniversalObject` will come back empty.
 In this case, skip the migration flow and immediately call AppsFlyer SDK `start`.
 
-## Deep linking 
+## Deep linking
 
 The migration process becomes relevant when an app launch is triggered by a Branch click. There are two primary types of deep linking:​
+
 - Deferred Deep Linking: This occurs when a user clicks on a Branch link and, if the app is not already installed, is directed to install it. After installation, the user is taken directly to the intended content within the app according to link data.​
 - Direct Deep Linking: This happens when the app is already installed, and a user clicks on a Branch link (e.g., through Android App Links), which opens the app directly to the specified content, according to the link data.​
 
@@ -65,19 +65,21 @@ When the `onInitFinished` callback is invoked with a non-empty `BranchUniversalO
 
 In a deferred deep linking scenario, the parameter `+is_first_session` in the incoming `BranchUniversalObject` is `true`.
 In this case:
- 1. After a mandatory 3 seconds register the callback `getLastAttributedTouchData`
- 2. In the `getLastAttributedTouchData` callback call:
-    - AppsFlyer `AppsFlyerMigrationHelper.setAttributionData` with the incoming deep linking data from `getLastAttributedTouchData`.
-    - Call AppsFlyer `start`
+
+1. After a mandatory 3 seconds register the callback `getLastAttributedTouchData`
+2. In the `getLastAttributedTouchData` callback call:
+   - AppsFlyer `AppsFlyerMigrationHelper.setAttributionData` with the incoming deep linking data from `getLastAttributedTouchData`.
+   - Call AppsFlyer `start`
 
 ## Direct deep linking
 
 In a direct deep linking scenario, the parameter `+is_first_session` in the incoming `BranchUniversalObject` is `false`.
 In this case:
- 1. Call AppsFlyer `AppsFlyerMigrationHelper.setDeepLinkingData` with the output from `getLatestReferringParams`.
- 2. Call AppsFlyer `start` 
 
-# Full code example 
+1. Call AppsFlyer `AppsFlyerMigrationHelper.setDeepLinkingData` with the output from `getLatestReferringParams`.
+2. Call AppsFlyer `start`
+
+# Full code example
 
 ## `MainActivity`
 

@@ -1,7 +1,6 @@
 ---
 title: Branch Migration Navigator on iOS
-excerpt: Activate the Branch Migration Navigator to streamline your traffic migration
-  journey from Branch to AppsFlyer
+excerpt: Activate the Branch Migration Navigator to streamline your traffic migration journey from Branch to AppsFlyer
 hidden: true
 ---
 
@@ -33,16 +32,20 @@ pod 'AppsFlyerMigrationHelper'
 
 To integrate the AppsFlyer Apple Migration Helper via Carthage:
 
-1. Go to the `Carthage` folder in the root of the repository. 
-2. Open `AppsFlyerMigrationHelper-dynamic.json`, 
-3. Click raw, 
-4. Copy and paste the URL of the file to your `Cartfile`: 
+1. Go to the `Carthage` folder in the root of the repository.
+
+2. Open `AppsFlyerMigrationHelper-dynamic.json`,
+
+3. Click raw,
+
+4. Copy and paste the URL of the file to your `Cartfile`:
 
     ```
     binary "https://raw.githubusercontent.com/AppsFlyerSDK/appsflyer-apple-migration-helper/main/Carthage/AppsFlyerMigrationHelper-dynamic.json" == BIINARY_VERSION
     ```
 
-5. Open the project folder in the terminal and use command `carthage update --use-xcframeworks`, 
+5. Open the project folder in the terminal and use command `carthage update --use-xcframeworks`,
+
 6. Drag and drop `AppsFlyerMigrationHelper.xcframework` binary (from Carthage/Build/iOS folder).
 
 More reference on Carthage binary artifacts integration [here](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md).
@@ -50,7 +53,9 @@ More reference on Carthage binary artifacts integration [here](https://github.co
 ## Adding the connector to your project via SPM
 
 To integrate the AppsFlyer Apple Migration Helper via Swift Package Manager (SPM):
+
 1. In Xcode, go to File > Swift Packages > Add Package Dependency.
+
 2. Enter the repository URL:
 
     ```
@@ -58,15 +63,16 @@ To integrate the AppsFlyer Apple Migration Helper via Swift Package Manager (SPM
     ```
 
 3. Choose the desired version or branch.
+
 4. Select your project’s target and click Finish.
 
 # Code flow concept
 
-| **Scenario**                  | **Suggested Indication**                                                        | **Action**                                                                                         | **Branch Method (Click Data Retrieval)**                               | **AppsFlyer Method**                                                   |
-|-------------------------------|---------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
-| **Organic App Open**          | `+clicked_branch_link` is `false`                                                | No Branch data to retrieve; proceed to start AppsFlyer SDK                                         | N/A                                                                    | N/A                                  |
-| **Branch Deferred Deep Link** | `+clicked_branch_link` is `true` and `+is_first_session` is `true`          | Introduce a 3-second delay, then retrieve and pass install-attributed click data to AppsFlyer      | `Branch.getInstance().lastAttributedTouchData()`                    | `AppsFlyerMigrationHelper.setAttributionData()`                        |
-| **Branch Direct Deep Link**   | `+clicked_branch_link` is `true` and `+is_first_session` is `false`         | Retrieve and pass direct deep link click data to AppsFlyer                                         | `Branch.getInstance().getLatestReferringParams()`  | `AppsFlyerMigrationHelper.setDeepLinkingData()`                        |
+| **Scenario**                  | **Suggested Indication**                                            | **Action**                                                                                    | **Branch Method (Click Data Retrieval)** | **AppsFlyer Method**                            |
+| ----------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------- |
+| **Organic App Open**          | `+clicked_branch_link` is `false`                                   | No Branch data to retrieve; proceed to start AppsFlyer SDK                                    | N/A                                                         | N/A                                             |
+| **Branch Deferred Deep Link** | `+clicked_branch_link` is `true` and `+is_first_session` is `true`  | Introduce a 3-second delay, then retrieve and pass install-attributed click data to AppsFlyer | `Branch.getInstance().lastAttributedTouchData()`            | `AppsFlyerMigrationHelper.setAttributionData()` |
+| **Branch Direct Deep Link**   | `+clicked_branch_link` is `true` and `+is_first_session` is `false` | Retrieve and pass direct deep link click data to AppsFlyer                                    | `Branch.getInstance().getLatestReferringParams()`           | `AppsFlyerMigrationHelper.setDeepLinkingData()` |
 
 # SDK and migration module initiazation
 
@@ -95,7 +101,7 @@ if Branch.getInstance().willShowPasteboardToast() {
 ```
 
 > ⚠️ Important
-> 
+>
 > Do not run AppsFlyer SDK `start` immediately after the `init`.
 > Read below when to start AppsFlyer SDK
 
@@ -126,12 +132,13 @@ Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error)
 ## Organic flow
 
 Organic flow means install or launch of the application not initiated by a click on a Branch link.
-In this case the `+clicked_branch_link` will come back `false`. 
+In this case the `+clicked_branch_link` will come back `false`.
 In this case, skip the migration flow and immediately call AppsFlyer SDK `start`.
 
-## Deep linking 
+## Deep linking
 
 The migration process becomes relevant when an app launch is triggered by a Branch click. There are two primary types of deep linking:​
+
 - Deferred Deep Linking: This occurs when a user clicks on a Branch link and, if the app is not already installed, is directed to install it. After installation, the user is taken directly to the intended content within the app according to link data.​
 - Direct Deep Linking: This happens when the app is already installed, and a user clicks on a Branch link (e.g., through Android App Links), which opens the app directly to the specified content, according to the link data.​
 
@@ -173,7 +180,7 @@ if isDeepLink {
 
 ## Handling Deep Links on Re-engagement
 
-In `didFinishLaunchingWithOptions`, use the following conditions to detect direct deep linking, call `setDeepLinkingData()` and it the output of `getLatestReferringParams()`. 
+In `didFinishLaunchingWithOptions`, use the following conditions to detect direct deep linking, call `setDeepLinkingData()` and it the output of `getLatestReferringParams()`.
 
 ```swift
 let isFirstBranchSession = (params?["+is_first_session"] as? Bool) ?? false
@@ -205,10 +212,6 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
     return true
 }
 ```
-
-
-
-
 
 # Full Code Example
 
@@ -293,7 +296,6 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
     return true
 }
 ```
-
 
 # Full code example for ATT support
 

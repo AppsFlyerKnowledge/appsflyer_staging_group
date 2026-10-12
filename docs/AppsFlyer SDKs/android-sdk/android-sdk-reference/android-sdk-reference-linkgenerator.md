@@ -4,22 +4,29 @@ hidden: false
 ---
 
 ## Overview
+
 **Public constructor**
+
 ```java
 public LinkGenerator(String mediaSource)
 ```
 
 **Import the class**
+
 ```java Java
 import com.appsflyer.share.LinkGenerator;
 ```
+
 ```kotlin Kotlin
 import com.appsflyer.share.LinkGenerator
 ```
 
 ## Methods
+
 ### setBrandDomain
+
 **Methods signature**
+
 ```java
 public LinkGenerator setBrandDomain(String brandDomain)
 ```
@@ -28,7 +35,9 @@ public LinkGenerator setBrandDomain(String brandDomain)
 `LinkGenerator`.
 
 ### getBrandDomain
+
 **Method signature**
+
 ```java
 public String getBrandDomain()
 ```
@@ -40,7 +49,9 @@ This method doesn't take any input arguments.
 `String`.
 
 ### setDeeplinkPath
+
 **Method signature**
+
 ```java
 public LinkGenerator setDeeplinkPath(String deeplinkPath)
 ```
@@ -49,15 +60,17 @@ public LinkGenerator setDeeplinkPath(String deeplinkPath)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `deeplinkPath` | |
+| Type     | Name           | Description |
+| :------- | :------------- | :---------- |
+| `String` | `deeplinkPath` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### setBaseDeeplink
+
 **Method signature**
+
 ```java
 public LinkGenerator setBaseDeeplink(String baseDeeplink)
 ```
@@ -66,15 +79,17 @@ public LinkGenerator setBaseDeeplink(String baseDeeplink)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `baseDeeplink` | |
+| Type     | Name           | Description |
+| :------- | :------------- | :---------- |
+| `String` | `baseDeeplink` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### getChannel
+
 **Method signature**
+
 ```java
 public String getChannel()
 ```
@@ -88,7 +103,9 @@ This method doesn't take any input arguments.
 `String`.
 
 ### setChannel
+
 **Method signature**
+
 ```java
 public LinkGenerator setChannel(String channel)
 ```
@@ -97,15 +114,17 @@ public LinkGenerator setChannel(String channel)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `channel` | |
+| Type     | Name      | Description |
+| :------- | :-------- | :---------- |
+| `String` | `channel` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### setReferrerCustomerId
+
 **Method signature**
+
 ```java
 public LinkGenerator setReferrerCustomerId(String referrerCustomerId)
 ```
@@ -114,15 +133,17 @@ public LinkGenerator setReferrerCustomerId(String referrerCustomerId)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `referrerCustomerId` | |
+| Type     | Name                 | Description |
+| :------- | :------------------- | :---------- |
+| `String` | `referrerCustomerId` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### getMediaSource
+
 **Method signature**
+
 ```java
 public String getMediaSource()
 ```
@@ -140,6 +161,7 @@ This method doesn't take any input arguments.
 > **Notice** - The method was names `getParameters` prior to SDK version 6.4.2
 
 **Method signature**
+
 ```java
 public Map<String, String> getUserParams()
 ```
@@ -153,7 +175,9 @@ This method doesn't take any input arguments.
 `Map<String, String>`.
 
 ### getCampaign
+
 **Method signature**
+
 ```java
 public String getCampaign()
 ```
@@ -167,7 +191,9 @@ This method doesn't take any input arguments.
 `String`.
 
 ### setCampaign
+
 **Method signature**
+
 ```java
 public LinkGenerator setCampaign(String campaign)
 ```
@@ -176,15 +202,17 @@ public LinkGenerator setCampaign(String campaign)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `campaign` | |
+| Type     | Name       | Description |
+| :------- | :--------- | :---------- |
+| `String` | `campaign` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### addParameter
+
 **Method signature**
+
 ```java
 public LinkGenerator addParameter(String key, String value)
 ```
@@ -193,16 +221,18 @@ public LinkGenerator addParameter(String key, String value)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `key` | Parameter name. |
+| Type     | Name    | Description                      |
+| :------- | :------ | :------------------------------- |
+| `String` | `key`   | Parameter name.  |
 | `String` | `value` | Parameter value. |
 
 **Returns**
 `LinkGenerator`.
 
 ### addParameters
+
 **Method signature**
+
 ```java
 public LinkGenerator addParameters(Map<String, String> parameters)
 ```
@@ -211,15 +241,17 @@ public LinkGenerator addParameters(Map<String, String> parameters)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `Map<String, String>` | `parameters` | |
+| Type                  | Name         | Description |
+| :-------------------- | :----------- | :---------- |
+| `Map<String, String>` | `parameters` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### setReferrerUID
+
 **Method signature**
+
 ```java
 public LinkGenerator setReferrerUID(String referrerUID)
 ```
@@ -228,15 +260,17 @@ public LinkGenerator setReferrerUID(String referrerUID)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `referrerUID` | |
+| Type     | Name          | Description |
+| :------- | :------------ | :---------- |
+| `String` | `referrerUID` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### setReferrerName
+
 **Method signature**
+
 ```java
 public LinkGenerator setReferrerName(String referrerName)
 ```
@@ -245,15 +279,17 @@ public LinkGenerator setReferrerName(String referrerName)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `referrerName` | |
+| Type     | Name           | Description |
+| :------- | :------------- | :---------- |
+| `String` | `referrerName` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### setReferrerImageURL
+
 **Method signature**
+
 ```java
 public LinkGenerator setReferrerImageURL(String referrerImageURL)
 ```
@@ -262,15 +298,17 @@ public LinkGenerator setReferrerImageURL(String referrerImageURL)
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `referrerImageURL` | |
+| Type     | Name               | Description |
+| :------- | :----------------- | :---------- |
+| `String` | `referrerImageURL` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### setBaseURL
+
 **Method signature**
+
 ```java
 public LinkGenerator setBaseURL(String onelinkID, String domain, String appPackage)
 ```
@@ -279,17 +317,19 @@ public LinkGenerator setBaseURL(String onelinkID, String domain, String appPacka
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `String` | `onelinkID` | |
-| `String` | `domain` | |
-| `String` | `appPackage` | |
+| Type     | Name         | Description |
+| :------- | :----------- | :---------- |
+| `String` | `onelinkID`  |             |
+| `String` | `domain`     |             |
+| `String` | `appPackage` |             |
 
 **Returns**
 `LinkGenerator`.
 
 ### generateLink
+
 **Method signature**
+
 ```java
 public String generateLink()
 ```
@@ -304,7 +344,9 @@ This method doesn't take any input arguments.
 `String`.
 
 ### generateLink
+
 **Method signature**
+
 ```java
 public void generateLink(Context context, CreateOneLinkHttpTask.ResponseListener listener)
 ```
@@ -314,10 +356,10 @@ Generates a short link using the OneLink API.
 
 **Input arguments**
 
-| Type | Name | Description |
-|:-------|:-----------|:-----------------|
-| `Context` | `context` | Application / Activity Context |
-| `CreateOneLinkHttpTask.ResponseListener` | `listener` | |
+| Type                                     | Name       | Description                    |
+| :--------------------------------------- | :--------- | :----------------------------- |
+| `Context`                                | `context`  | Application / Activity Context |
+| `CreateOneLinkHttpTask.ResponseListener` | `listener` |                                |
 
 **Returns**
 `void`.

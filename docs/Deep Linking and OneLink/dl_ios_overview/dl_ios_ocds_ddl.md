@@ -17,7 +17,7 @@ Extended deferred deep linking allows deep linking for new users in certain scen
 
 To allow deferred deep linking when UDL returns `NOT_FOUND`, `onConversionDataSuccess` callback should check whether it should handle the deferred deep linking.  
 `onConversionDataSuccess` is part of the Get Conversion Data(GCD) API. Its main purpose was is to [gather conversion data inside the device](https://dev.appsflyer.com/hc/docs/conversion-data-ios-7).  
-In the use case outlined here `onConversionDataSuccess` takes advantage of the fact that all deferred deep linking parameters are passed to the callback, on top of the conversion data. 
+In the use case outlined here `onConversionDataSuccess` takes advantage of the fact that all deferred deep linking parameters are passed to the callback, on top of the conversion data.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ In the use case outlined here `onConversionDataSuccess` takes advantage of the f
 
 ## Implementation
 
-1. `onConversionDataSuccess` should detect cases where deferred deep linking should occur that UDL didn't handle. 
+1. `onConversionDataSuccess` should detect cases where deferred deep linking should occur that UDL didn't handle.
    > See detailed [code dissection](#code-dissect)
 2. `onConversionDataSuccess` should route the user to the deferred deep linking destination based on the deep linking parameters passed to the callback.
 
@@ -34,8 +34,8 @@ In the use case outlined here `onConversionDataSuccess` takes advantage of the f
 
 ### Code dissect
 
-1. Implement the Get Conversion Data API delegate `AppsFlyerLibDelegate`. 
-   >  Implement only `onConversionDataSuccess` and `onConversionDataFail`.  
+1. Implement the Get Conversion Data API delegate `AppsFlyerLibDelegate`.
+   > Implement only `onConversionDataSuccess` and `onConversionDataFail`.  
    > The methods `onAppOpenAttribution` and `onAttributionFailure` are mutually exclusive with UDL, and will not be called.
 2. Detect deferred deep linking scenarios by filtering-in the conversion data payload with:
    - `af_status == Non-organic`
@@ -43,7 +43,7 @@ In the use case outlined here `onConversionDataSuccess` takes advantage of the f
 3. When deferred deep linking is detected, filter-out the cases that were already handled by UDL.  
    In the example that follows, all the links contain `deep_link_value`.  
    It is recommended for UDL to signal with a flag that deferred deep linking was already handled, and `onConversionDataSuccess` should skip.
-4. `onConversionDataSuccess` should verify the conversion data holds parameters that are used to route users inside the application. For example `fruit_name` in the example that follows.       
+4. `onConversionDataSuccess` should verify the conversion data holds parameters that are used to route users inside the application. For example `fruit_name` in the example that follows.
 5. Route the user to the deferred deep linking destination.
 
 ### Code snippet
@@ -96,14 +96,12 @@ extension AppDelegate: AppsFlyerLibDelegate {
 }
 ```
 
-
-
 ⇲ Github links: [Swift](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/7c58363b01a184863d3b3fc07ba707a72d76bcda/swift/basic_app/basic_app/AppDelegate.swift#L168-L212)
 
 ## Testing
 
 > 📘 **Important**
-> 
+>
 > The following testing scenario demonstrates the handling of deferred deep linking from links that contain custom parameters but not `deep_link_value` and `deep_link_sub1-10` parameters.  
 > This testing scenario is also relevant for all extended deferred deep linking described [earlier](#overview).
 
@@ -121,14 +119,14 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
 #### Adding ad-hoc parameters to the link
 
 - Use only the domain and OneLink template of your link, for example: `https://onelink-basic-app.onelink.me/H5hv`.
-- Add OneLink custom parameters other than `deep_link_value` and `deep_link_sub1-10`, as expected by your application. 
+- Add OneLink custom parameters other than `deep_link_value` and `deep_link_sub1-10`, as expected by your application.
 - The parameters should be added as _query parameters_.
-  - Example: `https://onelink-basic-app.onelink.me/H5hv?my_inapp_dest=apples&my_inapp_value=23`  
+  - Example: `https://onelink-basic-app.onelink.me/H5hv?my_inapp_dest=apples&my_inapp_value=23`
 
 ### Perform the test
 
 - Click the link on your device.
-- OneLink redirects you according to the link setup to wither the App Store or a website. 
+- OneLink redirects you according to the link setup to wither the App Store or a website.
 - Install the application.
   > **Important**
   >
@@ -153,7 +151,7 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
   [AppsFlyerSDK] [com.appsflyer.serial] [DDL] Start DDL
   ```
 
-- UDL sends query to AppsFlyer service to query a match with this install: 
+- UDL sends query to AppsFlyer service to query a match with this install:
   ```
   [AppsFlyerSDK] [com.appsflyer.serial] [DDL] URL: https://dlsdk.appsflyer.com/v1.0/ios/id1512793879?sdk_version=6.6&af_sig=c9a1d5b34d68e584d0db2a20f4049fb7cd2e785c3383bXXXXXXXXXXXXXXXXXXXXXXXX
   ```
@@ -168,8 +166,6 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
 ```
 [AppsFlyerSDK] [com.appsflyer.serial] [GCD-B01] GCD 4.0 URL: https://gcdsdk.appsflyer.com/install_data/v4.0/id1512793879?devkey=s*****4&device_id=1672050642148-9221195
 ```
-
-
 
 - `onConversionDataSuccess` is called with conversion data as input:
 

@@ -16,7 +16,7 @@ With minimal tech, fraudsters can send clicks on behalf of an ad network and cre
 - Validated clicks are recorded, and attributed to the ad network.
 - Ad networks should sign their clicks with [HMAC-SHA256](https://en.wikipedia.org/wiki/HMAC) signatures.
 - Invalidated clicks are rejected and:
-    - Are made available in Protect360 reports for ad networks (not advertisers). [Learn more](https://support.appsflyer.com/hc/en-us/articles/4420246395793#failed-click-signatures)
-    - Do not impact the conversion rate or click-blocking threshold of the ad network
+  - Are made available in Protect360 reports for ad networks (not advertisers). [Learn more](https://support.appsflyer.com/hc/en-us/articles/4420246395793#failed-click-signatures)
+  - Do not impact the conversion rate or click-blocking threshold of the ad network
 
 [Click here](https://support.appsflyer.com/hc/en-us/articles/360017831497-Click-signing-for-ad-networks) for more information on click signing and the set up procedure.

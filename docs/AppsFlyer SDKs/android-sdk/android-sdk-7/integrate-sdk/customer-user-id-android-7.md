@@ -37,6 +37,7 @@ AppsFlyerLib.getInstance().registerSessionReadyListener(() -> {
     AppsFlyerLib.getInstance().start();
 });
 ```
+
 ```kotlin Kotlin
 AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this)
 

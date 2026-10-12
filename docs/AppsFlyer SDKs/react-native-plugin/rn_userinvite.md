@@ -5,35 +5,32 @@ hidden: false
 
 # User invite
 
-
 ##### 1. `setAppInviteOneLinkID(oneLinkID, callback)`
 
 Set the OneLink ID that should be used for User-Invite-API.
 The link that is generated for the user invite will use this OneLink ID as the base link ID.
 
-| parameter       | type     | description               |
-| ----------      |----------|------------------         |
-| oneLinkID       | string   | oneLinkID                 |
-| callback        | function | success callback          |
- 
- > 📘 Note
- > 
- > - Make sure to call `setAppInviteOneLinkID()` **before** calling `start`.
- > - The OneLink template must be assigned to the app. 
+| parameter | type     | description      |
+| --------- | -------- | ---------------- |
+| oneLinkID | string   | oneLinkID        |
+| callback  | function | success callback |
 
- ##### 2. `generateInviteLink(parameters, success, error)`
- A complete list of supported parameters is available [here](https://support.appsflyer.com/hc/en-us/articles/115004480866-User-Invite-Tracking). Custom parameters can be passed using a userParams{} nested object, as in the example above.
+> 📘 Note
+>
+> - Make sure to call `setAppInviteOneLinkID()` **before** calling `start`.
+> - The OneLink template must be assigned to the app.
 
+##### 2. `generateInviteLink(parameters, success, error)`
 
-| parameter       | type     | description                      |
-| ----------      |----------|------------------                |
-| parameters      | json     | parameters for Invite link       |
-| success         | function | success callback (generated link)|
-| error           | function | error callback                   |
- 
- 
+A complete list of supported parameters is available [here](https://support.appsflyer.com/hc/en-us/articles/115004480866-User-Invite-Tracking). Custom parameters can be passed using a userParams{} nested object, as in the example above.
 
-*Example:*
+| parameter  | type     | description                                          |
+| ---------- | -------- | ---------------------------------------------------- |
+| parameters | json     | parameters for Invite link                           |
+| success    | function | success callback (generated link) |
+| error      | function | error callback                                       |
+
+_Example:_
 
 ```javascript
 

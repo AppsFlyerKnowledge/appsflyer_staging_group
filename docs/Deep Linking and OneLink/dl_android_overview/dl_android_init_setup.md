@@ -11,36 +11,37 @@ There are two app opening methods that can be implemented to cover your entire u
 
 The two methods and instructions for implementation are described in detail in the following sections.
 
-| Method | Description | Android Versions | Procedure |
-| --- | --- | --- | --- |
-| **Android App Links** | Directly opens the mobile app at the default activity. | Android V6+| <ol><li>[Generate SHA256 fingerprint.](#generating-a-sha256-fingerprint)</li><li> [Add intent-filter to main activity.](#adding-app-link-intent-filter-to-main-activity)</li></ol>|
-| **URI Scheme** | Directly opens the app based on the activity path specified in the URI scheme. | Android all versions | <ol><li>[Decide on a URI scheme with the marketer.](#deciding-on-a-uri-scheme) </li><li> [Add intent-filter to main activity.](#adding-uri-scheme-intent-filter-to-the-main-activity) </li><li> [Testing](#testing-uri-schemes) </li></ol>| 
+| Method                | Description                                                                                    | Android Versions     | Procedure                                                                                                                                                                                                                                  |
+| --------------------- | ---------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Android App Links** | Directly opens the mobile app at the default activity.                         | Android V6+          | <ol><li>[Generate SHA256 fingerprint.](#generating-a-sha256-fingerprint)</li><li> [Add intent-filter to main activity.](#adding-app-link-intent-filter-to-main-activity)</li></ol>                                                         |
+| **URI Scheme**        | Directly opens the app based on the activity path specified in the URI scheme. | Android all versions | <ol><li>[Decide on a URI scheme with the marketer.](#deciding-on-a-uri-scheme) </li><li> [Add intent-filter to main activity.](#adding-uri-scheme-intent-filter-to-the-main-activity) </li><li> [Testing](#testing-uri-schemes) </li></ol> |
 
 ## Procedures for Android App Links
+
 Android App Links work with Android V6 and above. [Learn more](https://support.appsflyer.com/hc/en-us/articles/115005314223).
 
 ### Generating a SHA256 fingerprint while in development
 
 1. Locate your [app's keystore](https://developer.android.com/training/articles/keystore).
-If the app is in still in development, locate the `debug.keystore`
-   * For Windows user: `C:\Users\USERNAME\.android\debug.keystore`
-   * For Linux or Mac OS user: `~/.android/debug.keystore`
+   If the app is in still in development, locate the `debug.keystore`
+   - For Windows user: `C:\Users\USERNAME\.android\debug.keystore`
+   - For Linux or Mac OS user: `~/.android/debug.keystore`
 2. Open the command line and navigate to the folder where the keystore file is located.
 3. Run the command:
-    
+
 ```shell
 // keytool -list -v -keystore <<KEY_STORE_FILE>>
 // For example, the default keystore file 
 keytool -list -v -keystore ~/.android/debug.keystore
 ```
 
-> 🚧 
+> 🚧
 >
 > The password for the debug.keystore is usually \"android\".
 
 The output should look like this:
 
-```text 
+```text
 Alias name: test
 Creation date: Sep 27, 2017
 Entry type: PrivateKeyEntry
@@ -66,21 +67,21 @@ SubjectKeyIdentifier [
 ]
 ```
 
-4. Send the SHA256 back to the marketer. 
+4. Send the SHA256 back to the marketer.
 
 ### Generating a SHA256 fingerprint while in production
 
-**The SHA256 fingerprint is generated in **
+\*\*The SHA256 fingerprint is generated in \*\*
 
-1. In *Google Play console* Find the public SHA256 fingerprint in **Setup -> App signing** (see image below)
+1. In _Google Play console_ Find the public SHA256 fingerprint in **Setup -> App signing** (see image below)
 
 ![Google Play SHA256 cert!](https://files.readme.io/8574437-Screenshot_2023-11-27_at_11.30.43.png "Google Play SHA256 cert")
 
-2. Send the SHA256 back to the marketer. 
+2. Send the SHA256 back to the marketer.
 
 ### Adding App Link intent-filter to main activity
 
-1. Get the auto-generated intent-filter code from the [marketer](https://support.appsflyer.com/hc/en-us/articles/207032246#add-redirection-logic-for-existing-app-users). The intent-filter code is used in the AndroidManifest.XML. 
+1. Get the auto-generated intent-filter code from the [marketer](https://support.appsflyer.com/hc/en-us/articles/207032246#add-redirection-logic-for-existing-app-users). The intent-filter code is used in the AndroidManifest.XML.
 2. Open the app's `AndroidManifest.xml` file.
 3. Add the intent-filter to the **main activity**.
 
@@ -102,22 +103,22 @@ SubjectKeyIdentifier [
 
 > ℹ️
 >
-> When `android:autoVerify="true"` is present on any of your intent filters, installing your app on devices with Android 6 and higher causes the system to attempt to verify all hosts associated with the URLs in any of your app's intent filters. 
+> When `android:autoVerify="true"` is present on any of your intent filters, installing your app on devices with Android 6 and higher causes the system to attempt to verify all hosts associated with the URLs in any of your app's intent filters.
 > For each unique host name found in the above intent filters, Android queries the corresponding websites for the Digital Asset Links file at `https://hostname/.well-known/assetlinks.json`. Once the [redirection logic for existing app users is added](https://support.appsflyer.com/hc/en-us/articles/207032246-OneLink-templates#add-redirection-logic-for-existing-app-users) to the OneLink template configuration, AppsFlyer creates and hosts this path for you.  
 > [Learn more](https://developer.android.com/training/app-links/verify-site-associations#request-verify)
 
 Github link: [XML](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/5b202b983b33d62bd5d80102ab27f17e2b1cb25f/java/basic_app/app/src/main/AndroidManifest.xml#L39-L49)
 
 4. Tell the marketer that the App Link configuration is completed.
-When the marketer tests the link, it should direct the user to the app's main page.
+   When the marketer tests the link, it should direct the user to the app's main page.
 
 > 📘 **Specifying which templates open your app**
 >
-> You can specify which templates open your app by adding them to the `pathPrefix` element, as shown in the example below: 
+> You can specify which templates open your app by adding them to the `pathPrefix` element, as shown in the example below:
 >
->```xml XML
-><intent-filter android:autoVerify="true">
->		...		
+> ```xml XML
+> <intent-filter android:autoVerify="true">
+>   	...		
 >    <!-- Replace "onelink-basic-app" with your OneLink domain -->
 >    <data 
 >        android:scheme="https"
@@ -127,12 +128,12 @@ When the marketer tests the link, it should direct the user to the app's main pa
 >        android:scheme="https"
 >        android:host="onelink-basic-app.onelink.me" 
 >        android:pathPrefix="/H2jv" />
-></intent-filter>
->```
+> </intent-filter>
+> ```
 
 ## Procedures for URI Scheme
 
-A URI scheme is a URL that leads users directly to the mobile app. 
+A URI scheme is a URL that leads users directly to the mobile app.
 
 When an app user enters a URI scheme in a browser address bar, or clicks on a link based on a URI scheme, the app launches, and the user is deep linked.
 
@@ -141,15 +142,17 @@ Whenever an App Link fails to open the app, the URI scheme can be used as a fall
 ### Deciding on a URI scheme
 
 **To decide on a URI scheme:**
-1. Contact the marketer. 
+
+1. Contact the marketer.
 2. Choose a URI scheme. For example: `yourappname://`
+
 > ℹ️
 >
-> * Use a URI scheme that is as unique as possible to your app and brand to avoid coincidental overlap with other apps in the ecosystem. Overlap with other apps is an inherent issue in the nature of URI scheme protocol.
-> * The URI scheme should not start with *http* or *https*.
-> * The URI scheme should be similarly defined on Android and iOS.
+> - Use a URI scheme that is as unique as possible to your app and brand to avoid coincidental overlap with other apps in the ecosystem. Overlap with other apps is an inherent issue in the nature of URI scheme protocol.
+> - The URI scheme should not start with _http_ or _https_.
+> - The URI scheme should be similarly defined on Android and iOS.
 
-3. Send the URI scheme to the marketer. For example: `afshopapp://mainactivity` 
+3. Send the URI scheme to the marketer. For example: `afshopapp://mainactivity`
 
 ### Adding URI scheme intent-filter to the main activity
 
@@ -157,8 +160,8 @@ Whenever an App Link fails to open the app, the URI scheme can be used as a fall
 
 1. Open the app's `AndroidManifest.xml` file.
 2. Add the following intent-filter to the **main activity**.
-In the `data` section, replace `host` and `scheme` with the URI scheme you chose. In the intent-filter code below, `host="mainactivity"` and `scheme="afshopapp"`, matching the URI scheme `afshopapp://mainactivity`.
-If there already is an intent-filter for the URI scheme in the main activity, overwrite it.
+   In the `data` section, replace `host` and `scheme` with the URI scheme you chose. In the intent-filter code below, `host="mainactivity"` and `scheme="afshopapp"`, matching the URI scheme `afshopapp://mainactivity`.
+   If there already is an intent-filter for the URI scheme in the main activity, overwrite it.
 
 ```xml XML
 <intent-filter>
@@ -188,9 +191,9 @@ An Android device with the app installed. Make sure it is the app source and ver
 
 1. Contact the marketer and get the custom link they created.
 2. Send the short or long URL the marketer gives you to your phone. You can either:
-   * Scan the QR code with your phone camera or QR scanner app.
-   * Email or WhatsApp yourself the link, and open it on your phone.
+   - Scan the QR code with your phone camera or QR scanner app.
+   - Email or WhatsApp yourself the link, and open it on your phone.
 3. Click the link on your mobile device.
-The app should open to its home screen.
+   The app should open to its home screen.
 
 [1]: https://support.appsflyer.com/hc/en-us/articles/207033836?__hstc=215508872.986091deeadbd815ef04121e1d880589.1586684365062.1591196345127.1591212728952.29&__hssc=215508872.2.1591212728952&__hsfp=3667076369 "Title"

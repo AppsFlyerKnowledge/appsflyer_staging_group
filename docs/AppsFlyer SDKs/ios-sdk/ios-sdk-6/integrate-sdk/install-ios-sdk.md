@@ -8,7 +8,7 @@ hidden: false
 
 [block:html]
 {
-  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Get started with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=ios&utm_source=devhub&utm_medium=install-ios-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_install', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+"html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Get started with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=ios&utm_source=devhub&utm_medium=install-ios-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_install', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
 }
 [/block]
 
@@ -30,8 +30,6 @@ Add the [latest version of `AppsFlyerFramework`](https://cocoapods.org/pods/Apps
 pod 'AppsFlyerFramework'
 ```
 
-
-
 **Step 3: Install dependencies**  
 In your terminal, navigate to your project's root folder and run `pod install`.
 
@@ -52,17 +50,15 @@ Add the following line to your `Cartfile` binary:
 binary "https://raw.githubusercontent.com/AppsFlyerSDK/AppsFlyerFramework/master/Carthage/appsflyer-ios.json"
 ```
 
-
-
 Currently doesn't support tvOS apps.
 
 > 📘 Note
-> 
+>
 > The link above links to a static library. If you're upgrading to a newer iOS version, do the following:
-> 
+>
 > 1. Remove the Run Script stage from Xcode that runs copy-frameworks.
 > 2. Make sure the library is not embedded.
-> 
+>
 > To learn more, see [Carthage docs](https://github.com/Carthage/Carthage#build-static-frameworks-to-speed-up-your-apps-launch-times).
 
 ### Install using Swift Package Manager (`V6.1.0`+)
@@ -73,24 +69,23 @@ In Xcode, go to **File** > **Add Packages**:
 
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/ba6a743-Screenshot_2022-12-20_at_14.44.18.png",
-        "Screenshot 2022-12-20 at 14.44.18.png",
-        1572
-      ],
-      "align": "center",
-      "sizing": "80"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/ba6a743-Screenshot_2022-12-20_at_14.44.18.png",
+"Screenshot 2022-12-20 at 14.44.18.png",
+1572
+],
+"align": "center",
+"sizing": "80"
+}
+]
 }
 [/block]
 
-
-
 **Step 2: Add iOS SDK GitHub repository**  
-Enter the AppsFlyer SDK GitHub repository. You can select one of the following:  
+Enter the AppsFlyer SDK GitHub repository. You can select one of the following:
+
 <ul>
   <li><a href="https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static" target="_blank">Statically Linked Library</a></li>
   <li><a href="https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic" target="_blank">Dynamically Linked Library</a><strong> Note:</strong> The use of this version is not supported for apps that can run on MacOS. Instead, use the Statically Linked library version.</li>
@@ -112,47 +107,41 @@ Enter the AppsFlyer SDK GitHub repository. You can select one of the following:
 }
 [/block]
 
-
-
-**Step 3: Select SDK version** 
+**Step 3: Select SDK version**
 
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/5c26d51-Screenshot_2022-12-20_at_14.42.53.png",
-        "Screenshot 2022-12-20 at 14.42.53.png",
-        2176
-      ],
-      "align": "center",
-      "sizing": "80"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/5c26d51-Screenshot_2022-12-20_at_14.42.53.png",
+"Screenshot 2022-12-20 at 14.42.53.png",
+2176
+],
+"align": "center",
+"sizing": "80"
+}
+]
 }
 [/block]
 
-
-
-**Step 4: Add AppsFlyerLib to desired Target** 
+**Step 4: Add AppsFlyerLib to desired Target**
 
 [block:image]
 {
-  "images": [
-    {
-      "image": [
-        "https://files.readme.io/f85b0d9-Screenshot_2022-12-20_at_14.43.15.png",
-        "Screenshot 2022-12-20 at 14.43.15.png",
-        2168
-      ],
-      "align": "center",
-      "sizing": "80"
-    }
-  ]
+"images": [
+{
+"image": [
+"https://files.readme.io/f85b0d9-Screenshot_2022-12-20_at_14.43.15.png",
+"Screenshot 2022-12-20 at 14.43.15.png",
+2168
+],
+"align": "center",
+"sizing": "80"
+}
+]
 }
 [/block]
-
-
 
 ### Manual install
 
@@ -168,9 +157,9 @@ Unzip the `AppsFlyerLib.framework.zip` file you just downloaded.
 Drag the `AppsFlyerLib.framework` folder and drop it into your Xcode project. Make sure **Copy items if needed** is checked.
 
 > 📘 Note
-> 
+>
 > This approach is only compatible with iOS 8 and above. For tvOS apps, you need a different `AppsFlyerFramework`:
-> 
+>
 > 1. Clone this [repo](https://github.com/AppsFlyerSDK/AppsFlyerFramework).
 > 2. Find `AppsFlyerLib.framework` in [this folder of the cloned repo](https://github.com/AppsFlyerSDK/AppsFlyerFramework/tree/master/tvOS).
 > 3. Repeat step 3.
@@ -182,7 +171,6 @@ The SDK automatically adds and uses the following native frameworks:
 - `AdSupport` framework: This framework is required to collect the IDFA from devices. Without IDFA you cannot attribute installs to Meta ads, Twitter, Google Ads, and other networks.
 - `AdServices` framework (`V6.1.3+`): Measure the performance of Apple Search Ads in your app.
 - `iAd` framework: (Deprecated) Measure the performance of Apple Search Ads in your app. **Note:** The `iAd` framework has not been in use since `V6.10.1` and completely removed from the code base from `V6.13.0`.
-
 
 ## Strict mode SDK
 
@@ -196,15 +184,11 @@ You can install the Strict mode SDK using one of the following methods.
 pod 'AppsFlyerFramework/Strict'
 ```
 
-
-
 ### Install using Carthage
 
 ```Cartfile
 binary "https://raw.githubusercontent.com/AppsFlyerSDK/AppsFlyerFramework/master/Carthage/appsflyer-strict.json" ~> 6.3.2
 ```
-
-
 
 ### Install using Swift Package Manager
 

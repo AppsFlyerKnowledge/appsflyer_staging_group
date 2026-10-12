@@ -2,6 +2,7 @@
 title: Test Integration
 hidden: false
 ---
+
 You are can test your integration for the following OS:
 
 - [Testing for iOS/Android](#testing-for-iosandroid)
@@ -9,12 +10,14 @@ You are can test your integration for the following OS:
 
 ## Testing for iOS/Android
 
-In order to test the plugin, you need to build an iOS/Android app. Then you can follow these guides: 
+In order to test the plugin, you need to build an iOS/Android app. Then you can follow these guides:
+
 - [Marketers](https://support.appsflyer.com/hc/en-us/articles/360001559405-Test-mobile-SDK-integration-with-the-app#introduction).
 - [Android](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#test-the-integration)
 - [iOS](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#test-the-integration)
 
 To enable the debug logs, set the following API to true:
+
 ```c#
 AppsFlyer.setIsDebug(true);
 ```

@@ -5,7 +5,7 @@ hidden: false
 
 This section provides instructions for an iOS developer to setup OneLink (deep linking and deferred deep linking) to work in the app.
 
-There are several stages involved in the setup: 
+There are several stages involved in the setup:
 
 1. [Initial app setup](dl_ios_init_setup)
 2. [Unified deep linking (UDL)](dl_ios_unified_deep_linking)

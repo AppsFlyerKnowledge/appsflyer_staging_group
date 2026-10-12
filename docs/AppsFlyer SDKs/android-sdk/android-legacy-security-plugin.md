@@ -11,7 +11,6 @@ A Gradle plugin for Android applications module that automates the process of cr
 
 It's crucial to note that this plugin only works within an application module where the `com.android.application` plugin is applied.
 
-
 ## Minimum Versions
 
 Ensure your project meets the following minimum versions for compatibility with the AppsFlyer Security Plugin:
@@ -21,6 +20,7 @@ Ensure your project meets the following minimum versions for compatibility with 
 - [Gradle](https://gradle.org/): Version 7.0
 
 ## Before You Begin ⚠️
+
 Please send us all the certificate hashes (SHA-256) of all the certificates with which you sign your app. This include the debug and release certificate hashes.</br>
 We use them to pre-build the version of the security module that your app will use.</br>
 This is a mandatory stage that is essential for the success of the app build when using this plugin.</br>
@@ -32,8 +32,10 @@ Instruction of getting the certificates can be found [here](#sha256-fingerprint)
 **Using the [plugins DSL](https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block):**
 
 ### Step 1
+
 The plugin is hosted on Maven Central.
 You first need to add the Maven Central as a repository in your `settings.gradle` or `settings.gradle.kts` file:
+
 ```groovy
 pluginManagement {
     repositories {
@@ -42,6 +44,7 @@ pluginManagement {
     }
 }
 ```
+
 ```kotlin
 pluginManagement {
     repositories {
@@ -52,6 +55,7 @@ pluginManagement {
 ```
 
 ### Step 2
+
 Declare the plugin in the `plugins` block of your root-level (`project-level`) Gradle file.
 Usually `<project>/build.gradle` or `<project>/<app-module>/build.gradle.kts` file.
 
@@ -62,6 +66,7 @@ plugins {
     // other plugins ...
 }
 ```
+
 ```kotlin
 plugins {
     id("com.android.application") version "$AGP_VERSION" apply false
@@ -69,7 +74,6 @@ plugins {
     // other plugins ...
 }
 ```
-
 
 ### Step 3
 
@@ -83,6 +87,7 @@ plugins {
     // other plugins...
 }
 ```
+
 ```kotlin
 plugins {
     id("com.android.application")
@@ -92,7 +97,9 @@ plugins {
 ```
 
 ### Legacy Installation
+
 **Using [legacy plugin application](https://docs.gradle.org/current/userguide/plugins.html#sec:old_plugin_application):**
+
 ```groovy
 buildscript {
   repositories {
@@ -105,6 +112,7 @@ buildscript {
 
 apply plugin: "com.appsflyer.security"
 ```
+
 ```kotlin
 buildscript {
   repositories {
@@ -119,13 +127,13 @@ apply(plugin = "com.appsflyer.security")
 ```
 
 **Notes:**
+
 1. Replace `$AGP_VERSION` with the actual version of the Android Gradle Plugin.
 2. Replace `$APPSFLYER_SECURITY_PLUGIN_VERSION` with the actual version of the AppsFlyer Security Plugin.
 
-
 ## Basic Configuration
-Configure the AppsFlyer security plugin in your app-level Gradle file. Usually `<project>/<app-module>/build.gradle` or `<project>/<app-module>/build.gradle.kts` file.
-</br>Ensure to keep sensitive information such as `authToken` and `certificateHashes` in a secure place and avoid including these directly as plain text in the configuration block.
+
+Configure the AppsFlyer security plugin in your app-level Gradle file. Usually `<project>/<app-module>/build.gradle` or `<project>/<app-module>/build.gradle.kts` file. </br>Ensure to keep sensitive information such as `authToken` and `certificateHashes` in a secure place and avoid including these directly as plain text in the configuration block.
 
 ```groovy
 appsFlyerSecurityPlugin {
@@ -135,6 +143,7 @@ appsFlyerSecurityPlugin {
     }
 }
 ```
+
 ```kotlin
 appsFlyerSecurityPlugin {
     defaultConfig {
@@ -143,18 +152,20 @@ appsFlyerSecurityPlugin {
     }
 }
 ```
+
 ## Configuration Options
 
 Each configuration block (`defaultConfig` or a specific `flavorConfig`) may include:
 
-| Option              | Type           | Description                                                                                                                                                                                                                                                                                                                                                   | Required | Important Note                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |  
-|---------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
-| `certificateHashes` | `List<String>` | This field specifies a list of the application signing keys that will be used to validate the Application Integrity. This is mandatory and requires you to supply the certificate hash for your signing key manually as AppsFlyer cannot automatically determine the signing key used to sign your application. Only SHA-256 hashes are supported.            | Yes      | **1.** When using app signing by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), Google manages and protects your app's signing key for you and signs your APKs on your behalf. In this case it is required that you provide the certificate hash for the signing key **used by Google** using this option. This is **always** the case when you distribute Android app bundles. </br>**2.** If `certificateHashes` is not specified or if the provided value doesn't match the build, the validation will fail and the traffic will be marked as fraud. |  
-| `authToken`         | `String`       | This is an API V2 token required for plugin authentication. You can retrieve the token in your AppsFlyer [dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377).                                                                                                                                                                           | Yes      | If `authToken` is not specified or is incorrect, the plugin cannot connect to the AppsFlyer server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |  
+| Option              | Type           | Description                                                                                                                                                                                                                                                                                                                                                                                        | Required | Important Note                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `certificateHashes` | `List<String>` | This field specifies a list of the application signing keys that will be used to validate the Application Integrity. This is mandatory and requires you to supply the certificate hash for your signing key manually as AppsFlyer cannot automatically determine the signing key used to sign your application. Only SHA-256 hashes are supported. | Yes      | **1.** When using app signing by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), Google manages and protects your app's signing key for you and signs your APKs on your behalf. In this case it is required that you provide the certificate hash for the signing key **used by Google** using this option. This is **always** the case when you distribute Android app bundles. </br>**2.** If `certificateHashes` is not specified or if the provided value doesn't match the build, the validation will fail and the traffic will be marked as fraud. |
+| `authToken`         | `String`       | This is an API V2 token required for plugin authentication. You can retrieve the token in your AppsFlyer [dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377).                                                                                                                                                                                | Yes      | If `authToken` is not specified or is incorrect, the plugin cannot connect to the AppsFlyer server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 In the event of any missing required values (`certificateHashes` and `authToken`), the plugin will not work as expected. The absence of `certificateHashes` will result in validation failure and potential detection of traffic as fraud, whereas the absence of a valid `authToken` will prevent the plugin from functioning properly.
 
 ## Ignore Flavors
+
 By default, the plugin will register tasks and embed the AppsFlyer Security SDK for every flavor.</br>
 If you wish to exclude flavors, you should provide the relevant flavors to exclude in the `ignoreFlavors` set under the `appsFlyerSecurityPlugin` section.</br>
 
@@ -166,7 +177,6 @@ The plugin excludes flavors in the following priority order:
 
 3. **Build Type (Debug/Release):** This will exclude all flavors that are built with this type.
 
-
 ```groovy
 appsFlyerSecurityPlugin {
   ignoreFlavors = ["freeDev"]
@@ -176,6 +186,7 @@ appsFlyerSecurityPlugin {
     }
 }
 ```
+
 ```kotlin
 appsFlyerSecurityPlugin {
     ignoreFlavors = setOf("freeDev", "debug")
@@ -200,7 +211,6 @@ The plugin allows you to define specific configurations for certain flavors or b
 
 4. **Default:** If none of the above match, the plugin defaults to the `defaultConfig`, applying it to all variants.
 
-
 ### Advanced Flavor Configuration
 
 ```groovy
@@ -223,6 +233,7 @@ appsFlyerSecurityPlugin {
     }
 }
 ```
+
 ```kotlin
 appsFlyerSecurityPlugin {
     defaultConfig {
@@ -245,14 +256,13 @@ appsFlyerSecurityPlugin {
 ```
 
 <a name="advanced-configuration-options"></a>
+
 ### Advanced Configuration Options
 
-
-| Option          | Type     | Description                                                                                                                                                                                                                                                                                                                                                   | Required | Important Note                                                                                                                                                            |  
-|-----------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
-| `channel`       | `String` | This channel specifies the unique store of your Android App when it is added via the Android Out-of-Store APK option. This combination of Android package name and channel uniquely identifies each AppsFlyer dashboard. This option is relevant only when using the dashboard per store option. If not specified, the default value is an empty string `""`. | No       | If the channel value is either blank or is one among "googleplay", "playstore", or "googleplaystore", it is ignored and the returned value will be an empty string, `""`. |  
-| `applicationId` | `String` | Specifies the unique identifier for the application associated with the flavor configuration. It can be used to override the default behavior of deriving the AppsFlyer App ID from the variant's package name and the `channel`. If not specified, the default behavior will be followed.                                                                    | No       | If not specified, the AppsFlyer App ID will be derived from the variant's package name and the `channel`.                                                                 |  
-
+| Option          | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                   | Required | Important Note                                                                                                                                                                            |
+| --------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `channel`       | `String` | This channel specifies the unique store of your Android App when it is added via the Android Out-of-Store APK option. This combination of Android package name and channel uniquely identifies each AppsFlyer dashboard. This option is relevant only when using the dashboard per store option. If not specified, the default value is an empty string `""`. | No       | If the channel value is either blank or is one among "googleplay", "playstore", or "googleplaystore", it is ignored and the returned value will be an empty string, `""`. |
+| `applicationId` | `String` | Specifies the unique identifier for the application associated with the flavor configuration. It can be used to override the default behavior of deriving the AppsFlyer App ID from the variant's package name and the `channel`. If not specified, the default behavior will be followed.                                                                                    | No       | If not specified, the AppsFlyer App ID will be derived from the variant's package name and the `channel`.                                                                 |
 
 ## Generating a SHA256 fingerprint
 
@@ -261,10 +271,12 @@ appsFlyerSecurityPlugin {
 **To generate the SHA256 fingerprint:**
 
 1. Locate your [app's keystore](https://developer.android.com/training/articles/keystore).
-  While developing your app, a default debug keystore is used unless differently specified in your Gradle configuration.
-  The default `debug.keystore` location is:
-  * For Windows user: `C:\Users\USERNAME\.android\debug.keystore`
-  * For Linux or Mac OS user: `~/.android/debug.keystore`
+   While developing your app, a default debug keystore is used unless differently specified in your Gradle configuration.
+   The default `debug.keystore` location is:
+
+- For Windows user: `C:\Users\USERNAME\.android\debug.keystore`
+- For Linux or Mac OS user: `~/.android/debug.keystore`
+
 2. Open the command line and navigate to the folder where the keystore file is located.
 3. Run the command:
 
@@ -278,7 +290,7 @@ keytool -list -v -keystore ~/.android/debug.keystore
 
 The output should look like this:
 
-```text 
+```text
 Alias name: test
 Creation date: Sep 27, 2017
 Entry type: PrivateKeyEntry
@@ -304,7 +316,7 @@ SubjectKeyIdentifier [
 ]
 ```
 
-4. Send the SHA256 to AppsFlyer. 
+4. Send the SHA256 to AppsFlyer.
 
 ### Release
 
@@ -313,5 +325,5 @@ SubjectKeyIdentifier [
 When using app signing by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), Google manages and protects your app's signing key for you and signs your APKs on your behalf. In this case it is required that you provide the certificate hash for the signing key **used by Google** using this option. This is **always** the case when you distribute Android app bundles.</br>
 
 1. In Google Play console Find the public SHA256 fingerprint in **Setup** -> **App signing** (see image below)
-![](https://files.readme.io/8574437-Screenshot_2023-11-27_at_11.30.43.png)
+   ![](https://files.readme.io/8574437-Screenshot_2023-11-27_at_11.30.43.png)
 2. Send the SHA256 to AppsFlyer.
