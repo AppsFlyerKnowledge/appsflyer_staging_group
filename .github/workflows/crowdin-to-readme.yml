@@ -1,0 +1,63 @@
+name: Crowdin → ReadMe language branch
+
+# Manual only. Run from GitHub → Actions → this workflow → "Run workflow".
+on:
+  workflow_dispatch:
+    inputs:
+      lang:
+        description: "Language code (Crowdin two-letter code, e.g. ru)"
+        required: true
+        default: "ru"
+      source_branch:
+        description: "Crowdin branch that holds translations/"
+        required: true
+        default: "l10n_v1.02"
+      target_branch:
+        description: "ReadMe language branch (must already exist)"
+        required: true
+        default: "v1.0-ru"
+
+permissions:
+  contents: write
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Crowdin branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_branch }}
+          path: src
+
+      - name: Checkout ReadMe language branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          path: dst
+
+      - name: Copy translations/<lang>/docs/** → docs/**
+        run: |
+          set -e
+          SRC="src/translations/${{ inputs.lang }}/docs"
+          if [ ! -d "$SRC" ]; then
+            echo "::error::No translations found at $SRC on ${{ inputs.source_branch }}"
+            exit 1
+          fi
+          mkdir -p dst/docs
+          cp -R "$SRC/." dst/docs/
+          echo "Copied files:"
+          (cd "$SRC" && find . -type f)
+
+      - name: Commit & push to ReadMe language branch
+        run: |
+          cd dst
+          git config user.name "crowdin-to-readme"
+          git config user.email "actions@github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "Nothing changed — ${{ inputs.target_branch }} already up to date."
+            exit 0
+          fi
+          git commit -m "Crowdin ${{ inputs.lang }} translations → ${{ inputs.target_branch }}"
+          git push origin HEAD:${{ inputs.target_branch }}
