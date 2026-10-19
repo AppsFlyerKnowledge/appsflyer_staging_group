@@ -28,8 +28,8 @@ Use the AppsFlyer SDK MCP server with Cursor, GitHub Copilot, or Codex to offloa
 
 ### Native SDKs
 
-- Android: [SDK 7](doc:android-sdk-7) | [SDK 6](doc:android-sdk-6)
-- iOS: [SDK 7](doc:ios-sdk-7) | [SDK 6](doc:ios-sdk-6)
+- Android: [SDK 7](doc:android-sdk-7) — using SDK 6? See [SDK 6](doc:android-sdk-6)
+- iOS: [SDK 7](doc:ios-sdk-7) — using SDK 6? See [SDK 6](doc:ios-sdk-6)
 
 ### Multi-platform plugins
 
