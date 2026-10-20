@@ -3,7 +3,7 @@ title: Google ICM integration (ODM SDK)
 hidden: true
 ---
 
-Starting from AppsFlyer iOS SDK v6.17.7, the SDK can automatically fetch Google’s ICM (Integrated Conversion Measurement) data from Google’s On Device Measurement (ODM) SDK. 
+Starting from AppsFlyer iOS SDK v6.17.7, the SDK can automatically fetch Google’s ICM (Integrated Conversion Measurement) data from Google’s On Device Measurement (ODM) SDK.
 
 #### To enable the Google ICM integration via ODM:
 
