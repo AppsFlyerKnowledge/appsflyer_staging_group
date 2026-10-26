@@ -1,0 +1,331 @@
+---
+title: In-App Events
+hidden: false
+---
+
+- [Overview](#overview)
+- [Send Event](#send-event)
+- [In-app purchase validation (V2)](#in-app-purchase-validation-v2)
+- [In-app purchase validation (legacy)](#in-app-purchase-validation)
+
+## Overview
+
+In-App Events provide insight on what is happening in your app. It is recommended to take the time and define the events you want to measure to allow you to measure _ROI_ (Return on Investment) and _LTV_ (Lifetime Value).
+
+Recording in-app events is performed by calling `sendEvent` with event name and value parameters. See In-App Events [documentation](https://support.appsflyer.com/hc/en-us/articles/115005544169-Rich-in-app-events-for-Android-and-iOS#introduction-predefined-and-custom-events) for more details.
+
+### Anatomy of an event
+
+In-app events consist of two parts:
+
+- **Event name**: the unique event identifier. It's usually how marketers see the event in the dashboard.
+- **Event values**: an object made up of key-value pairs called event parameters, which provide additional context about the event.
+
+Event names and parameters can be predefined or custom.
+
+> 👍 Tip
+>
+> Quickly define and generate in-app events code for all major platforms using the [in-app event generator tool](https://evgen.appsflyer.com?utm_medium=referral&utm_source=devhub).
+
+Predefined events and parameters are exposed as SDK constants (for example `AFInAppEvents.PURCHASE`), prefixed with `af_`. Use the constants instead of raw strings: it avoids naming mistakes, and changes to the underlying names stay transparent to you.
+
+Custom event names and parameters are user-defined and describe scenarios specific to your app.
+
+> 🚧 Attention
+>
+> To avoid confusion with predefined events, don't prefix custom event names with `af_`.
+
+**Valid custom event names:** up to 100 characters, non-English characters supported.
+
+**Valid custom event parameters:** up to 1000 characters (longer values may be truncated). Pricing and revenue values should use digits and decimals only (e.g. `5` or `5.2`), up to 5 digits after the decimal point.
+
+### Understanding event structure definitions
+
+Before implementing an event, it helps to have a clear event structure definition. For example, a definition for an `af_content_view` event on an eCommerce app:
+
+| Event name        | Event parameters                               | Parameter values                                                                                                                                                                     | Where/When                                             |
+| ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| `af_content_view` | `af_price`, `af_content_type`, `af_content_id` | `af_price`: item price. `af_content_type`: item category. `af_content_id`: item SKU. | When a user navigates to an item view. |
+
+- The event name is the value you pass as `sendEvent`'s first argument.
+- The event parameters list what to pass in the values dictionary.
+- Parameter values clarify what each parameter should contain.
+- Where/When describes the trigger point in your app.
+
+### Recording offline events
+
+The SDK can cache in-app events that occur when no internet connection is available:
+
+- It sends events to AppsFlyer and waits for a response.
+- If it doesn't receive a 200 response, the events are cached.
+- Once the next 200 response arrives, cached events are re-sent, one network request per event (unbatched).
+- The cache holds up to 40 events. Anything beyond that, until the next successful response, is discarded.
+
+## Send Event
+
+`void sendEvent(string eventName, Dictionary<string, string> eventValues)`
+
+| parameter     | type                         | description                                   |
+| ------------- | ---------------------------- | --------------------------------------------- |
+| `eventName`   | `string`                     | The name of the event                         |
+| `eventValues` | `Dictionary<string, string>` | The event values that are sent with the event |
+
+_Example:_
+
+```c#
+Dictionary<string, string> eventValues = new Dictionary<string, string>();
+eventValues.Add(AFInAppEvents.CURRENCY, "USD");
+eventValues.Add(AFInAppEvents.REVENUE, "0.99");
+eventValues.Add("af_quantity", "1");
+AppsFlyer.sendEvent(AFInAppEvents.PURCHASE, eventValues);
+```
+
+***
+
+## Logging revenue
+
+> 📘 Note
+>
+> For events with **revenue**, including in-app purchases, subscriptions, and ad revenue events, AppsFlyer customers with an ROI360 subscription should avoid using the `AFInAppEvents.REVENUE`(`af_revenue`) parameter in their in-app events. Doing so can result in duplicate revenue being reported. Instead, they should utilize the [purchase connector](https://dev.appsflyer.com/hc/docs/purchaseconnectorunity) and the [ad revenue SDK API](https://dev.appsflyer.com/hc/docs/ad-revenue-unity).
+
+You can send revenue with any in-app event. Use the `AFInAppEvents.REVENUE` event parameter to include revenue in the in-app event. You can populate it with any numeric value, positive or negative.
+
+The revenue value should not contain comma separators, currency signs, or text. A revenue event should be similar to 1234.56, for example.
+
+Currency code requirements when sending revenue events
+
+- Default currency: USD
+- Use a [3-character ISO 4217 code](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) (an example follows).
+- Set the currency code by calling the API:
+
+    ```c#
+    AppsFlyer.setCurrencyCode("ZZZ")
+    ```
+
+**Example: In-app purchase event with revenue**
+This purchase event is for 200.12 Euros. For the revenue to reflect in the dashboard use the following.
+
+```c#
+using System.Collections.Generic;
+
+Dictionary<string, string> purchaseEvent = new Dictionary<string, string> ();
+purchaseEvent.Add(AFInAppEvents.CURRENCY, "EUR");
+purchaseEvent.Add(AFInAppEvents.REVENUE, "200.12");
+purchaseEvent.Add(AFInAppEvents.QUANTITY, "1");
+purchaseEvent.Add(AFInAppEvents.CONTENT_TYPE, "category_a",);
+AppsFlyer.sendEvent ("af_purchase", purchaseEvent);
+```
+
+> 📘 Note
+> Do not add currency symbols to the revenue value.
+
+### Logging negative revenue
+
+Record negative revenue using a minus sign.
+
+- Revenue value is preceded by a minus sign.
+- The event name has a unique value, "cancel_purchase". This lets you identify negative revenue events in raw data reports and in the Dashboard.
+
+**Example: App user receives a refund or cancels a subscription**
+
+```c#
+using System.Collections.Generic;
+
+Dictionary<string, string> purchaseEvent = new Dictionary<string, string> ();
+purchaseEvent.Add(AFInAppEvents.CURRENCY, "USD");
+purchaseEvent.Add(AFInAppEvents.REVENUE, "-200");
+purchaseEvent.Add(AFInAppEvents.QUANTITY, "1");
+purchaseEvent.Add(AFInAppEvents.CONTENT_TYPE, "category_a");
+AppsFlyer.sendEvent ("cancel_purchase", purchaseEvent);
+```
+
+## In-app purchase validation (V2)
+
+For In-App Purchase Receipt Validation, follow the instructions according to your operating system.
+
+**Notes**
+
+- Calling validateReceipt automatically generates an `af_purchase` in-app event, so you don't need to send this event yourself.
+- The validate purchase response is triggered in the `AppsFlyerTrackerCallbacks.cs` class.
+- **iOS Error Handling:** On iOS, the `onValidateAndLogFailure` callback is only triggered for actual errors (network errors, invalid parameters, etc.). Validation failures (e.g., invalid receipt) are returned through the `onValidateAndLogComplete` callback in the response dictionary. Check the response to determine if validation was successful.
+
+**Android**
+
+`void validateAndSendInAppPurchase(AFPurchaseDetailsAndroid details, Dictionary<string, string> additionalParameters, MonoBehaviour gameObject)`
+
+**iOS**
+
+`void validateAndSendInAppPurchase(AFSDKPurchaseDetailsIOS details, Dictionary<string, string> extraEventValues, MonoBehaviour gameObject)`
+
+> In the C# SDK, the dictionary parameter is named `purchaseAdditionalDetails` on both platforms.
+
+```c#
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Purchasing;
+using AppsFlyerSDK;
+
+public class AppsFlyerObject : MonoBehaviour, IAppsFlyerValidateAndLog
+{
+
+    public static string kProductIDConsumable = "com.test.cons";
+
+    void Start()
+    {
+        AppsFlyer.initSDK("devKey", "appId");
+        AppsFlyer.startSDK();
+    }
+
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
+    {
+        string prodID = args.purchasedProduct.definition.id;
+        string transactionID = args.purchasedProduct.transactionID;
+
+        var recptToJSON = (Dictionary<string, object>)AFMiniJSON.Json.Deserialize(args.purchasedProduct.receipt);
+        var receiptPayload = (Dictionary<string, object>)AFMiniJSON.Json.Deserialize((string)recptToJSON["Payload"]);
+
+        if (String.Equals(prodID, kProductIDConsumable, StringComparison.Ordinal))
+        {
+            var purchaseAdditionalDetails = new Dictionary<string, string>
+            {
+                { "paywall", "123" }
+            };
+
+#if UNITY_IOS
+
+            if (isSandbox)
+            {
+                AppsFlyeriOS.setUseReceiptValidationSandbox(true);
+            }
+
+            AFSDKPurchaseDetailsIOS details = AFSDKPurchaseDetailsIOS.Init(
+                prodID,
+                transactionID,
+                AFSDKPurchaseType.OneTimePurchase);
+
+            AppsFlyer.validateAndSendInAppPurchase(details, purchaseAdditionalDetails, this);
+#elif UNITY_ANDROID
+
+            var purchaseData = (string)receiptPayload["json"];
+            var purchaseDataJson = (Dictionary<string, object>)AFMiniJSON.Json.Deserialize(purchaseData);
+            string purchaseToken = (string)purchaseDataJson["purchaseToken"];
+
+            AFPurchaseDetailsAndroid details = new AFPurchaseDetailsAndroid(
+                AFPurchaseType.OneTimePurchase,
+                purchaseToken,
+                prodID);
+
+            AppsFlyer.validateAndSendInAppPurchase(details, purchaseAdditionalDetails, this);
+#endif
+        }
+
+        return PurchaseProcessingResult.Complete;
+    }
+
+    public void onValidateAndLogComplete(string result)
+    {
+        AppsFlyer.AFLog("onValidateAndLogComplete", result);
+        Dictionary<string, object> validateAndLogDataDictionary = AppsFlyer.CallbackStringToDictionary(result);
+        // On iOS: Check the response dictionary to determine if validation was successful
+        // Validation failures are returned here, not in onValidateAndLogFailure
+    }
+
+    public void onValidateAndLogFailure(string error)
+    {
+        AppsFlyer.AFLog("onValidateAndLogFailure", error);
+        Dictionary<string, object> validateAndLogErrorDictionary = AppsFlyer.CallbackStringToDictionary(error);
+        // On iOS: This is only called for actual errors (network errors, invalid parameters, etc.)
+        // Validation failures come through onValidateAndLogComplete instead
+    }
+
+}
+
+```
+
+## In-app purchase validation
+
+> ⚠️ **Deprecated:** This legacy API is deprecated. Use the [V2 version](#in-app-purchase-validation-v2) with structured data classes (`AFPurchaseDetailsAndroid`/`AFSDKPurchaseDetailsIOS`) instead. The legacy methods are maintained for backward compatibility only.
+
+For In-App Purchase Receipt Validation, follow the instructions according to your operating system.
+
+**Notes**
+Calling validateReceipt automatically generates an `af_purchase` in-app event, so you don't need to send this event yourself.
+The validate purchase response is triggered in the `AppsFlyerTrackerCallbacks.cs` class.
+
+`void validateAndSendInAppPurchase(string productIdentifier, string price, string currency, string tranactionId, Dictionary<string, string> additionalParameters, MonoBehaviour gameObject)`
+
+```c#
+//To get the callbacks
+//AppsFlyer.createValidateInAppListener ("AppsFlyerTrackerCallbacks", "onInAppBillingSuccess", "onInAppBillingFailure");
+AppsFlyer.validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency, Dictionary additionalParametes);
+```
+
+```c#
+using UnityEngine.Purchasing;
+using AppsFlyerSDK;
+
+public class AppsFlyerObject : MonoBehaviour, IStoreListener, IAppsFlyerValidateReceipt
+{
+
+    public static string kProductIDConsumable = "com.test.cons";
+
+    void Start()
+    {
+        AppsFlyer.initSDK("devKey", "devKey");
+        AppsFlyer.startSDK();
+    }
+
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
+    {
+        string prodID = args.purchasedProduct.definition.id;
+        string price = args.purchasedProduct.metadata.localizedPrice.ToString();
+        string currency = args.purchasedProduct.metadata.isoCurrencyCode;
+
+        string receipt = args.purchasedProduct.receipt;
+        var recptToJSON = (Dictionary<string, object>)AFMiniJSON.Json.Deserialize(product.receipt);
+        var receiptPayload = (Dictionary<string, object>)AFMiniJSON.Json.Deserialize((string)recptToJSON["Payload"]);
+        var transactionID = product.transactionID;
+
+        if (String.Equals(args.purchasedProduct.definition.id, kProductIDConsumable, StringComparison.Ordinal))
+        {
+#if UNITY_IOS
+
+            if(isSandbox)
+            {
+                AppsFlyeriOS.setUseReceiptValidationSandbox(true);
+            }
+
+            AppsFlyeriOS.validateAndSendInAppPurchase(prodID, price, currency, transactionID, null, this);
+#elif UNITY_ANDROID
+        var purchaseData = (string)receiptPayload["json"];
+        var signature = (string)receiptPayload["signature"];
+        AppsFlyerAndroid.validateAndSendInAppPurchase(
+        "<google_public_key>", 
+        signature, 
+        purchaseData, 
+        price, 
+        currency, 
+        null, 
+        this);
+#endif
+        }
+
+        return PurchaseProcessingResult.Complete;
+    }
+
+    public void didFinishValidateReceipt(string result)
+    {
+        AppsFlyer.AFLog("didFinishValidateReceipt", result);
+    }
+
+    public void didFinishValidateReceiptWithError(string error)
+    {
+        AppsFlyer.AFLog("didFinishValidateReceiptWithError", error);
+    }
+
+}
+
+```
+
+
