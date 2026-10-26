@@ -15,7 +15,7 @@ projectIndex: https://appsflyerkb-group.readme.io/marketers/llms.txt
 
 # Welcome to AppsFlyer
 
-> **At a glance:** Learn what mobile advertising attribution is and how AppsFlyer helps marketers pinpoint their targeting, optimize their ad spend, and boost ROI.
+> **At a glance:** Learn what mobile advertising attribution is and how AppsFlyer helps marketers pinpoint their targeting, optimize their ad spend, and boost ROI. bla.
 
 ## What is app attribution?
 
