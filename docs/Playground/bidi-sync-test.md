@@ -16,4 +16,4 @@ If you can see it in the AppsFlyer-STG project, Git-to-ReadMe sync works.
 2. Open `docs/bidi-sync-test/bidi-sync-test.md` in GitHub.
 3. Confirm your edit appears as a new commit.
    
-
+[rel-test](/appsflyer-stg/docs/welcome-to-appsflyer-1)
