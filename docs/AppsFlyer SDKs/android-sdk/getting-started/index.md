@@ -46,4 +46,3 @@ Use the AppsFlyer SDK MCP server with Cursor, GitHub Copilot, or Codex to offloa
 
 - [Unreal Engine](doc:unreal-engine-plugin)
 - [Cocos2d](https://github.com/AppsFlyerSDK/appsflyer-cocos2dx-plugin) (GitHub)
-
