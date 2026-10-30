@@ -5,11 +5,6 @@ hidden: false
 metadata:
   robots: index
 ---
----
-updatedAt: 2026-10-22T13:40:38.000Z
-agentTools:
-  projectIndex: https://appsflyerkb-group.readme.io/marketers/llms.txt
----
 
 # Welcome to AppsFlyer
 
